@@ -16,7 +16,6 @@ function P2({ setfaseAtual, faseAtual }) {
     const [checkedItems, setCheckedItems] = useState([]);
 
 
-
     const handleCheckboxChange = (index) => {
         setCheckedItems((prev) => {
             if (prev.includes(index)) return prev.filter((item) => item !== index);
@@ -25,6 +24,18 @@ function P2({ setfaseAtual, faseAtual }) {
             return prev;
         });
     };
+
+    const validacaoNumFrases = () => {
+        if (checkedItems.length !== 3) {
+            alert('Necessário selecionar 3 frases.')
+            return false
+        }
+        return true
+    }
+
+    const proxPergunta = () => {
+        if (validacaoNumFrases()) setfaseAtual(faseAtual + 1)
+    }
 
 
     return (
@@ -47,7 +58,7 @@ function P2({ setfaseAtual, faseAtual }) {
 
             </div>
 
-            <button onClick={() => setfaseAtual(faseAtual + 1)}
+            <button onClick={proxPergunta}
                 className='p-1 px-5 bg-gray-300 rounded-lg m-5'>
                 Próxima Pergunta
             </button>
