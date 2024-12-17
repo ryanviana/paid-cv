@@ -57,13 +57,13 @@ function P1({ setfaseAtual, faseAtual }) {
     }
 
     return (
-        <div className='h-full w-full flex flex-col justify-between items-center'>
+        <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full'>
             <div>
                 <h2>Parte I - Preferência Visual </h2>
                 <h3>Selecione os campos de atuação que mais  te interessar e menos te interessar</h3>
             </div>
             <div className='flex justify-center text-center items-center'>
-                <div className="grid grid-cols-1 gap-y-8 h-full place-items-center md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-y-8 h-full place-items-center lg:grid-cols-2">
 
                     {images.map((img, index) => (
                         <div key={index} className={`relative group w-1/2 border-2 ${getBorderColor(index)}`} onMouseEnter={() => changeHover(index)} onMouseLeave={() => changeHover(index)}>
@@ -84,7 +84,7 @@ function P1({ setfaseAtual, faseAtual }) {
             </div>
 
             <button onClick={proxPergunta}
-                className='p-1 px-5 bg-gray-300 rounded-lg m-5 w-fit'>
+                className='p-1 px-5 bg-gray-300 rounded-lg m-5 transition-all duration-100 ease-in-out hover:bg-gray-400 hover:scale-105'>
                 Próxima Pergunta
             </button>
         </div>

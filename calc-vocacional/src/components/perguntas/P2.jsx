@@ -7,7 +7,7 @@ const options = [
     "Me interesso pelas áreas de botânica e ecologia.",
     "Busco aprender sobre programação.",
     "Gosto de entender a interpretação física de fenômenos.",
-    "Tenho curiosidade sobre como máquinas e dispositivos funcionam.",
+    "Tenho curiosidade sobre como máquinas e dispositivos fun   cionam.",
     "Me interesso em usar a tecnologia para construir algo novo, como aplicativos ou dispositivos.",
 ];
 
@@ -51,7 +51,7 @@ function P2({ setfaseAtual, faseAtual }) {
 
                 {options.map((label, index) => (
                     <div key={index} className={`p-3 transition hover:bg-gray-100 ${checkedItems.includes(index) ? "bg-blue-100" : ""}`}>
-                        <input type="checkbox" checked={checkedItems.includes(index)} onChange={() => handleCheckboxChange(index)} className="mr-5 w-6 h-6" />
+                        <input type="checkbox" checked={checkedItems.includes(index)} onChange={() => handleCheckboxChange(index)} className="cursor-pointer mr-5 w-6 h-6 transition-all duration-500 ease-in-out hover:scale-110" />
                         <label>{label}</label>
                     </div>
                 ))}
@@ -59,7 +59,7 @@ function P2({ setfaseAtual, faseAtual }) {
             </div>
 
             <button onClick={proxPergunta}
-                className='p-1 px-5 bg-gray-300 rounded-lg m-5'>
+                className='p-1 px-5 bg-gray-300 rounded-lg m-5 transition-all duration-100 ease-in-out hover:bg-gray-400 hover:scale-105'>
                 Próxima Pergunta
             </button>
         </div>
