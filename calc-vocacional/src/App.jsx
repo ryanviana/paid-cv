@@ -12,25 +12,18 @@ function App() {
     // Cada fase indica qual "parte" o usuário está do teste
     const [faseAtual, setfaseAtual] = useState(0);
     const fases = [
-        <P1 key="q1" />,
-        <P2 key="q2" />,
-        <P3 key="q3" />
+        <P1 key="q1" setfaseAtual={setfaseAtual} faseAtual={faseAtual}/>,
+        <P2 key="q2" setfaseAtual={setfaseAtual} faseAtual={faseAtual}/>,
+        <P3 key="q3" setfaseAtual={setfaseAtual} faseAtual={faseAtual}/>
     ];
 
     return (
-        <div className='text-center h-screen'>
-
+        <div className='text-center h-screen flex flex-col justify-between'>
             <Header />
 
-            <h1 className='m-5'>Questionário</h1>
-            <div>{fases[faseAtual]}</div>
-            <button onClick={() => setfaseAtual(faseAtual + 1)} 
-                    className='p-1 bg-gray-300 rounded-lg m-5'>
-                Próxima Pergunta
-            </button>
+            {fases[faseAtual]}
             
-            <Footer />
-
+            <Footer/>
         </div>
     )
 }
