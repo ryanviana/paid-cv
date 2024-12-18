@@ -13,6 +13,7 @@ function Questions() {
         let updatedPontuacao = [...pontuacaoTotal]
         updatedPontuacao = updatedPontuacao.map((x, i) => x + pontuacao[i])
 
+        console.log("Pontuação final total: " + updatedPontuacao)
         setPontuacaoTotal(updatedPontuacao)
     }
 
@@ -23,7 +24,7 @@ function Questions() {
     // Cada fase indica qual "parte" o usuário está do teste
     const perguntas = [
         <P1 key="q1" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P2 key="q2" setperguntaAtual={setperguntaAtual} perguntaAtual={perguntaAtual}/>,
+        <P2 key="q2" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P3 key="q3"/>
     ];
 

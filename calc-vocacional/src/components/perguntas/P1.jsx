@@ -65,7 +65,7 @@ function P1({ updatePerguntaAtual, updatePontuacaoTotal }) {
 
         if (!validacaoInteresse()) return
 
-        let pontuacao = calculaPontuacaoQuestao()
+        const pontuacao = calculaPontuacaoQuestao()
         updatePontuacao(pontuacao)
 
         updatePerguntaAtual()

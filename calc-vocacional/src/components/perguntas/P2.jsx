@@ -1,20 +1,13 @@
 import { useState } from 'react'
 
-const options = [
-    "Me interesso por entender a interação de elementos a um nível atômico.",
-    "Sinto facilidade em assistir a aulas e ensinar meus colegas.",
-    "Entendo facilmente assuntos como álgebra e geometria.",
-    "Me interesso pelas áreas de botânica e ecologia.",
-    "Busco aprender sobre programação.",
-    "Gosto de entender a interpretação física de fenômenos.",
-    "Tenho curiosidade sobre como máquinas e dispositivos fun   cionam.",
-    "Me interesso em usar a tecnologia para construir algo novo, como aplicativos ou dispositivos.",
-];
+import { weight_question_5 as weight_question } from '../../data/QuestionsWeight'
+import { statement_question_5 as statement_question } from '../../data/QuestionsStatements'
 
-function P2({ setperguntaAtual, perguntaAtual }) {
+function P2({ updatePerguntaAtual, updatePontuacaoTotal }) {
 
     const [checkedItems, setCheckedItems] = useState([]);
 
+    const [pontuacaoQuestao, setPontuacaoQuestao] = useState([]) // vai ter tamanho igual ao numero de profissões
 
     const handleCheckboxChange = (index) => {
         setCheckedItems((prev) => {
@@ -33,8 +26,31 @@ function P2({ setperguntaAtual, perguntaAtual }) {
         return true
     }
 
+    const calculaPontuacaoQuestao = () => {
+        let pontuacao = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        weight_question.forEach((valor, index) => {
+            if (checkedItems.includes(index)) pontuacao = pontuacao.map((x, i) => x + valor[i])
+            else pontuacao = pontuacao.map((x, i) => x - valor[i])
+        });
+
+        return pontuacao
+    }
+
+    const updatePontuacao = (pontuacaoAtual) => {
+        let pontuacaoUpdated = [...pontuacaoAtual]
+        if (pontuacaoQuestao.length !== 0) pontuacaoUpdated = pontuacaoAtual.map((x, i) => x - pontuacaoQuestao[i])
+
+        setPontuacaoQuestao(pontuacaoAtual)
+        updatePontuacaoTotal(pontuacaoUpdated)
+    }
+
     const proxPergunta = () => {
-        if (validacaoNumFrases()) setperguntaAtual(perguntaAtual + 1)
+        if (!validacaoNumFrases()) return
+
+        const pontuacao = calculaPontuacaoQuestao()
+        updatePontuacao(pontuacao)
+
+        updatePerguntaAtual()
     }
 
 
@@ -46,10 +62,10 @@ function P2({ setperguntaAtual, perguntaAtual }) {
             </div>
 
             <div className='flex flex-col gap-5 items-start w-fit text-2xl'>
-                
+
                 <h1 className='font-bold text-3xl'>Durante a escola, eu:</h1>
 
-                {options.map((label, index) => (
+                {statement_question.map((label, index) => (
                     <div key={index} className={`p-3 transition hover:bg-gray-100 ${checkedItems.includes(index) ? "bg-blue-100" : ""}`}>
                         <input type="checkbox" checked={checkedItems.includes(index)} onChange={() => handleCheckboxChange(index)} className="cursor-pointer mr-5 w-6 h-6 transition-all duration-500 ease-in-out hover:scale-110" />
                         <label>{label}</label>
