@@ -20,6 +20,9 @@ export default {
             'montserrat': ['Montserrat', 'sans-serif'], 
             'questrial': ['Questrial', 'sans-serif'], 
         },
+        boxShadow: {
+          'my': '0 0 55px -15px rgba(0, 0, 0, 0)',
+        }
     },
   },
   plugins: [],

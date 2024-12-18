@@ -13,8 +13,8 @@ function P1({ updatePerguntaAtual, updatePontuacaoTotal }) {
 
 
     const getBorderColor = (number) => {
-        if (interesse[number] === "1") return "border-green-500 shadow-green-500 shadow-lg"
-        if (interesse[number] === "-1") return "border-red-600 shadow-red-600 shadow-lg"
+        if (interesse[number] === "1") return "border-green-500 shadow-green-500 shadow-my"
+        if (interesse[number] === "-1") return "border-red-600 shadow-red-600 shadow-my"
         return ""
     }
 
