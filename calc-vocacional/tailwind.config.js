@@ -5,13 +5,21 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-    colors: {
-        'jornadas-blue' : '#06fdfd',        
-    },
-    fontFamily: {
-        'montserrat': ['Montserrat', 'sans-serif'], 
-        'questrial': ['Questrial', 'sans-serif'], 
+    extend: {
+        backgroundImage: {
+            'jornadas-logo': "url('/jornadas-logo.png')",
+        },
+        from: {
+            'jornadas-logo': "url('/jornadas-logo.png')",
+        },
+        colors: {
+            'jornadas-blue' : '#06fdfd',        
+            'jornadas-blue-dark' : '#04caca',        
+        },
+        fontFamily: {
+            'montserrat': ['Montserrat', 'sans-serif'], 
+            'questrial': ['Questrial', 'sans-serif'], 
+        },
     },
   },
   plugins: [],
