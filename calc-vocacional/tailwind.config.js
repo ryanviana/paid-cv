@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {},
+    colors: {
+        'jornadas-blue' : '#06fdfd',        
+    },
+    fontFamily: {
+        'montserrat': ['Montserrat', 'sans-serif'], 
+        'questrial': ['Questrial', 'sans-serif'], 
+    },
   },
   plugins: [],
 }
