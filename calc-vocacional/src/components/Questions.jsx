@@ -6,11 +6,25 @@ import P3 from "./perguntas/P3";
 
 function Questions() {
 
-    // Cada fase indica qual "parte" o usuário está do teste
+    const [pontuacaoTotal, setPontuacaoTotal] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0])
     const [perguntaAtual, setperguntaAtual] = useState(0);
+
+    const updatePontuacaoTotal = (pontuacao) => {
+        let updatedPontuacao = [...pontuacaoTotal]
+        updatedPontuacao = updatedPontuacao.map((x, i) => x + pontuacao[i])
+
+        console.log("Pontuação final total: " + updatedPontuacao)
+        setPontuacaoTotal(updatedPontuacao)
+    }
+
+    const updatePerguntaAtual = () => {
+        setperguntaAtual(perguntaAtual + 1)
+    }
+
+    // Cada fase indica qual "parte" o usuário está do teste
     const perguntas = [
-        <P1 key="q1" setperguntaAtual={setperguntaAtual} perguntaAtual={perguntaAtual}/>,
-        <P2 key="q2" setperguntaAtual={setperguntaAtual} perguntaAtual={perguntaAtual}/>,
+        <P1 key="q1" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
+        <P2 key="q2" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P3 key="q3"/>
     ];
 
