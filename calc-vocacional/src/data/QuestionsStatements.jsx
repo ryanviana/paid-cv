@@ -17,7 +17,7 @@ export const statement_question_5 = [
     "Me interesso pelas áreas de botânica e ecologia.",
     "Busco aprender sobre programação.",
     "Gosto de entender a interpretação física de fenômenos.",
-    "Tenho curiosidade sobre como máquinas e dispositivos fun   cionam.",
+    "Tenho curiosidade sobre como máquinas e dispositivos funcionam.",
     "Me interesso em usar a tecnologia para construir algo novo, como aplicativos ou dispositivos.",
 ];
 
