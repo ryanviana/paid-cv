@@ -1,14 +1,12 @@
-function P3({ setfaseAtual, faseAtual }) {
+import { Link } from "react-router-dom";
 
+
+function P3() {
 
     return (
-        <div>
-            <h2>Pergunta 3</h2>
-            <p>3333333333333333333333333333333333</p>
-            <button onClick={() => setfaseAtual(faseAtual + 1)}
-                className='p-1 bg-gray-300 rounded-lg m-5'>
-                Próxima Pergunta
-            </button>
+        <div className="h-fit w-full flex flex-col justify-between items-center lg:h-full">
+            <h1>Ultima questão hehe</h1>
+            <Link to="/results" className="bg-gray-300 p-3 w-fit">Ir para os resultados</Link>
         </div>
     );
 }

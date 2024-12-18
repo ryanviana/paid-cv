@@ -11,7 +11,7 @@ const options = [
     "Me interesso em usar a tecnologia para construir algo novo, como aplicativos ou dispositivos.",
 ];
 
-function P2({ setfaseAtual, faseAtual }) {
+function P2({ setperguntaAtual, perguntaAtual }) {
 
     const [checkedItems, setCheckedItems] = useState([]);
 
@@ -34,12 +34,12 @@ function P2({ setfaseAtual, faseAtual }) {
     }
 
     const proxPergunta = () => {
-        if (validacaoNumFrases()) setfaseAtual(faseAtual + 1)
+        if (validacaoNumFrases()) setperguntaAtual(perguntaAtual + 1)
     }
 
 
     return (
-        <div className='h-full w-full flex flex-col justify-between text-center items-center'>
+        <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full'>
             <div>
                 <h2>Parte 2 - Avaliação de interesses </h2>
                 <h3>Escolha as três frases com as quais você mais se identifica</h3>

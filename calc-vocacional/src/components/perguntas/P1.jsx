@@ -12,7 +12,7 @@ const images = [
     { image: img3, label: 'Desenvolvimento sustentável' }
 ]
 
-function P1({ setfaseAtual, faseAtual }) {
+function P1({ setperguntaAtual, perguntaAtual }) {
 
     // cada index se refere a uma imagem
     const [hover, setHover] = useState([false, false, false, false]);
@@ -53,7 +53,7 @@ function P1({ setfaseAtual, faseAtual }) {
     }
 
     const proxPergunta = () => {
-        if (validacaoInteresse()) setfaseAtual(faseAtual + 1)
+        if (validacaoInteresse()) setperguntaAtual(perguntaAtual + 1)
     }
 
     return (
