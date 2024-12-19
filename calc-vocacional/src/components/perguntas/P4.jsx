@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import ImageQuestion from "../ImageQuestion";
-import { weight_question_2 as weight_question } from '../../data/QuestionsWeight'
-import { statement_question_2 as statement_question } from '../../data/QuestionsStatements'
+import { weight_question_4 as weight_question } from '../../data/QuestionsWeight'
+import { statement_question_4 as statement_question } from '../../data/QuestionsStatements'
 
 
 function P1({ updatePerguntaAtual, updatePontuacaoTotal }) {

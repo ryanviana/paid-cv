@@ -3,6 +3,9 @@ import { useState } from 'react'
 import P1 from "./perguntas/P1";
 import P2 from "./perguntas/P2";
 import P3 from "./perguntas/P3";
+import P4 from "./perguntas/P4";
+import P5 from "./perguntas/P5";
+import P6 from "./perguntas/P6";
 
 function Questions() {
 
@@ -25,7 +28,10 @@ function Questions() {
     const perguntas = [
         <P1 key="q1" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P2 key="q2" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P3 key="q3"/>
+        <P3 key="q3" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
+        <P4 key="q4" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
+        <P5 key="q5" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
+        <P6 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
     ];
 
     return (

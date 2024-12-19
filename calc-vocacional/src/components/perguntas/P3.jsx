@@ -1,14 +1,20 @@
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+
+import ImageQuestion from "../ImageQuestion";
+import { weight_question_3 as weight_question } from '../../data/QuestionsWeight'
+import { statement_question_3 as statement_question } from '../../data/QuestionsStatements'
 
 
-function P3() {
+function P1({ updatePerguntaAtual, updatePontuacaoTotal }) {
 
     return (
-        <div className="h-fit w-full flex flex-col justify-between items-center lg:h-full">
-            <h1>Ultima questão hehe</h1>
-            <Link to="/results" className="bg-gray-300 p-3 w-fit">Ir para os resultados</Link>
+        <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full'>
+            
+            <ImageQuestion updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} 
+                            weight_question={weight_question} statement_question={statement_question} />
+            
         </div>
     );
 }
 
-export default P3;
+export default P1;
