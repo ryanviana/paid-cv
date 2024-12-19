@@ -1,12 +1,8 @@
 import { useState } from 'react'
 
-import { weight_question_5 as weight_question } from '../../data/QuestionsWeight'
-import { statement_question_5 as statement_question } from '../../data/QuestionsStatements'
-
-function P2({ updatePerguntaAtual, updatePontuacaoTotal }) {
+function SelectQuestion({ updatePerguntaAtual, updatePontuacaoTotal, weight_question, statement_question }) {
 
     const [checkedItems, setCheckedItems] = useState([]);
-
     const [pontuacaoQuestao, setPontuacaoQuestao] = useState([]) // vai ter tamanho igual ao numero de profissões
 
     const handleCheckboxChange = (index) => {
@@ -82,4 +78,4 @@ function P2({ updatePerguntaAtual, updatePontuacaoTotal }) {
     );
 }
 
-export default P2;
+export default SelectQuestion;

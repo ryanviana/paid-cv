@@ -4,10 +4,10 @@ import './styles/index.css'
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Home from "./components/Home";
-import LandingPage from "./components/LandingPage";
-import Instructions from "./components/Instructions";
-import Questions from "./components/Questions";
+import Home from "./pages/Home";
+import LandingPage from "./pages/LandingPage";
+import Instructions from "./pages/Instructions";
+import Questions from "./pages/Questions";
 import Result from "./components/Result";
 
 function App() {

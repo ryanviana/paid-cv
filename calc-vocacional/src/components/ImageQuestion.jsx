@@ -1,9 +1,6 @@
 import { useState } from 'react'
 
-import { weight_question_1 as weight_question } from '../../data/QuestionsWeight'
-import { statement_question_1 as statement_question } from '../../data/QuestionsStatements'
-
-function P1({ updatePerguntaAtual, updatePontuacaoTotal }) {
+function ImageQuestion({ updatePerguntaAtual, updatePontuacaoTotal, weight_question, statement_question }) {
 
     // cada index se refere a uma imagem
     const [hover, setHover] = useState([false, false, false, false]);
@@ -106,4 +103,4 @@ function P1({ updatePerguntaAtual, updatePontuacaoTotal }) {
     );
 }
 
-export default P1;
+export default ImageQuestion;
