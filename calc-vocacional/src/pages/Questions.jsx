@@ -1,16 +1,16 @@
 import { useState } from 'react'
 
-import P1 from "./perguntas/P1";
-import P2 from "./perguntas/P2";
-import P3 from "./perguntas/P3";
-import P4 from "./perguntas/P4";
-import P5 from "./perguntas/P5";
-import P6 from "./perguntas/P6";
-import P7 from "./perguntas/P7";
-import P8 from "./perguntas/P8";
-import P9 from "./perguntas/P9";
-import P10 from "./perguntas/P10";
-import Result from "./Result";
+import P1 from "../components/perguntas/P1";
+import P2 from "../components/perguntas/P2";
+import P3 from "../components/perguntas/P3";
+import P4 from "../components/perguntas/P4";
+import P5 from "../components/perguntas/P5";
+import P6 from "../components/perguntas/P6";
+import P7 from "../components/perguntas/P7";
+import P8 from "../components/perguntas/P8";
+import P9 from "../components/perguntas/P9";
+import P10 from "../components/perguntas/P10";
+import Result from "../components/Result";
 
 function Questions() {
 
