@@ -97,22 +97,3 @@ export const weight_question_10 = [
     [9, 3, 6, 8, 5, 7, 4, 1, 2],
     [6, 5, 3, 4, 9, 2, 8, 1, 7],
 ]
-
-
-// export const weight_question_1 = {
-//     0: {Computacao: 4, Eletrica: 7, Mecatronica: 5, Aeronautica: 2, Licenciatura: 1, Producao: 3, Materiais: 6, Civil: 9, Ambiental: 8},
-//     1: {Computacao: 9, Eletrica: 7, Mecatronica: 8, Aeronautica: 6, Licenciatura: 4, Producao: 5, Materiais: 2, Civil: 3, Ambiental: 1},
-//     2: {Computacao: 3, Eletrica: 4, Mecatronica: 6, Aeronautica: 8, Licenciatura: 9, Producao: 5, Materiais: 2, Civil: 7, Ambiental: 1},
-//     4: {Computacao: 5, Eletrica: 7, Mecatronica: 3, Aeronautica: 2, Licenciatura: 1, Producao: 4, Materiais: 6, Civil: 8, Ambiental: 9},
-// }
-
-// export const weight_question_5 = {
-//     0: {Computacao: 1, Eletrica: 4, Mecatronica: 5, Aeronautica: 3, Licenciatura: 9, Producao: 2, Materiais: 8, Civil: 6, Ambiental: 7},
-//     1: {Computacao: 4, Eletrica: 6, Mecatronica: 5, Aeronautica: 8, Licenciatura: 9, Producao: 3, Materiais: 2, Civil: 7, Ambiental: 1},
-//     2: {Computacao: 3, Eletrica: 4, Mecatronica: 6, Aeronautica: 8, Licenciatura: 9, Producao: 5, Materiais: 2, Civil: 7, Ambiental: 1},
-//     3: {Computacao: 1, Eletrica: 2, Mecatronica: 3, Aeronautica: 4, Licenciatura: 8, Producao: 5, Materiais: 6, Civil: 7, Ambiental: 9},
-//     4: {Computacao: 9, Eletrica: 6, Mecatronica: 8, Aeronautica: 5, Licenciatura: 4, Producao: 7, Materiais: 2, Civil: 3, Ambiental: 1},
-//     5: {Computacao: 1, Eletrica: 5, Mecatronica: 4, Aeronautica: 3, Licenciatura: 9, Producao: 2, Materiais: 8, Civil: 6, Ambiental: 7},
-//     6: {Computacao: 8, Eletrica: 7, Mecatronica: 9, Aeronautica: 6, Licenciatura: 3, Producao: 5, Materiais: 4, Civil: 1, Ambiental: 2},
-//     7: {Computacao: 9, Eletrica: 8, Mecatronica: 7, Aeronautica: 7, Licenciatura: 4, Producao: 6, Materiais: 3, Civil: 1, Ambiental: 2},
-// }
