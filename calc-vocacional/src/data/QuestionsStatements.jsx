@@ -73,48 +73,48 @@ export const statement_question_6 = [
 
 
 export const statement_question_7 = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "Quero entender como projetos complexos, como avióes, funcionam.",
+    "Me interesso por criar programas e aplicativos.",
+    "Gosto de explorar novas tecnologias que ajudam a resolver problemas.",
+    "Quero aplicar a tecnologia para melhorar processos industriais.",
+    "Tenho curiosidade sobre inovações tecnológicas que ajudam o meio ambiente.",
+    "Quero trabalhar com inteligência artificial e ciência de dados.",
+    "Gosto de usar tecnologia para criar produtos práticos.",
+    "Prefiro explorar como a tecnologia pode ser integrada a outras áreas, como biologia.",
 ];
 
 
 export const statement_question_8 = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "Participar de competições e projetos práticos, como robótica ou construção de protótipos.",
+    "Fazer pesquisas científicas para desenvolver tecnologias inovadoras.",
+    "Estudar tecnologias avançadas, como inteligência artificial.",
+    "Criar ou participar de projetos que ajudem a solucionar problemas ambientais.",
+    "Aprender a liderar equipes e projetos multidisciplinares.",
+    "Explorar áreas que misturem ciência e criatividade, como design tecnológico.",
+    "Trabalhar em estágios para adquirir experiência prática e me preparar para o mercado.",
+    "Desenvolver habilidades que me ajudem a empreender e criar algo novo.",
 ];
 
 
 export const statement_question_9 = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "Gosto de analisá-lo profundamente antes de propor soluções.",
+    "Prefiro testar ideias práticas até encontrar a solução mais eficiente.",
+    "Busco soluções inovadoras que possam trazer resultados únicos.",
+    "Gosto de ensinar ou explicar o que sei para ajudar os colegas.",
+    "Prefiro analisar dados ou fazer pesquisas para ajudar na tomada de decisões.",
+    "Uso tecnologia ou ferramentas para ajudar na resolução.",
+    "Gosto de relacionar o problema a conceitos que já conheço.",
+    "Prefiro dividir o problema em partes menores e resolver cada uma por vez.",
 ];
 
 
 export const statement_question_10 = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "Quero desenvolver tecnologias que melhorem o dia a dia das pessoas.",
+    "Desejo criar soluções que ajudem a proteger o meio ambiente.",
+    "Gosto da ideia de trabalhar em grandes projetos que impactam muitas pessoas.",
+    "Quero pesquisar e descobrir algo que possa transformar a sociedade.",
+    "Gosto de resolver problemas práticos que tornem processos mais eficientes.",
+    "Quero desenvolver produtos ou serviços que melhorem a qualidade de vida.",
+    "Desejo trabalhar em projetos que conectem tecnologia, ciência e inovação.",
+    "Quero criar algo que seja lembrado por sua contribuição científica ou social.",
 ];
