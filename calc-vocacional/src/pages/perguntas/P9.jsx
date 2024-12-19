@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import SelectQuestion from "../SelectQuestion";
+import SelectQuestion from "../../components/SelectQuestion";
 import { weight_question_9 as weight_question } from '../../data/QuestionsWeight'
 import { statement_question_9 as statement_question } from '../../data/QuestionsStatements'
 
