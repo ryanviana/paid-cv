@@ -10,7 +10,7 @@ import P7 from "./perguntas/P7";
 import P8 from "./perguntas/P8";
 import P9 from "./perguntas/P9";
 import P10 from "./perguntas/P10";
-import Result from "./ResultBack";
+import Result from "./ResultFront";
 
 function Questions() {
 
