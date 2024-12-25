@@ -10,7 +10,7 @@ import P7 from "./perguntas/P7";
 import P8 from "./perguntas/P8";
 import P9 from "./perguntas/P9";
 import P10 from "./perguntas/P10";
-import Result from "../components/Result";
+import Result from "./ResultBack";
 
 function Questions() {
 
@@ -35,18 +35,18 @@ function Questions() {
         <P2 key="q2" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P3 key="q3" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P4 key="q4" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <Result key="res1" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='parcial'/>,
+        <Result key="res1" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='parcial' />,
         <P5 key="q5" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P6 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P7 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P8 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P9 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
         <P10 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <Result key="res2" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='total'/>,
+        <Result key="res2" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='total' />,
     ];
 
     return (
-        <div className='flex flex-col w-full items-center text-center'>
+        <div className='flex flex-col w-full items-center text-center h-full'>
             {perguntas[perguntaAtual]}
         </div>
     )
