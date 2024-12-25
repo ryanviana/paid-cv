@@ -8,7 +8,6 @@ import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
 import Instructions from "./pages/Instructions";
 import Questions from "./pages/Questions";
-import Result from "./components/Result";
 
 function App() {
 
@@ -22,7 +21,6 @@ function App() {
                     <Route path="/landing" element={<LandingPage />} />
                     <Route path="/instructions" element={<Instructions />} />
                     <Route path="/questions" element={<Questions />} />
-                    <Route path="/results" element={<Result />} />
                 </Routes>
             </Router>
 
