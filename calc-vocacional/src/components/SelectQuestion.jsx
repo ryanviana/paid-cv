@@ -29,6 +29,10 @@ function SelectQuestion({ updatePerguntaAtual, updatePontuacaoTotal, weight_ques
             else pontuacao = pontuacao.map((x, i) => x - valor[i])
         });
 
+        // normalizando os valores
+        const menorValor = Math.min(...pontuacao);
+        if (menorValor < 0) pontuacao = pontuacao.map(x => x + Math.abs(menorValor));
+
         return pontuacao
     }
 
