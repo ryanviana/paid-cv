@@ -9,7 +9,7 @@ function Email({ pontuacaoTotal }) {
     const enviarEmail = async () => {
         try {
             setStatus('loading')
-            const _ = await axios.post("http://3.12.246.4:4000/send-email", {
+            const _ = await axios.post("https://3.12.246.4:4000/send-email", {
                 score: pontuacaoTotal,
                 user_email: email
             });

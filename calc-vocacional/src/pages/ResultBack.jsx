@@ -10,7 +10,7 @@ function ResultBack({ updatePerguntaAtual, pontuacaoTotal, type }) {
         const fetchPlot = async () => {
 
             try {
-                const response = await axios.post("http://3.12.246.4:4000/generate-plot", {
+                const response = await axios.post("https://3.12.246.4:4000/generate-plot", {
                     score: pontuacaoTotal,
                     result_type: type
                 });
