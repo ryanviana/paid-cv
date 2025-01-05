@@ -48,7 +48,9 @@ export const statement_question_4 = [
 
 
 
-export const statement_question_5 = [
+export const statement_question_5 = {
+    title: 'Durante a escola, eu:', 
+    phrases: [
     "Me interesso por entender a interação de elementos a um nível atômico.",
     "Sinto facilidade em assistir a aulas e ensinar meus colegas.",
     "Entendo facilmente assuntos como álgebra e geometria.",
@@ -57,10 +59,12 @@ export const statement_question_5 = [
     "Gosto de entender a interpretação física de fenômenos.",
     "Tenho curiosidade sobre como máquinas e dispositivos funcionam.",
     "Me interesso em usar a tecnologia para construir algo novo, como aplicativos ou dispositivos.",
-];
+]};
 
 
-export const statement_question_6 = [
+export const statement_question_6 = {
+    title: 'Quando penso no meu futuro, eu quero:', 
+    phrases: [
     "Trabalhar em projetos que ajudem a preservar o meio ambiente.",
     "Criar soluções tecnológicas inovadoras que impactem a sociedade.",
     "Ter uma carreira sólida em uma área de alta demanda no mercado.",
@@ -69,10 +73,12 @@ export const statement_question_6 = [
     "Criar ou gerenciar minha própria empresa ou startup.",
     "Trabalhar em grandes projetos, como construções ou infraestrutura.",
     "Contribuir para melhorar a vida das pessoas com meu trabalho.",
-];
+]};
 
 
-export const statement_question_7 = [
+export const statement_question_7 = {
+    title: 'Quando penso em tecnologia, eu:', 
+    phrases: [
     "Quero entender como projetos complexos, como avióes, funcionam.",
     "Me interesso por criar programas e aplicativos.",
     "Gosto de explorar novas tecnologias que ajudam a resolver problemas.",
@@ -81,10 +87,12 @@ export const statement_question_7 = [
     "Quero trabalhar com inteligência artificial e ciência de dados.",
     "Gosto de usar tecnologia para criar produtos práticos.",
     "Prefiro explorar como a tecnologia pode ser integrada a outras áreas, como biologia.",
-];
+]};
 
 
-export const statement_question_8 = [
+export const statement_question_8 = {
+    title: 'Na faculdade, eu gostaria de:', 
+    phrases: [
     "Participar de competições e projetos práticos, como robótica ou construção de protótipos.",
     "Fazer pesquisas científicas para desenvolver tecnologias inovadoras.",
     "Estudar tecnologias avançadas, como inteligência artificial.",
@@ -93,10 +101,12 @@ export const statement_question_8 = [
     "Explorar áreas que misturem ciência e criatividade, como design tecnológico.",
     "Trabalhar em estágios para adquirir experiência prática e me preparar para o mercado.",
     "Desenvolver habilidades que me ajudem a empreender e criar algo novo.",
-];
+]};
 
 
-export const statement_question_9 = [
+export const statement_question_9 = {
+    title: 'Na faculdade, eu gostaria de:', 
+    phrases: [
     "Gosto de analisá-lo profundamente antes de propor soluções.",
     "Prefiro testar ideias práticas até encontrar a solução mais eficiente.",
     "Busco soluções inovadoras que possam trazer resultados únicos.",
@@ -105,10 +115,12 @@ export const statement_question_9 = [
     "Uso tecnologia ou ferramentas para ajudar na resolução.",
     "Gosto de relacionar o problema a conceitos que já conheço.",
     "Prefiro dividir o problema em partes menores e resolver cada uma por vez.",
-];
+]};
 
 
-export const statement_question_10 = [
+export const statement_question_10 = {
+    title: 'Sobre o impacto do trabalho no mundo:', 
+    phrases: [
     "Quero desenvolver tecnologias que melhorem o dia a dia das pessoas.",
     "Desejo criar soluções que ajudem a proteger o meio ambiente.",
     "Gosto da ideia de trabalhar em grandes projetos que impactam muitas pessoas.",
@@ -117,4 +129,4 @@ export const statement_question_10 = [
     "Quero desenvolver produtos ou serviços que melhorem a qualidade de vida.",
     "Desejo trabalhar em projetos que conectem tecnologia, ciência e inovação.",
     "Quero criar algo que seja lembrado por sua contribuição científica ou social.",
-];
+]};

@@ -63,9 +63,9 @@ function SelectQuestion({ updatePerguntaAtual, updatePontuacaoTotal, weight_ques
 
             <div className='flex flex-col gap-5 items-start w-fit text-2xl'>
 
-                <h1 className='font-bold text-3xl'>Durante a escola, eu:</h1>
+                <h1 className='font-bold text-3xl'>{statement_question['title']}</h1>
 
-                {statement_question.map((label, index) => (
+                {statement_question['phrases'].map((label, index) => (
                     <div key={index} className={`p-3 transition hover:bg-gray-100 ${checkedItems.includes(index) ? "bg-blue-100" : ""}`}>
                         <input type="checkbox" checked={checkedItems.includes(index)} onChange={() => handleCheckboxChange(index)} className="cursor-pointer mr-5 w-6 h-6 transition-all duration-500 ease-in-out hover:scale-110" />
                         <label>{label}</label>
