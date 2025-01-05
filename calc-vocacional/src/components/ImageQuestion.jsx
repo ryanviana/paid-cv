@@ -1,12 +1,10 @@
 import { useState } from 'react'
 
-function ImageQuestion({ updatePerguntaAtual, updatePontuacaoTotal, weight_question, statement_question }) {
+function ImageQuestion({ proximaPergunta, weight_question, statement_question }) {
 
     // cada index se refere a uma imagem
     const [hover, setHover] = useState([false, false, false, false]);
     const [interesse, setInteresse] = useState(['', '', '', '']) // 1 - like <-> -1 - dislike  
-
-    const [pontuacaoQuestao, setPontuacaoQuestao] = useState([]) // vai ter tamanho igual ao numero de profissões
 
 
     const getBorderColor = (number) => {
@@ -55,22 +53,13 @@ function ImageQuestion({ updatePerguntaAtual, updatePontuacaoTotal, weight_quest
         return pontuacao
     }
 
-    const updatePontuacao = (pontuacaoAtual) => {
-        let pontuacaoUpdated = [...pontuacaoAtual]
-        if (pontuacaoQuestao.length !== 0) pontuacaoUpdated = pontuacaoAtual.map((x, i) => x - pontuacaoQuestao[i])
-
-        setPontuacaoQuestao(pontuacaoAtual)
-        updatePontuacaoTotal(pontuacaoUpdated)
-    }
-
     const proxPergunta = () => {
 
         if (!validacaoInteresse()) return
 
         const pontuacao = calculaPontuacaoQuestao()
-        updatePontuacao(pontuacao)
-
-        updatePerguntaAtual()
+        
+        proximaPergunta(pontuacao)
     }
 
     return (

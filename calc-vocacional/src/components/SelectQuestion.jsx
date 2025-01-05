@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-function SelectQuestion({ updatePerguntaAtual, updatePontuacaoTotal, weight_question, statement_question }) {
+function SelectQuestion({ proximaPergunta, weight_question, statement_question }) {
 
     const [checkedItems, setCheckedItems] = useState([]);
-    const [pontuacaoQuestao, setPontuacaoQuestao] = useState([]) // vai ter tamanho igual ao numero de profissões
 
+    
     const handleCheckboxChange = (index) => {
         setCheckedItems((prev) => {
             if (prev.includes(index)) return prev.filter((item) => item !== index);
@@ -35,22 +35,13 @@ function SelectQuestion({ updatePerguntaAtual, updatePontuacaoTotal, weight_ques
 
         return pontuacao
     }
-
-    const updatePontuacao = (pontuacaoAtual) => {
-        let pontuacaoUpdated = [...pontuacaoAtual]
-        if (pontuacaoQuestao.length !== 0) pontuacaoUpdated = pontuacaoAtual.map((x, i) => x - pontuacaoQuestao[i])
-
-        setPontuacaoQuestao(pontuacaoAtual)
-        updatePontuacaoTotal(pontuacaoUpdated)
-    }
-
+    
     const proxPergunta = () => {
         if (!validacaoNumFrases()) return
 
         const pontuacao = calculaPontuacaoQuestao()
-        updatePontuacao(pontuacao)
-
-        updatePerguntaAtual()
+        
+        proximaPergunta(pontuacao)
     }
 
 

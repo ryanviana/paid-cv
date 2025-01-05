@@ -29,19 +29,24 @@ function Questions() {
         setperguntaAtual(perguntaAtual + 1)
     }
 
+    const proximaPergunta = (pontuacao) => {
+        updatePontuacaoTotal(pontuacao)
+        updatePerguntaAtual()
+    }
+
     // Cada fase indica qual "parte" o usuário está do teste
     const perguntas = [
-        <P1 key="q1" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P2 key="q2" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P3 key="q3" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P4 key="q4" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
+        <P1 key="q1" proximaPergunta={proximaPergunta} />,
+        <P2 key="q2" proximaPergunta={proximaPergunta} />,
+        <P3 key="q3" proximaPergunta={proximaPergunta} />,
+        <P4 key="q4" proximaPergunta={proximaPergunta} />,
         <Result key="res1" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='parcial' />,
-        <P5 key="q5" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P6 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P7 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P8 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P9 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
-        <P10 key="q6" updatePerguntaAtual={updatePerguntaAtual} updatePontuacaoTotal={updatePontuacaoTotal} />,
+        <P5 key="q5" proximaPergunta={proximaPergunta} />,
+        <P6 key="q6" proximaPergunta={proximaPergunta} />,
+        <P7 key="q6" proximaPergunta={proximaPergunta} />,
+        <P8 key="q6" proximaPergunta={proximaPergunta} />,
+        <P9 key="q6" proximaPergunta={proximaPergunta} />,
+        <P10 key="q6" proximaPergunta={proximaPergunta} />,
         <Result key="res2" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='total' />,
     ];
 
