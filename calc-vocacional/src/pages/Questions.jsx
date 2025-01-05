@@ -11,6 +11,7 @@ import P8 from "./perguntas/P8";
 import P9 from "./perguntas/P9";
 import P10 from "./perguntas/P10";
 import Result from "./ResultFront";
+import Email from "./Email";
 
 function Questions() {
 
@@ -37,6 +38,8 @@ function Questions() {
     // Cada fase indica qual "parte" o usuário está do teste
     const perguntas = [
         <P1 key="q1" proximaPergunta={proximaPergunta} />,
+        <Result key="res2" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='total' />,
+        <Email key="email" pontuacaoTotal={pontuacaoTotal} />,
         <P2 key="q2" proximaPergunta={proximaPergunta} />,
         <P3 key="q3" proximaPergunta={proximaPergunta} />,
         <P4 key="q4" proximaPergunta={proximaPergunta} />,
@@ -47,7 +50,6 @@ function Questions() {
         <P8 key="q6" proximaPergunta={proximaPergunta} />,
         <P9 key="q6" proximaPergunta={proximaPergunta} />,
         <P10 key="q6" proximaPergunta={proximaPergunta} />,
-        <Result key="res2" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='total' />,
     ];
 
     return (
