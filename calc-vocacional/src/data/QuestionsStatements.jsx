@@ -105,7 +105,7 @@ export const statement_question_8 = {
 
 
 export const statement_question_9 = {
-    title: 'Na faculdade, eu gostaria de:', 
+    title: 'Sobre resolução de problemas:', 
     phrases: [
     "Gosto de analisá-lo profundamente antes de propor soluções.",
     "Prefiro testar ideias práticas até encontrar a solução mais eficiente.",
