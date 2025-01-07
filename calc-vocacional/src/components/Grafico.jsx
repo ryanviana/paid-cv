@@ -60,7 +60,9 @@ function Grafico({ pontuacaoTotal, type }) {
     };
 
     return (
-        <Radar data={data} options={options} />
+        <div className="w-[90%] h-[90%] flex items-center justify-center">
+            <Radar data={data} options={options} className='w-full h-full'/>
+        </div>
     );
 }
 

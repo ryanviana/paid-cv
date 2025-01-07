@@ -5,7 +5,6 @@ import '../styles/index.css'
 import Header from "../components/Header";
 import Home from "../pages/Home";
 import LandingPage from "../pages/LandingPage";
-import Instructions from "../pages/Instructions";
 import Questions from "../pages/Questions";
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/landing" element={<LandingPage />} />
-                    <Route path="/instructions" element={<Instructions />} />
                     <Route path="/questions" element={<Questions />} />
                 </Routes>
             </Router>
