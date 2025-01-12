@@ -13,8 +13,9 @@ export default {
             'jornadas-logo': "url('/jornadas-logo.png')",
         },
         colors: {
-            'jornadas-blue' : '#06fdfd',        
-            'jornadas-blue-dark' : '#04caca',        
+            'jornadas-blue' : '#25e2cc',        
+            'jornadas-blue-dark' : '#04caca',   
+            'jornadas-blue-light' : '#79dcd7',      
         },
         fontFamily: {
             'montserrat': ['Montserrat', 'sans-serif'], 
