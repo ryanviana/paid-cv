@@ -24,11 +24,11 @@ function LandingPage() {
                 </h2>
                 <p className="mt-2 font-questrial text-sm sm:text-base md:text-lg text-white text-center">
                     Você está prestes a embarcar em uma{" "}
-                    <span className="text-jornadas-blue font-bold">jornada</span> 
+                    <span className="text-jornadas-blue font-bold">jornada </span> 
                     de autoconhecimento e descobertas
                 </p>
                 <Link 
-                    to="/instructions"
+                    to="/questions"
                     className="
                         mt-7 w-48 sm:w-56 md:w-64 bg-jornadas-blue 
                         rounded-lg hover:bg-jornadas-blue-dark text-black 

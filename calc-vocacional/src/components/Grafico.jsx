@@ -53,16 +53,14 @@ function Grafico({ pontuacaoTotal, type }) {
         datasets: [{
             label: "Score",
             data: pontuacaoTotal,
-            backgroundColor: 'rgba(6, 253, 253, 0.5)',
+            backgroundColor: 'rgba(36, 228, 204, 0.5)',
             borderColor: '#04caca',
             borderWidth: 3
         }]
     };
 
     return (
-        <div className="w-[90%] h-[90%] flex items-center justify-center">
-            <Radar data={data} options={options} className='w-full h-full'/>
-        </div>
+        <Radar data={data} options={options}/>
     );
 }
 
