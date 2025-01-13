@@ -32,7 +32,7 @@ function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
         <div className="w-full h-auto flex flex-col justify-between items-center mb-10 p-3">
             <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
             <h1 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h1>
-            <div className="flex justify-center text-center items-center h-[80%] w-[80%]">
+            <div className="flex justify-center text-center items-center h-[50%] w-[50%]">
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
 
