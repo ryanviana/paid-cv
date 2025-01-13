@@ -63,12 +63,12 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
     }
 
     return (
-        <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full'>
+        <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full px-10 py-10'>
             <div>
-                <h2>Parte I - Preferência Visual </h2>
-                <h3>Selecione os campos de atuação que mais  te interessar e menos te interessar</h3>
+                <h2 className='font-montserrat text-gray-600 font-bold text-3xl'>Parte I - Preferência Visual </h2>
+                <h3 className='font-questrial'>Selecione os campos de atuação que mais  te interessar e menos te interessar</h3>
             </div>
-            <div className='flex justify-center text-center items-center'>
+            <div className='flex justify-center text-center items-center mt-10'>
                 <div className="grid grid-cols-1 gap-y-8 h-full place-items-center lg:grid-cols-2">
 
                     {statement_question.map((img, index) => (
@@ -90,7 +90,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
             </div>
 
             <button onClick={proxPergunta}
-                className='p-1 px-5 bg-gray-300 rounded-lg m-5 transition-all duration-100 ease-in-out hover:bg-gray-400 hover:scale-105'>
+                className='font-bold text-white font-montserrat p-3 px-5 bg-jornadas-blue rounded-lg m-5 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
                 Próxima Pergunta
             </button>
         </div>
