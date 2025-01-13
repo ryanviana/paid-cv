@@ -200,40 +200,6 @@
         ]
     },
     {
-        "area": "Produção",
-        "cursos": [
-            {
-                "nome": "Engenharia de Produção",
-                "resumo": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas.",
-                "descricao": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas. Durante o curso, que dura cerca de cinco anos, os alunos estudam matérias como matemática, física, gestão de projetos, controle de qualidade, planejamento da produção e logística. Além disso, aprendem sobre ergonomia, sustentabilidade e como integrar tecnologia nos processos. No mercado de trabalho, o engenheiro de produção é valorizado em indústrias, empresas de serviços, startups e consultorias, sendo responsável por reduzir custos, otimizar recursos e aumentar a produtividade.",
-                "cargos": [
-                    {
-                        "cargo": "Analista de Logística",
-                        "descricao": "Planeja e organiza a movimentação de materiais e produtos para garantir eficiência."
-                    },
-                    {
-                        "cargo": "Engenheiro de Qualidade",
-                        "descricao": "Avalia processos e produtos para assegurar que atendam aos padrões exigidos."
-                    },
-                    {
-                        "cargo": "Gerente de Produção",
-                        "descricao": "Supervisiona a equipe e os recursos envolvidos na fabricação de produtos, garantindo cumprimento de metas."
-                    },
-                    {
-                        "cargo": "Consultor de Processos",
-                        "descricao": "Analisa e sugere melhorias em processos empresariais para otimizar resultados."
-                    },
-                    {
-                        "cargo": "Especialista em Planejamento e Controle de Produção (PCP)",
-                        "descricao": "Garante que os processos de produção sejam organizados e eficientes."
-                    }
-                ],
-                "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um engenheiro de produção no Brasil é de R$ 8.500 por mês, podendo variar com a experiência e o porte da empresa.",
-                "perfil_estudante": "O estudante de Engenharia de Produção tem afinidade com matemática e física, gosta de resolver problemas e trabalhar em equipe. Geralmente, é uma pessoa organizada, analítica e interessada em melhorar processos e aumentar a eficiência. Além disso, precisa ter boa comunicação e disposição para aprender continuamente, já que o mercado exige atualização constante."
-            }
-        ]
-    },
-    {
         "area": "Mecatrônica",
         "cursos": [
             {
@@ -411,6 +377,40 @@
         ]
     },
     {
+        "area": "Produção",
+        "cursos": [
+            {
+                "nome": "Engenharia de Produção",
+                "resumo": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas.",
+                "descricao": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas. Durante o curso, que dura cerca de cinco anos, os alunos estudam matérias como matemática, física, gestão de projetos, controle de qualidade, planejamento da produção e logística. Além disso, aprendem sobre ergonomia, sustentabilidade e como integrar tecnologia nos processos. No mercado de trabalho, o engenheiro de produção é valorizado em indústrias, empresas de serviços, startups e consultorias, sendo responsável por reduzir custos, otimizar recursos e aumentar a produtividade.",
+                "cargos": [
+                    {
+                        "cargo": "Analista de Logística",
+                        "descricao": "Planeja e organiza a movimentação de materiais e produtos para garantir eficiência."
+                    },
+                    {
+                        "cargo": "Engenheiro de Qualidade",
+                        "descricao": "Avalia processos e produtos para assegurar que atendam aos padrões exigidos."
+                    },
+                    {
+                        "cargo": "Gerente de Produção",
+                        "descricao": "Supervisiona a equipe e os recursos envolvidos na fabricação de produtos, garantindo cumprimento de metas."
+                    },
+                    {
+                        "cargo": "Consultor de Processos",
+                        "descricao": "Analisa e sugere melhorias em processos empresariais para otimizar resultados."
+                    },
+                    {
+                        "cargo": "Especialista em Planejamento e Controle de Produção (PCP)",
+                        "descricao": "Garante que os processos de produção sejam organizados e eficientes."
+                    }
+                ],
+                "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um engenheiro de produção no Brasil é de R$ 8.500 por mês, podendo variar com a experiência e o porte da empresa.",
+                "perfil_estudante": "O estudante de Engenharia de Produção tem afinidade com matemática e física, gosta de resolver problemas e trabalhar em equipe. Geralmente, é uma pessoa organizada, analítica e interessada em melhorar processos e aumentar a eficiência. Além disso, precisa ter boa comunicação e disposição para aprender continuamente, já que o mercado exige atualização constante."
+            }
+        ]
+    },   
+    {
         "area": "Materiais",
         "cursos": [
             {
@@ -441,40 +441,6 @@
                 ],
                 "media_salarial": "De acordo com o site Glassdoor, a média salarial de um engenheiro de materiais no Brasil é de aproximadamente R$ 7.500 por mês, variando conforme o setor e a experiência.",
                 "perfil_estudante": "O aluno de Engenharia de Materiais tem curiosidade sobre como os materiais são feitos e funcionam. Ele gosta de química, física e matemática, além de ter interesse por inovação tecnológica. Habilidades como raciocínio lógico, atenção aos detalhes e criatividade são fundamentais para projetar soluções eficientes. A vontade de aprender continuamente também é importante, já que o setor está em constante evolução."
-            }
-        ]
-    },
-    {
-        "area": "Ambiental",
-        "cursos": [
-            {
-                "nome": "Engenharia Ambiental",
-                "resumo": "Focado na preservação e recuperação do meio ambiente, com ênfase em ciência, tecnologia e sustentabilidade.",
-                "descricao": "A Engenharia Ambiental é um curso voltado para a preservação e recuperação do meio ambiente, integrando ciência, tecnologia e sustentabilidade. Durante os cinco anos da graduação, os estudantes aprendem disciplinas como ecologia, geologia, tratamento de resíduos, hidrologia, saneamento, gestão de recursos naturais e energias renováveis. O curso também inclui aspectos técnicos, como análises químicas e ambientais, e ferramentas de planejamento urbano e ambiental. No mercado de trabalho, engenheiros ambientais atuam em empresas, órgãos públicos, ONGs e consultorias, desenvolvendo soluções para minimizar os impactos ambientais e promover o uso sustentável dos recursos naturais.",
-                "cargos": [
-                    {
-                        "cargo": "Engenheiro de Saneamento",
-                        "descricao": "Trabalha no planejamento e gestão de sistemas de abastecimento de água, esgoto e resíduos sólidos."
-                    },
-                    {
-                        "cargo": "Consultor Ambiental",
-                        "descricao": "Realiza análises e propõe soluções para empresas se adequarem às normas ambientais."
-                    },
-                    {
-                        "cargo": "Engenheiro de Gestão de Recursos Naturais",
-                        "descricao": "Planeja o uso sustentável de recursos como água, solo e florestas."
-                    },
-                    {
-                        "cargo": "Especialista em Licenciamento Ambiental",
-                        "descricao": "Elabora e supervisiona processos de licenciamento de empreendimentos que impactam o meio ambiente."
-                    },
-                    {
-                        "cargo": "Engenheiro de Energias Renováveis",
-                        "descricao": "Desenvolve projetos de energia sustentável, como solar, eólica e biomassa."
-                    }
-                ],
-                "media_salarial": "De acordo com o site Glassdoor, o salário médio de um engenheiro ambiental no Brasil é de aproximadamente R$ 6.500 por mês, com variações dependendo do setor e da experiência.",
-                "perfil_estudante": "O estudante de Engenharia Ambiental geralmente tem interesse por natureza, sustentabilidade e tecnologia. É uma pessoa que gosta de biologia, química e geografia, e está motivada a resolver problemas relacionados ao meio ambiente. Características como raciocínio lógico, visão sistêmica, trabalho em equipe e vontade de causar impacto positivo na sociedade são fundamentais para o sucesso na profissão."
             }
         ]
     },
@@ -511,5 +477,39 @@
                 "perfil_estudante": "O aluno de Engenharia Civil geralmente é organizado, gosta de matemática e física e tem interesse por construção e infraestrutura. Características como raciocínio lógico, atenção aos detalhes, capacidade de trabalhar em equipe e habilidade de resolver problemas são essenciais. Além disso, é importante ter disposição para aprender continuamente e acompanhar as inovações tecnológicas no setor."
             }
         ]
-    }
+    },
+    {
+        "area": "Ambiental",
+        "cursos": [
+            {
+                "nome": "Engenharia Ambiental",
+                "resumo": "Focado na preservação e recuperação do meio ambiente, com ênfase em ciência, tecnologia e sustentabilidade.",
+                "descricao": "A Engenharia Ambiental é um curso voltado para a preservação e recuperação do meio ambiente, integrando ciência, tecnologia e sustentabilidade. Durante os cinco anos da graduação, os estudantes aprendem disciplinas como ecologia, geologia, tratamento de resíduos, hidrologia, saneamento, gestão de recursos naturais e energias renováveis. O curso também inclui aspectos técnicos, como análises químicas e ambientais, e ferramentas de planejamento urbano e ambiental. No mercado de trabalho, engenheiros ambientais atuam em empresas, órgãos públicos, ONGs e consultorias, desenvolvendo soluções para minimizar os impactos ambientais e promover o uso sustentável dos recursos naturais.",
+                "cargos": [
+                    {
+                        "cargo": "Engenheiro de Saneamento",
+                        "descricao": "Trabalha no planejamento e gestão de sistemas de abastecimento de água, esgoto e resíduos sólidos."
+                    },
+                    {
+                        "cargo": "Consultor Ambiental",
+                        "descricao": "Realiza análises e propõe soluções para empresas se adequarem às normas ambientais."
+                    },
+                    {
+                        "cargo": "Engenheiro de Gestão de Recursos Naturais",
+                        "descricao": "Planeja o uso sustentável de recursos como água, solo e florestas."
+                    },
+                    {
+                        "cargo": "Especialista em Licenciamento Ambiental",
+                        "descricao": "Elabora e supervisiona processos de licenciamento de empreendimentos que impactam o meio ambiente."
+                    },
+                    {
+                        "cargo": "Engenheiro de Energias Renováveis",
+                        "descricao": "Desenvolve projetos de energia sustentável, como solar, eólica e biomassa."
+                    }
+                ],
+                "media_salarial": "De acordo com o site Glassdoor, o salário médio de um engenheiro ambiental no Brasil é de aproximadamente R$ 6.500 por mês, com variações dependendo do setor e da experiência.",
+                "perfil_estudante": "O estudante de Engenharia Ambiental geralmente tem interesse por natureza, sustentabilidade e tecnologia. É uma pessoa que gosta de biologia, química e geografia, e está motivada a resolver problemas relacionados ao meio ambiente. Características como raciocínio lógico, visão sistêmica, trabalho em equipe e vontade de causar impacto positivo na sociedade são fundamentais para o sucesso na profissão."
+            }
+        ]
+    } 
 ]
