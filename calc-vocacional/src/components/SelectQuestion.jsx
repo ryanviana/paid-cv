@@ -14,14 +14,6 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
         });
     };
 
-    const validacaoNumFrases = () => {
-        if (checkedItems.length !== 3) {
-            alert('Necessário selecionar 3 frases.')
-            return false
-        }
-        return true
-    }
-
     const calculaPontuacaoQuestao = () => {
         let pontuacao = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         weight_question.forEach((valor, index) => {
@@ -37,8 +29,6 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
     }
     
     const proxPergunta = () => {
-        if (!validacaoNumFrases()) return
-
         const pontuacao = calculaPontuacaoQuestao()
         
         proximaPergunta(pontuacao)
