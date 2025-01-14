@@ -4,6 +4,8 @@ import ImageQuestion from "../components/ImageQuestion";
 import SelectQuestion from "../components/SelectQuestion";
 import Result from "./ResultFront";
 import Email from "./Email";
+import ExplicacaoImagem from "./ExplicacaoImagem"
+import ExplicacaoSelect from "./ExplicacaoSelect"
 
 // enunciados das perguntas
 import { statement_question_1 } from '../data/QuestionsStatements'
@@ -54,11 +56,13 @@ function Questions() {
 
     // Cada fase indica qual "parte" o usuário está do teste
     const perguntas = [
+        <ExplicacaoImagem key="ex1" updatePerguntaAtual={updatePerguntaAtual} />,
         <ImageQuestion key="q1" proximaPergunta={proximaPergunta} weight_question={weight_question_1} statement_question={statement_question_1} />,
         <ImageQuestion key="q2" proximaPergunta={proximaPergunta} weight_question={weight_question_2} statement_question={statement_question_2} />,
         <ImageQuestion key="q3" proximaPergunta={proximaPergunta} weight_question={weight_question_3} statement_question={statement_question_3} />,
         <ImageQuestion key="q4" proximaPergunta={proximaPergunta} weight_question={weight_question_4} statement_question={statement_question_4} />,
         <Result key="res1" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='parcial' />,
+        <ExplicacaoSelect key="ex2" updatePerguntaAtual={updatePerguntaAtual} />,
         <SelectQuestion key="q5"  proximaPergunta={proximaPergunta} weight_question={weight_question_5} statement_question={statement_question_5} />,
         <SelectQuestion key="q6"  proximaPergunta={proximaPergunta} weight_question={weight_question_6} statement_question={statement_question_6} />,
         <SelectQuestion key="q7"  proximaPergunta={proximaPergunta} weight_question={weight_question_7} statement_question={statement_question_7} />,
@@ -70,7 +74,7 @@ function Questions() {
     ];
 
     return (
-        <div className='flex flex-col w-full items-center text-center'>
+        <div className='flex flex-col w-full h-full items-center text-center'>
             {perguntas[perguntaAtual]}
         </div>
     )
