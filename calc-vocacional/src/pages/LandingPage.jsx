@@ -2,42 +2,21 @@ import { Link } from "react-router-dom";
 
 function LandingPage() {
     return (
-        <div className="
-            w-full h-screen flex flex-col justify-center items-center
-            bg-gradient-to-b from-[#353535] via-[#525252] to-[#353535] ">
-            <div className="flex justify-center mt-0 mb-0">
-                <img 
-                    src="/jornadas-logo.png" 
-                    alt="Logo" 
-                    className="w-[80%] sm:w-[60%] md:w-[40%] max-w-[500px] object-contain"
-                />
-            </div>
-
-            <div className="flex flex-col items-center justify-center">
-                <h1 className=
-                        "font-montserrat font-bold text-4xl 
-                        sm:text-5xl md:text-7xl text-white text-center mt-6">
-                    Cálculo Vocacional
-                </h1>
-                <h2 className="font-questrial text-base sm:text-lg md:text-xl text-white text-center mt-2">
-                    Descubra seu curso ideal
-                </h2>
-                <p className="mt-2 font-questrial text-sm sm:text-base md:text-lg text-white text-center">
-                    Você está prestes a embarcar em uma{" "}
-                    <span className="text-jornadas-blue font-bold">jornada </span> 
-                    de autoconhecimento e descobertas
-                </p>
-                <Link 
-                    to="/questions"
-                    className="
-                        mt-7 w-48 sm:w-56 md:w-64 bg-jornadas-blue 
-                        rounded-lg hover:bg-jornadas-blue-dark text-black 
-                        font-questrial font-semibold py-2 px-4 shadow-xg focus:outline-none 
-                        focus:ring-2 focus:ring-white focus:ring-opacity-75"
-                >
-                    Iniciar Teste
-                </Link>
-            </div>
+        <div className="w-full h-screen flex flex-col justify-center items-center gap-4 md:gap-7 p-5">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold">Cálculo Vocacional</h1>
+            <h2 className="text-xl md:text-4xl lg:text-5xl font-bold">Encontre o curso de exatas que combina com você!</h2>
+            <p className="font-medium text-base md:text-lg lg:text-xl">Com este teste, você vai explorar suas habilidades, interesses e sonhos para descobrir o curso que tem tudo a ver com você!</p>
+            <p className="font-medium text-base md:text-lg lg:text-xl">Ao final do teste, você poderá acessar a aula referente aos cursos mais alinhados com você, e salvar os resultados para rever depois! Boa sorte!</p>
+            <Link
+                to="/questions"
+                className="
+                        md:text-xl mt-7 w-48 sm:w-56 md:w-64 bg-jornadas-blue
+                        rounded-lg text-black font-questrial font-semibold py-2 px-4 shadow-xg
+                        focus:ring-2 focus:ring-white focus:ring-opacity-75 focus:outline-none 
+                        transition-all hover:bg-jornadas-blue-dark hover:scale-110"
+            >
+                Vamos começar!
+            </Link>
         </div>
     );
 }
