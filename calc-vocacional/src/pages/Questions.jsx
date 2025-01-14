@@ -1,17 +1,34 @@
 import { useState } from 'react'
 
-import P1 from "./perguntas/P1";
-import P2 from "./perguntas/P2";
-import P3 from "./perguntas/P3";
-import P4 from "./perguntas/P4";
-import P5 from "./perguntas/P5";
-import P6 from "./perguntas/P6";
-import P7 from "./perguntas/P7";
-import P8 from "./perguntas/P8";
-import P9 from "./perguntas/P9";
-import P10 from "./perguntas/P10";
+import ImageQuestion from "../components/ImageQuestion";
+import SelectQuestion from "../components/SelectQuestion";
 import Result from "./ResultFront";
 import Email from "./Email";
+
+// enunciados das perguntas
+import { statement_question_1 } from '../data/QuestionsStatements'
+import { statement_question_2 } from '../data/QuestionsStatements'
+import { statement_question_3 } from '../data/QuestionsStatements'
+import { statement_question_4 } from '../data/QuestionsStatements'
+import { statement_question_5 } from '../data/QuestionsStatements'
+import { statement_question_6 } from '../data/QuestionsStatements'
+import { statement_question_7 } from '../data/QuestionsStatements'
+import { statement_question_8 } from '../data/QuestionsStatements'
+import { statement_question_9 } from '../data/QuestionsStatements'
+import { statement_question_10 } from '../data/QuestionsStatements'
+
+// pesos de cada item das perguntas
+import { weight_question_1 } from '../data/QuestionsWeight'
+import { weight_question_2 } from '../data/QuestionsWeight'
+import { weight_question_3 } from '../data/QuestionsWeight'
+import { weight_question_4 } from '../data/QuestionsWeight'
+import { weight_question_5 } from '../data/QuestionsWeight'
+import { weight_question_6 } from '../data/QuestionsWeight'
+import { weight_question_7 } from '../data/QuestionsWeight'
+import { weight_question_8 } from '../data/QuestionsWeight'
+import { weight_question_9 } from '../data/QuestionsWeight'
+import { weight_question_10 } from '../data/QuestionsWeight'
+
 
 function Questions() {
 
@@ -37,23 +54,23 @@ function Questions() {
 
     // Cada fase indica qual "parte" o usuário está do teste
     const perguntas = [
-        <P1 key="q1" proximaPergunta={proximaPergunta} />,
-        <P2 key="q2" proximaPergunta={proximaPergunta} />,
-        <P3 key="q3" proximaPergunta={proximaPergunta} />,
-        <P4 key="q4" proximaPergunta={proximaPergunta} />,
+        <ImageQuestion key="q1" proximaPergunta={proximaPergunta} weight_question={weight_question_1} statement_question={statement_question_1} />,
+        <ImageQuestion key="q2" proximaPergunta={proximaPergunta} weight_question={weight_question_2} statement_question={statement_question_2} />,
+        <ImageQuestion key="q3" proximaPergunta={proximaPergunta} weight_question={weight_question_3} statement_question={statement_question_3} />,
+        <ImageQuestion key="q4" proximaPergunta={proximaPergunta} weight_question={weight_question_4} statement_question={statement_question_4} />,
         <Result key="res1" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='parcial' />,
-        <P5 key="q5" proximaPergunta={proximaPergunta} />,
-        <P6 key="q6" proximaPergunta={proximaPergunta} />,
-        <P7 key="q6" proximaPergunta={proximaPergunta} />,
-        <P8 key="q6" proximaPergunta={proximaPergunta} />,
-        <P9 key="q6" proximaPergunta={proximaPergunta} />,
-        <P10 key="q6" proximaPergunta={proximaPergunta} />,
+        <SelectQuestion key="q5"  proximaPergunta={proximaPergunta} weight_question={weight_question_5} statement_question={statement_question_5} />,
+        <SelectQuestion key="q6"  proximaPergunta={proximaPergunta} weight_question={weight_question_6} statement_question={statement_question_6} />,
+        <SelectQuestion key="q7"  proximaPergunta={proximaPergunta} weight_question={weight_question_7} statement_question={statement_question_7} />,
+        <SelectQuestion key="q8"  proximaPergunta={proximaPergunta} weight_question={weight_question_8} statement_question={statement_question_8} />,
+        <SelectQuestion key="q9"  proximaPergunta={proximaPergunta} weight_question={weight_question_9} statement_question={statement_question_9} />,
+        <SelectQuestion key="q10"  proximaPergunta={proximaPergunta} weight_question={weight_question_10} statement_question={statement_question_10} />,
         <Result key="res2" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='total' />,
         <Email key="email" pontuacaoTotal={pontuacaoTotal} />,
     ];
 
     return (
-        <div className='flex flex-col w-full items-center text-center h-full'>
+        <div className='flex flex-col w-full items-center text-center'>
             {perguntas[perguntaAtual]}
         </div>
     )

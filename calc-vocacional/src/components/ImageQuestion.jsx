@@ -63,7 +63,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
     }
 
     return (
-        <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full px-10 py-10'>
+        <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full'>
             <div>
                 <h2 className='font-montserrat text-gray-600 font-bold text-3xl'>Parte I - Preferência Visual </h2>
                 <h3 className='font-questrial'>Selecione os campos de atuação que mais  te interessar e menos te interessar</h3>
