@@ -1,16 +1,16 @@
-import Logo from '/react.svg'
+import Logo from '/jornadas-logo-sem-bordas.png'
 
 function Header() {
 
     return (
-        <nav className="bg-jornadas-blue py-1 px-6 shadow-lg flex justify-between items-center">
-        
-        <img src={Logo} alt="Logo Jornadas" className="h-5 md:h-10" />
+        <nav className="py-2 shadow-lg flex">
 
-        <h1 className="text-white text-1xl md:text-2xl font-montserrat font-bold text-center">
-            Cálculo Vocacional
-        </h1>
-    </nav>
+            <img src={Logo} alt="Logo Jornadas" className="h-7 md:h-10 px-3 md:px-5" />
+
+            <h1 className="text-black text-1xl md:text-2xl font-montserrat text-center">
+                <strong>Jornadas</strong> <i>Educação</i>
+            </h1>
+        </nav>
     );
 }
 
