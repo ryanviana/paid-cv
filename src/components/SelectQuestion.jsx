@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import * as Defines from '../data/Defines';
+
 function SelectQuestion({ proximaPergunta, weight_question, statement_question }) {
 
     const [checkedItems, setCheckedItems] = useState([]);
@@ -15,7 +17,7 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
     };
 
     const calculaPontuacaoQuestao = () => {
-        let pontuacao = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        let pontuacao = Array(Defines.numAreas).fill(0)
         weight_question.forEach((valor, index) => {
             if (checkedItems.includes(index)) pontuacao = pontuacao.map((x, i) => x + valor[i])
             else pontuacao = pontuacao.map((x, i) => x - valor[i])

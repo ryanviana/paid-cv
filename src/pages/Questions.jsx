@@ -7,6 +7,9 @@ import Email from "./Email";
 import ExplicacaoImagem from "./ExplicacaoImagem"
 import ExplicacaoSelect from "./ExplicacaoSelect"
 
+// defines das areas
+import * as Defines from '../data/Defines';
+
 // enunciados das perguntas
 import { statement_question_1 } from '../data/QuestionsStatements'
 import { statement_question_2 } from '../data/QuestionsStatements'
@@ -34,7 +37,7 @@ import { weight_question_10 } from '../data/QuestionsWeight'
 
 function Questions() {
 
-    const [pontuacaoTotal, setPontuacaoTotal] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    const [pontuacaoTotal, setPontuacaoTotal] = useState(Array(Defines.numAreas).fill(0))
     const [perguntaAtual, setperguntaAtual] = useState(0);
 
     const updatePontuacaoTotal = (pontuacao) => {

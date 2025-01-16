@@ -1,5 +1,8 @@
 import { useState } from 'react'
 
+// defines importantes
+import * as Defines from '../data/Defines';
+
 function ImageQuestion({ proximaPergunta, weight_question, statement_question }) {
 
     // cada index se refere a uma imagem
@@ -41,7 +44,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
     }
 
     const calculaPontuacaoQuestao = () => {
-        let pontuacao = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        let pontuacao = Array(Defines.numAreas).fill(0)
         weight_question.forEach((valor, index) => {
             pontuacao = pontuacao.map((x, i) => x + valor[i] * interesse[index])
         });
