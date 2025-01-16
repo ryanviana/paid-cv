@@ -42,7 +42,7 @@ export const statement_question_4 = [
     { image: question4_img0, label: 'Sala de aula' },
     { image: question4_img1, label: 'Fábrica' },
     { image: question4_img2, label: 'Laboratório' },
-    { image: question4_img3, label: 'Simuladores de voo' }
+    { image: question4_img3, label: 'Aeroporto' }
 ]
 
 

@@ -61,7 +61,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
         if (!validacaoInteresse()) return
 
         const pontuacao = calculaPontuacaoQuestao()
-        
+
         proximaPergunta(pontuacao)
     }
 
@@ -69,23 +69,26 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
         <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full'>
             <div>
                 <h2 className='font-montserrat text-gray-600 font-bold text-3xl'>Parte I - Preferência Visual </h2>
-                <h3 className='font-questrial'>Selecione os campos de atuação que mais  te interessar e menos te interessar</h3>
+                <h3 className='font-questrial'>Indique os campos de atuação e/ou os ambientes de trabalhos que mais despertam o seu interesse e os que menos atraem você.</h3>
             </div>
-            <div className='flex justify-center text-center items-center mt-10'>
+            <div className='flex justify-center text-center items-center'>
                 <div className="grid grid-cols-1 gap-y-8 h-full place-items-center lg:grid-cols-2">
 
                     {statement_question.map((img, index) => (
-                        <div key={index} className={`relative group w-1/2 border-2 ${getBorderColor(index)}`} onMouseEnter={() => changeHover(index)} onMouseLeave={() => changeHover(index)}>
+                        <div key={index} className='h-[90%] flex flex-col items-center gap-3 lg:gap-0'>
+                            <div className={`relative group w-1/2 border-2 ${getBorderColor(index)}`} onMouseEnter={() => changeHover(index)} onMouseLeave={() => changeHover(index)}>
 
                             <img src={img['image']} alt={img['label']} className={`w-full h-full object-cover transition duration-200 ${hover[index] ? "blur-md" : "blur-0"}`} />
-                            {hover[index] && (
-                                <div className="absolute inset-0 flex items-center justify-center space-x-4">
-                                    <button onClick={() => changeInteresse(index, '1')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow"> Interesso </button>
+                                {hover[index] && (
+                                    <div className="absolute inset-0 flex items-center justify-center space-x-4">
+                                        <button onClick={() => changeInteresse(index, '1')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow"> Interesso </button>
 
-                                    <button onClick={() => changeInteresse(index, '-1')} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow"> Não interesso </button>
-                                </div>
-                            )}
+                                        <button onClick={() => changeInteresse(index, '-1')} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow"> Não interesso </button>
+                                    </div>
+                                )}
 
+                            </div>
+                            <p>{img['label']}</p>
                         </div>
                     ))}
 
@@ -93,7 +96,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
             </div>
 
             <button onClick={proxPergunta}
-                className='font-bold text-white font-montserrat p-3 px-5 bg-jornadas-blue rounded-lg m-5 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
+                className='font-bold text-white font-montserrat p-3 px-5 bg-jornadas-blue rounded-lg mt-10 lg:m-5 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
                 Próxima Pergunta
             </button>
         </div>
