@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import ImageQuestion from "../components/ImageQuestion";
 import SelectQuestion from "../components/SelectQuestion";
-import Result from "./ResultFront";
+import Result from "./Result";
 import Email from "./Email";
 import ExplicacaoImagem from "./ExplicacaoImagem"
 import ExplicacaoSelect from "./ExplicacaoSelect"
