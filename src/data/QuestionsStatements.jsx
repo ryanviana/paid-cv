@@ -79,7 +79,7 @@ export const statement_question_6 = {
 export const statement_question_7 = {
     title: 'Quando penso em tecnologia, eu:', 
     phrases: [
-    "Quero entender como projetos complexos, como avióes, funcionam.",
+    "Quero entender como projetos complexos, como aviões, funcionam.",
     "Me interesso por criar programas e aplicativos.",
     "Gosto de explorar novas tecnologias que ajudam a resolver problemas.",
     "Quero aplicar a tecnologia para melhorar processos industriais.",
