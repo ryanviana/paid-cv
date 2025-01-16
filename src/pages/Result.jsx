@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Grafico from "../components/Grafico";
 import areasConhecimento from '../data/areas_cursos.json'
 
-function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
+function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
@@ -32,7 +32,7 @@ function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
         <div className="w-full h-auto flex flex-col justify-between items-center mb-10 p-3">
             <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
             <h1 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h1>
-            <div className="flex justify-center text-center items-center h-[80%] w-[80%]">
+            <div className="flex justify-center text-center items-center h-[50%] w-[50%]">
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
 
@@ -69,13 +69,13 @@ function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
 
             {isModalOpen && cursoSelecionado && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-                    <div className="bg-cyan-50 px-20 py-10 rounded-lg max-w-[70%] max-h-[90%] overflow-auto">
+                    <div className="bg-cyan-50 px-7 py-5 sm:px-12 sm:py-10 lg:px-20 lg:py-20 leading-relaxed hyphens-auto break-words text-base rounded-lg max-w-[70%] max-h-[90%] overflow-auto">
                         <h3 className="text-2xl font-bold text-black mb-4 font-montserrat">{cursoSelecionado.nome}</h3>
-                        <p className="text-lg text-gray-700 mb-4 text-justify font-questrial">{cursoSelecionado.descricao}</p>
+                        <p className="text-lg text-gray-700 mb-4 text-left sm:text-justify font-questrial">{cursoSelecionado.descricao}</p>
 
                         {/* cargos dentro do curso selecionado */}
-                        <p className="text-lg text-black mb-4 text-justify font-bold font-montserrat">Cargos típicos para graduados em {cursoSelecionado.nome}</p>
-                        <ul className="list-disc pl-6 mb-4 text-justify font-questrial">
+                        <p className="text-lg text-black mb-4 text-left sm:text-justify font-bold font-montserrat">Cargos típicos para graduados em {cursoSelecionado.nome}</p>
+                        <ul className="list-disc pl-6 mb-4 text-left sm:text-justify font-questrial">
                             {cursoSelecionado.cargos.map((cargo, index) => (
                                 <li key={index} className="text-gray-700 text-lg">
                                     <strong>{cargo.cargo}:</strong> {cargo.descricao}
@@ -109,4 +109,4 @@ function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
     );
 }
 
-export default ResultFront;
+export default Result;
