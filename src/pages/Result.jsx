@@ -31,15 +31,6 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
         setCursoSelecionado(null);
     };
 
-
-    const capturePageAsImage = async () => {
-        const element = document.getElementById("result_id"); // ID do elemento que você quer capturar
-        const canvas = await html2canvas(element);
-        const image = canvas.toDataURL("image/png"); // Gera a imagem em formato base64
-        return image;
-    };
-
-
     const handleButton = async () => {
         if (type === 'parcial') {
             updatePerguntaAtual()
@@ -48,15 +39,40 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
         }
     }
 
-    const sendStorys = async () => {
-        const image = await capturePageAsImage();
 
-        // Precisa ser uma URL encode (com a imagem base64)
+
+    const capturePageAsImage = async () => {
+        const element = document.getElementById("result_id");
+        const canvas = await html2canvas(element);
+        const image = canvas.toDataURL("image/png");
+        return image;
+    };
+
+    const uploadImage = async (imageBase64) => {
+        // Converter base64 para um arquivo blob
+        const blob = await fetch(imageBase64).then((res) => res.blob());
+        const formData = new FormData();
+        formData.append("file", new File([blob], "resultado.png"));
+
+        // Enviar para o backend
+        const response = await fetch("https://3.12.246.4:4000/upload-image/", {
+            method: "POST",
+            body: formData,
+        });
+
+        const { url } = await response.json();
+        return url;
+    };
+
+
+    const sendStorys = async () => {
+        const imageBase64 = await capturePageAsImage();
+        const publicImageUrl = await uploadImage(imageBase64)
+
         const instagramUrl = `instagram://story?background_image=${encodeURIComponent(
-            image
+            publicImageUrl
         )}`;
 
-        // Abre o Instagram (somente no mobile)
         window.location.href = instagramUrl;
     }
 
