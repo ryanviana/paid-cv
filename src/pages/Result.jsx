@@ -72,8 +72,13 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
         const instagramUrl = `instagram://story?background_image=${encodeURIComponent(
             publicImageUrl
         )}`;
-
-        window.location.href = instagramUrl;
+        try {
+            setTimeout(() => {
+                window.location.href = instagramUrl;
+            }, 300);
+        } catch (_) {
+            alert("Não foi possível abrir o Instagram. Certifique-se de que o app está instalado.");
+        }
     }
 
     // array com áreas e pontuações 
