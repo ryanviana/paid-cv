@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Grafico from "../components/Grafico";
 import areasConhecimento from '../data/areas_cursos.json'
 
-function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
+function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
@@ -125,4 +125,4 @@ function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
     );
 }
 
-export default ResultFront;
+export default Result;

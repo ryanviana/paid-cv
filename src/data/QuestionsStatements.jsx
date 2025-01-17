@@ -42,7 +42,7 @@ export const statement_question_4 = [
     { image: question4_img0, label: 'Sala de aula' },
     { image: question4_img1, label: 'Fábrica' },
     { image: question4_img2, label: 'Laboratório' },
-    { image: question4_img3, label: 'Simuladores de voo' }
+    { image: question4_img3, label: 'Aeroporto' }
 ]
 
 
@@ -79,7 +79,7 @@ export const statement_question_6 = {
 export const statement_question_7 = {
     title: 'Quando penso em tecnologia, eu:', 
     phrases: [
-    "Quero entender como projetos complexos, como avióes, funcionam.",
+    "Quero entender como projetos complexos, como aviões, funcionam.",
     "Me interesso por criar programas e aplicativos.",
     "Gosto de explorar novas tecnologias que ajudam a resolver problemas.",
     "Quero aplicar a tecnologia para melhorar processos industriais.",

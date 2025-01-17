@@ -1,6 +1,8 @@
 import { Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
 
+import * as Defines from '../data/Defines';
+
 // Registrar as escalas e elementos necessários
 ChartJS.register(
     RadialLinearScale,
@@ -45,8 +47,8 @@ const options = {
 
 function Grafico({ pontuacaoTotal, type }) {
 
-    let labels = ["Computacao", "Eletrica", "Mecatronica", "Aeronautica", "Licenciatura", "Producao", "Materiais", "Civil", "Ambiental"]
-    if (type === 'parcial') labels = ["???", "???", "???", "???", "???", "???", "???", "???", "???"]
+    let labels = Defines.listaAreas
+    if (type === 'parcial') labels = Array(Defines.numAreas).fill("?")
 
     const data = {
         labels: labels,

@@ -1,5 +1,8 @@
 import { useState } from 'react'
 
+// defines importantes
+import * as Defines from '../data/Defines';
+
 function ImageQuestion({ proximaPergunta, weight_question, statement_question }) {
 
     const [hover, setHover] = useState([false, false, false, false]);
@@ -40,7 +43,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
     }
 
     const calculaPontuacaoQuestao = () => {
-        let pontuacao = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        let pontuacao = Array(Defines.numAreas).fill(0)
         weight_question.forEach((valor, index) => {
             pontuacao = pontuacao.map((x, i) => x + valor[i] * interesse[index])
         });
@@ -56,7 +59,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
         if (!validacaoInteresse()) return
 
         const pontuacao = calculaPontuacaoQuestao()
-        
+
         proximaPergunta(pontuacao)
     }
 
@@ -91,14 +94,20 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
             <div className="flex justify-center text-center items-center mt-10">
                 <div className="grid grid-cols-1 gap-y-8 h-full place-items-center lg:grid-cols-2">
                     {statement_question.map((img, index) => (
-                        <div key={index} className={`relative group w-1/2 border-2 ${getBorderColor(index)}`} onMouseEnter={() => changeHover(index)} onMouseLeave={() => changeHover(index)}>
+                        <div key={index} className='h-[90%] flex flex-col items-center gap-3 lg:gap-0'>
+                            <div className={`relative group w-1/2 border-2 ${getBorderColor(index)}`} onMouseEnter={() => changeHover(index)} onMouseLeave={() => changeHover(index)}>
+
                             <img src={img['image']} alt={img['label']} className={`w-full h-full object-cover transition duration-200 ${hover[index] ? "blur-md" : "blur-0"}`} />
-                            {hover[index] && (
-                                <div className="absolute inset-0 flex items-center justify-center space-x-4">
-                                    <button onClick={() => changeInteresse(index, '1')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow"> Interesso </button>
-                                    <button onClick={() => changeInteresse(index, '-1')} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow"> Não interesso </button>
-                                </div>
-                            )}
+                                {hover[index] && (
+                                    <div className="absolute inset-0 flex items-center justify-center space-x-4">
+                                        <button onClick={() => changeInteresse(index, '1')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow"> Interesso </button>
+
+                                        <button onClick={() => changeInteresse(index, '-1')} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow"> Não interesso </button>
+                                    </div>
+                                )}
+
+                            </div>
+                            <p>{img['label']}</p>
                         </div>
                     ))}
                 </div>
