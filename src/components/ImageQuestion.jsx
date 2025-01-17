@@ -36,7 +36,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
 
     const validacaoInteresse = () => {
         if (interesse.includes('')) {
-            setIsModalOpen(true); 
+            setIsModalOpen(true);
             return false;
         }
         return true
@@ -88,33 +88,34 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
     return (
         <div className="p-7 h-auto w-full flex flex-col justify-between items-center lg:h-auto">
             <div>
-                <h2 className="font-montserrat text-gray-600 font-bold text-3xl">Parte I - Preferência Visual </h2>
-                <h3 className="font-questrial">Selecione os campos de atuação que mais te interessar e menos te interessar</h3>
+                <h2 className="font-montserrat text-black font-semibold text-2xl">{statement_question['title']}</h2>
             </div>
-            <div className="flex justify-center text-center items-center mt-10">
+            <div className="flex justify-center text-center items-center mt-5">
                 <div className="grid grid-cols-1 gap-y-8 h-full place-items-center lg:grid-cols-2">
-                    {statement_question.map((img, index) => (
+                    {statement_question['images'].map((img, index) => (
                         <div key={index} className='h-[90%] flex flex-col items-center gap-3 lg:gap-0'>
                             <div className={`relative group w-1/2 border-2 ${getBorderColor(index)}`} onMouseEnter={() => changeHover(index)} onMouseLeave={() => changeHover(index)}>
 
-                            <img src={img['image']} alt={img['label']} className={`w-full h-full object-cover transition duration-200 ${hover[index] ? "blur-md" : "blur-0"}`} />
+                                <img src={img['image']} alt={img['label']} className={`w-full h-full object-cover transition duration-200 ${hover[index] ? "blur-lg" : "blur-0"}`} />
                                 {hover[index] && (
-                                    <div className="absolute inset-0 flex items-center justify-center space-x-4">
-                                        <button onClick={() => changeInteresse(index, '1')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow"> Interesso </button>
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
+                                        <p className='font-bold text-lg text-white bg-opacity-25 bg-black py-1 px-3 rounded-3xl'>{img['label']}</p>
+                                        <div className='flex items-center gap-5'>
+                                            <button onClick={() => changeInteresse(index, '1')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow"> Interesso </button>
+                                            <button onClick={() => changeInteresse(index, '-1')} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow"> Não interesso </button>
+                                        </div>
 
-                                        <button onClick={() => changeInteresse(index, '-1')} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow"> Não interesso </button>
                                     </div>
                                 )}
 
                             </div>
-                            <p>{img['label']}</p>
                         </div>
                     ))}
                 </div>
             </div>
 
             <button onClick={proxPergunta}
-                className="font-bold text-white font-montserrat p-3 px-5 bg-jornadas-blue rounded-lg m-5 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105">
+                className="font-bold text-white font-montserrat p-3 px-5 mt-12 bg-jornadas-blue rounded-lg lg:mt-10 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105">
                 Próxima Pergunta
             </button>
 
