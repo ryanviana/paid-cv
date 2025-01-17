@@ -3,7 +3,6 @@ import { useState } from 'react'
 import ImageQuestion from "../components/ImageQuestion";
 import SelectQuestion from "../components/SelectQuestion";
 import Result from "./Result";
-import Email from "./Email";
 import ExplicacaoImagem from "./ExplicacaoImagem"
 import ExplicacaoSelect from "./ExplicacaoSelect"
 
@@ -73,7 +72,6 @@ function Questions() {
         <SelectQuestion key="q9"  proximaPergunta={proximaPergunta} weight_question={weight_question_9} statement_question={statement_question_9} />,
         <SelectQuestion key="q10"  proximaPergunta={proximaPergunta} weight_question={weight_question_10} statement_question={statement_question_10} />,
         <Result key="res2" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='total' />,
-        <Email key="email" pontuacaoTotal={pontuacaoTotal} />,
     ];
 
     return (

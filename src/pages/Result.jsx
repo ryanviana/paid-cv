@@ -1,30 +1,41 @@
 import { useState } from 'react';
 import Grafico from "../components/Grafico";
+import Email from "./Email";
 import areasConhecimento from '../data/areas_cursos.json'
 
 function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+
+    const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
 
     let button_content;
-    if (type == 'total'){
+    if (type == 'total') {
         button_content = "Exportar resultados";
     } else {
         button_content = "Próxima pergunta";
     }
 
-    // abre modal (popup)
-    const openModal = (curso) => {
+    // abre curso modal (popup)
+    const openCourseModal = (curso) => {
         setCursoSelecionado(curso);
-        setIsModalOpen(true);
+        setIsCourseModalOpen(true);
     };
 
-    // fecha modal (popup) 
-    const closeModal = () => {
-        setIsModalOpen(false);
+    // fecha curso modal (popup) 
+    const closeCourseModal = () => {
+        setIsCourseModalOpen(false);
         setCursoSelecionado(null);
     };
+
+    const handleButton = () => {
+        if (type === 'parcial') {
+            updatePerguntaAtual()
+        } else {
+            setIsExportModalOpen(true)
+        }
+    }
 
     // array com áreas e pontuações 
     const areasComPontuacao = areasConhecimento.map((area, index) => ({
@@ -40,7 +51,7 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
             <div>
                 <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
                 <h2 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h2>
-            </div> 
+            </div>
             <div className="flex justify-center text-center items-center h-[40%] w-[40%]">
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
@@ -62,7 +73,7 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
                                             <span className="text-xl text-black font-bold font-montserrat">{curso.nome}</span>
                                             <p className="text-xl text-black font-questrial mt-2">{curso.resumo}</p>
                                             <p
-                                                onClick={() => openModal(curso)}
+                                                onClick={() => openCourseModal(curso)}
                                                 className="text-xl font-bold text-blue-400 font-questrial mt-2 cursor-pointer"
                                             >
                                                 Ver mais...
@@ -78,12 +89,12 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
             )}
 
 
-            <button onClick={() => updatePerguntaAtual()}
+            <button onClick={handleButton}
                 className='mt-5 mb-5 px-5 py-3 font-bold bg-jornadas-blue rounded-lg transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
-                    {button_content}
+                {button_content}
             </button>
 
-            {isModalOpen && cursoSelecionado && (
+            {isCourseModalOpen && cursoSelecionado && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
                     <div className="bg-cyan-50 px-7 py-5 sm:px-12 sm:py-10 lg:px-20 lg:py-20 leading-relaxed hyphens-auto break-words text-base rounded-lg max-w-[70%] max-h-[90%] overflow-auto">
                         <h3 className="text-2xl font-bold text-black mb-4 font-montserrat">{cursoSelecionado.nome}</h3>
@@ -113,11 +124,27 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
 
                         {/* botão para fechar popup*/}
                         <button
-                            onClick={closeModal}
+                            onClick={closeCourseModal}
                             className='mt-5 px-5 py-3 bg-jornadas-blue rounded-lg transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'
                         >
                             Fechar
                         </button>
+                    </div>
+                </div>
+            )}
+
+            {isExportModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+                    <div className="bg-cyan-50 w-[40%] px-7 py-5 sm:px-12 sm:py-10 leading-relaxed hyphens-auto break-words text-base rounded-lg *:max-h-[90%] overflow-auto">
+                        <div className='flex flex-row content-between justify-between items-center'>
+                            <div></div>
+                            <h1 className='font-bold text-2xl'>Exportar Resultados</h1>
+                            <button
+                                onClick={() => setIsExportModalOpen(false)}
+                                className='font-extrabold text-xl px-3 py-1 bg-jornadas-blue rounded-lg transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'
+                            >X</button>
+                        </div>
+                        <Email />
                     </div>
                 </div>
             )}
