@@ -2,48 +2,60 @@ import question1_img0 from '/perg1_img0.jpeg'
 import question1_img1 from '/perg1_img1.jpeg'
 import question1_img2 from '/perg1_img2.jpeg'
 import question1_img3 from '/perg1_img3.jpeg'
-export const statement_question_1 = [
-    { image: question1_img0, label: 'Grandes construções' },
-    { image: question1_img1, label: 'Programação e computação' },
-    { image: question1_img2, label: 'Problemas teóricos' },
-    { image: question1_img3, label: 'Desenvolvimento sustentável' }
-]
+export const statement_question_1 = {
+    title: "Indique os campos de atuação que mais despertam o seu interesse e os que menos atraem você.",
+    images: [
+        { image: question1_img0, label: 'Grandes construções' },
+        { image: question1_img1, label: 'Programação e computação' },
+        { image: question1_img2, label: 'Problemas teóricos' },
+        { image: question1_img3, label: 'Desenvolvimento sustentável' }
+    ]
+}
 
 
 import question2_img0 from '/perg2_img0.jpeg'
 import question2_img1 from '/perg2_img1.jpeg'
 import question2_img2 from '/perg2_img2.jpeg'
 import question2_img3 from '/perg2_img3.jpeg'
-export const statement_question_2 = [
-    { image: question2_img0, label: 'Aeronaves' },
-    { image: question2_img1, label: 'Sistemas elétricos' },
-    { image: question2_img2, label: 'Automação e robótica' },
-    { image: question2_img3, label: 'Ciência dos materiais' }
-]
+export const statement_question_2 = {
+    title: "Indique os campos de atuação que mais despertam o seu interesse e os que menos atraem você.",
+    images: [
+        { image: question2_img0, label: 'Aeronaves' },
+        { image: question2_img1, label: 'Sistemas elétricos' },
+        { image: question2_img2, label: 'Automação e robótica' },
+        { image: question2_img3, label: 'Ciência dos materiais' }
+    ]
+}
 
 
 import question3_img0 from '/perg3_img0.jpeg'
 import question3_img1 from '/perg3_img1.jpeg'
 import question3_img2 from '/perg3_img2.jpeg'
 import question3_img3 from '/perg3_img3.jpeg'
-export const statement_question_3 = [
-    { image: question3_img0, label: 'Laboratórios de pesquisa' },
-    { image: question3_img1, label: 'Escritórios' },
-    { image: question3_img2, label: 'Campos abertos' },
-    { image: question3_img3, label: 'Obras' }
-]
+export const statement_question_3 = {
+    title: "Escolha os ambientes de trabalho em que você se imagina e os que menos têm a ver com o seu perfil.",
+    images: [
+        { image: question3_img0, label: 'Laboratórios de pesquisa' },
+        { image: question3_img1, label: 'Escritórios' },
+        { image: question3_img2, label: 'Campos abertos' },
+        { image: question3_img3, label: 'Obras' }
+    ]
+}
 
 
 import question4_img0 from '/perg4_img0.jpeg'
 import question4_img1 from '/perg4_img1.jpeg'
 import question4_img2 from '/perg4_img2.jpeg'
 import question4_img3 from '/perg4_img3.jpeg'
-export const statement_question_4 = [
-    { image: question4_img0, label: 'Sala de aula' },
-    { image: question4_img1, label: 'Fábrica' },
-    { image: question4_img2, label: 'Laboratório' },
-    { image: question4_img3, label: 'Aeroporto' }
-]
+export const statement_question_4 = {
+    title: "Escolha os ambientes de trabalho em que você se imagina e os que menos têm a ver com o seu perfil.",
+    images: [
+        { image: question4_img0, label: 'Sala de aula' },
+        { image: question4_img1, label: 'Fábrica' },
+        { image: question4_img2, label: 'Laboratório' },
+        { image: question4_img3, label: 'Aeroporto' }
+    ]
+}
 
 
 

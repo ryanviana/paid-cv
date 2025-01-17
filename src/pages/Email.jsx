@@ -35,11 +35,11 @@ function Email({ pontuacaoTotal }) {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center h-full gap-2'>
-            <h1 className='font-bold text-2xl'>Digite seu email</h1>
+        <div className='flex flex-col items-center justify-center h-full gap-2 mt-10'>
+            <h1 className='font-semibold text-lg'>Digite seu email</h1>
             <div className='text-sm'>Necessário liberar o site do <a href="https://3.12.246.4:4000/" className='hover:underline text-blue-700'>backend</a> (certificado auto assinado)</div>
-            <input type="text" className='bg-gray-200 border-gray-400 border rounded-xl p-2 m-3' onChange={(e) => setEmail(e.target.value)} />
-            <button className='bg-gray-300 p-2 rounded-xl w-48 transition-all hover:scale-105 hover:bg-gray-400' onClick={enviarEmail}>Enviar email</button>
+            <input type="text" className='bg-gray-200 border-gray-400 border rounded-xl py-1 px-2 m-3' onChange={(e) => setEmail(e.target.value)} />
+            <button className='bg-jornadas-blue py-1 px-5 rounded-xl transition-all hover:scale-105 hover:bg-jornadas-blue-dark' onClick={enviarEmail}>Enviar email</button>
 
             {status === 'loading' && <div>Enviando email...</div>}
             {status === 'send' && <div>Email enviado e resultados salvos.</div>}

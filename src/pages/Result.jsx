@@ -1,23 +1,64 @@
 import { useState } from 'react';
 import Grafico from "../components/Grafico";
+import Email from "./Email";
 import areasConhecimento from '../data/areas_cursos.json'
+
+import html2canvas from "html2canvas";
 
 function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+
+    const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
 
-    // abre modal (popup)
-    const openModal = (curso) => {
+    let button_content;
+    if (type == 'total') {
+        button_content = "Exportar resultados";
+    } else {
+        button_content = "Próxima pergunta";
+    }
+
+    // abre curso modal (popup)
+    const openCourseModal = (curso) => {
         setCursoSelecionado(curso);
-        setIsModalOpen(true);
+        setIsCourseModalOpen(true);
     };
 
-    // fecha modal (popup) 
-    const closeModal = () => {
-        setIsModalOpen(false);
+    // fecha curso modal (popup) 
+    const closeCourseModal = () => {
+        setIsCourseModalOpen(false);
         setCursoSelecionado(null);
     };
+
+
+    const capturePageAsImage = async () => {
+        const element = document.getElementById("result_id"); // ID do elemento que você quer capturar
+        const canvas = await html2canvas(element);
+        const image = canvas.toDataURL("image/png"); // Gera a imagem em formato base64
+        return image;
+    };
+
+
+    const handleButton = async () => {
+        if (type === 'parcial') {
+            updatePerguntaAtual()
+        } else {
+            setIsExportModalOpen(true)
+        }
+    }
+
+    const sendStorys = async () => {
+        const image = await capturePageAsImage();
+
+        // Precisa ser uma URL encode (com a imagem base64)
+        const instagramUrl = `instagram://story?background_image=${encodeURIComponent(
+            image
+        )}`;
+
+        // Abre o Instagram (somente no mobile)
+        window.location.href = instagramUrl;
+    }
 
     // array com áreas e pontuações 
     const areasComPontuacao = areasConhecimento.map((area, index) => ({
@@ -29,45 +70,54 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
     areasComPontuacao.sort((a, b) => b.pontuacao - a.pontuacao);
 
     return (
-        <div className="w-full h-auto flex flex-col justify-between items-center mb-10 p-3">
-            <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
-            <h1 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h1>
-            <div className="flex justify-center text-center items-center h-[50%] w-[50%]">
+        <div id='result_id' className="w-full h-auto flex flex-col justify-between items-center mb-10 p-4">
+            <div>
+                <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
+                <h2 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h2>
+            </div>
+            <div className="flex justify-center text-center items-center h-[40%] w-[40%]">
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
 
-            <div className="mt-10 flex justify-center text-center items-center h-full w-full font-questrial">
-                <h1 className="text-2xl">Para aprender mais a respeito de cada área e se direcionar na plataforma, dê uma olhada no nosso guia: </h1>
-            </div>
-
-            <div className="mt-5 w-[98%]">
-                {areasComPontuacao.map((item, index) => (
-                    <div key={index} className="mt-4 bg-cyan-50 py-5 px-12">
-                        <h2 className="text-3xl font-bold text-black text-justify font-montserrat">{index + 1}. {item.area.area}</h2>
-                        <ul className="mt-4 list-disc pl-5 text-justify">
-                            {item.area.cursos.map((curso, cursoIndex) => (
-                                <li key={cursoIndex} className="mb-4 text-justify">
-                                    <span className="text-xl text-black font-bold font-montserrat">{curso.nome}</span>
-                                    <p className="text-xl text-black font-questrial mt-2">{curso.resumo}</p>
-                                    <p
-                                        onClick={() => openModal(curso)}
-                                        className="text-xl font-bold text-blue-400 font-questrial mt-2 cursor-pointer"
-                                    >
-                                        Ver mais...
-                                    </p>
-                                </li>
-                            ))}
-                        </ul>
+            { /* The code only shows if all question has ended */}
+            {type === 'total' && (
+                <>
+                    <div className="mt-5 flex justify-center text-center items-center h-full w-full font-questrial">
+                        <h1 className="text-2xl">Para aprender mais a respeito de cada área e se direcionar na plataforma, dê uma olhada no nosso guia: </h1>
                     </div>
-                ))}
-            </div>
 
-            <button onClick={() => updatePerguntaAtual()}
-                className='mt-5 mb-5 px-5 py-3 bg-jornadas-blue rounded-lg transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
-                Exportar resultados
+                    <div className="mt-5 w-[98%]">
+                        {areasComPontuacao.map((item, index) => (
+                            <div key={index} className="mt-4 bg-cyan-50 py-5 px-12">
+                                <h2 className="text-3xl font-bold text-black text-justify font-montserrat">{index + 1}. {item.area.area}</h2>
+                                <ul className="mt-4 list-disc pl-5 text-justify">
+                                    {item.area.cursos.map((curso, cursoIndex) => (
+                                        <li key={cursoIndex} className="mb-4 text-justify">
+                                            <span className="text-xl text-black font-bold font-montserrat">{curso.nome}</span>
+                                            <p className="text-xl text-black font-questrial mt-2">{curso.resumo}</p>
+                                            <p
+                                                onClick={() => openCourseModal(curso)}
+                                                className="text-xl font-bold text-blue-400 font-questrial mt-2 cursor-pointer"
+                                            >
+                                                Ver mais...
+                                            </p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+
+                </>
+            )}
+
+
+            <button onClick={handleButton}
+                className='mt-5 mb-5 px-5 py-3 font-bold bg-jornadas-blue rounded-lg transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
+                {button_content}
             </button>
 
-            {isModalOpen && cursoSelecionado && (
+            {isCourseModalOpen && cursoSelecionado && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
                     <div className="bg-cyan-50 px-7 py-5 sm:px-12 sm:py-10 lg:px-20 lg:py-20 leading-relaxed hyphens-auto break-words text-base rounded-lg max-w-[70%] max-h-[90%] overflow-auto">
                         <h3 className="text-2xl font-bold text-black mb-4 font-montserrat">{cursoSelecionado.nome}</h3>
@@ -97,11 +147,28 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
 
                         {/* botão para fechar popup*/}
                         <button
-                            onClick={closeModal}
+                            onClick={closeCourseModal}
                             className='mt-5 px-5 py-3 bg-jornadas-blue rounded-lg transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'
                         >
                             Fechar
                         </button>
+                    </div>
+                </div>
+            )}
+
+            {isExportModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+                    <div className="bg-cyan-50 w-[40%] px-7 py-5 sm:px-12 sm:py-10 leading-relaxed hyphens-auto break-words text-base rounded-lg *:max-h-[90%] overflow-auto">
+                        <div className='flex flex-row content-between justify-between items-center'>
+                            <div></div>
+                            <h1 className='font-bold text-2xl'>Exportar Resultados</h1>
+                            <button
+                                onClick={() => setIsExportModalOpen(false)}
+                                className='font-extrabold text-xl px-3 py-1 bg-gray-300 rounded-lg transition-all duration-100 ease-in-out hover:bg-gray-400 hover:scale-105'
+                            >X</button>
+                        </div>
+                        <button onClick={sendStorys} className='bg-black text-white'>oioioioioio</button>
+                        <Email />
                     </div>
                 </div>
             )}

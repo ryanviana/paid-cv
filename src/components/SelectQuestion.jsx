@@ -6,7 +6,7 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
 
     const [checkedItems, setCheckedItems] = useState([]);
 
-    
+
     const handleCheckboxChange = (index) => {
         setCheckedItems((prev) => {
             if (prev.includes(index)) return prev.filter((item) => item !== index);
@@ -29,32 +29,37 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
 
         return pontuacao
     }
-    
+
     const proxPergunta = () => {
         const pontuacao = calculaPontuacaoQuestao()
-        
+
         proximaPergunta(pontuacao)
     }
 
 
     return (
-        <div className='h-fit w-full flex flex-col justify-between items-center lg:h-full px-10 py-10'>
+        <div className='h-fit lg:h-full w-full flex flex-col justify-between items-center p-7'>
             <div>
-                <h2 className='font-montserrat text-gray-600 font-bold text-3xl'>Parte 2 - Avaliação de interesses </h2>
-                <h3 className='font-questrial'>Escolha as três frases com as quais você mais se identifica</h3>
+                <h2 className="font-montserrat text-black font-semibold text-2xl">Escolha as três frases que mais combinam com você:</h2>
             </div>
 
             <div className='flex flex-col gap-5 items-start w-fit font-questrial text-xl mt-5'>
-
                 <h1 className='font-montserrat text-xl'>{statement_question['title']}</h1>
 
                 {statement_question['phrases'].map((label, index) => (
-                    <div key={index} className={`p-2 transition hover:bg-gray-100 ${checkedItems.includes(index) ? "bg-blue-100" : ""}`}>
-                        <input type="checkbox" checked={checkedItems.includes(index)} onChange={() => handleCheckboxChange(index)} className="cursor-pointer mr-5 w-6 h-6 transition-all duration-500 ease-in-out hover:scale-110" />
-                        <label>{label}</label>
+                    <div
+                        key={index}
+                        className={`p-2 transition hover:bg-gray-100 ${checkedItems.includes(index) ? "bg-blue-100" : ""} cursor-pointer`}
+                        onClick={() => handleCheckboxChange(index)} // Habilita o clique na div inteira
+                    >
+                        <input
+                            type="checkbox"
+                            checked={checkedItems.includes(index)}
+                            className="cursor-pointer mr-5 w-6 h-6 transition-all duration-500 ease-in-out hover:scale-110"
+                        />
+                        <label className='cursor-pointer'>{label}</label>
                     </div>
                 ))}
-
             </div>
 
             <button onClick={proxPergunta}
