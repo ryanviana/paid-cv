@@ -7,6 +7,13 @@ function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
 
+    let button_content;
+    if (type == 'total'){
+        button_content = "Exportar resultados";
+    } else {
+        button_content = "Próxima pergunta";
+    }
+
     // abre modal (popup)
     const openModal = (curso) => {
         setCursoSelecionado(curso);
@@ -29,42 +36,51 @@ function ResultFront({ updatePerguntaAtual, pontuacaoTotal, type }) {
     areasComPontuacao.sort((a, b) => b.pontuacao - a.pontuacao);
 
     return (
-        <div className="w-full h-auto flex flex-col justify-between items-center mb-10 p-3">
-            <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
-            <h1 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h1>
-            <div className="flex justify-center text-center items-center h-[50%] w-[50%]">
+        <div className="w-full h-auto flex flex-col justify-between items-center mb-10 p-4">
+            <div>
+                <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
+                <h2 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h2>
+            </div> 
+            <div className="flex justify-center text-center items-center h-[40%] w-[40%]">
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
 
-            <div className="mt-10 flex justify-center text-center items-center h-full w-full font-questrial">
-                <h1 className="text-2xl">Para aprender mais a respeito de cada área e se direcionar na plataforma, dê uma olhada no nosso guia: </h1>
-            </div>
-
-            <div className="mt-5 w-[98%]">
-                {areasComPontuacao.map((item, index) => (
-                    <div key={index} className="mt-4 bg-cyan-50 py-5 px-12">
-                        <h2 className="text-3xl font-bold text-black text-justify font-montserrat">{index + 1}. {item.area.area}</h2>
-                        <ul className="mt-4 list-disc pl-5 text-justify">
-                            {item.area.cursos.map((curso, cursoIndex) => (
-                                <li key={cursoIndex} className="mb-4 text-justify">
-                                    <span className="text-xl text-black font-bold font-montserrat">{curso.nome}</span>
-                                    <p className="text-xl text-black font-questrial mt-2">{curso.resumo}</p>
-                                    <p
-                                        onClick={() => openModal(curso)}
-                                        className="text-xl font-bold text-blue-400 font-questrial mt-2 cursor-pointer"
-                                    >
-                                        Ver mais...
-                                    </p>
-                                </li>
-                            ))}
-                        </ul>
+            { /* The code only shows if all question has ended */ }
+            {type === 'total' && (
+                <>
+                    <div className="mt-5 flex justify-center text-center items-center h-full w-full font-questrial">
+                        <h1 className="text-2xl">Para aprender mais a respeito de cada área e se direcionar na plataforma, dê uma olhada no nosso guia: </h1>
                     </div>
-                ))}
-            </div>
+
+                    <div className="mt-5 w-[98%]">
+                        {areasComPontuacao.map((item, index) => (
+                            <div key={index} className="mt-4 bg-cyan-50 py-5 px-12">
+                                <h2 className="text-3xl font-bold text-black text-justify font-montserrat">{index + 1}. {item.area.area}</h2>
+                                <ul className="mt-4 list-disc pl-5 text-justify">
+                                    {item.area.cursos.map((curso, cursoIndex) => (
+                                        <li key={cursoIndex} className="mb-4 text-justify">
+                                            <span className="text-xl text-black font-bold font-montserrat">{curso.nome}</span>
+                                            <p className="text-xl text-black font-questrial mt-2">{curso.resumo}</p>
+                                            <p
+                                                onClick={() => openModal(curso)}
+                                                className="text-xl font-bold text-blue-400 font-questrial mt-2 cursor-pointer"
+                                            >
+                                                Ver mais...
+                                            </p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+
+                </>
+            )}
+
 
             <button onClick={() => updatePerguntaAtual()}
-                className='mt-5 mb-5 px-5 py-3 bg-jornadas-blue rounded-lg transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
-                Exportar resultados
+                className='mt-5 mb-5 px-5 py-3 font-bold bg-jornadas-blue rounded-lg transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
+                    {button_content}
             </button>
 
             {isModalOpen && cursoSelecionado && (
