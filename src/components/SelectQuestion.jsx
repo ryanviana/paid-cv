@@ -43,18 +43,24 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
             </div>
 
             <div className='flex flex-col gap-5 items-start w-fit font-questrial text-xl mt-5'>
-
                 <h1 className='font-montserrat text-xl'>{statement_question['title']}</h1>
 
                 {statement_question['phrases'].map((label, index) => (
-                    <div key={index} className={`p-2 transition hover:bg-gray-100 ${checkedItems.includes(index) ? "bg-blue-100" : ""}`}>
-                        <input type="checkbox" checked={checkedItems.includes(index)} onChange={() => handleCheckboxChange(index)} className="cursor-pointer mr-5 w-6 h-6 transition-all duration-500 ease-in-out hover:scale-110" />
-                        <label>{label}</label>
+                    <div
+                        key={index}
+                        className={`p-2 transition hover:bg-gray-100 ${checkedItems.includes(index) ? "bg-blue-100" : ""} cursor-pointer`}
+                        onClick={() => handleCheckboxChange(index)} // Habilita o clique na div inteira
+                    >
+                        <input
+                            type="checkbox"
+                            checked={checkedItems.includes(index)}
+                            className="cursor-pointer mr-5 w-6 h-6 transition-all duration-500 ease-in-out hover:scale-110"
+                        />
+                        <label className='cursor-pointer'>{label}</label>
                     </div>
                 ))}
-
             </div>
-
+           
             <button onClick={proxPergunta}
                 className='font-bold text-white font-montserrat p-3 px-5 bg-jornadas-blue rounded-lg m-5 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
                 Próxima Pergunta
