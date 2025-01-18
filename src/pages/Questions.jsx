@@ -39,44 +39,55 @@ function Questions() {
     const [pontuacaoTotal, setPontuacaoTotal] = useState(Array(Defines.numAreas).fill(0))
     const [perguntaAtual, setperguntaAtual] = useState(0);
 
-    const updatePontuacaoTotal = (pontuacao) => {
+    const updatePontuacao = (pontuacao) => {
+        // calcula pontuação da questão
+        let updatedPontuacaoQuestaoAtual = [...pontuacaoQuestao[perguntaAtual]]
+        updatedPontuacaoQuestaoAtual = updatedPontuacaoQuestaoAtual.map((x, i) => pontuacao[i] - x)
+
+        // calcula pontuação total
         let updatedPontuacao = [...pontuacaoTotal]
-        updatedPontuacao = updatedPontuacao.map((x, i) => x + pontuacao[i])
-
-        console.log("Pontuação final total: " + updatedPontuacao)
+        updatedPontuacao = updatedPontuacao.map((x, i) => x + updatedPontuacaoQuestaoAtual[i])
+        console.log("Pontuação total: " + updatedPontuacao)
         setPontuacaoTotal(updatedPontuacao)
+
+        // atualiza as pontuações das questoes
+        let updatedPontuacaoQuestao = [...pontuacaoQuestao]
+        updatedPontuacaoQuestao[perguntaAtual] = pontuacao
+        console.log("Pontuação questao: " + pontuacao)
+        setPontuacaoQuestao(updatedPontuacaoQuestao)
     }
 
-    const updatePerguntaAtual = () => {
-        setperguntaAtual(perguntaAtual + 1)
+    const updatePagina = (dir) => {
+        setperguntaAtual(perguntaAtual + dir)
     }
-
-    const proximaPergunta = (pontuacao) => {
-        updatePontuacaoTotal(pontuacao)
-        updatePerguntaAtual()
+    
+    const updatePerguntaAtual = (pontuacao, dir) => {
+        if (dir === 1) updatePontuacao(pontuacao)
+        updatePagina(dir)
     }
-
-    // Cada fase indica qual "parte" o usuário está do teste
-    const perguntas = [
-        <ExplicacaoImagem key="ex1" updatePerguntaAtual={updatePerguntaAtual} />,
-        <ImageQuestion key="q1" proximaPergunta={proximaPergunta} weight_question={weight_question_1} statement_question={statement_question_1} />,
-        <ImageQuestion key="q2" proximaPergunta={proximaPergunta} weight_question={weight_question_2} statement_question={statement_question_2} />,
-        <ImageQuestion key="q3" proximaPergunta={proximaPergunta} weight_question={weight_question_3} statement_question={statement_question_3} />,
-        <ImageQuestion key="q4" proximaPergunta={proximaPergunta} weight_question={weight_question_4} statement_question={statement_question_4} />,
-        <Result key="res1" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='parcial' />,
-        <ExplicacaoSelect key="ex2" updatePerguntaAtual={updatePerguntaAtual} />,
-        <SelectQuestion key="q5"  proximaPergunta={proximaPergunta} weight_question={weight_question_5} statement_question={statement_question_5} />,
-        <SelectQuestion key="q6"  proximaPergunta={proximaPergunta} weight_question={weight_question_6} statement_question={statement_question_6} />,
-        <SelectQuestion key="q7"  proximaPergunta={proximaPergunta} weight_question={weight_question_7} statement_question={statement_question_7} />,
-        <SelectQuestion key="q8"  proximaPergunta={proximaPergunta} weight_question={weight_question_8} statement_question={statement_question_8} />,
-        <SelectQuestion key="q9"  proximaPergunta={proximaPergunta} weight_question={weight_question_9} statement_question={statement_question_9} />,
-        <SelectQuestion key="q10"  proximaPergunta={proximaPergunta} weight_question={weight_question_10} statement_question={statement_question_10} />,
-        <Result key="res2" updatePerguntaAtual={updatePerguntaAtual} pontuacaoTotal={pontuacaoTotal} type='total' />,
+    
+    const paginas = [
+        <ExplicacaoImagem key="ex1" updatePagina={updatePagina} />,
+        <ImageQuestion key="q1" weight_question={weight_question_1} statement_question={statement_question_1} updatePerguntaAtual={updatePerguntaAtual} />,
+        <ImageQuestion key="q2" weight_question={weight_question_2} statement_question={statement_question_2} updatePerguntaAtual={updatePerguntaAtual} />,
+        <ImageQuestion key="q3" weight_question={weight_question_3} statement_question={statement_question_3} updatePerguntaAtual={updatePerguntaAtual} />,
+        <ImageQuestion key="q4" weight_question={weight_question_4} statement_question={statement_question_4} updatePerguntaAtual={updatePerguntaAtual} />,
+        <Result key="res1" pontuacaoTotal={pontuacaoTotal} type='parcial' updatePagina={updatePagina} />,
+        <ExplicacaoSelect key="ex2" updatePagina={updatePagina} />,
+        <SelectQuestion key="q5" weight_question={weight_question_5} statement_question={statement_question_5} updatePerguntaAtual={updatePerguntaAtual} />,
+        <SelectQuestion key="q6" weight_question={weight_question_6} statement_question={statement_question_6} updatePerguntaAtual={updatePerguntaAtual} />,
+        <SelectQuestion key="q7" weight_question={weight_question_7} statement_question={statement_question_7} updatePerguntaAtual={updatePerguntaAtual} />,
+        <SelectQuestion key="q8" weight_question={weight_question_8} statement_question={statement_question_8} updatePerguntaAtual={updatePerguntaAtual} />,
+        <SelectQuestion key="q9" weight_question={weight_question_9} statement_question={statement_question_9} updatePerguntaAtual={updatePerguntaAtual} />,
+        <SelectQuestion key="q10" weight_question={weight_question_10} statement_question={statement_question_10} updatePerguntaAtual={updatePerguntaAtual} />,
+        <Result key="res2" pontuacaoTotal={pontuacaoTotal} type='total' updatePagina={updatePagina} />,
     ];
+
+    const [pontuacaoQuestao, setPontuacaoQuestao] = useState(Array(paginas.length).fill(Array(Defines.numAreas).fill(0)))
 
     return (
         <div className='flex flex-col w-full h-full items-center text-center'>
-            {perguntas[perguntaAtual]}
+            {paginas[perguntaAtual]}
         </div>
     )
 }

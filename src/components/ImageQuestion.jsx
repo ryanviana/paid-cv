@@ -3,7 +3,7 @@ import { useState } from 'react'
 // defines importantes
 import * as Defines from '../data/Defines';
 
-function ImageQuestion({ proximaPergunta, weight_question, statement_question }) {
+function ImageQuestion({ weight_question, statement_question, updatePerguntaAtual }) {
 
     const [hover, setHover] = useState([false, false, false, false]);
     const [interesse, setInteresse] = useState(['', '', '', '']); // 1 - like <-> -1 - dislike  
@@ -60,7 +60,7 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
 
         const pontuacao = calculaPontuacaoQuestao()
 
-        proximaPergunta(pontuacao)
+        updatePerguntaAtual(pontuacao, 1)
     }
 
     // Modal Component
@@ -114,12 +114,17 @@ function ImageQuestion({ proximaPergunta, weight_question, statement_question })
                 </div>
             </div>
 
-            <button onClick={proxPergunta}
-                className="font-bold text-white font-montserrat p-3 px-5 mt-12 bg-jornadas-blue rounded-lg lg:mt-10 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105">
-                Próxima Pergunta
-            </button>
+            <div className='flex gap-5'>
+                <button onClick={() => updatePerguntaAtual(null, -1)}
+                    className="font-bold text-white font-montserrat p-3 px-5 mt-12 bg-jornadas-blue rounded-lg lg:mt-10 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105">
+                    Voltar Pergunta
+                </button>
+                <button onClick={proxPergunta}
+                    className="font-bold text-white font-montserrat p-3 px-5 mt-12 bg-jornadas-blue rounded-lg lg:mt-10 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105">
+                    Próxima Pergunta
+                </button>
+            </div>
 
-            {/* Modal */}
             <AlertModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}

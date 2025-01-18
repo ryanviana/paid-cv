@@ -5,7 +5,7 @@ import areasConhecimento from '../data/areas_cursos.json'
 
 import html2canvas from "html2canvas";
 
-function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
+function Result({ pontuacaoTotal, type, updatePagina }) {
 
     const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
@@ -31,33 +31,54 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
         setCursoSelecionado(null);
     };
 
-
-    const capturePageAsImage = async () => {
-        const element = document.getElementById("result_id"); // ID do elemento que você quer capturar
-        const canvas = await html2canvas(element);
-        const image = canvas.toDataURL("image/png"); // Gera a imagem em formato base64
-        return image;
-    };
-
-
     const handleButton = async () => {
         if (type === 'parcial') {
-            updatePerguntaAtual()
+            updatePagina(1)
         } else {
             setIsExportModalOpen(true)
         }
     }
 
+
+
+    const capturePageAsImage = async () => {
+        const element = document.getElementById("result_id");
+        const canvas = await html2canvas(element);
+        const image = canvas.toDataURL("image/png");
+        return image;
+    };
+
+    const uploadImage = async (imageBase64) => {
+        // Converter base64 para um arquivo blob
+        const blob = await fetch(imageBase64).then((res) => res.blob());
+        const formData = new FormData();
+        formData.append("file", new File([blob], "resultado.png"));
+
+        // Enviar para o backend
+        const response = await fetch("https://3.12.246.4:4000/upload-image/", {
+            method: "POST",
+            body: formData,
+        });
+
+        const { url } = await response.json();
+        return url;
+    };
+
+
     const sendStorys = async () => {
-        const image = await capturePageAsImage();
+        const imageBase64 = await capturePageAsImage();
+        const publicImageUrl = await uploadImage(imageBase64)
 
-        // Precisa ser uma URL encode (com a imagem base64)
         const instagramUrl = `instagram://story?background_image=${encodeURIComponent(
-            image
+            publicImageUrl
         )}`;
-
-        // Abre o Instagram (somente no mobile)
-        window.location.href = instagramUrl;
+        try {
+            setTimeout(() => {
+                window.location.href = instagramUrl;
+            }, 300);
+        } catch (_) {
+            alert("Não foi possível abrir o Instagram. Certifique-se de que o app está instalado.");
+        }
     }
 
     // array com áreas e pontuações 
@@ -167,7 +188,7 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
                                 className='font-extrabold text-xl px-3 py-1 bg-gray-300 rounded-lg transition-all duration-100 ease-in-out hover:bg-gray-400 hover:scale-105'
                             >X</button>
                         </div>
-                        <button onClick={sendStorys} className='bg-black text-white'>oioioioioio</button>
+                        {/* <button onClick={sendStorys} className='bg-black text-white'>Teste instagram</button> */}
                         <Email />
                     </div>
                 </div>
