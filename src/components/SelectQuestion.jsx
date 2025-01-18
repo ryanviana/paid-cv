@@ -79,7 +79,7 @@ function SelectQuestion({ weight_question, statement_question, updatePerguntaAtu
 }
 
 SelectQuestion.propTypes = {
-    weight_question: PropTypes.object.isRequired,
+    weight_question: PropTypes.array.isRequired,
     statement_question: PropTypes.object.isRequired,
     updatePerguntaAtual: PropTypes.func.isRequired
 };
