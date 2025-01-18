@@ -53,7 +53,6 @@ function Questions() {
         // atualiza a pontuação da questão
         let updatedPontuacaoQuestao = [...pontuacaoQuestao]
         updatedPontuacaoQuestao[perguntaAtual] = pontuacao
-        console.log("Pontuação questao: " + pontuacao)
         setPontuacaoQuestao(updatedPontuacaoQuestao)
     }
 
