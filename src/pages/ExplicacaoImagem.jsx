@@ -1,6 +1,6 @@
 function ExplicacaoImagem({ updatePagina }) {
 	return (
-		<div className="flex flex-col h-full items-center justify-center gap-10 px-12 w-full lg:w-2/3 xl:w-1/2">
+		<div className="flex flex-col h-full items-center justify-center gap-6 lg:gap-10 px-12 w-full lg:w-2/3 xl:w-1/2">
 			<h1 className="text-3xl md:text-5xl font-bold">Parte 1 - Preferência visual</h1>
 			<p className="text-lg md:text-2xl">Nesta etapa, você verá 4 imagens em cada pergunta. Seu desafio é simples: dizer quais delas mais despertam o seu interesse!</p>
 			<p className="text-lg md:text-2xl">A primeira parte será sobre diferentes áreas de atuação. Já a segunda mostrará possíveis ambientes de trabalho. Vamos lá?</p>

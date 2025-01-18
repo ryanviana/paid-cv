@@ -1,6 +1,6 @@
 function ExplicacaoSelect({ updatePagina }) {
 	return (
-		<div className="flex flex-col h-full items-center justify-center gap-10 px-12 w-full lg:w-2/3 xl:w-1/2">
+		<div className="flex flex-col h-full items-center justify-center gap-6 lg:gap-10 px-12 w-full lg:w-2/3 xl:w-1/2">
 			<h1 className="text-3xl md:text-5xl font-bold">Parte 2 - Avaliação de interesses</h1>
 			<p className="text-lg md:text-2xl">Nesta etapa, você encontrará várias afirmações sobre diferentes temas. Escolha aquelas que mais têm a ver com você!</p>
 			<p className="text-lg md:text-2xl">Importante: selecione 3 frases que mais se conectem com seus interesses.</p>
