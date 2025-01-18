@@ -188,7 +188,7 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
                                 className='font-extrabold text-xl px-3 py-1 bg-gray-300 rounded-lg transition-all duration-100 ease-in-out hover:bg-gray-400 hover:scale-105'
                             >X</button>
                         </div>
-                        <button onClick={sendStorys} className='bg-black text-white'>oioioioioio</button>
+                        {/* <button onClick={sendStorys} className='bg-black text-white'>Teste instagram</button> */}
                         <Email />
                     </div>
                 </div>
