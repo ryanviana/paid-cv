@@ -146,7 +146,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                                 className='font-extrabold text-xl px-3 py-1 bg-gray-300 rounded-lg transition-all duration-100 ease-in-out hover:bg-gray-400 hover:scale-105'
                             >X</button>
                         </div>
-                        <Email />
+                        <Email pontuacaoTotal={pontuacaoTotal}/>
                     </div>
                 </div>
             )}
