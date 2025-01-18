@@ -5,7 +5,7 @@ import areasConhecimento from '../data/areas_cursos.json'
 
 import html2canvas from "html2canvas";
 
-function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
+function Result({ pontuacaoTotal, type, updatePagina }) {
 
     const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
@@ -33,7 +33,7 @@ function Result({ updatePerguntaAtual, pontuacaoTotal, type }) {
 
     const handleButton = async () => {
         if (type === 'parcial') {
-            updatePerguntaAtual()
+            updatePagina(1)
         } else {
             setIsExportModalOpen(true)
         }

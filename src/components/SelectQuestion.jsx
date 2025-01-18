@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import * as Defines from '../data/Defines';
 
-function SelectQuestion({ proximaPergunta, weight_question, statement_question }) {
+function SelectQuestion({ weight_question, statement_question, updatePerguntaAtual }) {
 
     const [checkedItems, setCheckedItems] = useState([]);
 
@@ -33,7 +33,7 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
     const proxPergunta = () => {
         const pontuacao = calculaPontuacaoQuestao()
 
-        proximaPergunta(pontuacao)
+        updatePerguntaAtual(pontuacao, 1)
     }
 
 
@@ -55,6 +55,7 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
                         <input
                             type="checkbox"
                             checked={checkedItems.includes(index)}
+                            readOnly
                             className="cursor-pointer mr-5 w-6 h-6 transition-all duration-500 ease-in-out hover:scale-110"
                         />
                         <label className='cursor-pointer'>{label}</label>
@@ -62,10 +63,16 @@ function SelectQuestion({ proximaPergunta, weight_question, statement_question }
                 ))}
             </div>
 
-            <button onClick={proxPergunta}
-                className='font-bold text-white font-montserrat p-3 px-5 bg-jornadas-blue rounded-lg m-5 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105'>
-                Próxima Pergunta
-            </button>
+            <div className='flex gap-5'>
+                <button onClick={() => updatePerguntaAtual(null, -1)}
+                    className="font-bold text-white font-montserrat p-3 px-5 mt-12 bg-jornadas-blue rounded-lg lg:mt-10 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105">
+                    Voltar Pergunta
+                </button>
+                <button onClick={proxPergunta}
+                    className="font-bold text-white font-montserrat p-3 px-5 mt-12 bg-jornadas-blue rounded-lg lg:mt-10 transition-all duration-100 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105">
+                    Próxima Pergunta
+                </button>
+            </div>
         </div>
     );
 }
