@@ -44,13 +44,13 @@ function Questions() {
         let updatedPontuacaoQuestaoAtual = [...pontuacaoQuestao[perguntaAtual]]
         updatedPontuacaoQuestaoAtual = updatedPontuacaoQuestaoAtual.map((x, i) => pontuacao[i] - x)
 
-        // calcula pontuação total
+        // calcula e atualiza pontuação total
         let updatedPontuacao = [...pontuacaoTotal]
         updatedPontuacao = updatedPontuacao.map((x, i) => x + updatedPontuacaoQuestaoAtual[i])
         console.log("Pontuação total: " + updatedPontuacao)
         setPontuacaoTotal(updatedPontuacao)
 
-        // atualiza as pontuações das questoes
+        // atualiza a pontuação da questão
         let updatedPontuacaoQuestao = [...pontuacaoQuestao]
         updatedPontuacaoQuestao[perguntaAtual] = pontuacao
         console.log("Pontuação questao: " + pontuacao)
