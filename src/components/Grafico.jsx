@@ -1,5 +1,6 @@
 import { Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
+import PropTypes from 'prop-types';
 
 import * as Defines from '../data/Defines';
 
@@ -65,5 +66,10 @@ function Grafico({ pontuacaoTotal, type }) {
         <Radar data={data} options={options}/>
     );
 }
+
+Grafico.propTypes = {
+    pontuacaoTotal: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired
+};
 
 export default Grafico;

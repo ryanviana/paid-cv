@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types';
 
 import * as Defines from '../data/Defines';
 
@@ -76,5 +77,11 @@ function SelectQuestion({ weight_question, statement_question, updatePerguntaAtu
         </div>
     );
 }
+
+SelectQuestion.propTypes = {
+    weight_question: PropTypes.object.isRequired,
+    statement_question: PropTypes.object.isRequired,
+    updatePerguntaAtual: PropTypes.func.isRequired
+};
 
 export default SelectQuestion;

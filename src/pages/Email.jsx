@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import PropTypes from 'prop-types';
 
 function Email({ pontuacaoTotal }) {
 
@@ -49,5 +50,9 @@ function Email({ pontuacaoTotal }) {
         </div>
     )
 }
+
+Email.propTypes = {
+    pontuacaoTotal: PropTypes.array.isRequired,
+};
 
 export default Email;

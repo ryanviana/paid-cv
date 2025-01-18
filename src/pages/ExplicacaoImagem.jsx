@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function ExplicacaoImagem({ updatePagina }) {
 	return (
 		<div className="flex flex-col h-full items-center justify-center gap-6 lg:gap-10 px-12 w-full lg:w-2/3 xl:w-1/2">
@@ -17,5 +19,9 @@ function ExplicacaoImagem({ updatePagina }) {
 
 	);
 }
+
+ExplicacaoImagem.propTypes = {
+    updatePagina: PropTypes.func.isRequired,
+};
 
 export default ExplicacaoImagem;

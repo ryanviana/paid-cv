@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import Grafico from "../components/Grafico";
 import Email from "./Email";
 import areasConhecimento from '../data/areas_cursos.json'
-
-import html2canvas from "html2canvas";
 
 function Result({ pontuacaoTotal, type, updatePagina }) {
 
@@ -36,48 +36,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
             updatePagina(1)
         } else {
             setIsExportModalOpen(true)
-        }
-    }
-
-
-
-    const capturePageAsImage = async () => {
-        const element = document.getElementById("result_id");
-        const canvas = await html2canvas(element);
-        const image = canvas.toDataURL("image/png");
-        return image;
-    };
-
-    const uploadImage = async (imageBase64) => {
-        // Converter base64 para um arquivo blob
-        const blob = await fetch(imageBase64).then((res) => res.blob());
-        const formData = new FormData();
-        formData.append("file", new File([blob], "resultado.png"));
-
-        // Enviar para o backend
-        const response = await fetch("https://3.12.246.4:4000/upload-image/", {
-            method: "POST",
-            body: formData,
-        });
-
-        const { url } = await response.json();
-        return url;
-    };
-
-
-    const sendStorys = async () => {
-        const imageBase64 = await capturePageAsImage();
-        const publicImageUrl = await uploadImage(imageBase64)
-
-        const instagramUrl = `instagram://story?background_image=${encodeURIComponent(
-            publicImageUrl
-        )}`;
-        try {
-            setTimeout(() => {
-                window.location.href = instagramUrl;
-            }, 300);
-        } catch (_) {
-            alert("Não foi possível abrir o Instagram. Certifique-se de que o app está instalado.");
         }
     }
 
@@ -188,13 +146,18 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                                 className='font-extrabold text-xl px-3 py-1 bg-gray-300 rounded-lg transition-all duration-100 ease-in-out hover:bg-gray-400 hover:scale-105'
                             >X</button>
                         </div>
-                        {/* <button onClick={sendStorys} className='bg-black text-white'>Teste instagram</button> */}
                         <Email />
                     </div>
                 </div>
             )}
         </div>
-    );
+    )
 }
+
+Result.propTypes = {
+    pontuacaoTotal: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+    updatePagina: PropTypes.func.isRequired
+};
 
 export default Result;
