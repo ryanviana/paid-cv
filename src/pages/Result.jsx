@@ -12,11 +12,15 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
 
-    let button_content;
+    let button_content, result_title, description;
     if (type == 'total') {
         button_content = "Exportar resultados";
+        result_title = "Resultados";
+        description = "Pronto, seus resultados estão na mão!";
     } else {
         button_content = "Próxima pergunta";
+        result_title = "Você está quase lá!";
+        description = "Você está indo muito bem! Por enquanto, vamos te dar um spoiler:";
     }
 
     // abre curso modal (popup)
@@ -51,8 +55,8 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     return (
         <div id='result_id' className="w-full h-fit flex flex-col items-center mb-10 p-4">
             <div>
-                <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
-                <h2 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h2>
+                <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">{result_title}</h1>
+                <h2 className="text-black text-3xl font-bold font-questrial">{description}</h2>
             </div>
 
             <div className='h-full w-full'>
