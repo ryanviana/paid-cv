@@ -49,15 +49,17 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     areasComPontuacao.sort((a, b) => b.pontuacao - a.pontuacao);
 
     return (
-        <div id='result_id' className="w-full h-auto flex flex-col justify-between items-center mb-10 p-4">
+        <div id='result_id' className="w-full h-full flex flex-col justify-between items-center mb-10 p-4">
             <div>
                 <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
                 <h2 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h2>
             </div>
-            <div className="flex justify-center text-center items-center h-[40%] w-[40%]">
+
+            <div className='h-[80%] w-[80%] xs-h-[70%] xs-w-[100%] sm-h-[70%] sm-w-[100%]'>
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
 
+ 
             { /* The code only shows if all question has ended */}
             {type === 'total' && (
                 <>
