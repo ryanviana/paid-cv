@@ -49,20 +49,19 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     areasComPontuacao.sort((a, b) => b.pontuacao - a.pontuacao);
 
     return (
-        <div id='result_id' className="w-full h-full flex flex-col justify-between items-center mb-10 p-4">
+        <div id='result_id' className="w-full h-fit flex flex-col items-center mb-10 p-4">
             <div>
                 <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
                 <h2 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h2>
             </div>
 
-            <div className='h-[80%] w-[80%] xs-h-[70%] xs-w-[100%] sm-h-[70%] sm-w-[100%]'>
+            <div className='h-full w-full'>
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
 
  
-            { /* The code only shows if all question has ended */}
             {type === 'total' && (
-                <>
+                <div className='flex flex-col'>
                     <div className="mt-5 flex justify-center text-center items-center h-full w-full font-questrial">
                         <h1 className="text-2xl">Para aprender mais a respeito de cada área e se direcionar na plataforma, dê uma olhada no nosso guia: </h1>
                     </div>
@@ -89,7 +88,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                         ))}
                     </div>
 
-                </>
+                </div>
             )}
 
 
