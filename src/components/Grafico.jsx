@@ -29,7 +29,12 @@ const options = {
             },
             pointLabels: {
                 font: {
-                    size: 15,
+                    size: (context) => {
+                        const width = context.chart.width;
+                        if (width < 400) return 7; // Tamanho pequeno para telas menores
+                        if (width < 600) return 9; // Tamanho médio
+                        return 12; // Tamanho padrão
+                    },
                     weight: 'bold',
                     family: 'Arial',
                 },
@@ -46,6 +51,7 @@ const options = {
         easing: 'easeOutCubic',
     },
 };
+
 
 function Grafico({ pontuacaoTotal, type }) {
 
