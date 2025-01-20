@@ -12,11 +12,15 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
     const [cursoSelecionado, setCursoSelecionado] = useState(null);
 
-    let button_content;
+    let button_content, result_title, description;
     if (type == 'total') {
         button_content = "Exportar resultados";
+        result_title = "Resultados";
+        description = "Pronto, seus resultados estão na mão!";
     } else {
         button_content = "Próxima pergunta";
+        result_title = "Você está quase lá!";
+        description = "Você está indo muito bem! Por enquanto, vamos te dar um spoiler:";
     }
 
     // abre curso modal (popup)
@@ -49,18 +53,19 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     areasComPontuacao.sort((a, b) => b.pontuacao - a.pontuacao);
 
     return (
-        <div id='result_id' className="w-full h-auto flex flex-col justify-between items-center mb-10 p-4">
+        <div id='result_id' className="w-full h-fit flex flex-col items-center mb-10 p-4">
             <div>
-                <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">Resultados</h1>
-                <h2 className="text-black text-3xl font-bold font-questrial">Pronto, seus resultados estão na mão!</h2>
+                <h1 className="mt-5 text-black text-6xl font-bold font-montserrat">{result_title}</h1>
+                <h2 className="text-black text-3xl font-bold font-questrial">{description}</h2>
             </div>
-            <div className="flex justify-center text-center items-center h-[40%] w-[40%]">
+
+            <div className='h-full w-full'>
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
 
-            { /* The code only shows if all question has ended */}
+ 
             {type === 'total' && (
-                <>
+                <div className='flex flex-col'>
                     <div className="mt-5 flex justify-center text-center items-center h-full w-full font-questrial">
                         <h1 className="text-2xl">Para aprender mais a respeito de cada área e se direcionar na plataforma, dê uma olhada no nosso guia: </h1>
                     </div>
@@ -87,7 +92,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                         ))}
                     </div>
 
-                </>
+                </div>
             )}
 
 
@@ -98,7 +103,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
 
             {isCourseModalOpen && cursoSelecionado && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-                    <div className="bg-cyan-50 px-7 py-5 sm:px-12 sm:py-10 lg:px-20 lg:py-20 leading-relaxed hyphens-auto break-words text-base rounded-lg max-w-[70%] max-h-[90%] overflow-auto">
+                    <div className="bg-cyan-50 px-7 py-5 sm:px-12 sm:py-10 lg:px-20 lg:py-20 leading-relaxed hyphens-auto break-words text-base rounded-lg max-w-[90%] max-h-[90%] sm:max-w-[90%] xs:max-w-[95%] overflow-auto">
                         <h3 className="text-2xl font-bold text-black mb-4 font-montserrat">{cursoSelecionado.nome}</h3>
                         <p className="text-lg text-gray-700 mb-4 text-left sm:text-justify font-questrial">{cursoSelecionado.descricao}</p>
 

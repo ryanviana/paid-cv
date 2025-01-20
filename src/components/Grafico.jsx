@@ -18,6 +18,7 @@ ChartJS.register(
 
 const options = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
         r: {
             ticks: {
@@ -63,7 +64,9 @@ function Grafico({ pontuacaoTotal, type }) {
     };
 
     return (
-        <Radar data={data} options={options}/>
+        <div className='flex w-full min-h-[500px] h-full'>
+            <Radar data={data} options={options} />
+        </div> 
     );
 }
 
