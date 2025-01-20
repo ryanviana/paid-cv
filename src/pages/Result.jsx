@@ -103,7 +103,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
 
             {isCourseModalOpen && cursoSelecionado && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-                    <div className="bg-cyan-50 px-7 py-5 sm:px-12 sm:py-10 lg:px-20 lg:py-20 leading-relaxed hyphens-auto break-words text-base rounded-lg max-w-[70%] max-h-[90%] overflow-auto">
+                    <div className="bg-cyan-50 px-7 py-5 sm:px-12 sm:py-10 lg:px-20 lg:py-20 leading-relaxed hyphens-auto break-words text-base rounded-lg max-w-[90%] max-h-[90%] sm:max-w-[90%] xs:max-w-[95%] overflow-auto">
                         <h3 className="text-2xl font-bold text-black mb-4 font-montserrat">{cursoSelecionado.nome}</h3>
                         <p className="text-lg text-gray-700 mb-4 text-left sm:text-justify font-questrial">{cursoSelecionado.descricao}</p>
 
