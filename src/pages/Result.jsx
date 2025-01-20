@@ -59,7 +59,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                 <h2 className="text-black text-3xl font-bold font-questrial">{description}</h2>
             </div>
 
-            <div className='h-full w-full'>
+            <div className='h-full w-[80%]'>
                 <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
             </div>
 
