@@ -16,6 +16,7 @@ ChartJS.register(
     Legend
 );
 
+
 const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -23,6 +24,14 @@ const options = {
         r: {
             ticks: {
                 display: true,
+                font: {
+                    size: (context) => {
+                        const width = context.chart.width;
+                        if (width < 400) return 8; // Fontes menores para telas pequenas
+                        if (width < 600) return 10;
+                        return 12;
+                    },
+                },
             },
             angleLines: {
                 display: true,
@@ -31,9 +40,9 @@ const options = {
                 font: {
                     size: (context) => {
                         const width = context.chart.width;
-                        if (width < 400) return 7; // Tamanho pequeno para telas menores
-                        if (width < 600) return 9; // Tamanho médio
-                        return 12; // Tamanho padrão
+                        if (width < 400) return 8; // Ajuste de rótulos em telas pequenas
+                        if (width < 600) return 10;
+                        return 12;
                     },
                     weight: 'bold',
                     family: 'Arial',
@@ -43,7 +52,17 @@ const options = {
     },
     plugins: {
         legend: {
-            display: false
+            display: true,
+            labels: {
+                font: {
+                    size: (context) => {
+                        const width = context.chart.width;
+                        if (width < 400) return 8; // Fonte da legenda em telas pequenas
+                        if (width < 600) return 10;
+                        return 12;
+                    },
+                },
+            },
         },
     },
     animation: {
