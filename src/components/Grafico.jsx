@@ -52,7 +52,7 @@ const options = {
     },
     plugins: {
         legend: {
-            display: true,
+            display: false,
             labels: {
                 font: {
                     size: (context) => {
@@ -84,14 +84,14 @@ function Grafico({ pontuacaoTotal, type }) {
             data: pontuacaoTotal,
             backgroundColor: 'rgba(36, 228, 204, 0.5)',
             borderColor: '#04caca',
-            borderWidth: 3
+            borderWidth: 2 
         }]
     };
 
     return (
-        <div className='flex w-full h-full justify-center'>
+        <div className='bg-green-500 flex justify-center items-center w-full h-auto max-w-[600px] max-h-[600px] sm:max-w-[500px] sm:max-h-[500px] md:max-w-[600px] md:max-h-[600px]'>
             <Radar data={data} options={options} />
-        </div> 
+        </div>
     );
 }
 
