@@ -79,7 +79,7 @@
             {
                 "nome": "Ciência de Dados",
                 "resumo": "A Ciência de Dados é um curso de graduação que combina conhecimentos de estatística, matemática e computação para analisar grandes volumes de dados e extrair informações valiosas.",
-                "descricao": "A Ciência de Dados é um curso de graduação que combina conhecimentos de estatística, matemática e computação para analisar grandes volumes de dados e extrair informações valiosas. Durante a faculdade, os alunos estudam disciplinas como Programação, Estatística, Aprendizado de Máquina, Banco de Dados, Visualização de Dados e Inteligência Artificial. Essas matérias preparam os estudantes para lidar com a coleta, processamento e análise de dados complexos. No mercado de trabalho, cientistas de dados são altamente demandados em setores como tecnologia, saúde, finanças e varejo, atuando na interpretação de dados para apoiar decisões estratégicas e impulsionar inovações.",
+                "descricao": "Esse curso tem um início bem teórico, com uma base forte em matemática e estatística. Nos primeiros anos, os alunos encaram disciplinas pesadas, mas fundamentais para a formação. Mais para frente, entram matérias mais aplicadas, como ciência de dados, análise de dados e machine learning. A grade horária é menor em comparação a outros cursos, mas algumas matérias são bem desafiadoras, o que faz com que muitos alunos comecem a estagiar cedo.",
                 "cargos": [
                     {
                         "cargo": "Cientista de Dados",
@@ -94,15 +94,15 @@
                         "descricao": "Interpreta dados para gerar relatórios e insights que orientam estratégias de negócios e operações."
                     },
                     {
-                        "cargo": "Especialista em Machine Learning",
-                        "descricao": "Cria e implementa modelos de aprendizado de máquina para prever comportamentos e automatizar processos."
+                        "cargo": "Atuarial/seguros",
+                        "descricao": "Aplicação de modelagem estatística e machine learning para avaliação de riscos, precificação de seguros e previsões atuariais."
                     },
                     {
                         "cargo": "Analista de Business Intelligence (BI)",
                         "descricao": "Transforma dados brutos em informações estratégicas, criando dashboards e visualizações para suportar decisões gerenciais."
                     }
                 ],
-                "media_salarial": "A remuneração para profissionais formados em Ciência de Dados varia conforme a região, experiência e porte da empresa. De acordo com o site Salario.com, a média salarial é de aproximadamente R$8.800,00 mensais. ",
+                "media_salarial": "Para estagiários, a média é de 2.000 reais. Um analista júnior ganha em média R$5.000, um pleno R$12.000 e para analistas sênior pode chegar a salários muito altos, especialmente para quem trabalha no exterior ganhando em dólar.",
                 "perfil_estudante": "O perfil ideal para um estudante de Ciência de Dados inclui afinidade com matemática e estatística, além de interesse por tecnologia e análise de informações. Habilidades como raciocínio lógico, pensamento analítico e capacidade de resolver problemas complexos são fundamentais. Além disso, é importante ter curiosidade para explorar grandes volumes de dados e disposição para aprendizado contínuo, acompanhando as constantes evoluções tecnológicas na área."
             },
             {
@@ -416,31 +416,35 @@
             {
                 "nome": "Engenharia de Materiais",
                 "resumo": "Estudo da ciência e tecnologia dos materiais, incluindo metais, cerâmicas, polímeros, compósitos, nanotecnologia, e suas aplicações industriais.",
-                "descricao": "A Engenharia de Materiais é um curso que explora a ciência e a tecnologia dos materiais, desde metais e cerâmicas até polímeros e compósitos. Durante os cinco anos de graduação, os estudantes aprendem sobre química, física e propriedades dos materiais, além de disciplinas específicas como ciência dos materiais, caracterização de materiais, metalurgia, materiais compósitos e nanotecnologia. Há também aulas práticas em laboratórios para desenvolver habilidades de análise e fabricação. No mercado de trabalho, engenheiros de materiais atuam em setores como indústrias automobilísticas, aeroespaciais, de energia, eletrônicos e biomateriais, desenvolvendo novos materiais e processos para aplicações inovadoras.",
+                "descricao": "A Engenharia de Materiais e Manufatura é um curso muito voltado para pesquisa e desenvolvimento na indústria, mas, no Brasil, há poucas grandes empresas atuando especificamente nessa área. Por isso, muitos engenheiros acabam migrando para setores correlatos, como manufatura e engenharia de produção. O curso envolve bastante conhecimento sobre inteligência de fábrica, planejamento e supply chain, permitindo que os profissionais atuem tanto na parte técnica quanto na gestão da produção industrial. Além disso, é um curso que frequentemente compete com a Engenharia Química no mercado de trabalho.",
                 "cargos": [
                     {
-                        "cargo": "Engenheiro de Desenvolvimento de Materiais",
-                        "descricao": "Cria e testa novos materiais para melhorar produtos e processos industriais."
+                        "cargo": "Pesquisa e Desenvolvimento (P&D)",
+                        "descricao": "Geralmente dentro de indústrias químicas e materiais avançados."
                     },
                     {
-                        "cargo": "Especialista em Caracterização de Materiais",
-                        "descricao": "Analisa propriedades físicas e químicas de materiais para garantir sua qualidade e desempenho."
+                        "cargo": "Manufatura e Produção Industrial",
+                        "descricao": "Inteligência de fábrica, controle de qualidade, processos de fabricação."
                     },
                     {
-                        "cargo": "Engenheiro de Processos",
-                        "descricao": "Trabalha no desenvolvimento e otimização de processos industriais que envolvem materiais."
+                        "cargo": "Supply Chain e Logística",
+                        "descricao": "Trabalha no planejamento e otimização da cadeia produtiva."
                     },
                     {
-                        "cargo": "Engenheiro de Qualidade",
-                        "descricao": "Avalia a conformidade dos materiais com os padrões exigidos para diferentes aplicações."
+                        "cargo": "Engenharia de Processos",
+                        "descricao": "Garante a melhoria contínua e eficiência produtiva."
                     },
                     {
                         "cargo": "Engenheiro de Sustentabilidade",
                         "descricao": "Desenvolve soluções que utilizem materiais de forma mais eficiente e com menor impacto ambiental."
                     }
+                    {
+                        "cargo": "Obs:",
+                        "descricao": "Muitos profissionais acabam migrando para a Engenharia de Produção ou áreas correlatas devido à maior oferta de oportunidades no Brasil."
+                    }
                 ],
-                "media_salarial": "De acordo com o site Glassdoor, a média salarial de um engenheiro de materiais no Brasil é de aproximadamente R$ 7.500 por mês, variando conforme o setor e a experiência.",
-                "perfil_estudante": "O aluno de Engenharia de Materiais tem curiosidade sobre como os materiais são feitos e funcionam. Ele gosta de química, física e matemática, além de ter interesse por inovação tecnológica. Habilidades como raciocínio lógico, atenção aos detalhes e criatividade são fundamentais para projetar soluções eficientes. A vontade de aprender continuamente também é importante, já que o setor está em constante evolução."
+                "media_salarial": "A média salarial de um estagiário é de R$2.500, analista júnior de R$5.000 e o salário no auge da carreira Depende bastante da área de atuação, mas profissionais que fazem pós-graduação e seguem carreira em grandes empresas podem alcançar cargos de liderança em laboratórios e fábricas. Já sobre as empresas de destaque, temos: Setor de Materiais e P&D: Pirelli, 3M, Saint-Gobain, Manufatura e Indústria: Volkswagen, Faber-Castell (contrata muitos estagiários), montadoras em geral, Alimentos e Bebidas: Ambev (para cargos como chefe de laboratório)",
+                "perfil_estudante": "O aluno de Engenharia de Materiais tem curiosidade sobre como os materiais são feitos e funcionam. Ele gosta de química, física e matemática, além de ter interesse por inovação tecnológica. Habilidades como raciocínio lógico, atenção aos detalhes e criatividade são fundamentais para projetar soluções eficientes. A vontade de aprender continuamente também é importante, já que o setor está em constante evolução. A pós-graduação faz diferença para quem quer crescer na área, possibilitando cargos mais altos, como liderança em laboratórios dentro de grandes empresas. Além disso, trabalhar no exterior pode ser uma ótima opção, já que há mais oportunidades nessa área fora do Brasil."
             }
         ]
     },
@@ -450,7 +454,7 @@
             {
                 "nome": "Engenharia Civil",
                 "resumo": "Forma profissionais para planejar, projetar e construir infraestrutura e edificações.",
-                "descricao": "A Engenharia Civil é uma área que forma profissionais para planejar, projetar e construir infraestrutura e edificações. Durante os cinco anos de graduação, os estudantes estudam disciplinas como cálculo, física, resistência dos materiais, mecânica dos solos, hidrologia, planejamento urbano, materiais de construção e gestão de obras. Há também atividades práticas em laboratórios e projetos integradores, que aproximam os alunos das demandas do mercado. No mercado de trabalho, engenheiros civis atuam em construtoras, órgãos públicos, empresas de infraestrutura e escritórios de projetos, sendo responsáveis por garantir que as construções sejam seguras, funcionais e econômicas.",
+                "descricao": "A Engenharia Civil é a área responsável por projetar, construir e analisar todo tipo de infraestrutura, sendo essencial para a adaptação do meio ambiente à habitação humana. O curso abrange desde edificações e infraestrutura até sistemas de transporte e recursos hídricos. A formação envolve conhecimentos multidisciplinares, indo da construção de casas e edifícios à gestão de barragens, rodovias e planejamento de transporte. Além do trabalho técnico, o engenheiro civil pode atuar em gestão, fiscalização de obras e até em cargos administrativos e legislativos.",
                 "cargos": [
                     {
                         "cargo": "Engenheiro de Estruturas",
@@ -469,11 +473,15 @@
                         "descricao": "Planeja sistemas de abastecimento de água, esgoto e drenagem urbana."
                     },
                     {
-                        "cargo": "Consultor de Planejamento Urbano",
-                        "descricao": "Atua no desenvolvimento de projetos que promovem o crescimento organizado das cidades."
+                        "cargo": "Topografia e Agrimensura",
+                        "descricao": "É responsável pelo mapeamento, geoprocessamento, monitoramento de estruturas."
+                    }
+                    {
+                        "cargo": "Engenheiro de Transportes",
+                        "descricao": "Atua no desenvolvimento de projetos de infraestrutura e planejamento de rodovias, hidrovias e aeroportos."
                     }
                 ],
-                "media_salarial": "Segundo o site Glassdoor, o salário médio de um engenheiro civil no Brasil é de R$ 7.500 por mês, podendo variar conforme experiência e porte da empresa.",
+                "media_salarial": "Para estagiários, de R$1.000 a R$3.000, já um engenheiro no início da carreira ganha em média de R$3.000 a R$6.000 mas podendo chegar de R$10.000 a R$25.000 no auge da carreira(podendo ser maior em cargos de gestão ou em setores como mineração, ou atuando de forma autônoma). Algumas das empresas mais famosas são: Construtoras e incorporadoras: MRV, Andrade Gutierrez, Ambar Tech (São Carlos), Mineração e siderurgia: Vale, ArcelorMittal, Energia e combustíveis: Raízen",
                 "perfil_estudante": "O aluno de Engenharia Civil geralmente é organizado, gosta de matemática e física e tem interesse por construção e infraestrutura. Características como raciocínio lógico, atenção aos detalhes, capacidade de trabalhar em equipe e habilidade de resolver problemas são essenciais. Além disso, é importante ter disposição para aprender continuamente e acompanhar as inovações tecnológicas no setor."
             }
         ]
