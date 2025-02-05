@@ -12,7 +12,7 @@ function Email({ pontuacaoTotal }) {
         setStatus('loading')
 
         try {
-            await axios.post("https://3.12.246.4:4000/save-results", {
+            await axios.post("https://cv.backend.decisaoexata.com/save-results", {
                 score: pontuacaoTotal,
                 user_email: email
             });
@@ -23,7 +23,7 @@ function Email({ pontuacaoTotal }) {
         }
 
         try {
-            await axios.post("https://3.12.246.4:4000/send-email", {
+            await axios.post("https://cv.backend.decisaoexata.com/send-email", {
                 score: pontuacaoTotal,
                 user_email: email
             });
