@@ -205,30 +205,30 @@
             {
                 "nome": "Engenharia Mecatrônica",
                 "resumo": "A Engenharia Mecatrônica une mecânica, eletrônica e computação para criar e melhorar sistemas automatizados.",
-                "descricao": "A Engenharia Mecatrônica é uma área que une mecânica, eletrônica e computação para criar e melhorar sistemas automatizados. Durante os cinco anos do curso, os estudantes aprendem sobre disciplinas como mecânica dos sólidos, termodinâmica, eletrônica, programação, controle de sistemas e automação industrial. A formação também inclui estudos de robótica e inteligência artificial, permitindo que os alunos desenvolvam soluções tecnológicas avançadas. No mercado de trabalho, engenheiros mecatrônicos atuam em indústrias automotivas, de eletrodomésticos, farmacêuticas, robótica e até em startups, desenvolvendo e aplicando tecnologias que aumentam a eficiência e inovação.",
+                "descricao": "A Engenharia Mecatrônica combina conhecimentos de eletrônica, programação, processos industriais e documentação técnica para integrar sistemas complexos. O curso capacita os alunos a desenvolver soluções para diversas aplicações, como robôs industriais, sistemas inteligentes e até veículos autônomos, enfatizando a conexão entre diferentes tecnologias para resolver problemas do mundo real. Além do aspecto técnico, o curso proporciona uma base matemática sólida e uma abordagem estruturada para a resolução de problemas, o que amplia as oportunidades de atuação. Essas habilidades analíticas são altamente valorizadas em áreas como consultoria estratégica e mercado financeiro, tornando engenheiros mecatrônicos competitivos em segmentos como trading quantitativo e gestão de investimentos.",
                 "cargos": [
                     {
                         "cargo": "Engenheiro de Automação",
                         "descricao": "Cria sistemas automatizados que otimizam processos industriais e reduzem custos."
                     },
                     {
-                        "cargo": "Desenvolvedor de Robôs",
-                        "descricao": "Projeta e implementa robôs para aplicações industriais, médicas ou de consumo."
+                        "cargo": "Cientista de dados",
+                        "descricao": "Utiliza métodos de análise para extrair informações de grandes volumes de dados"
                     },
                     {
                         "cargo": "Especialista em Controle e Automação",
                         "descricao": "Trabalha na programação e manutenção de sistemas controlados automaticamente."
                     },
                     {
-                        "cargo": "Engenheiro de Manutenção",
-                        "descricao": "Monitora e ajusta máquinas automatizadas para garantir eficiência e funcionamento."
+                        "cargo": "Analista financeiro",
+                        "descricao": "Utiliza dos conhecimentos de computação e modelagem matemática para prever movimentações do mercado financeiro."
                     },
                     {
-                        "cargo": "Consultor em Indústria 4.0",
+                        "cargo": "Consultor Estratégico",
                         "descricao": "Ajuda empresas a implementarem tecnologias avançadas, como IoT (Internet das Coisas) e inteligência artificial."
                     }
                 ],
-                "media_salarial": "De acordo com o site Glassdoor, a média salarial de um engenheiro mecatrônico no Brasil é de aproximadamente R$ 9.000 por mês, podendo variar dependendo da experiência e do setor.",
+                "media_salarial": "No mercado financeiro, o salário inicial é cerca de R$15 mil/mês, podendo chegar a R$40 mil/mês em dez anos. Em consultorias estratégicas, começa em torno de R$8 mil/mês e alcança R$30 mil/mês no mesmo período. Já em tecnologia e engenharia, inicia em R$6,5 mil/mês, com potencial de atingir R$15 mil/mês após uma década.",
                 "perfil_estudante": "O aluno de Engenharia Mecatrônica tem afinidade com matemática, física e tecnologia. É curioso e gosta de entender como funcionam máquinas e sistemas automatizados. Além disso, costuma ter interesse por robótica, programação e inovação tecnológica. Habilidades como raciocínio lógico, trabalho em equipe e criatividade são essenciais para o sucesso na área."
             },
             {
