@@ -38,7 +38,7 @@
         ],
         "media_salarial": "Quanto à remuneração, o salário de um engenheiro de computação no Brasil varia conforme a região, experiência e porte da empresa. De acordo com o site Glassdoor, a média salarial é de aproximadamente R$11.000 mensais para uma jornada de 8 horas diárias.",
         "perfil_estudante": "O perfil ideal para um estudante de Engenharia de Computação inclui afinidade com disciplinas de exatas, especialmente Matemática e Física, além de interesse por tecnologia e inovação. Habilidades como raciocínio lógico, capacidade de resolver problemas complexos e pensamento analítico são fundamentais. Além disso, é importante ter disposição para aprender continuamente, adaptando-se às rápidas evoluções tecnológicas, e gostar de trabalhar em equipe, já que muitos projetos exigem colaboração multidisciplinar. ",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/computer_engineering.webp?token=GHSAT0AAAAAAC6N4PAD4XJ6WPIYWW54TDD6Z5D26NQ",
+        "imagem": "/images/computer_engineering.webp",
         "habilidades": {
           "Matemática": 5,
           "Física": 4,
@@ -83,7 +83,7 @@
         ],
         "media_salarial": "A remuneração para profissionais formados em Ciência da Computação varia conforme a região, experiência e porte da empresa. De acordo com o site Salario.com.br, a média salarial para um Programador de Computador é de aproximadamente R$4.037,87, enquanto um Analista de Sistemas pode receber em média R$5.611,43.",
         "perfil_estudante": "O perfil ideal para um estudante de Ciência da Computação inclui afinidade com tecnologia e habilidades em lógica e matemática. É importante ter raciocínio lógico apurado, capacidade de resolver problemas complexos e interesse por inovações tecnológicas. Além disso, a disposição para aprendizado contínuo é fundamental, dado o rápido avanço da área, bem como a habilidade de trabalhar em equipe e comunicar ideias de forma clara.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/computer_science.webp?token=GHSAT0AAAAAAC6N4PACJLGI4TN5PZ3P6YBMZ5D3DSA",
+        "imagem": "/images/computer_science.webp",
         "habilidades": {
           "Matemática": 5,
           "Estatística": 4,
@@ -119,7 +119,7 @@
         ],
         "media_salarial": "Para estagiários, a média é de 2.000 reais. Um analista júnior ganha em média R$5.000, um pleno R$12.000 e para analistas sênior pode chegar a salários muito altos, especialmente para quem trabalha no exterior ganhando em dólar.",
         "perfil_estudante": "O perfil ideal para um estudante de Ciência de Dados inclui afinidade com matemática e estatística, além de interesse por tecnologia e análise de informações. Habilidades como raciocínio lógico, pensamento analítico e capacidade de resolver problemas complexos são fundamentais. Além disso, é importante ter curiosidade para explorar grandes volumes de dados e disposição para aprendizado contínuo, acompanhando as constantes evoluções tecnológicas na área.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/data_science.webp?token=GHSAT0AAAAAAC6N4PACJ6KNYATASUDB577OZ5D26OA",
+        "imagem": "/images/data_science.webp",
         "habilidades": {
           "Matemática": 5,
           "Estatística": 5,
@@ -156,7 +156,7 @@
         ],
         "media_salarial": "A remuneração para profissionais de Sistemas de Informação varia conforme a região, experiência e porte da empresa. De acordo com o site Salario.com.br, a média salarial para um Analista de Sistemas é de aproximadamente R$7.205,62 mensais.",
         "perfil_estudante": "O perfil ideal para um estudante de Sistemas de Informação inclui interesse por tecnologia e gestão, habilidades em lógica e matemática, além de capacidade de resolver problemas complexos. É importante ter aptidão para trabalhar em equipe, boa comunicação e disposição para se atualizar constantemente, acompanhando as rápidas evoluções tecnológicas e as demandas do mercado.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/information_systems.webp?token=GHSAT0AAAAAAC6N4PAD3BUTPG72FDV3NEEGZ5D26OQ",
+        "imagem": "/images/information_systems.webp",
         "habilidades": {
           "Lógica": 4,
           "Gestão": 4,
@@ -193,7 +193,7 @@
         ],
         "media_salarial": "A remuneração para profissionais da área varia conforme a região, experiência e porte da empresa. De acordo com o site Vagas.com, a média salarial de um analista de sistemas é de R$ 5.116,00.",
         "perfil_estudante": "O perfil ideal para um estudante de Análise e Desenvolvimento de Sistemas inclui afinidade com tecnologia, raciocínio lógico apurado e habilidades em resolução de problemas. É importante ter capacidade de trabalhar em equipe, boa comunicação e disposição para constante atualização, acompanhando as rápidas evoluções do setor de TI. ",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/ads.webp?token=GHSAT0AAAAAAC6N4PACQL5ZZBQW5CP34S3YZ5D3ETA",
+        "imagem": "/images/ads.webp",
         "habilidades": {
           "Programação": 5,
           "Banco de Dados": 4,
@@ -234,7 +234,7 @@
         ],
         "media_salarial": "A remuneração para engenheiros eletricistas varia conforme a região, experiência e setor de atuação. De acordo com o site Salario.com.br, a média salarial é de aproximadamente R$8.485 para uma jornada de 40 horas semanais.",
         "perfil_estudante": "O perfil ideal para um estudante de Engenharia Elétrica inclui afinidade com disciplinas de exatas, especialmente Matemática e Física, além de interesse por tecnologia e inovação. Habilidades como raciocínio lógico, capacidade de resolver problemas complexos e pensamento analítico são fundamentais. Além disso, é importante ter disposição para aprender continuamente, adaptando-se às rápidas evoluções tecnológicas, e gostar de trabalhar em equipe, já que muitos projetos exigem colaboração multidisciplinar.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/eletrical_engineering.webp?token=GHSAT0AAAAAAC6N4PADCCHXLQ7KS27XX5FYZ5D26OQ",
+        "imagem": "/images/eletrical_engineering.webp",
         "habilidades": {
           "Matemática": 5,
           "Física": 5,
@@ -276,7 +276,7 @@
         ],
         "media_salarial": "No mercado financeiro, o salário inicial é cerca de R$15 mil/mês, podendo chegar a R$40 mil/mês em dez anos. Em consultorias estratégicas, começa em torno de R$8 mil/mês e alcança R$30 mil/mês no mesmo período. Já em tecnologia e engenharia, inicia em R$6,5 mil/mês, com potencial de atingir R$15 mil/mês após uma década.",
         "perfil_estudante": "O aluno de Engenharia Mecatrônica tem afinidade com matemática, física e tecnologia. É curioso e gosta de entender como funcionam máquinas e sistemas automatizados. Além disso, costuma ter interesse por robótica, programação e inovação tecnológica. Habilidades como raciocínio lógico, trabalho em equipe e criatividade são essenciais para o sucesso na área.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/mecatronics.webp?token=GHSAT0AAAAAAC6N4PADLANFOXABP4WMEILUZ5D26PQ",
+        "imagem": "/images/mecatronics.webp",
         "habilidades": {
           "Matemática": 5,
           "Física": 5,
@@ -313,7 +313,7 @@
         ],
         "media_salarial": "De acordo com o site Glassdoor, o salário médio de um engenheiro mecânico no Brasil é de R$ 8.000 por mês, mas pode variar dependendo da experiência e do setor de atuação.",
         "perfil_estudante": "O estudante de Engenharia Mecânica geralmente é curioso e interessado em entender como funcionam máquinas e equipamentos. Afinidade com matemática e física é essencial, assim como raciocínio lógico e criatividade para resolver problemas. Habilidades de trabalho em equipe e vontade de aprender continuamente também são importantes para acompanhar as inovações na área.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/mechanical.webp?token=GHSAT0AAAAAAC6N4PADPAH6YS3JP2SSYEMOZ5D26QA",
+        "imagem": "/images/mechanical.webp",
         "habilidades": {
           "Matemática": 5,
           "Física": 5,
@@ -355,7 +355,7 @@
         ],
         "media_salarial": "Segundo o site Glassdoor, o salário médio de um engenheiro aeronáutico no Brasil é de aproximadamente R$ 10.000 por mês, podendo variar conforme o setor e a experiência.",
         "perfil_estudante": "O aluno de Engenharia Aeronáutica costuma ser apaixonado por aviação e tecnologia. Ele tem afinidade com matemática e física, além de interesse por inovação e soluções complexas. Habilidades como raciocínio lógico, atenção a detalhes e trabalho em equipe são fundamentais. Além disso, é importante ter disposição para aprender continuamente, acompanhando as constantes evoluções no setor aeroespacial.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/aeronautic_engineering.webp?token=GHSAT0AAAAAAC6N4PADIMMYJCBAI5HLABMIZ5D3DZQ",
+        "imagem": "/images/aeronautic_engineering.webp",
         "habilidades": {
           "Matemática": 5,
           "Física": 5,
@@ -393,7 +393,7 @@
         ],
         "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um professor de Matemática no Brasil é de aproximadamente R$ 4.000 por mês em escolas públicas e privadas, podendo aumentar em cargos de coordenação ou com carga horária adicional.",
         "perfil_estudante": "Quem escolhe a Licenciatura em Matemática geralmente gosta de ensinar e tem afinidade com números e raciocínio lógico. Esse estudante valoriza o aprendizado contínuo e gosta de encontrar formas criativas para explicar conceitos. Paciência, boa comunicação e interesse em contribuir para a educação de jovens são características importantes para quem se identifica com essa profissão.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/math_lic.webp?token=GHSAT0AAAAAAC6N4PADYKDYNQ6ALEJ6D6SMZ5D26PQ",
+        "imagem": "/images/math_lic.webp",
         "habilidades": {
           "Matemática": 5,
           "Pedagogia": 4,
@@ -425,7 +425,7 @@
         ],
         "media_salarial": "Segundo o site Salario.com.br, a média salarial de um professor de Física no Brasil é de aproximadamente R$ 4.500 por mês, variando com a carga horária, instituição e experiência.",
         "perfil_estudante": "O estudante de Licenciatura em Física geralmente tem curiosidade sobre os fenômenos naturais e gosta de ensinar. É alguém com afinidade por ciências exatas, raciocínio lógico e boa capacidade de comunicação. Paciência, criatividade e interesse em tornar o aprendizado acessível para diferentes públicos são características importantes para quem se identifica com essa profissão.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/physics_lic.webp?token=GHSAT0AAAAAAC6N4PACV43K6CPCCLN4WI4OZ5D26QQ",
+        "imagem": "/images/physics_lic.webp",
         "habilidades": {
           "Física": 5,
           "Didática": 4,
@@ -457,7 +457,7 @@
         ],
         "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um professor de Química no Brasil é de aproximadamente R$ 4.200 por mês, podendo aumentar com experiência, carga horária extra ou cargos de coordenação.",
         "perfil_estudante": "Quem escolhe Licenciatura em Química costuma ter afinidade com ciências e curiosidade sobre os processos químicos que acontecem ao nosso redor. O estudante ideal é organizado, gosta de ensinar e é capaz de traduzir conceitos complexos para uma linguagem simples e acessível. Criatividade, paciência e paixão por compartilhar conhecimento são qualidades fundamentais para o sucesso na profissão.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/chem_lic.webp?token=GHSAT0AAAAAAC6N4PACU42JGXCWD664G6WSZ5D26MQ",
+        "imagem": "/images/chem_lic.webp",
         "habilidades": {
           "Química": 5,
           "Didática": 4,
@@ -498,7 +498,7 @@
         ],
         "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um engenheiro de produção no Brasil é de R$ 8.500 por mês, podendo variar com a experiência e o porte da empresa.",
         "perfil_estudante": "O estudante de Engenharia de Produção tem afinidade com matemática e física, gosta de resolver problemas e trabalhar em equipe. Geralmente, é uma pessoa organizada, analítica e interessada em melhorar processos e aumentar a eficiência. Além disso, precisa ter boa comunicação e disposição para aprender continuamente, já que o mercado exige atualização constante.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/prod_engineering.webp?token=GHSAT0AAAAAAC6N4PAD3K5I7VXGM7T3MVOOZ5D26RQ",
+        "imagem": "/images/prod_engineering.webp",
         "habilidades": {
           "Matemática": 5,
           "Gestão": 5,
@@ -544,7 +544,7 @@
         ],
         "media_salarial": "A média salarial de um estagiário é de R$2.500, analista júnior de R$5.000 e o salário no auge da carreira Depende bastante da área de atuação, mas profissionais que fazem pós-graduação e seguem carreira em grandes empresas podem alcançar cargos de liderança em laboratórios e fábricas. Já sobre as empresas de destaque, temos: Setor de Materiais e P&D: Pirelli, 3M, Saint-Gobain, Manufatura e Indústria: Volkswagen, Faber-Castell (contrata muitos estagiários), montadoras em geral, Alimentos e Bebidas: Ambev (para cargos como chefe de laboratório)",
         "perfil_estudante": "O aluno de Engenharia de Materiais tem curiosidade sobre como os materiais são feitos e funcionam. Ele gosta de química, física e matemática, além de ter interesse por inovação tecnológica. Habilidades como raciocínio lógico, atenção aos detalhes e criatividade são fundamentais para projetar soluções eficientes. A vontade de aprender continuamente também é importante, já que o setor está em constante evolução. A pós-graduação faz diferença para quem quer crescer na área, possibilitando cargos mais altos, como liderança em laboratórios dentro de grandes empresas. Além disso, trabalhar no exterior pode ser uma ótima opção, já que há mais oportunidades nessa área fora do Brasil.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/materiais.webp?token=GHSAT0AAAAAAC6N4PAC3C26RBHYW3OOF6U2Z5D26PA",
+        "imagem": "/images/materiais.webp",
         "habilidades": {
           "Química": 4,
           "Física": 4,
@@ -590,7 +590,7 @@
         ],
         "media_salarial": "Para estagiários, de R$1.000 a R$3.000, já um engenheiro no início da carreira ganha em média de R$3.000 a R$6.000 mas podendo chegar de R$10.000 a R$25.000 no auge da carreira(podendo ser maior em cargos de gestão ou em setores como mineração, ou atuando de forma autônoma). Algumas das empresas mais famosas são: Construtoras e incorporadoras: MRV, Andrade Gutierrez, Ambar Tech (São Carlos), Mineração e siderurgia: Vale, ArcelorMittal, Energia e combustíveis: Raízen",
         "perfil_estudante": "O aluno de Engenharia Civil geralmente é organizado, gosta de matemática e física e tem interesse por construção e infraestrutura. Características como raciocínio lógico, atenção aos detalhes, capacidade de trabalhar em equipe e habilidade de resolver problemas são essenciais. Além disso, é importante ter disposição para aprender continuamente e acompanhar as inovações tecnológicas no setor.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/civil.webp?token=GHSAT0AAAAAAC6N4PADNKP3DYMSFX33EYHCZ5D26NA",
+        "imagem": "/images/civil.webp",
         "habilidades": {
           "Matemática": 5,
           "Física": 4,
@@ -632,7 +632,7 @@
         ],
         "media_salarial": "De acordo com o site Glassdoor, o salário médio de um engenheiro ambiental no Brasil é de aproximadamente R$ 6.500 por mês, com variações dependendo do setor e da experiência.",
         "perfil_estudante": "O estudante de Engenharia Ambiental geralmente tem interesse por natureza, sustentabilidade e tecnologia. É uma pessoa que gosta de biologia, química e geografia, e está motivada a resolver problemas relacionados ao meio ambiente. Características como raciocínio lógico, visão sistêmica, trabalho em equipe e vontade de causar impacto positivo na sociedade são fundamentais para o sucesso na profissão.",
-        "imagem": "https://raw.githubusercontent.com/ryanviana/CalculoVocacional/refs/heads/main/public/images/ambiental.webp?token=GHSAT0AAAAAAC6N4PAD3BBNU256S25T667MZ5D26MA",
+        "imagem": "/images/ambiental.webp",
         "habilidades": {
           "Biologia": 4,
           "Química": 4,
