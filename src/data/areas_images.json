@@ -1,0 +1,66 @@
+[
+  {
+    "nome": "Engenharia de Computação",
+    "imagem": "https://www.pexels.com/photo/person-coding-on-a-holographic-interface-5495841/"
+  },
+  {
+    "nome": "Ciência da Computação",
+    "imagem": "https://www.pexels.com/photo/robot-holding-a-laptop-with-code-on-screen-6132654/"
+  },
+  {
+    "nome": "Ciência de Dados",
+    "imagem": "https://www.pexels.com/photo/funny-hand-drawn-charts-on-wall-681335/"
+  },
+  {
+    "nome": "Sistemas de Informação",
+    "imagem": "https://www.pexels.com/photo/toy-servers-and-network-cables-arranged-humorously-4421501/"
+  },
+  {
+    "nome": "Análise de Desenvolvimento de Sistemas",
+    "imagem": "https://www.pexels.com/photo/oversized-glasses-on-a-laptop-with-joke-code-571027/"
+  },
+  {
+    "nome": "Engenharia Elétrica",
+    "imagem": "https://www.pexels.com/photo/cartoon-lightbulb-with-sparks-2783922/"
+  },
+  {
+    "nome": "Engenharia Mecatrônica",
+    "imagem": "https://www.pexels.com/photo/tiny-robot-with-funny-expression-1366331/"
+  },
+  {
+    "nome": "Engenharia Mecânica",
+    "imagem": "https://www.pexels.com/photo/mechanical-gears-stacked-in-a-smiley-face-681338/"
+  },
+  {
+    "nome": "Engenharia Aeronáutica",
+    "imagem": "https://www.pexels.com/photo/folded-paper-airplane-with-googly-eyes-7088342/"
+  },
+  {
+    "nome": "Licenciatura em Matemática",
+    "imagem": "https://www.pexels.com/photo/funny-cartoon-equations-on-a-chalkboard-7096650/"
+  },
+  {
+    "nome": "Licenciatura em Física",
+    "imagem": "https://www.pexels.com/photo/funny-lab-flasks-with-googly-eyes-652999/"
+  },
+  {
+    "nome": "Licenciatura em Química",
+    "imagem": "https://www.pexels.com/photo/quirky-chemistry-glassware-on-colored-background-4022162/"
+  },
+  {
+    "nome": "Engenharia de Produção",
+    "imagem": "https://www.pexels.com/photo/miniature-workers-on-a-toy-production-line-5318807/"
+  },
+  {
+    "nome": "Engenharia de Materiais",
+    "imagem": "https://www.pexels.com/photo/cartoon-assembly-of-different-materials-2214575/"
+  },
+  {
+    "nome": "Engenharia Civil",
+    "imagem": "https://www.pexels.com/photo/funny-lego-construction-site-559722/"
+  },
+  {
+    "nome": "Engenharia Ambiental",
+    "imagem": "https://www.pexels.com/photo/mini-globe-with-plants-growing-around-it-3586798/"
+  }
+]

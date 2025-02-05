@@ -1,523 +1,646 @@
 [
-    {
-        "area": "Computação",
-        "cursos": [
-            {
-                "nome": "Engenharia de Computação",
-                "resumo": "A Engenharia de Computação é um curso de graduação com duração média de cinco anos, que combina conhecimentos de hardware e software para formar profissionais capazes de desenvolver e integrar sistemas computacionais.",
-                "descricao": "A Engenharia de Computação é um curso de graduação com duração média de cinco anos, que combina conhecimentos de hardware e software para formar profissionais capazes de desenvolver e integrar sistemas computacionais. Durante a faculdade, os alunos estudam disciplinas fundamentais como Matemática, Física, Circuitos Elétricos, Eletrônica Digital, Arquitetura de Computadores, Linguagens de Programação, Estruturas de Dados, Sistemas Operacionais e Redes de Computadores. Além disso, há matérias focadas em Engenharia de Software, Inteligência Artificial e Sistemas Embarcados.",
-                "cargos": [
-                    {
-                        "cargo": "Desenvolvedor de Software",
-                        "descricao": "Cria e mantém programas de computador, aplicativos móveis e sistemas operacionais, garantindo funcionalidade e eficiência."
-                    },
-                    {
-                        "cargo": "Engenheiro de Hardware",
-                        "descricao": "Projeta e desenvolve componentes físicos de computadores e dispositivos eletrônicos, como placas-mãe e processadores."
-                    },
-                    {
-                        "cargo": "Analista de Redes",
-                        "descricao": "Gerencia e monitora redes de computadores, assegurando comunicação eficiente e segura entre dispositivos."
-                    },
-                    {
-                        "cargo": "Especialista em Segurança da Informação",
-                        "descricao": "Implementa medidas de proteção para sistemas e dados, prevenindo acessos não autorizados e ciberataques."
-                    },
-                    {
-                        "cargo": "Engenheiro de Sistemas Embarcados",
-                        "descricao": "Desenvolve sistemas computacionais integrados a dispositivos, como eletrodomésticos inteligentes e equipamentos médicos."
-                    },
-                    {
-                        "cargo": "Consultor de TI",
-                        "descricao": "Oferece soluções tecnológicas para empresas, auxiliando na implementação e otimização de sistemas de informação."
-                    },
-                    {
-                        "cargo": "Gerente de Projetos de TI",
-                        "descricao": "Coordena equipes e recursos em projetos tecnológicos, garantindo o cumprimento de prazos e objetivos estabelecidos."
-                    }
-                ],
-                "media_salarial": "Quanto à remuneração, o salário de um engenheiro de computação no Brasil varia conforme a região, experiência e porte da empresa. De acordo com o site Glassdoor, a média salarial é de aproximadamente R$11.000 mensais para uma jornada de 8 horas diárias.",
-                "perfil_estudante": "O perfil ideal para um estudante de Engenharia de Computação inclui afinidade com disciplinas de exatas, especialmente Matemática e Física, além de interesse por tecnologia e inovação. Habilidades como raciocínio lógico, capacidade de resolver problemas complexos e pensamento analítico são fundamentais. Além disso, é importante ter disposição para aprender continuamente, adaptando-se às rápidas evoluções tecnológicas, e gostar de trabalhar em equipe, já que muitos projetos exigem colaboração multidisciplinar. "
-            },
-            {
-                "nome": "Ciência da Computação",
-                "resumo": "A Ciência da Computação é um curso de graduação com duração média de quatro anos, focado no estudo dos fundamentos teóricos e práticos da computação.",
-                "descricao": "A Ciência da Computação é um curso de graduação com duração média de quatro anos, focado no estudo dos fundamentos teóricos e práticos da computação. Durante a faculdade, os alunos exploram disciplinas como Programação, Algoritmos, Estruturas de Dados, Banco de Dados, Engenharia de Software, Redes de Computadores, Inteligência Artificial e Sistemas Operacionais. Além disso, há uma base sólida em Matemática, incluindo Cálculo, Álgebra Linear e Estatística, essenciais para o desenvolvimento de soluções computacionais eficientes. No mercado de trabalho, os cientistas da computação encontram oportunidades em empresas de tecnologia, instituições financeiras, indústrias e órgãos públicos, atuando no desenvolvimento de software, análise de dados, segurança da informação e pesquisa científica.",
-                "cargos": [
-                    {
-                        "cargo": "Desenvolvedor de Software",
-                        "descricao": "Cria, testa e mantém programas e aplicativos, garantindo que funcionem corretamente e atendam às necessidades dos usuários."
-                    },
-                    {
-                        "cargo": "Analista de Sistemas",
-                        "descricao": "Estuda as necessidades dos usuários e projeta soluções tecnológicas para melhorar processos e aumentar a eficiência organizacional."
-                    },
-                    {
-                        "cargo": "Engenheiro de Software",
-                        "descricao": "Planeja, desenvolve e gerencia sistemas de software complexos, assegurando qualidade e desempenho adequados."
-                    },
-                    {
-                        "cargo": "Cientista de Dados",
-                        "descricao": "Analisa grandes volumes de dados para extrair insights valiosos, auxiliando na tomada de decisões estratégicas."
-                    },
-                    {
-                        "cargo": "Especialista em Segurança da Informação",
-                        "descricao": "Protege sistemas e dados contra ameaças cibernéticas, implementando medidas de segurança eficazes."
-                    },
-                    {
-                        "cargo": "Administrador de Banco de Dados",
-                        "descricao": "Gerencia e organiza dados armazenados, garantindo sua integridade, disponibilidade e segurança."
-                    },
-                    {
-                        "cargo": "Desenvolvedor de Jogos Digitais",
-                        "descricao": "Cria e implementa jogos para diversas plataformas, desde a concepção até a programação e testes finais."
-                    }
-                ],
-                "media_salarial": "A remuneração para profissionais formados em Ciência da Computação varia conforme a região, experiência e porte da empresa. De acordo com o site Salario.com.br, a média salarial para um Programador de Computador é de aproximadamente R$4.037,87, enquanto um Analista de Sistemas pode receber em média R$5.611,43.",
-                "perfil_estudante": "O perfil ideal para um estudante de Ciência da Computação inclui afinidade com tecnologia e habilidades em lógica e matemática. É importante ter raciocínio lógico apurado, capacidade de resolver problemas complexos e interesse por inovações tecnológicas. Além disso, a disposição para aprendizado contínuo é fundamental, dado o rápido avanço da área, bem como a habilidade de trabalhar em equipe e comunicar ideias de forma clara."
-            },
-            {
-                "nome": "Ciência de Dados",
-                "resumo": "A Ciência de Dados é um curso de graduação que combina conhecimentos de estatística, matemática e computação para analisar grandes volumes de dados e extrair informações valiosas.",
-                "descricao": "Esse curso tem um início bem teórico, com uma base forte em matemática e estatística. Nos primeiros anos, os alunos encaram disciplinas pesadas, mas fundamentais para a formação. Mais para frente, entram matérias mais aplicadas, como ciência de dados, análise de dados e machine learning. A grade horária é menor em comparação a outros cursos, mas algumas matérias são bem desafiadoras, o que faz com que muitos alunos comecem a estagiar cedo.",
-                "cargos": [
-                    {
-                        "cargo": "Cientista de Dados",
-                        "descricao": "Analisa grandes conjuntos de dados para identificar padrões e tendências, auxiliando na tomada de decisões empresariais."
-                    },
-                    {
-                        "cargo": "Engenheiro de Dados",
-                        "descricao": "Desenvolve e mantém a infraestrutura necessária para a coleta, armazenamento e processamento de dados em larga escala."
-                    },
-                    {
-                        "cargo": "Analista de Dados",
-                        "descricao": "Interpreta dados para gerar relatórios e insights que orientam estratégias de negócios e operações."
-                    },
-                    {
-                        "cargo": "Atuarial/seguros",
-                        "descricao": "Aplicação de modelagem estatística e machine learning para avaliação de riscos, precificação de seguros e previsões atuariais."
-                    },
-                    {
-                        "cargo": "Analista de Business Intelligence (BI)",
-                        "descricao": "Transforma dados brutos em informações estratégicas, criando dashboards e visualizações para suportar decisões gerenciais."
-                    }
-                ],
-                "media_salarial": "Para estagiários, a média é de 2.000 reais. Um analista júnior ganha em média R$5.000, um pleno R$12.000 e para analistas sênior pode chegar a salários muito altos, especialmente para quem trabalha no exterior ganhando em dólar.",
-                "perfil_estudante": "O perfil ideal para um estudante de Ciência de Dados inclui afinidade com matemática e estatística, além de interesse por tecnologia e análise de informações. Habilidades como raciocínio lógico, pensamento analítico e capacidade de resolver problemas complexos são fundamentais. Além disso, é importante ter curiosidade para explorar grandes volumes de dados e disposição para aprendizado contínuo, acompanhando as constantes evoluções tecnológicas na área."
-            },
-            {
-                "nome": "Sistemas de Informação",
-                "resumo": "Sistemas de Informação é uma graduação com duração média de quatro anos, que integra conhecimentos de tecnologia e gestão para desenvolver soluções que otimizem o fluxo de informações nas organizações.",
-                "descricao": "Sistemas de Informação é uma graduação com duração média de quatro anos, que integra conhecimentos de tecnologia e gestão para desenvolver soluções que otimizem o fluxo de informações nas organizações. Durante o curso, os alunos estudam disciplinas como Programação, Banco de Dados, Engenharia de Software, Redes de Computadores, Análise de Sistemas e Gestão de Projetos. Além disso, há matérias voltadas à administração e negócios, preparando o estudante para compreender tanto o ambiente tecnológico quanto o organizacional. No mercado de trabalho, o profissional pode atuar em empresas de diversos setores, desenvolvendo e gerenciando sistemas de informação que atendam às necessidades específicas de cada negócio.",
-                "cargos": [
-                    {
-                        "cargo": "Analista de Sistemas",
-                        "descricao": "Responsável por identificar as necessidades dos usuários e projetar soluções tecnológicas que melhorem os processos organizacionais."
-                    },
-                    {
-                        "cargo": "Desenvolvedor de Software",
-                        "descricao": "Cria, testa e mantém programas e aplicativos, assegurando que funcionem conforme as especificações e atendam às demandas dos clientes."
-                    },
-                    {
-                        "cargo": "Administrador de Banco de Dados",
-                        "descricao": "Gerencia e organiza os dados da empresa, garantindo sua integridade, segurança e disponibilidade para os usuários autorizados."
-                    },
-                    {
-                        "cargo": "Gerente de Projetos de TI",
-                        "descricao": "Coordena equipes e recursos em projetos tecnológicos, assegurando o cumprimento de prazos, orçamento e qualidade dos entregáveis."
-                    },
-                    {
-                        "cargo": "Consultor de TI",
-                        "descricao": "Oferece assessoria especializada para empresas na implementação e otimização de sistemas de informação, visando melhorar a eficiência e competitividade."
-                    }
-                ],
-                "media_salarial": "A remuneração para profissionais de Sistemas de Informação varia conforme a região, experiência e porte da empresa. De acordo com o site Salario.com.br, a média salarial para um Analista de Sistemas é de aproximadamente R$7.205,62 mensais.",
-                "perfil_estudante": "O perfil ideal para um estudante de Sistemas de Informação inclui interesse por tecnologia e gestão, habilidades em lógica e matemática, além de capacidade de resolver problemas complexos. É importante ter aptidão para trabalhar em equipe, boa comunicação e disposição para se atualizar constantemente, acompanhando as rápidas evoluções tecnológicas e as demandas do mercado."
-            },
-            {
-                "nome": "Análise de Desenvolvimento de Sistemas",
-                "resumo": "O curso de Análise e Desenvolvimento de Sistemas é uma graduação tecnológica com duração média de dois a três anos, focada na formação de profissionais aptos a projetar, desenvolver, testar e manter sistemas computacionais.",
-                "descricao": "O curso de Análise e Desenvolvimento de Sistemas é uma graduação tecnológica com duração média de dois a três anos, focada na formação de profissionais aptos a projetar, desenvolver, testar e manter sistemas computacionais. Durante o curso, os alunos estudam disciplinas como Programação, Banco de Dados, Engenharia de Software, Análise de Sistemas e Gestão de Projetos. Essas matérias proporcionam uma base sólida para o desenvolvimento de soluções tecnológicas eficientes. No mercado de trabalho, os profissionais encontram oportunidades em empresas de tecnologia, departamentos de TI de diversas organizações e startups, atuando no desenvolvimento de softwares, aplicativos e sistemas personalizados.",
-                "cargos": [
-                    {
-                        "cargo": "Analista de Sistemas",
-                        "descricao": "Responsável por compreender as necessidades dos usuários e traduzir essas demandas em soluções tecnológicas eficazes."
-                    },
-                    {
-                        "cargo": "Desenvolvedor de Software",
-                        "descricao": "Cria, testa e mantém programas e aplicativos, assegurando que atendam aos requisitos funcionais e de desempenho."
-                    },
-                    {
-                        "cargo": "Administrador de Banco de Dados",
-                        "descricao": "Gerencia e organiza os dados da empresa, garantindo sua integridade, segurança e disponibilidade."
-                    },
-                    {
-                        "cargo": "Analista de Suporte Técnico",
-                        "descricao": "Oferece assistência aos usuários, solucionando problemas relacionados a hardware e software."
-                    },
-                    {
-                        "cargo": "Gerente de Projetos de TI",
-                        "descricao": "Coordena equipes e recursos em projetos tecnológicos, assegurando o cumprimento de prazos e objetivos estabelecidos."
-                    }
-                ],
-                "media_salarial": "A remuneração para profissionais da área varia conforme a região, experiência e porte da empresa. De acordo com o site Vagas.com, a média salarial de um analista de sistemas é de R$ 5.116,00.",
-                "perfil_estudante": "O perfil ideal para um estudante de Análise e Desenvolvimento de Sistemas inclui afinidade com tecnologia, raciocínio lógico apurado e habilidades em resolução de problemas. É importante ter capacidade de trabalhar em equipe, boa comunicação e disposição para constante atualização, acompanhando as rápidas evoluções do setor de TI. "
-            }
-        ]
-    },
-    {
-        "area": "Elétrica",
-        "cursos": [
-            {
-                "nome": "Engenharia Elétrica",
-                "resumo": "A Engenharia Elétrica é um curso de graduação com duração média de cinco anos, focado no estudo e aplicação de sistemas elétricos e eletrônicos.",
-                "descricao": "A Engenharia Elétrica é um curso de graduação com duração média de cinco anos, focado no estudo e aplicação de sistemas elétricos e eletrônicos. Durante a faculdade, os alunos estudam disciplinas fundamentais como Matemática, Física e Química, além de matérias específicas como Circuitos Elétricos, Eletrônica Analógica e Digital, Eletromagnetismo, Máquinas Elétricas, Sistemas de Controle, Telecomunicações e Energias Renováveis. As aulas práticas em laboratórios são essenciais para consolidar o conhecimento teórico e preparar os estudantes para desafios reais.",
-                "cargos": [
-                    {
-                        "cargo": "Engenheiro de Projetos Elétricos",
-                        "descricao": "Responsável por elaborar e supervisionar projetos de instalações elétricas em edificações e indústrias, assegurando conformidade com normas técnicas e segurança."
-                    },
-                    {
-                        "cargo": "Engenheiro de Manutenção Elétrica",
-                        "descricao": "Atua na manutenção preventiva e corretiva de sistemas e equipamentos elétricos, garantindo seu funcionamento contínuo e eficiente."
-                    },
-                    {
-                        "cargo": "Especialista em Automação Industrial",
-                        "descricao": "Desenvolve e implementa sistemas automatizados para otimizar processos produtivos, aumentando a eficiência e reduzindo custos operacionais."
-                    },
-                    {
-                        "cargo": "Engenheiro de Telecomunicações",
-                        "descricao": "Trabalha no desenvolvimento e manutenção de sistemas de comunicação, como redes de telefonia e internet, assegurando qualidade e cobertura dos serviços."
-                    },
-                    {
-                        "cargo": "Consultor em Eficiência Energética",
-                        "descricao": "Orienta empresas e instituições na adoção de práticas e tecnologias que reduzam o consumo de energia, promovendo sustentabilidade e economia."
-                    }
-                ],
-                "media_salarial": "A remuneração para engenheiros eletricistas varia conforme a região, experiência e setor de atuação. De acordo com o site Salario.com.br, a média salarial é de aproximadamente R$8.485 para uma jornada de 40 horas semanais.",
-                "perfil_estudante": "O perfil ideal para um estudante de Engenharia Elétrica inclui afinidade com disciplinas de exatas, especialmente Matemática e Física, além de interesse por tecnologia e inovação. Habilidades como raciocínio lógico, capacidade de resolver problemas complexos e pensamento analítico são fundamentais. Além disso, é importante ter disposição para aprender continuamente, adaptando-se às rápidas evoluções tecnológicas, e gostar de trabalhar em equipe, já que muitos projetos exigem colaboração multidisciplinar."
-            }
-        ]
-    },
-    {
-        "area": "Mecatrônica",
-        "cursos": [
-            {
-                "nome": "Engenharia Mecatrônica",
-                "resumo": "A Engenharia Mecatrônica une mecânica, eletrônica e computação para criar e melhorar sistemas automatizados.",
-                "descricao": "A Engenharia Mecatrônica combina conhecimentos de eletrônica, programação, processos industriais e documentação técnica para integrar sistemas complexos. O curso capacita os alunos a desenvolver soluções para diversas aplicações, como robôs industriais, sistemas inteligentes e até veículos autônomos, enfatizando a conexão entre diferentes tecnologias para resolver problemas do mundo real. Além do aspecto técnico, o curso proporciona uma base matemática sólida e uma abordagem estruturada para a resolução de problemas, o que amplia as oportunidades de atuação. Essas habilidades analíticas são altamente valorizadas em áreas como consultoria estratégica e mercado financeiro, tornando engenheiros mecatrônicos competitivos em segmentos como trading quantitativo e gestão de investimentos.",
-                "cargos": [
-                    {
-                        "cargo": "Engenheiro de Automação",
-                        "descricao": "Cria sistemas automatizados que otimizam processos industriais e reduzem custos."
-                    },
-                    {
-                        "cargo": "Cientista de dados",
-                        "descricao": "Utiliza métodos de análise para extrair informações de grandes volumes de dados"
-                    },
-                    {
-                        "cargo": "Especialista em Controle e Automação",
-                        "descricao": "Trabalha na programação e manutenção de sistemas controlados automaticamente."
-                    },
-                    {
-                        "cargo": "Analista financeiro",
-                        "descricao": "Utiliza dos conhecimentos de computação e modelagem matemática para prever movimentações do mercado financeiro."
-                    },
-                    {
-                        "cargo": "Consultor Estratégico",
-                        "descricao": "Ajuda empresas a implementarem tecnologias avançadas, como IoT (Internet das Coisas) e inteligência artificial."
-                    }
-                ],
-                "media_salarial": "No mercado financeiro, o salário inicial é cerca de R$15 mil/mês, podendo chegar a R$40 mil/mês em dez anos. Em consultorias estratégicas, começa em torno de R$8 mil/mês e alcança R$30 mil/mês no mesmo período. Já em tecnologia e engenharia, inicia em R$6,5 mil/mês, com potencial de atingir R$15 mil/mês após uma década.",
-                "perfil_estudante": "O aluno de Engenharia Mecatrônica tem afinidade com matemática, física e tecnologia. É curioso e gosta de entender como funcionam máquinas e sistemas automatizados. Além disso, costuma ter interesse por robótica, programação e inovação tecnológica. Habilidades como raciocínio lógico, trabalho em equipe e criatividade são essenciais para o sucesso na área."
-            },
-            {
-                "nome": "Engenharia Mecânica",
-                "resumo": "A Engenharia Mecânica é voltada para o estudo e desenvolvimento de máquinas, equipamentos e sistemas mecânicos.",
-                "descricao": "A Engenharia Mecânica é um curso voltado para o estudo e desenvolvimento de máquinas, equipamentos e sistemas mecânicos. Com duração média de cinco anos, o curso abrange disciplinas como termodinâmica, resistência dos materiais, mecânica dos fluidos, projeto de máquinas, manufatura e controle de sistemas. Os estudantes também aprendem fundamentos de matemática e física aplicados ao desenvolvimento e manutenção de tecnologias mecânicas. No mercado de trabalho, engenheiros mecânicos atuam em indústrias automotivas, aeronáuticas, metalúrgicas e de energia, além de trabalhar com projetos, manutenção e inovação tecnológica.",
-                "cargos": [
-                    {
-                        "cargo": "Engenheiro de Projetos Mecânicos",
-                        "descricao": "Cria e desenvolve máquinas, peças e sistemas mecânicos, garantindo sua eficiência e segurança."
-                    },
-                    {
-                        "cargo": "Engenheiro de Manutenção",
-                        "descricao": "Supervisiona a manutenção preventiva e corretiva de equipamentos, assegurando seu funcionamento contínuo."
-                    },
-                    {
-                        "cargo": "Engenheiro de Produção",
-                        "descricao": "Coordena processos industriais para melhorar a eficiência e qualidade dos produtos fabricados."
-                    },
-                    {
-                        "cargo": "Especialista em Automação Industrial",
-                        "descricao": "Implementa sistemas automatizados para otimizar processos de produção."
-                    },
-                    {
-                        "cargo": "Engenheiro de Termodinâmica",
-                        "descricao": "Trabalha no desenvolvimento de sistemas de aquecimento, ventilação e refrigeração."
-                    }
-                ],
-                "media_salarial": "De acordo com o site Glassdoor, o salário médio de um engenheiro mecânico no Brasil é de R$ 8.000 por mês, mas pode variar dependendo da experiência e do setor de atuação.",
-                "perfil_estudante": "O estudante de Engenharia Mecânica geralmente é curioso e interessado em entender como funcionam máquinas e equipamentos. Afinidade com matemática e física é essencial, assim como raciocínio lógico e criatividade para resolver problemas. Habilidades de trabalho em equipe e vontade de aprender continuamente também são importantes para acompanhar as inovações na área."
-            }
-        ]
-    },
-    {
-        "area": "Aeronáutica",
-        "cursos": [
-            {
-                "nome": "Engenharia Aeronáutica",
-                "resumo": "A Engenharia Aeronáutica é focada no desenvolvimento, construção e manutenção de aeronaves e sistemas aeroespaciais.",
-                "descricao": "A Engenharia Aeronáutica é uma área focada no desenvolvimento, construção e manutenção de aeronaves e sistemas aeroespaciais. O curso, que dura em média cinco anos, oferece disciplinas como aerodinâmica, mecânica dos fluidos, estruturas aeronáuticas, motores a jato e sistemas de propulsão. Os alunos também aprendem fundamentos de matemática, física e programação, essenciais para projetar e testar tecnologias aeroespaciais. No mercado de trabalho, engenheiros aeronáuticos atuam em indústrias aeronáuticas, aeroportos, empresas de manutenção e até no setor espacial, contribuindo para a inovação e segurança no transporte aéreo e na exploração aeroespacial.",
-                "cargos": [
-                    {
-                        "cargo": "Engenheiro de Projeto Aeronáutico",
-                        "descricao": "Desenvolve e aprimora aeronaves, projetando estruturas, sistemas e motores para atender a requisitos de desempenho e segurança."
-                    },
-                    {
-                        "cargo": "Engenheiro de Manutenção Aeronáutica",
-                        "descricao": "Realiza inspeções e manutenções em aeronaves para garantir sua operação segura e eficiente."
-                    },
-                    {
-                        "cargo": "Especialista em Aerodinâmica",
-                        "descricao": "Analisa e otimiza o desempenho de aeronaves, considerando fatores como resistência do ar e estabilidade."
-                    },
-                    {
-                        "cargo": "Engenheiro de Motores e Propulsão",
-                        "descricao": "Trabalha no desenvolvimento, análise e manutenção de motores a jato, turbinas e sistemas de propulsão."
-                    },
-                    {
-                        "cargo": "Consultor Aeroespacial",
-                        "descricao": "Oferece soluções técnicas e estratégicas para empresas de aviação e espaço."
-                    }
-                ],
-                "media_salarial": "Segundo o site Glassdoor, o salário médio de um engenheiro aeronáutico no Brasil é de aproximadamente R$ 10.000 por mês, podendo variar conforme o setor e a experiência.",
-                "perfil_estudante": "O aluno de Engenharia Aeronáutica costuma ser apaixonado por aviação e tecnologia. Ele tem afinidade com matemática e física, além de interesse por inovação e soluções complexas. Habilidades como raciocínio lógico, atenção a detalhes e trabalho em equipe são fundamentais. Além disso, é importante ter disposição para aprender continuamente, acompanhando as constantes evoluções no setor aeroespacial."
-            }
-        ]
-    },
-    {
-        "area": "Licenciatura",
-        "cursos": [
-            {
-                "nome": "Licenciatura em Matemática",
-                "resumo": "Formação de professores para o ensino fundamental e médio, com ênfase em álgebra, geometria, cálculo, estatística e metodologias de ensino.",
-                "descricao": "A Licenciatura em Matemática é um curso de graduação com duração média de quatro anos, que forma professores para o ensino fundamental e médio. Durante o curso, os alunos estudam disciplinas como álgebra, geometria, cálculo, estatística e metodologia de ensino. Além disso, aprendem sobre didática, pedagogia e tecnologias aplicadas à educação, para desenvolver habilidades que os ajudem a ensinar de forma clara e eficiente. No mercado de trabalho, o licenciado em Matemática pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs e até em criação de materiais didáticos.",
-                "cargos": [
-                    {
-                        "cargo": "Professor de Matemática",
-                        "descricao": "Ensina matemática em escolas de ensino fundamental e médio, ajudando os alunos a desenvolverem habilidades analíticas e lógicas."
-                    },
-                    {
-                        "cargo": "Coordenador Pedagógico",
-                        "descricao": "Organiza e supervisiona o planejamento pedagógico em instituições de ensino, apoiando outros professores."
-                    },
-                    {
-                        "cargo": "Instrutor de Cursos Preparatórios",
-                        "descricao": "Dá aulas em cursos voltados para vestibulares e concursos, explicando conteúdos de forma prática e objetiva."
-                    },
-                    {
-                        "cargo": "Desenvolvedor de Materiais Didáticos",
-                        "descricao": "Cria livros, apostilas e conteúdos digitais voltados ao ensino da matemática."
-                    }
-                ],
-                "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um professor de Matemática no Brasil é de aproximadamente R$ 4.000 por mês em escolas públicas e privadas, podendo aumentar em cargos de coordenação ou com carga horária adicional.",
-                "perfil_estudante": "Quem escolhe a Licenciatura em Matemática geralmente gosta de ensinar e tem afinidade com números e raciocínio lógico. Esse estudante valoriza o aprendizado contínuo e gosta de encontrar formas criativas para explicar conceitos. Paciência, boa comunicação e interesse em contribuir para a educação de jovens são características importantes para quem se identifica com essa profissão."
-            },
-            {
-                "nome": "Licenciatura em Física",
-                "resumo": "Formação de professores para o ensino fundamental e médio com ênfase em mecânica, termodinâmica, eletromagnetismo, óptica, e metodologias de ensino da física.",
-                "descricao": "A Licenciatura em Física é um curso de graduação com duração média de quatro anos, que prepara professores para o ensino fundamental e médio. Durante o curso, os alunos estudam disciplinas como mecânica, termodinâmica, eletromagnetismo, óptica, física moderna e astronomia. Além disso, aprendem didática, pedagogia e metodologias de ensino voltadas para a física, com foco em como tornar o aprendizado dessa ciência mais acessível e interessante para os alunos. No mercado de trabalho, o licenciado em Física pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs, além de colaborar com a criação de materiais didáticos e projetos educacionais.",
-                "cargos": [
-                    {
-                        "cargo": "Professor de Física",
-                        "descricao": "Ensina conceitos fundamentais de física em escolas de ensino médio e fundamental, estimulando o raciocínio científico."
-                    },
-                    {
-                        "cargo": "Coordenador Pedagógico",
-                        "descricao": "Supervisiona o trabalho dos professores e organiza o currículo em instituições de ensino."
-                    },
-                    {
-                        "cargo": "Instrutor de Cursos Preparatórios",
-                        "descricao": "Dá aulas em cursinhos voltados para vestibulares e ENEM, abordando tópicos de física de maneira prática e objetiva."
-                    },
-                    {
-                        "cargo": "Criador de Materiais Didáticos",
-                        "descricao": "Desenvolve livros, apostilas e conteúdos digitais que ajudam no ensino da física."
-                    }
-                ],
-                "media_salarial": "Segundo o site Salario.com.br, a média salarial de um professor de Física no Brasil é de aproximadamente R$ 4.500 por mês, variando com a carga horária, instituição e experiência.",
-                "perfil_estudante": "O estudante de Licenciatura em Física geralmente tem curiosidade sobre os fenômenos naturais e gosta de ensinar. É alguém com afinidade por ciências exatas, raciocínio lógico e boa capacidade de comunicação. Paciência, criatividade e interesse em tornar o aprendizado acessível para diferentes públicos são características importantes para quem se identifica com essa profissão."
-            },
-            {
-                "nome": "Licenciatura em Química",
-                "resumo": "Formação de professores para o ensino fundamental e médio, com foco em química geral, inorgânica, orgânica e metodologias de ensino da química.",
-                "descricao": "A Licenciatura em Química é um curso de graduação com duração média de quatro anos, voltado para a formação de professores para o ensino fundamental e médio. Durante o curso, os estudantes aprendem fundamentos da química, como química geral, inorgânica, orgânica e físico-química. Também estudam experimentação em laboratório, toxicologia e bioquímica. Além das disciplinas científicas, há matérias pedagógicas, como didática e metodologias de ensino, que preparam os alunos para planejar e conduzir aulas de forma eficaz. No mercado de trabalho, o licenciado em Química pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs e na criação de materiais didáticos.",
-                "cargos": [
-                    {
-                        "cargo": "Professor de Química",
-                        "descricao": "Ensina conteúdos químicos em escolas de ensino médio e fundamental, ajudando os alunos a compreenderem os fenômenos químicos do dia a dia."
-                    },
-                    {
-                        "cargo": "Coordenador Pedagógico",
-                        "descricao": "Auxilia outros professores no planejamento e organização do ensino, promovendo melhores práticas educacionais."
-                    },
-                    {
-                        "cargo": "Instrutor de Cursos Preparatórios",
-                        "descricao": "Trabalha em cursinhos voltados para vestibulares e concursos, focando nos conteúdos de química mais requisitados."
-                    },
-                    {
-                        "cargo": "Desenvolvedor de Materiais Didáticos",
-                        "descricao": "Produz livros, apostilas e recursos digitais que facilitam o ensino e aprendizado da química."
-                    }
-                ],
-                "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um professor de Química no Brasil é de aproximadamente R$ 4.200 por mês, podendo aumentar com experiência, carga horária extra ou cargos de coordenação.",
-                "perfil_estudante": "Quem escolhe Licenciatura em Química costuma ter afinidade com ciências e curiosidade sobre os processos químicos que acontecem ao nosso redor. O estudante ideal é organizado, gosta de ensinar e é capaz de traduzir conceitos complexos para uma linguagem simples e acessível. Criatividade, paciência e paixão por compartilhar conhecimento são qualidades fundamentais para o sucesso na profissão."
-            }
-        ]
-    },
-    {
-        "area": "Produção",
-        "cursos": [
-            {
-                "nome": "Engenharia de Produção",
-                "resumo": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas.",
-                "descricao": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas. Durante o curso, que dura cerca de cinco anos, os alunos estudam matérias como matemática, física, gestão de projetos, controle de qualidade, planejamento da produção e logística. Além disso, aprendem sobre ergonomia, sustentabilidade e como integrar tecnologia nos processos. No mercado de trabalho, o engenheiro de produção é valorizado em indústrias, empresas de serviços, startups e consultorias, sendo responsável por reduzir custos, otimizar recursos e aumentar a produtividade.",
-                "cargos": [
-                    {
-                        "cargo": "Analista de Logística",
-                        "descricao": "Planeja e organiza a movimentação de materiais e produtos para garantir eficiência."
-                    },
-                    {
-                        "cargo": "Engenheiro de Qualidade",
-                        "descricao": "Avalia processos e produtos para assegurar que atendam aos padrões exigidos."
-                    },
-                    {
-                        "cargo": "Gerente de Produção",
-                        "descricao": "Supervisiona a equipe e os recursos envolvidos na fabricação de produtos, garantindo cumprimento de metas."
-                    },
-                    {
-                        "cargo": "Consultor de Processos",
-                        "descricao": "Analisa e sugere melhorias em processos empresariais para otimizar resultados."
-                    },
-                    {
-                        "cargo": "Especialista em Planejamento e Controle de Produção (PCP)",
-                        "descricao": "Garante que os processos de produção sejam organizados e eficientes."
-                    }
-                ],
-                "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um engenheiro de produção no Brasil é de R$ 8.500 por mês, podendo variar com a experiência e o porte da empresa.",
-                "perfil_estudante": "O estudante de Engenharia de Produção tem afinidade com matemática e física, gosta de resolver problemas e trabalhar em equipe. Geralmente, é uma pessoa organizada, analítica e interessada em melhorar processos e aumentar a eficiência. Além disso, precisa ter boa comunicação e disposição para aprender continuamente, já que o mercado exige atualização constante."
-            }
-        ]
-    },   
-    {
-        "area": "Materiais",
-        "cursos": [
-            {
-                "nome": "Engenharia de Materiais",
-                "resumo": "Estudo da ciência e tecnologia dos materiais, incluindo metais, cerâmicas, polímeros, compósitos, nanotecnologia, e suas aplicações industriais.",
-                "descricao": "A Engenharia de Materiais e Manufatura é um curso muito voltado para pesquisa e desenvolvimento na indústria, mas, no Brasil, há poucas grandes empresas atuando especificamente nessa área. Por isso, muitos engenheiros acabam migrando para setores correlatos, como manufatura e engenharia de produção. O curso envolve bastante conhecimento sobre inteligência de fábrica, planejamento e supply chain, permitindo que os profissionais atuem tanto na parte técnica quanto na gestão da produção industrial. Além disso, é um curso que frequentemente compete com a Engenharia Química no mercado de trabalho.",
-                "cargos": [
-                    {
-                        "cargo": "Pesquisa e Desenvolvimento (P&D)",
-                        "descricao": "Geralmente dentro de indústrias químicas e materiais avançados."
-                    },
-                    {
-                        "cargo": "Manufatura e Produção Industrial",
-                        "descricao": "Inteligência de fábrica, controle de qualidade, processos de fabricação."
-                    },
-                    {
-                        "cargo": "Supply Chain e Logística",
-                        "descricao": "Trabalha no planejamento e otimização da cadeia produtiva."
-                    },
-                    {
-                        "cargo": "Engenharia de Processos",
-                        "descricao": "Garante a melhoria contínua e eficiência produtiva."
-                    },
-                    {
-                        "cargo": "Engenheiro de Sustentabilidade",
-                        "descricao": "Desenvolve soluções que utilizem materiais de forma mais eficiente e com menor impacto ambiental."
-                    },
-                    {
-                        "cargo": "Obs:",
-                        "descricao": "Muitos profissionais acabam migrando para a Engenharia de Produção ou áreas correlatas devido à maior oferta de oportunidades no Brasil."
-                    }
-                ],
-                "media_salarial": "A média salarial de um estagiário é de R$2.500, analista júnior de R$5.000 e o salário no auge da carreira Depende bastante da área de atuação, mas profissionais que fazem pós-graduação e seguem carreira em grandes empresas podem alcançar cargos de liderança em laboratórios e fábricas. Já sobre as empresas de destaque, temos: Setor de Materiais e P&D: Pirelli, 3M, Saint-Gobain, Manufatura e Indústria: Volkswagen, Faber-Castell (contrata muitos estagiários), montadoras em geral, Alimentos e Bebidas: Ambev (para cargos como chefe de laboratório)",
-                "perfil_estudante": "O aluno de Engenharia de Materiais tem curiosidade sobre como os materiais são feitos e funcionam. Ele gosta de química, física e matemática, além de ter interesse por inovação tecnológica. Habilidades como raciocínio lógico, atenção aos detalhes e criatividade são fundamentais para projetar soluções eficientes. A vontade de aprender continuamente também é importante, já que o setor está em constante evolução. A pós-graduação faz diferença para quem quer crescer na área, possibilitando cargos mais altos, como liderança em laboratórios dentro de grandes empresas. Além disso, trabalhar no exterior pode ser uma ótima opção, já que há mais oportunidades nessa área fora do Brasil."
-            }
-        ]
-    },
-    {
-        "area": "Civil",
-        "cursos": [
-            {
-                "nome": "Engenharia Civil",
-                "resumo": "Forma profissionais para planejar, projetar e construir infraestrutura e edificações.",
-                "descricao": "A Engenharia Civil é a área responsável por projetar, construir e analisar todo tipo de infraestrutura, sendo essencial para a adaptação do meio ambiente à habitação humana. O curso abrange desde edificações e infraestrutura até sistemas de transporte e recursos hídricos. A formação envolve conhecimentos multidisciplinares, indo da construção de casas e edifícios à gestão de barragens, rodovias e planejamento de transporte. Além do trabalho técnico, o engenheiro civil pode atuar em gestão, fiscalização de obras e até em cargos administrativos e legislativos.",
-                "cargos": [
-                    {
-                        "cargo": "Engenheiro de Estruturas",
-                        "descricao": "Projeta e analisa estruturas como pontes, edifícios e viadutos, garantindo segurança e eficiência."
-                    },
-                    {
-                        "cargo": "Engenheiro de Obras",
-                        "descricao": "Supervisiona a execução de obras, gerenciando equipes, materiais e cronogramas."
-                    },
-                    {
-                        "cargo": "Engenheiro Geotécnico",
-                        "descricao": "Estuda o comportamento do solo e das fundações para construir com segurança."
-                    },
-                    {
-                        "cargo": "Engenheiro de Hidráulica e Saneamento",
-                        "descricao": "Planeja sistemas de abastecimento de água, esgoto e drenagem urbana."
-                    },
-                    {
-                        "cargo": "Topografia e Agrimensura",
-                        "descricao": "É responsável pelo mapeamento, geoprocessamento, monitoramento de estruturas."
-                    },
-                    {
-                        "cargo": "Engenheiro de Transportes",
-                        "descricao": "Atua no desenvolvimento de projetos de infraestrutura e planejamento de rodovias, hidrovias e aeroportos."
-                    }
-                ],
-                "media_salarial": "Para estagiários, de R$1.000 a R$3.000, já um engenheiro no início da carreira ganha em média de R$3.000 a R$6.000 mas podendo chegar de R$10.000 a R$25.000 no auge da carreira(podendo ser maior em cargos de gestão ou em setores como mineração, ou atuando de forma autônoma). Algumas das empresas mais famosas são: Construtoras e incorporadoras: MRV, Andrade Gutierrez, Ambar Tech (São Carlos), Mineração e siderurgia: Vale, ArcelorMittal, Energia e combustíveis: Raízen",
-                "perfil_estudante": "O aluno de Engenharia Civil geralmente é organizado, gosta de matemática e física e tem interesse por construção e infraestrutura. Características como raciocínio lógico, atenção aos detalhes, capacidade de trabalhar em equipe e habilidade de resolver problemas são essenciais. Além disso, é importante ter disposição para aprender continuamente e acompanhar as inovações tecnológicas no setor."
-            }
-        ]
-    },
-    {
-        "area": "Ambiental",
-        "cursos": [
-            {
-                "nome": "Engenharia Ambiental",
-                "resumo": "Focado na preservação e recuperação do meio ambiente, com ênfase em ciência, tecnologia e sustentabilidade.",
-                "descricao": "A Engenharia Ambiental é um curso voltado para a preservação e recuperação do meio ambiente, integrando ciência, tecnologia e sustentabilidade. Durante os cinco anos da graduação, os estudantes aprendem disciplinas como ecologia, geologia, tratamento de resíduos, hidrologia, saneamento, gestão de recursos naturais e energias renováveis. O curso também inclui aspectos técnicos, como análises químicas e ambientais, e ferramentas de planejamento urbano e ambiental. No mercado de trabalho, engenheiros ambientais atuam em empresas, órgãos públicos, ONGs e consultorias, desenvolvendo soluções para minimizar os impactos ambientais e promover o uso sustentável dos recursos naturais.",
-                "cargos": [
-                    {
-                        "cargo": "Engenheiro de Saneamento",
-                        "descricao": "Trabalha no planejamento e gestão de sistemas de abastecimento de água, esgoto e resíduos sólidos."
-                    },
-                    {
-                        "cargo": "Consultor Ambiental",
-                        "descricao": "Realiza análises e propõe soluções para empresas se adequarem às normas ambientais."
-                    },
-                    {
-                        "cargo": "Engenheiro de Gestão de Recursos Naturais",
-                        "descricao": "Planeja o uso sustentável de recursos como água, solo e florestas."
-                    },
-                    {
-                        "cargo": "Especialista em Licenciamento Ambiental",
-                        "descricao": "Elabora e supervisiona processos de licenciamento de empreendimentos que impactam o meio ambiente."
-                    },
-                    {
-                        "cargo": "Engenheiro de Energias Renováveis",
-                        "descricao": "Desenvolve projetos de energia sustentável, como solar, eólica e biomassa."
-                    }
-                ],
-                "media_salarial": "De acordo com o site Glassdoor, o salário médio de um engenheiro ambiental no Brasil é de aproximadamente R$ 6.500 por mês, com variações dependendo do setor e da experiência.",
-                "perfil_estudante": "O estudante de Engenharia Ambiental geralmente tem interesse por natureza, sustentabilidade e tecnologia. É uma pessoa que gosta de biologia, química e geografia, e está motivada a resolver problemas relacionados ao meio ambiente. Características como raciocínio lógico, visão sistêmica, trabalho em equipe e vontade de causar impacto positivo na sociedade são fundamentais para o sucesso na profissão."
-            }
-        ]
-    } 
+  {
+    "area": "Computação",
+    "cursos": [
+      {
+        "nome": "Engenharia de Computação",
+        "resumo": "A Engenharia de Computação é um curso de graduação com duração média de cinco anos, que combina conhecimentos de hardware e software para formar profissionais capazes de desenvolver e integrar sistemas computacionais.",
+        "descricao": "A Engenharia de Computação é um curso de graduação com duração média de cinco anos, que combina conhecimentos de hardware e software para formar profissionais capazes de desenvolver e integrar sistemas computacionais. Durante a faculdade, os alunos estudam disciplinas fundamentais como Matemática, Física, Circuitos Elétricos, Eletrônica Digital, Arquitetura de Computadores, Linguagens de Programação, Estruturas de Dados, Sistemas Operacionais e Redes de Computadores. Além disso, há matérias focadas em Engenharia de Software, Inteligência Artificial e Sistemas Embarcados.",
+        "cargos": [
+          {
+            "cargo": "Desenvolvedor de Software",
+            "descricao": "Cria e mantém programas de computador, aplicativos móveis e sistemas operacionais, garantindo funcionalidade e eficiência."
+          },
+          {
+            "cargo": "Engenheiro de Hardware",
+            "descricao": "Projeta e desenvolve componentes físicos de computadores e dispositivos eletrônicos, como placas-mãe e processadores."
+          },
+          {
+            "cargo": "Analista de Redes",
+            "descricao": "Gerencia e monitora redes de computadores, assegurando comunicação eficiente e segura entre dispositivos."
+          },
+          {
+            "cargo": "Especialista em Segurança da Informação",
+            "descricao": "Implementa medidas de proteção para sistemas e dados, prevenindo acessos não autorizados e ciberataques."
+          },
+          {
+            "cargo": "Engenheiro de Sistemas Embarcados",
+            "descricao": "Desenvolve sistemas computacionais integrados a dispositivos, como eletrodomésticos inteligentes e equipamentos médicos."
+          },
+          {
+            "cargo": "Consultor de TI",
+            "descricao": "Oferece soluções tecnológicas para empresas, auxiliando na implementação e otimização de sistemas de informação."
+          },
+          {
+            "cargo": "Gerente de Projetos de TI",
+            "descricao": "Coordena equipes e recursos em projetos tecnológicos, garantindo o cumprimento de prazos e objetivos estabelecidos."
+          }
+        ],
+        "media_salarial": "Quanto à remuneração, o salário de um engenheiro de computação no Brasil varia conforme a região, experiência e porte da empresa. De acordo com o site Glassdoor, a média salarial é de aproximadamente R$11.000 mensais para uma jornada de 8 horas diárias.",
+        "perfil_estudante": "O perfil ideal para um estudante de Engenharia de Computação inclui afinidade com disciplinas de exatas, especialmente Matemática e Física, além de interesse por tecnologia e inovação. Habilidades como raciocínio lógico, capacidade de resolver problemas complexos e pensamento analítico são fundamentais. Além disso, é importante ter disposição para aprender continuamente, adaptando-se às rápidas evoluções tecnológicas, e gostar de trabalhar em equipe, já que muitos projetos exigem colaboração multidisciplinar. ",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/computer_engineering.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPKZT44CKSN%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T192010Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaCXNhLWVhc3QtMSJIMEYCIQCWMyOrmDojIpPic7F9BtoQOJB%2FRj3KsDmI0wgO2x8yEAIhAKsyCbYUie0EcZWpyI0rh6imINxXysMuqJJWxg6noG9kKu0CCEwQABoMNDgxNjY1MTI5NDI5Igxi7kBDv0QGtpGCkFUqygKAm4liS6y1nf65WzzIHgCtTWnISw9AQzY3fkbXogrtfs5Jt6LTS3PA06uxo2ULnnOeIIS835xXE%2F1%2FQM337jQfv9P7uUmVPM2g62gNqbid%2F95f2%2FLaPlUY%2BcTHNSWAPcRbFFuCtwJ9OW9YxvuVn0ihxb%2B1c4wrRRU9H8LPw1b2mfiRozus4uxE4aodlS%2BT5D02KyTUTV4yTL5SClk9KKZrZ4jHN8WXsc68hfhVf9cZdwRC7TkZUISS1hfIaAsb3KTZFKl3BA5s5RYbbqp8fFWXp4VB83NOxCsriqYhf0Clk3pe1K4RmkWkOHKjsjwFcIL5ml95wERER9ltHkTBriLA%2FG%2BOUog59g998n4CirIDV%2FED5qY3MVHc6fG7LlbMjMyKVm6Pw%2FtIKiym8iNym1UPI7gvhCDFEccjEMq4Jcs0Wgeu8Kq18cjcvG4wh4GNvQY6sgI4rYIi1hdfKHnbquq130K1hJT%2Fm6dbe9ZCG51h9EN1mgO3LKUY5KIFrDQcHmMI%2BXVrClhg5arxEFaQvS7NFCX5etTI3rGmcFpXP%2F9RttALsmdCsCvEDV1ZSIjt1Sf9PXGDqF2bwYnnp8q25M8IyZeQGLOSKUvU7p84Y9ZBJruCizkN2ss38KyAo8wGuQ8%2B%2F5rxHh4eORXvmqYlwzHQ43qynu0B1gC04oBFPB7m2tFstX9YauvV9tR3ZePpYbis%2FmuFZN%2FtpVtFQaRsLw%2F2mJ92raHtrvpIIqxhuvwozzyQOQIZ17qR3nVt26MQ3GNRlU3YineScnx16rx%2F2hta2HxJTmDmNuwo6%2FXCpV0%2BdvwNlFcvob4I54F%2FhFxhel0win9O%2BIqxdKYN9tntroiS%2Fu4NwaI%3D&X-Amz-Signature=b306abf7ae633888bae630fb97448da8f01881d447b3454023ec1f2ed63eef4f&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Física": 4,
+          "Eletrônica": 4,
+          "Programação": 5,
+          "Inglês": 4
+        }
+      },
+      {
+        "nome": "Ciência da Computação",
+        "resumo": "A Ciência da Computação é um curso de graduação com duração média de quatro anos, focado no estudo dos fundamentos teóricos e práticos da computação.",
+        "descricao": "A Ciência da Computação é um curso de graduação com duração média de quatro anos, focado no estudo dos fundamentos teóricos e práticos da computação. Durante a faculdade, os alunos exploram disciplinas como Programação, Algoritmos, Estruturas de Dados, Banco de Dados, Engenharia de Software, Redes de Computadores, Inteligência Artificial e Sistemas Operacionais. Além disso, há uma base sólida em Matemática, incluindo Cálculo, Álgebra Linear e Estatística, essenciais para o desenvolvimento de soluções computacionais eficientes. No mercado de trabalho, os cientistas da computação encontram oportunidades em empresas de tecnologia, instituições financeiras, indústrias e órgãos públicos, atuando no desenvolvimento de software, análise de dados, segurança da informação e pesquisa científica.",
+        "cargos": [
+          {
+            "cargo": "Desenvolvedor de Software",
+            "descricao": "Cria, testa e mantém programas e aplicativos, garantindo que funcionem corretamente e atendam às necessidades dos usuários."
+          },
+          {
+            "cargo": "Analista de Sistemas",
+            "descricao": "Estuda as necessidades dos usuários e projeta soluções tecnológicas para melhorar processos e aumentar a eficiência organizacional."
+          },
+          {
+            "cargo": "Engenheiro de Software",
+            "descricao": "Planeja, desenvolve e gerencia sistemas de software complexos, assegurando qualidade e desempenho adequados."
+          },
+          {
+            "cargo": "Cientista de Dados",
+            "descricao": "Analisa grandes volumes de dados para extrair insights valiosos, auxiliando na tomada de decisões estratégicas."
+          },
+          {
+            "cargo": "Especialista em Segurança da Informação",
+            "descricao": "Protege sistemas e dados contra ameaças cibernéticas, implementando medidas de segurança eficazes."
+          },
+          {
+            "cargo": "Administrador de Banco de Dados",
+            "descricao": "Gerencia e organiza dados armazenados, garantindo sua integridade, disponibilidade e segurança."
+          },
+          {
+            "cargo": "Desenvolvedor de Jogos Digitais",
+            "descricao": "Cria e implementa jogos para diversas plataformas, desde a concepção até a programação e testes finais."
+          }
+        ],
+        "media_salarial": "A remuneração para profissionais formados em Ciência da Computação varia conforme a região, experiência e porte da empresa. De acordo com o site Salario.com.br, a média salarial para um Programador de Computador é de aproximadamente R$4.037,87, enquanto um Analista de Sistemas pode receber em média R$5.611,43.",
+        "perfil_estudante": "O perfil ideal para um estudante de Ciência da Computação inclui afinidade com tecnologia e habilidades em lógica e matemática. É importante ter raciocínio lógico apurado, capacidade de resolver problemas complexos e interesse por inovações tecnológicas. Além disso, a disposição para aprendizado contínuo é fundamental, dado o rápido avanço da área, bem como a habilidade de trabalhar em equipe e comunicar ideias de forma clara.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/computer_science.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK2KRG3IHM%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191952Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaCXNhLWVhc3QtMSJIMEYCIQCuVSwcISOPUG99p5NyibbMY8ZUACCMA9r0MAos%2FHj%2FdgIhAOvxYdbTyrYI5Z%2B%2FduUv8kiSVJfLO%2BLSCZAU1UTy8OMNKu0CCEwQABoMNDgxNjY1MTI5NDI5IgxhTeQjSmFXfwp0%2BOIqygJfM84wfZt6AOqxbOhenqq2HE6Tjg222CUFApQAKdk9EC7DG6jyXZ%2B7dX8IUjxX0c3Iiy5KoF0YKtEtqjnIa0cPH4h9PS83b5DCa%2FLXtA0o15brlH%2FL9UWKMceV3yJeByLieL5aI4%2FKA%2Fy6%2B7S38FYFY%2FzJ5RBVKqhNf%2BwWUDxq2pjmM%2FG01sgvUyUCxK8wgrIr7%2FjOxaQgnOI0vB0BfvJq0mCGjrdjbQ3icf%2BWAQCV7H5KRdMBhCQ%2B%2BjwJuVplvnu0ObDeTtbhK78zPeVswIHrZYhlyOA14tEt6RdlEM9UpMSZuvYMxCb8iFAgYo8CiPlKRQTc22vtUkiIDK7CYHmu%2B3klx7LkBrE9VeKrcffcTFuJUVTIvUjGNHNALhsBamDVTFExTTODZHutzqV6DbgEdI0YzcXMmr9bazc6Z%2BImmZPJqbyWVXU0c5Uwh4GNvQY6sgKmXZcAHS1cLL3fQAGsI2oOkHC4SzXf4IKyfjmMIXf0eOf7IbTuWnwReHeutgp%2FEIxsCe7ULjldEiufDDs6QrjSNbqaTu2xDIe90FanigVS6Q0DBTq1iGNF7YBj2xiUIyGrnBD7NnSIhTc8W4QP86AQt6k38kFAMuyXkNbQlfht%2BbywFb%2FGDlGfFnmpKrcIfREUdfaUGWyi5CZvIZNppEBI33FyPnawvrYA7jgotI%2BGEjN9s8VrlQowQwCqvVOp8y%2BdArS5MpMBoG67VBUT5Z9LiONQh8xHRradmid9I1SeNgv0TapW6PBD%2Fdw5hEiW8zWa5pKG8tXQsEhm%2BXI6hvl%2FoQtc4ukXJPHJU8Ppu8exMPuXZboyRRDdj2YygXGJgu4tNVFxqlGwrZnEqH4f3ucLv0c%3D&X-Amz-Signature=d2638ec98004880849da3aa227750444b5e7e2c799876b5879cd7279c26b5dc4&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Estatística": 4,
+          "Programação": 5,
+          "Inglês": 4
+        }
+      },
+      {
+        "nome": "Ciência de Dados",
+        "resumo": "A Ciência de Dados é um curso de graduação que combina conhecimentos de estatística, matemática e computação para analisar grandes volumes de dados e extrair informações valiosas.",
+        "descricao": "Esse curso tem um início bem teórico, com uma base forte em matemática e estatística. Nos primeiros anos, os alunos encaram disciplinas pesadas, mas fundamentais para a formação. Mais para frente, entram matérias mais aplicadas, como ciência de dados, análise de dados e machine learning. A grade horária é menor em comparação a outros cursos, mas algumas matérias são bem desafiadoras, o que faz com que muitos alunos comecem a estagiar cedo.",
+        "cargos": [
+          {
+            "cargo": "Cientista de Dados",
+            "descricao": "Analisa grandes conjuntos de dados para identificar padrões e tendências, auxiliando na tomada de decisões empresariais."
+          },
+          {
+            "cargo": "Engenheiro de Dados",
+            "descricao": "Desenvolve e mantém a infraestrutura necessária para a coleta, armazenamento e processamento de dados em larga escala."
+          },
+          {
+            "cargo": "Analista de Dados",
+            "descricao": "Interpreta dados para gerar relatórios e insights que orientam estratégias de negócios e operações."
+          },
+          {
+            "cargo": "Atuarial/seguros",
+            "descricao": "Aplicação de modelagem estatística e machine learning para avaliação de riscos, precificação de seguros e previsões atuariais."
+          },
+          {
+            "cargo": "Analista de Business Intelligence (BI)",
+            "descricao": "Transforma dados brutos em informações estratégicas, criando dashboards e visualizações para suportar decisões gerenciais."
+          }
+        ],
+        "media_salarial": "Para estagiários, a média é de 2.000 reais. Um analista júnior ganha em média R$5.000, um pleno R$12.000 e para analistas sênior pode chegar a salários muito altos, especialmente para quem trabalha no exterior ganhando em dólar.",
+        "perfil_estudante": "O perfil ideal para um estudante de Ciência de Dados inclui afinidade com matemática e estatística, além de interesse por tecnologia e análise de informações. Habilidades como raciocínio lógico, pensamento analítico e capacidade de resolver problemas complexos são fundamentais. Além disso, é importante ter curiosidade para explorar grandes volumes de dados e disposição para aprendizado contínuo, acompanhando as constantes evoluções tecnológicas na área.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/data_science.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPKQAKWXKSR%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191931Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaCXNhLWVhc3QtMSJHMEUCIEr8DB850a0IT%2BDn6CuVYryDwqqoMm0Rsk%2FnsR11xk4vAiEA6QXYgW%2F%2BjU3W3K7VyEFTt5XkM9gkQ%2FOnfjAFWTs3DAcq7QIITBAAGgw0ODE2NjUxMjk0MjkiDM4mgak3cyJ77Wp5CCrKAkmOIC6xglh2ksLJ9R1k%2FF8RGeenRwlRkVthTOzeIEs7RrjQ7xqJMwOZAiT7TDaWq2ErlknYSomD0WrrmGBcXBA9mCn43HQal0Ey%2BXbvCqT7bvxkeFMJMz4gMF%2Fdzey5mGr9v6nWAoR%2FBqrArMHZWWByD6ZbknetmGcNT4ih3FRAgUVDlYPoo4jTUIbNWuwojGA5nwt0d65aNNKPOV0xl6OtyMsGbDwzr5yNVpUhe3JDU8hDmb%2Fk1%2BA0aOXxs3VgCWuditEeMY%2Fa7%2B4OLjXjlR7drvUfSZRqEaNmN9xqNOgK6uYMixpVNjb1n0BPSpTWeo%2BNZL0pSoxW2l4mtXDAvsC6vF6dSf0f2%2Bgmva26C%2BzdbACOywvS9%2FMzYrExgThtUIuDzAL0dfUrdOTmrYjihV0cBn2N1vgMfbkhoxvlbtnFChHwtYYuVGnglTCHgY29BjqzAo1MHfikQzEffYL2UnzXrzRaM%2BqFOSa8g%2BWTBDEJo%2FT25J7XJr36FqPMycNNk8ZLlD23PpLSyYZssEbXTcyzDnejQeH9tCJPQm3tKxtd0oS8mwSJTl1GhU0gDl9oWaVtQmZMb7oOG9aWU%2B9lWZpGBHwfYAhDCMzH3PbKo7j8Qkcj4%2F%2FHwOXzWMYy1btxVMxbHt9Nn0%2FrBpBbYVtGIFKfRHbmqUihyrlAK0wD1kId9pLfgFcNmXixtbEAvbCB25xa9ZtTOt3%2FMkT04axNztuVpHM%2BwEuF4PbFx8GqvluMuJM6beoockPYOluOxBfC9mJJukOgavPblEF2aVlaByrvUZBAe1AqAbwV%2FXJyhcWN%2BQ23%2F5wt6xJm9hFDdWv%2FG0kr1Qwq0u%2Bj4Z%2BITVqVrNys13b%2BCgU%3D&X-Amz-Signature=485c841ff5bb72d8e20c9f8dba370e00dcd6f09366a1706d7244348cdac37d09&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Estatística": 5,
+          "Programação": 4,
+          "Banco de Dados": 4,
+          "Inglês": 4
+        }
+      },
+      {
+        "nome": "Sistemas de Informação",
+        "resumo": "Sistemas de Informação é uma graduação com duração média de quatro anos, que integra conhecimentos de tecnologia e gestão para desenvolver soluções que otimizem o fluxo de informações nas organizações.",
+        "descricao": "Sistemas de Informação é uma graduação com duração média de quatro anos, que integra conhecimentos de tecnologia e gestão para desenvolver soluções que otimizem o fluxo de informações nas organizações. Durante o curso, os alunos estudam disciplinas como Programação, Banco de Dados, Engenharia de Software, Redes de Computadores, Análise de Sistemas e Gestão de Projetos. Além disso, há matérias voltadas à administração e negócios, preparando o estudante para compreender tanto o ambiente tecnológico quanto o organizacional. No mercado de trabalho, o profissional pode atuar em empresas de diversos setores, desenvolvendo e gerenciando sistemas de informação que atendam às necessidades específicas de cada negócio.",
+        "cargos": [
+          {
+            "cargo": "Analista de Sistemas",
+            "descricao": "Responsável por identificar as necessidades dos usuários e projetar soluções tecnológicas que melhorem os processos organizacionais."
+          },
+          {
+            "cargo": "Desenvolvedor de Software",
+            "descricao": "Cria, testa e mantém programas e aplicativos, assegurando que funcionem conforme as especificações e atendam às demandas dos clientes."
+          },
+          {
+            "cargo": "Administrador de Banco de Dados",
+            "descricao": "Gerencia e organiza os dados da empresa, garantindo sua integridade, segurança e disponibilidade para os usuários autorizados."
+          },
+          {
+            "cargo": "Gerente de Projetos de TI",
+            "descricao": "Coordena equipes e recursos em projetos tecnológicos, assegurando o cumprimento de prazos, orçamento e qualidade dos entregáveis."
+          },
+          {
+            "cargo": "Consultor de TI",
+            "descricao": "Oferece assessoria especializada para empresas na implementação e otimização de sistemas de informação, visando melhorar a eficiência e competitividade."
+          }
+        ],
+        "media_salarial": "A remuneração para profissionais de Sistemas de Informação varia conforme a região, experiência e porte da empresa. De acordo com o site Salario.com.br, a média salarial para um Analista de Sistemas é de aproximadamente R$7.205,62 mensais.",
+        "perfil_estudante": "O perfil ideal para um estudante de Sistemas de Informação inclui interesse por tecnologia e gestão, habilidades em lógica e matemática, além de capacidade de resolver problemas complexos. É importante ter aptidão para trabalhar em equipe, boa comunicação e disposição para se atualizar constantemente, acompanhando as rápidas evoluções tecnológicas e as demandas do mercado.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/information_systems.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK7ENDYXFN%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191915Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaCXNhLWVhc3QtMSJIMEYCIQDbJ4H2n0cWEiUodIJSWTSPLG2Ef83%2By3G5hs%2F%2BDR62WwIhAKU7St5t3YIQmmwwX1onD9bWX0Dq2VOBrv5nodS2InHwKu0CCEwQABoMNDgxNjY1MTI5NDI5IgwtnhKE6tpYacThpNgqygJZo2sDc7TG6sp0usBKEN5a%2FXD3mJG2%2FGEP8Km%2F%2FA513qSxuNbmHAVmkNNFZqlT7JeRG%2BKTTwKOpN7N7AwfbyIAzPS0XI5ajVLenU5Rk%2FbaH%2Fvug3Re1Cu3OvVekjnXUmB%2F%2F8Tcxwe3pzeUEoefYi5j5qdKJ8lmqr4io1RASk3VFZP%2FQ2wv7nT9p5wb6ouiWaYDRvDVZoT5wsUtNlL2BgRdSQF4wJb%2F%2FAnj4PdagE5ZPdE%2FRKQhXweMBFESFb61L6yZlT8eun3oTevwSDW3Sg4BH43mhMQWAqeqTUDa8e0F720KK7UTJiu5QwyUGqoH%2BKIozM6IWHSRZJZOBanuAnHCatTQr%2FhFw2fbt2FmVIuEdJzuLkvFMPeGnq7duQvPEr1WbbeBOz4NxzTVvUsSbm0PGcZ4qpMfyL1YwXgHeUI7E%2F13plQLVhM5ZT8wh4GNvQY6sgJFPptvEDci73NlkFbKWiELTXzHAAkwVGt6t6NZ3LvgS2v24KzRDaXjZ1CqdSly9hoZAMDlXGIuZcp9kPslgn%2FLgkLZaS8M9qJcXd%2FUBuzgAnEawVYmdC1rWTSbHhDgTN8Tro%2FNuN6vIQYkTcDIMk7qRybO5Zfq5Nl7bg53tKac1tfn2wuKZxl8zIS1KN9JtQ60fqWFYPBqpJtfFqr3irwWwwS9Exp7nsiu4g9qgi4p3xBhEUIN0w2kazU9UQVUcx5rSqVVbAasFJMP5UsSiKYtW0BYBFHX9NMexPskqs3zF2UkWY972DLFcSABmkaHng9X1XWR2Z6Kag0sYXtFA1RaJcAh7JD5W%2BuV5Q%2FJ%2B43mItKW4MrwYs7nP784V9rdYL%2Fvz7scxwwQdhiz4Zh6cHXgmEQ%3D&X-Amz-Signature=25b10a341394032dd678de3eb8c88e9ad053642b5c716b2f23b0b7c8c5c3564d&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Lógica": 4,
+          "Gestão": 4,
+          "Programação": 4,
+          "Banco de Dados": 4,
+          "Inglês": 3
+        }
+      },
+      {
+        "nome": "Análise de Desenvolvimento de Sistemas",
+        "resumo": "O curso de Análise e Desenvolvimento de Sistemas é uma graduação tecnológica com duração média de dois a três anos, focada na formação de profissionais aptos a projetar, desenvolver, testar e manter sistemas computacionais.",
+        "descricao": "O curso de Análise e Desenvolvimento de Sistemas é uma graduação tecnológica com duração média de dois a três anos, focada na formação de profissionais aptos a projetar, desenvolver, testar e manter sistemas computacionais. Durante o curso, os alunos estudam disciplinas como Programação, Banco de Dados, Engenharia de Software, Análise de Sistemas e Gestão de Projetos. Essas matérias proporcionam uma base sólida para o desenvolvimento de soluções tecnológicas eficientes. No mercado de trabalho, os profissionais encontram oportunidades em empresas de tecnologia, departamentos de TI de diversas organizações e startups, atuando no desenvolvimento de softwares, aplicativos e sistemas personalizados.",
+        "cargos": [
+          {
+            "cargo": "Analista de Sistemas",
+            "descricao": "Responsável por compreender as necessidades dos usuários e traduzir essas demandas em soluções tecnológicas eficazes."
+          },
+          {
+            "cargo": "Desenvolvedor de Software",
+            "descricao": "Cria, testa e mantém programas e aplicativos, assegurando que atendam aos requisitos funcionais e de desempenho."
+          },
+          {
+            "cargo": "Administrador de Banco de Dados",
+            "descricao": "Gerencia e organiza os dados da empresa, garantindo sua integridade, segurança e disponibilidade."
+          },
+          {
+            "cargo": "Analista de Suporte Técnico",
+            "descricao": "Oferece assistência aos usuários, solucionando problemas relacionados a hardware e software."
+          },
+          {
+            "cargo": "Gerente de Projetos de TI",
+            "descricao": "Coordena equipes e recursos em projetos tecnológicos, assegurando o cumprimento de prazos e objetivos estabelecidos."
+          }
+        ],
+        "media_salarial": "A remuneração para profissionais da área varia conforme a região, experiência e porte da empresa. De acordo com o site Vagas.com, a média salarial de um analista de sistemas é de R$ 5.116,00.",
+        "perfil_estudante": "O perfil ideal para um estudante de Análise e Desenvolvimento de Sistemas inclui afinidade com tecnologia, raciocínio lógico apurado e habilidades em resolução de problemas. É importante ter capacidade de trabalhar em equipe, boa comunicação e disposição para constante atualização, acompanhando as rápidas evoluções do setor de TI. ",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/ads.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPKQQSJDWJZ%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191428Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXNhLWVhc3QtMSJHMEUCIQCWBIpiLd7eSoPaJfIdK%2BQXmGYYu5UtskgptKbxxzkChwIgPsfGl4ZObzfRxABiziKVBhmgaTIWazoYy5tqqMslfMwq7QIITBAAGgw0ODE2NjUxMjk0MjkiDDIdfxpP5bgPS8R53CrKAjaWckf2gWZ5fE7T%2FXQoVM02%2Fip4%2BRzZvmd9KhjKupf3e%2FIjeyceKtFgZHH%2BuWgb3Fcp70PmnxtMHtSUlsEw0w4IPmpdLUD301jgd4raBSTCQRqebQPCWqUfa%2FLIezt4Jt6MkRE8j%2BGYlt8FLbg1E5pUOrJ10pIcYjCx34QoweSTNWuYA0D5zKVnMQ2XbNbqlDdIIVg%2BNmlQiFG%2BHDbQGFQGBrANMNj8vV7KCudbXN4hgnm%2F%2FpItgElH9SzS6wqJaIzyxvO5AqC2mZ9dLl%2F1Te0%2Fkn6Q9IdQeRNXPvBxk0aLhs%2F4l8CHYV%2B7UQr3H%2FRoUo3H5FYCPRXff7nssxC6pX8zH6XOXO1GxZWVcnxlt6booevnFwlORr7lXD3H%2FcCJmtU%2Bv%2FMe5tyXyRLcJa2noHfUygtdFNQ21bImmtcTBNTxPOyQD4YQzrowSTCHgY29BjqzAltHlqxrcJ6e0ghiBlJQUOMTDPmfEQj2RUoJCMvyEqO%2FPsWxSVcHRkN3MEJqhBBKi7GkJ7it8pXZL7xkISf1Lkt27pm6m1btoXwRP8b199pyS9RLydKnPDZ61bzhUTOrQ0uU1ZRNCNFQoVqbArN3XgUtiPwnOWWId7fptcsGzEFX6rliAGv0Hyw6q6lfICyLkoY7Kv8ozlQzfae8BVpsLPA9N9GaoIZNjnVRlQJjtXpcV6nxmGZfRFKAJDZXZVD2sKKh5jY2qlHH1uBnU5iXFhXjRAZ7nI1Px4JnsXWj4wuFX%2FvNkweiZVhtKAeefJNVFPI6uymwdOCEMrL1y%2Fhk9ZHQWhoGKg3cE0JS%2BJ3GmKUIW4yZ8%2Bihd0aoQJT1qryZJ1DmrAkPodBTMmbNmf6UQZNMLt0%3D&X-Amz-Signature=27a7642fe8c4c1c292feceece99e9f83b9b38fb4bd40dc8e0230358f081eb440&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Programação": 5,
+          "Banco de Dados": 4,
+          "Lógica": 4,
+          "Inglês": 3
+        }
+      }
+    ]
+  },
+  {
+    "area": "Elétrica",
+    "cursos": [
+      {
+        "nome": "Engenharia Elétrica",
+        "resumo": "A Engenharia Elétrica é um curso de graduação com duração média de cinco anos, focado no estudo e aplicação de sistemas elétricos e eletrônicos.",
+        "descricao": "A Engenharia Elétrica é um curso de graduação com duração média de cinco anos, focado no estudo e aplicação de sistemas elétricos e eletrônicos. Durante a faculdade, os alunos estudam disciplinas fundamentais como Matemática, Física e Química, além de matérias específicas como Circuitos Elétricos, Eletrônica Analógica e Digital, Eletromagnetismo, Máquinas Elétricas, Sistemas de Controle, Telecomunicações e Energias Renováveis. As aulas práticas em laboratórios são essenciais para consolidar o conhecimento teórico e preparar os estudantes para desafios reais.",
+        "cargos": [
+          {
+            "cargo": "Engenheiro de Projetos Elétricos",
+            "descricao": "Responsável por elaborar e supervisionar projetos de instalações elétricas em edificações e indústrias, assegurando conformidade com normas técnicas e segurança."
+          },
+          {
+            "cargo": "Engenheiro de Manutenção Elétrica",
+            "descricao": "Atua na manutenção preventiva e corretiva de sistemas e equipamentos elétricos, garantindo seu funcionamento contínuo e eficiente."
+          },
+          {
+            "cargo": "Especialista em Automação Industrial",
+            "descricao": "Desenvolve e implementa sistemas automatizados para otimizar processos produtivos, aumentando a eficiência e reduzindo custos operacionais."
+          },
+          {
+            "cargo": "Engenheiro de Telecomunicações",
+            "descricao": "Trabalha no desenvolvimento e manutenção de sistemas de comunicação, como redes de telefonia e internet, assegurando qualidade e cobertura dos serviços."
+          },
+          {
+            "cargo": "Consultor em Eficiência Energética",
+            "descricao": "Orienta empresas e instituições na adoção de práticas e tecnologias que reduzam o consumo de energia, promovendo sustentabilidade e economia."
+          }
+        ],
+        "media_salarial": "A remuneração para engenheiros eletricistas varia conforme a região, experiência e setor de atuação. De acordo com o site Salario.com.br, a média salarial é de aproximadamente R$8.485 para uma jornada de 40 horas semanais.",
+        "perfil_estudante": "O perfil ideal para um estudante de Engenharia Elétrica inclui afinidade com disciplinas de exatas, especialmente Matemática e Física, além de interesse por tecnologia e inovação. Habilidades como raciocínio lógico, capacidade de resolver problemas complexos e pensamento analítico são fundamentais. Além disso, é importante ter disposição para aprender continuamente, adaptando-se às rápidas evoluções tecnológicas, e gostar de trabalhar em equipe, já que muitos projetos exigem colaboração multidisciplinar.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/eletrical_engineering.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK5F746CDN%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191852Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXNhLWVhc3QtMSJHMEUCIAZuHfY%2Bda0fvE7Sjzq17dEpCEDCBbQz7xpVleZoYFVAAiEAuq8aR5%2BeZ19eshne822AZDU4ZV2SHXIHE0R8b3swT5Eq7QIITBAAGgw0ODE2NjUxMjk0MjkiDErtkkKt%2BeeBEDX8KirKAgq5tqL9POTTR8bqD8M6dvOKrijQrYKSnIOAEdLbig8a0f27vJl7PAEYhnNuTNpXFMK46bbm%2FIqWx3PcrNbnTcGgu4blUoAGuU7zH6Mx2fV%2FnYfp%2FqMOwrO%2BmeChVJhPed4hVKvY%2FgwfwrKZdS8Wu5A3WyYfQ4oE3P0akJLXbiLAW82fdwYo0VPygwBaVVVyColVXI4Lahz8OO%2FHiUNuR%2B9vaAln0yHN%2B7s26v%2FDL6yoYIdfACM%2BwuaY0tqTqvRSUoPXlJOyPzcXWXHEsLiJxccXpjfOSg15eeCL9hP2FuACM%2FSluqxOpXXzbOHo%2F%2F3KsJXsd7voZfjtgOv%2Bs%2FxZSz1zoZVm5hRS%2BYhJyJQqbYD1sYL%2F41YwqnVic9rU3MDQo3j63lwnhKILZ0h39Erux2w7ahFI8Pwes6hjNhazNLRhJdLKK2OiII%2B5TDCHgY29BjqzAm0nL9JwvbJ%2FKqgOMcX2k3WQn1eNXikSQ357Oa%2F3XxDxXc3f%2F6HY1Uvp0P2%2FxCrrprq4FWBCvyvT2DwexVxV6YQJllEVwh1HFZI0qDfe5%2Bt30zta2Tcl7ZJ10TXp%2Fm4%2FO0ZsIxjWeG7zAEUCkaxEFJRKfJLEdIvurIgF6A6MX4t7KcpUpYE5TFWcBs%2FlsnXBEDsUdgZ32JZG5wMgI4cRttHaUPT%2BacbmFxkU%2FqFr4XevrHR2Oxm%2BndqZS8L5U1aBYi1m9fv%2Buib3X8Ci3LJnuFpIWXxrWQnbcVgPnkLjD%2Fiy9oRNIVfGO0JxmttGLm8La4oxkgG4tgKsLilpyeCfjCxTm6cpbXoVnznJ95MGPLwk8CwfVvz45vYLEKJlpuEHqSogv%2FKIbaRm5oUsDuEoJIQQ7ck%3D&X-Amz-Signature=fbe2e6abe3707767c718a6b652cd0842e30c397cd2dcdd29f92dfae04a457811&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Física": 5,
+          "Eletrônica": 4,
+          "Lógica": 4,
+          "Inglês": 3
+        }
+      }
+    ]
+  },
+  {
+    "area": "Mecatrônica",
+    "cursos": [
+      {
+        "nome": "Engenharia Mecatrônica",
+        "resumo": "A Engenharia Mecatrônica une mecânica, eletrônica e computação para criar e melhorar sistemas automatizados.",
+        "descricao": "A Engenharia Mecatrônica combina conhecimentos de eletrônica, programação, processos industriais e documentação técnica para integrar sistemas complexos. O curso capacita os alunos a desenvolver soluções para diversas aplicações, como robôs industriais, sistemas inteligentes e até veículos autônomos, enfatizando a conexão entre diferentes tecnologias para resolver problemas do mundo real. Além do aspecto técnico, o curso proporciona uma base matemática sólida e uma abordagem estruturada para a resolução de problemas, o que amplia as oportunidades de atuação. Essas habilidades analíticas são altamente valorizadas em áreas como consultoria estratégica e mercado financeiro, tornando engenheiros mecatrônicos competitivos em segmentos como trading quantitativo e gestão de investimentos.",
+        "cargos": [
+          {
+            "cargo": "Engenheiro de Automação",
+            "descricao": "Cria sistemas automatizados que otimizam processos industriais e reduzem custos."
+          },
+          {
+            "cargo": "Cientista de dados",
+            "descricao": "Utiliza métodos de análise para extrair informações de grandes volumes de dados"
+          },
+          {
+            "cargo": "Especialista em Controle e Automação",
+            "descricao": "Trabalha na programação e manutenção de sistemas controlados automaticamente."
+          },
+          {
+            "cargo": "Analista financeiro",
+            "descricao": "Utiliza dos conhecimentos de computação e modelagem matemática para prever movimentações do mercado financeiro."
+          },
+          {
+            "cargo": "Consultor Estratégico",
+            "descricao": "Ajuda empresas a implementarem tecnologias avançadas, como IoT (Internet das Coisas) e inteligência artificial."
+          }
+        ],
+        "media_salarial": "No mercado financeiro, o salário inicial é cerca de R$15 mil/mês, podendo chegar a R$40 mil/mês em dez anos. Em consultorias estratégicas, começa em torno de R$8 mil/mês e alcança R$30 mil/mês no mesmo período. Já em tecnologia e engenharia, inicia em R$6,5 mil/mês, com potencial de atingir R$15 mil/mês após uma década.",
+        "perfil_estudante": "O aluno de Engenharia Mecatrônica tem afinidade com matemática, física e tecnologia. É curioso e gosta de entender como funcionam máquinas e sistemas automatizados. Além disso, costuma ter interesse por robótica, programação e inovação tecnológica. Habilidades como raciocínio lógico, trabalho em equipe e criatividade são essenciais para o sucesso na área.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/mecatronics.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK2WQZHMY4%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T190802Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXNhLWVhc3QtMSJIMEYCIQDoalYTOXCfNy93ouAF3KIzci2MiUlljAtjL9JHb9j4kAIhAPJas7Pyl5bWyDDdnGE6Svq7q%2BKJBjoYQOJuYYub%2FiuGKu0CCEwQABoMNDgxNjY1MTI5NDI5IgyfPkSUCOgI8pgGR58qygKZXArMp8SFmWKZ2e3DC0Rp3jXpTV2ua%2Bj3vWXUYtFTLLehtPHp0AztBh%2B%2BmJZI159cVy6w2crw3u9L%2FdynzNOCSmceBeGY44H7QIEcxlYgv%2F2j70tA02OQqfbmJ1%2FMM4bRJKzVsQmRIV72YYztf9xEJLH7GZSYlkJHsHHSQkOhmTEtrx%2FodqAIREX8JXpwcdlT4pQOHvGLqoGsQ596m6RqeeBq6eFRzSsAgTCg2BDcotaCzdg0bEAtXDI%2FABXg%2Fw37pgFnBl00gaTFGzDz1Kq%2BXSLYLvfncRx7fQckGj74jcjgmcmcU8jokhj5YpjrID9Gxbu9QKk2m2glBxrZk83RdjP%2BUPBe22MvU72tadrAAYR0saNawtTzD4mPUEs%2FsiveLxC99%2FW%2BgUF8rNht%2B9VlqX6zv%2FXXruFlzvNObect0H%2BbKjJj3dKQRz4wh4GNvQY6sgJjOl%2Bn2FbFcYUWlaDE2zaoZcejn3ggy%2FB1c7sV0l0NEpvav5bsBvtOqwzAaw%2ByqU8NR3Dzr7jZ58wK6h2AJFEmriDflTEmhf1lf%2BcBaN2KLUBPo3eBsOOZYz42zBiaIlIDcZydIV9KsY2%2Bq9osTosHBQkh3Xmd9kcQjSDSbGtZr9u7CXukA8aMJ2qO2Mt%2FIzXPozI%2BNkkSFP3iM64%2BOJCbuQGBevPQYosF8WKRxX%2FOijDpbcaMppFzhQvQ7xsXDLFnDjANWpcT3pipZgxQXT7%2BOPaqXBnY2SwbVUAGIgMXiIjYLCZ9mpLi5pTnip5vd%2BCXRhRfZaBStNh7ogBzKFdyvj6hw6HZKpQyQVWudxEOkwv7LQkDgA4Qvo67bcTnbzk%2B5btwyl0foC2U9Jjg7iuX2Ks%3D&X-Amz-Signature=8448f5a53136866ff159f6ad4c34bb40b42eaa2aa9d09ff98bbe7d354df0e820&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Física": 5,
+          "Programação": 4,
+          "Eletrônica": 4,
+          "Inglês": 4
+        }
+      },
+      {
+        "nome": "Engenharia Mecânica",
+        "resumo": "A Engenharia Mecânica é voltada para o estudo e desenvolvimento de máquinas, equipamentos e sistemas mecânicos.",
+        "descricao": "A Engenharia Mecânica é um curso voltado para o estudo e desenvolvimento de máquinas, equipamentos e sistemas mecânicos. Com duração média de cinco anos, o curso abrange disciplinas como termodinâmica, resistência dos materiais, mecânica dos fluidos, projeto de máquinas, manufatura e controle de sistemas. Os estudantes também aprendem fundamentos de matemática e física aplicados ao desenvolvimento e manutenção de tecnologias mecânicas. No mercado de trabalho, engenheiros mecânicos atuam em indústrias automotivas, aeronáuticas, metalúrgicas e de energia, além de trabalhar com projetos, manutenção e inovação tecnológica.",
+        "cargos": [
+          {
+            "cargo": "Engenheiro de Projetos Mecânicos",
+            "descricao": "Cria e desenvolve máquinas, peças e sistemas mecânicos, garantindo sua eficiência e segurança."
+          },
+          {
+            "cargo": "Engenheiro de Manutenção",
+            "descricao": "Supervisiona a manutenção preventiva e corretiva de equipamentos, assegurando seu funcionamento contínuo."
+          },
+          {
+            "cargo": "Engenheiro de Produção",
+            "descricao": "Coordena processos industriais para melhorar a eficiência e qualidade dos produtos fabricados."
+          },
+          {
+            "cargo": "Especialista em Automação Industrial",
+            "descricao": "Implementa sistemas automatizados para otimizar processos de produção."
+          },
+          {
+            "cargo": "Engenheiro de Termodinâmica",
+            "descricao": "Trabalha no desenvolvimento de sistemas de aquecimento, ventilação e refrigeração."
+          }
+        ],
+        "media_salarial": "De acordo com o site Glassdoor, o salário médio de um engenheiro mecânico no Brasil é de R$ 8.000 por mês, mas pode variar dependendo da experiência e do setor de atuação.",
+        "perfil_estudante": "O estudante de Engenharia Mecânica geralmente é curioso e interessado em entender como funcionam máquinas e equipamentos. Afinidade com matemática e física é essencial, assim como raciocínio lógico e criatividade para resolver problemas. Habilidades de trabalho em equipe e vontade de aprender continuamente também são importantes para acompanhar as inovações na área.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/mechanical.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPKX27V3QBR%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191822Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaCXNhLWVhc3QtMSJIMEYCIQD%2F3DfOC1hCqnV%2BOH9CbKEUaZYzaviTMxMvzXtaGkdoRAIhALlNTdvKXiVIw5cQv6%2FpD5YwVXir5FWzZ8J3iwYS1zj4Ku0CCEwQABoMNDgxNjY1MTI5NDI5IgyFhmurRwWRznuwEYYqygLLPvQn33OP71B6DhZMFPhvsLmlF5FmtddsFWjmBmL%2FHBRD%2FR6WOSEwomfqgiBTD%2FtFMGBqzXfZZ3JPlJlXd9fAsWgJHxNaeGGACLq6hlBJnXOBiI8GHyioccYq749NrfT49LN5Uyjrjp%2Fc53GH8SHnf1StdyKhIBGBFQjJbdvTCrawDSARI8899u9l9sN3rH5uswgIUiwEpIFlH%2F%2BJhx1vNMMvQtdF%2FS2pMQRayuSTVcducKFURoBZ0tGmNDcyQUgxLL8Lalm7HjNU%2BVrPTNxGMsESFSzS1HMJyiNRpb4pCHILya0LSFGsxRK3AZvd6ZdKOoJ6y1caJJ02pgPCsoi7nDxQSSbXd4aWxhqkSmtlev%2FkgFvqAQgMbx0mRFNxRNOAUCGaKBQS5Bn5dQ3qDFAqgrsrLXHbY3cT8yDne1xtG%2FivC17geegCUT4wh4GNvQY6sgIW0%2BsVnhgxRM1alQnjX%2BRqSFfUUtTzFP6mUpNoWK3i%2BtUSDp75rx%2BvQz5oBZWSkx%2F2fhG8TpSoRa6nYqi0N%2BJ5HQguQuIUwqZ4Sb9xJpbFiB4%2Bvn7ZBKEOLPKaL7sCY12YDH%2FMZKABLJOHnfNpDw0NPgHdRDVotdGjozeVYCYwrtxEXjNOMe64Af5ilK3Rgx5vaQ0eVk7GC7wdwjGvp25S7UiDdBLK1m0ifClJmhLnUdiz3k0c%2FClcmWO2cZ1sehGPjd5iun8cjTosoy%2BJHVRickbd2oVqHNi1VPYPiX2uxzti2xS3ErIyI45uJvBLXSKEYln0ntWdU%2BpCvFhfvp7JxoXR%2FbedBJn74bqLordm16yEKLlpNnGm1M4yBoKAdij%2F%2Fn8jnNRy%2B75ZkquD1Re%2FKVs%3D&X-Amz-Signature=727492b9a480f3eef4143d1dd2a9f34c28700e6b1ec49c098c972414dac185f6&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Física": 5,
+          "Resistência dos Materiais": 4,
+          "Termodinâmica": 4,
+          "Inglês": 3
+        }
+      }
+    ]
+  },
+  {
+    "area": "Aeronáutica",
+    "cursos": [
+      {
+        "nome": "Engenharia Aeronáutica",
+        "resumo": "A Engenharia Aeronáutica é focada no desenvolvimento, construção e manutenção de aeronaves e sistemas aeroespaciais.",
+        "descricao": "A Engenharia Aeronáutica é uma área focada no desenvolvimento, construção e manutenção de aeronaves e sistemas aeroespaciais. O curso, que dura em média cinco anos, oferece disciplinas como aerodinâmica, mecânica dos fluidos, estruturas aeronáuticas, motores a jato e sistemas de propulsão. Os alunos também aprendem fundamentos de matemática, física e programação, essenciais para projetar e testar tecnologias aeroespaciais. No mercado de trabalho, engenheiros aeronáuticos atuam em indústrias aeronáuticas, aeroportos, empresas de manutenção e até no setor espacial, contribuindo para a inovação e segurança no transporte aéreo e na exploração aeroespacial.",
+        "cargos": [
+          {
+            "cargo": "Engenheiro de Projeto Aeronáutico",
+            "descricao": "Desenvolve e aprimora aeronaves, projetando estruturas, sistemas e motores para atender a requisitos de desempenho e segurança."
+          },
+          {
+            "cargo": "Engenheiro de Manutenção Aeronáutica",
+            "descricao": "Realiza inspeções e manutenções em aeronaves para garantir sua operação segura e eficiente."
+          },
+          {
+            "cargo": "Especialista em Aerodinâmica",
+            "descricao": "Analisa e otimiza o desempenho de aeronaves, considerando fatores como resistência do ar e estabilidade."
+          },
+          {
+            "cargo": "Engenheiro de Motores e Propulsão",
+            "descricao": "Trabalha no desenvolvimento, análise e manutenção de motores a jato, turbinas e sistemas de propulsão."
+          },
+          {
+            "cargo": "Consultor Aeroespacial",
+            "descricao": "Oferece soluções técnicas e estratégicas para empresas de aviação e espaço."
+          }
+        ],
+        "media_salarial": "Segundo o site Glassdoor, o salário médio de um engenheiro aeronáutico no Brasil é de aproximadamente R$ 10.000 por mês, podendo variar conforme o setor e a experiência.",
+        "perfil_estudante": "O aluno de Engenharia Aeronáutica costuma ser apaixonado por aviação e tecnologia. Ele tem afinidade com matemática e física, além de interesse por inovação e soluções complexas. Habilidades como raciocínio lógico, atenção a detalhes e trabalho em equipe são fundamentais. Além disso, é importante ter disposição para aprender continuamente, acompanhando as constantes evoluções no setor aeroespacial.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/aeronautic_engineering.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPKWZ5PYLZB%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191800Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaCXNhLWVhc3QtMSJHMEUCIQCiE02JHAQmfUdyIuyqYVEq3a1uxJEoPQF6LGOdwwToTgIgbbScPegoOmwrDD4dauj3q3BPPScCnDmUOw9PUHrrC7cq7QIITBAAGgw0ODE2NjUxMjk0MjkiDAayoLiK8GhuKetlYyrKAobwDEEv87xiLn15RM4vwytmIpEFBaT%2BasB6lqq6u8Vmpe%2B27QD6QI%2FtkAoEDghxpdePdTWxkWdrjUAgYLk0rnDcznfCMJR1HkxySV4bipNzjhbQ0Mnvwfq51uGgXFpmlPe%2BuOqcCDZ2RfaXAGSLJH6fPwuXXXldxWO9VQzEqAJ6hirGjfB47Xk0FcUnTn2raw8o86sgFdkM40fHtiHxvMg%2ByR0v0545N1OZ5jC0ablYSR3%2FQgEh86eFUZ7vtx1KpXjd%2FVYAYdhj75szdSrkYqoBajh9wH6%2B3hbn%2BnlR1qr2hDocJ0alIIXVqBUChwAedo2npOnvwAhw1biQxhoWfwO930KxQbliz5Y%2BTivN7fioNRSRa%2BtM5hfyLxMmaTz6C1%2F%2B%2FrOxBe1e5pP%2BwU70vLfimziSb9VJVUmaeW21I2C4tHFaG5s8jJ4IpjCHgY29BjqzApsVvI8E%2BH7LM4FcTVHafBnFhrlzSrAmFjQAIl47FDZ3T9h%2B971GeC9xL3Biv5Hd6CHOCnsUjqCwKqEpjxPr1h%2Bdef9n4ai6wVGP4gsN61WREa9e%2BsZkBIhotZNVLABHpkvK3cP7dHAnEivVX9Jx7HgBWCIsO3LIzesbbhcEGY6aoSf7CqZNn5L33xeYwY1U4CY24UwkNMmJLFmxB3lpHfh2%2FJq03YcoC0XlR6rxFhGagLfGBWuFym3jIyZR5oLO30SQG9VOaSE7iK9y4rMUBrwxTQ9oP2D3%2Fji183RkDYCE9HhAr4QjmFE1lacZPWUyJlbF%2FRFchCQFwNthkOVTIsfQGrKHvR3PXCWdlN5UCz7WGTHZl2Io7WXk7%2BMNwQYnYZXMM7FHsrqRneTdRFKEmCy3LRQ%3D&X-Amz-Signature=44cd279278082f7dced4a53e9a7875b06d82e5de579c2dbb96d745ab265c483c&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Física": 5,
+          "Aerodinâmica": 4,
+          "Programação": 3,
+          "Inglês": 4
+        }
+      }
+    ]
+  },
+  {
+    "area": "Licenciatura",
+    "cursos": [
+      {
+        "nome": "Licenciatura em Matemática",
+        "resumo": "Formação de professores para o ensino fundamental e médio, com ênfase em álgebra, geometria, cálculo, estatística e metodologias de ensino.",
+        "descricao": "A Licenciatura em Matemática é um curso de graduação com duração média de quatro anos, que forma professores para o ensino fundamental e médio. Durante o curso, os alunos estudam disciplinas como álgebra, geometria, cálculo, estatística e metodologia de ensino. Além disso, aprendem sobre didática, pedagogia e tecnologias aplicadas à educação, para desenvolver habilidades que os ajudem a ensinar de forma clara e eficiente. No mercado de trabalho, o licenciado em Matemática pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs e até em criação de materiais didáticos.",
+        "cargos": [
+          {
+            "cargo": "Professor de Matemática",
+            "descricao": "Ensina matemática em escolas de ensino fundamental e médio, ajudando os alunos a desenvolverem habilidades analíticas e lógicas."
+          },
+          {
+            "cargo": "Coordenador Pedagógico",
+            "descricao": "Organiza e supervisiona o planejamento pedagógico em instituições de ensino, apoiando outros professores."
+          },
+          {
+            "cargo": "Instrutor de Cursos Preparatórios",
+            "descricao": "Dá aulas em cursos voltados para vestibulares e concursos, explicando conteúdos de forma prática e objetiva."
+          },
+          {
+            "cargo": "Desenvolvedor de Materiais Didáticos",
+            "descricao": "Cria livros, apostilas e conteúdos digitais voltados ao ensino da matemática."
+          }
+        ],
+        "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um professor de Matemática no Brasil é de aproximadamente R$ 4.000 por mês em escolas públicas e privadas, podendo aumentar em cargos de coordenação ou com carga horária adicional.",
+        "perfil_estudante": "Quem escolhe a Licenciatura em Matemática geralmente gosta de ensinar e tem afinidade com números e raciocínio lógico. Esse estudante valoriza o aprendizado contínuo e gosta de encontrar formas criativas para explicar conceitos. Paciência, boa comunicação e interesse em contribuir para a educação de jovens são características importantes para quem se identifica com essa profissão.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/math_lic.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPKZT2RES4T%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191740Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaCXNhLWVhc3QtMSJHMEUCIQDXiUPwq5wleCJmu8iGRPfzVl2UnwnvpRj4v2duXcWJ%2BQIgG%2F%2FppbigOzWFEG6GYVJsiIsFZnRDzauguW4AJIgjuGEq7QIITBAAGgw0ODE2NjUxMjk0MjkiDMY2RqFzXrkAfddijyrKAnxQuW8ZW4pPXK5bcwJgZAnE3QR%2Bt75CDM3s07ubRYzc99DijSFpjfxH8ZLzewirU9vddn7evBcbqwfeXSCobJOJtp5AiOquVOqlFV363oE3bJZ3CnFP5AX3e02sg3vdEsxxRH0iF3Gyw1tdYScUU1kUwSNsCgDXXtGQiTBGFhjsIFGCySn0YwEZmYj0m43azeSJtCWi6OG25vvVI4Bod%2FJA4kCMrMs6qdwX8GQBqhdW0B3JbeAvGaun5OGZHYx%2BiKGbT3bpv74WfjWBCO14iW%2FjsnyiCenV6WA7sMQ%2ByBub%2FwwoorIolincbJuORlb17ywdbmWkriKTj2IsuzSFGiGPpNRf8c%2BuA%2BX7%2BPEI1ZatG6z4aWWpOi%2FYxFIHLLy0e4pNJmCYLsLtRRQnJsIu5jVp2C0zPyegBGjBCKFyU5CdbIXVe7f8rdVcrDCHgY29BjqzAvhbSH2lPDdFebSkJKLhkadIaf1ZiOkRmusoSHiDnVc5FESitnYbV7HePfHXk8umIZsWr%2BhjcN26lSc2xxTxMOK48HT3gJGz%2BpyVjIRdNtg1JXsS2yVd%2F%2BwPvgIC3XIfGc89PFCyBMcn21pMZ%2BYvGI0g38Lqwv7f8mN7v2dT7CzgGa9qc7GEEUD87Pk2K3HzH%2B8frnKX12ivvTpDr0nuIlpQmPfbb8DiLIrXm7ALT63pCJl2OFYC1DrYUepRGk0gLGQyHRCvCu4WrhRlqewvLcIe%2BzXsBaB7yhUyWxZelHU48Z0ucXT98R8hwX1ROfnAHdYLiMwv93a7QuAA13hsyRLbwz74lqEoDFQTw2ObNcWBhCWqiZJ%2BqZgnPk58qsi8s3xr4len7p39jFXMqc1lHXnOSlE%3D&X-Amz-Signature=3c5355cdc3ae8d5d9adb17410e7b66aced0692ab2ba78ea6337fc7c9a37790f5&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Pedagogia": 4,
+          "Comunicação": 4,
+          "Inglês": 2
+        }
+      },
+      {
+        "nome": "Licenciatura em Física",
+        "resumo": "Formação de professores para o ensino fundamental e médio com ênfase em mecânica, termodinâmica, eletromagnetismo, óptica, e metodologias de ensino da física.",
+        "descricao": "A Licenciatura em Física é um curso de graduação com duração média de quatro anos, que prepara professores para o ensino fundamental e médio. Durante o curso, os alunos estudam disciplinas como mecânica, termodinâmica, eletromagnetismo, óptica, física moderna e astronomia. Além disso, aprendem didática, pedagogia e metodologias de ensino voltadas para a física, com foco em como tornar o aprendizado dessa ciência mais acessível e interessante para os alunos. No mercado de trabalho, o licenciado em Física pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs, além de colaborar com a criação de materiais didáticos e projetos educacionais.",
+        "cargos": [
+          {
+            "cargo": "Professor de Física",
+            "descricao": "Ensina conceitos fundamentais de física em escolas de ensino médio e fundamental, estimulando o raciocínio científico."
+          },
+          {
+            "cargo": "Coordenador Pedagógico",
+            "descricao": "Supervisiona o trabalho dos professores e organiza o currículo em instituições de ensino."
+          },
+          {
+            "cargo": "Instrutor de Cursos Preparatórios",
+            "descricao": "Dá aulas em cursinhos voltados para vestibulares e ENEM, abordando tópicos de física de maneira prática e objetiva."
+          },
+          {
+            "cargo": "Criador de Materiais Didáticos",
+            "descricao": "Desenvolve livros, apostilas e conteúdos digitais que ajudam no ensino da física."
+          }
+        ],
+        "media_salarial": "Segundo o site Salario.com.br, a média salarial de um professor de Física no Brasil é de aproximadamente R$ 4.500 por mês, variando com a carga horária, instituição e experiência.",
+        "perfil_estudante": "O estudante de Licenciatura em Física geralmente tem curiosidade sobre os fenômenos naturais e gosta de ensinar. É alguém com afinidade por ciências exatas, raciocínio lógico e boa capacidade de comunicação. Paciência, criatividade e interesse em tornar o aprendizado acessível para diferentes públicos são características importantes para quem se identifica com essa profissão.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/physics_lic.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK6R3IAB6O%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191722Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaCXNhLWVhc3QtMSJGMEQCICWiopyPo97LEFqwkAsLV0nvsr1HUd3pLCkp7bEbjuQlAiAPkKDErFNhBAXfa4AQitx5G5onDY8vqyC3HlZOymoILCrtAghMEAAaDDQ4MTY2NTEyOTQyOSIMtAv%2BwGCLS76pk4amKsoC8k3siD86lkWXM2UHsDaZMgAKN4aukvvRqmqaVLrODImaL6G7pc318MR4H1E%2BekroVGFdewXuDfaNG4M3Do4cZ7GgeWhmYW7KM989tvpL1GWu9QNNdAyyZLuJNDN9kKBK2I9PBIZWLa9aMytIYsORBtW6Qbmy6Zz3Ok1KdDBBl9m5quQyhk5yVZMWiWv7aZkCmihyI9YEc2O55oGzemQOZvGQMTVR47hrTdrbItH4RYeMQPiyuETsnVJVWKwodvQWJ4dk5xhK6LJdh3ZYdGL4RIHbMQp%2BeAUoNxT3BT4jvlog3sdnJZf2l6I90Hl5MU4ohvgCkNXZoEHtzLisP6nAJ1t8fjHvHvGGJ2L6kUC0U045ewLzdosLY1VwekEI35ZhzLuHytGT1CMJNDD3Nc8G%2FZmeUOnzWeq6vikG4sS8D6sYqqA2%2FKa5b99JMIeBjb0GOrQCLBz%2FWMEHaXD9ydStr55vrslco7YzjWZdQjFx4Gl0%2Fthnlf2ic4j%2BtfKeOWblAyXPKNIcpuiB%2FRAJKr7wWtG3MqXpe2QetkCldpFhRWn8zfAjPCIDh0dT6RcPfBb57xlhLMQLAObfjVOiVjhWV%2FaSXH5eZdvQPASujVXjm8ni8vDIFkFO7T9pDWb%2FV2G4V8huTIgKVXq98Ga0zXSNL0eVxMR725aqYRefehLg0N7SKDcgg6Hvmmq%2FzYRFPvs2cqQeWM2bxYW8j3J3y8lQlEoPLSrMIxhnsEKFxH%2BMaOIYWsozuOGksDXqdYKaPksoDg%2F72beHk3pT1Y9jkryxuzF69dja0z66YT1DWtmwzNYzfQpqj%2FBU3MW4eISnLjK4uZkPZaaSDpFZTcIiob8CaQUpxf%2F05ZA%3D&X-Amz-Signature=59b351c32fbf2878babe7b7711ea659d489ae38378e025e3ff936980b9bae577&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Física": 5,
+          "Didática": 4,
+          "Matemática": 4,
+          "Comunicação": 3
+        }
+      },
+      {
+        "nome": "Licenciatura em Química",
+        "resumo": "Formação de professores para o ensino fundamental e médio, com foco em química geral, inorgânica, orgânica e metodologias de ensino da química.",
+        "descricao": "A Licenciatura em Química é um curso de graduação com duração média de quatro anos, voltado para a formação de professores para o ensino fundamental e médio. Durante o curso, os estudantes aprendem fundamentos da química, como química geral, inorgânica, orgânica e físico-química. Também estudam experimentação em laboratório, toxicologia e bioquímica. Além das disciplinas científicas, há matérias pedagógicas, como didática e metodologias de ensino, que preparam os alunos para planejar e conduzir aulas de forma eficaz. No mercado de trabalho, o licenciado em Química pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs e na criação de materiais didáticos.",
+        "cargos": [
+          {
+            "cargo": "Professor de Química",
+            "descricao": "Ensina conteúdos químicos em escolas de ensino médio e fundamental, ajudando os alunos a compreenderem os fenômenos químicos do dia a dia."
+          },
+          {
+            "cargo": "Coordenador Pedagógico",
+            "descricao": "Auxilia outros professores no planejamento e organização do ensino, promovendo melhores práticas educacionais."
+          },
+          {
+            "cargo": "Instrutor de Cursos Preparatórios",
+            "descricao": "Trabalha em cursinhos voltados para vestibulares e concursos, focando nos conteúdos de química mais requisitados."
+          },
+          {
+            "cargo": "Desenvolvedor de Materiais Didáticos",
+            "descricao": "Produz livros, apostilas e recursos digitais que facilitam o ensino e aprendizado da química."
+          }
+        ],
+        "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um professor de Química no Brasil é de aproximadamente R$ 4.200 por mês, podendo aumentar com experiência, carga horária extra ou cargos de coordenação.",
+        "perfil_estudante": "Quem escolhe Licenciatura em Química costuma ter afinidade com ciências e curiosidade sobre os processos químicos que acontecem ao nosso redor. O estudante ideal é organizado, gosta de ensinar e é capaz de traduzir conceitos complexos para uma linguagem simples e acessível. Criatividade, paciência e paixão por compartilhar conhecimento são qualidades fundamentais para o sucesso na profissão.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/chem_lic.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK5F746CDN%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191700Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXNhLWVhc3QtMSJHMEUCIAZuHfY%2Bda0fvE7Sjzq17dEpCEDCBbQz7xpVleZoYFVAAiEAuq8aR5%2BeZ19eshne822AZDU4ZV2SHXIHE0R8b3swT5Eq7QIITBAAGgw0ODE2NjUxMjk0MjkiDErtkkKt%2BeeBEDX8KirKAgq5tqL9POTTR8bqD8M6dvOKrijQrYKSnIOAEdLbig8a0f27vJl7PAEYhnNuTNpXFMK46bbm%2FIqWx3PcrNbnTcGgu4blUoAGuU7zH6Mx2fV%2FnYfp%2FqMOwrO%2BmeChVJhPed4hVKvY%2FgwfwrKZdS8Wu5A3WyYfQ4oE3P0akJLXbiLAW82fdwYo0VPygwBaVVVyColVXI4Lahz8OO%2FHiUNuR%2B9vaAln0yHN%2B7s26v%2FDL6yoYIdfACM%2BwuaY0tqTqvRSUoPXlJOyPzcXWXHEsLiJxccXpjfOSg15eeCL9hP2FuACM%2FSluqxOpXXzbOHo%2F%2F3KsJXsd7voZfjtgOv%2Bs%2FxZSz1zoZVm5hRS%2BYhJyJQqbYD1sYL%2F41YwqnVic9rU3MDQo3j63lwnhKILZ0h39Erux2w7ahFI8Pwes6hjNhazNLRhJdLKK2OiII%2B5TDCHgY29BjqzAm0nL9JwvbJ%2FKqgOMcX2k3WQn1eNXikSQ357Oa%2F3XxDxXc3f%2F6HY1Uvp0P2%2FxCrrprq4FWBCvyvT2DwexVxV6YQJllEVwh1HFZI0qDfe5%2Bt30zta2Tcl7ZJ10TXp%2Fm4%2FO0ZsIxjWeG7zAEUCkaxEFJRKfJLEdIvurIgF6A6MX4t7KcpUpYE5TFWcBs%2FlsnXBEDsUdgZ32JZG5wMgI4cRttHaUPT%2BacbmFxkU%2FqFr4XevrHR2Oxm%2BndqZS8L5U1aBYi1m9fv%2Buib3X8Ci3LJnuFpIWXxrWQnbcVgPnkLjD%2Fiy9oRNIVfGO0JxmttGLm8La4oxkgG4tgKsLilpyeCfjCxTm6cpbXoVnznJ95MGPLwk8CwfVvz45vYLEKJlpuEHqSogv%2FKIbaRm5oUsDuEoJIQQ7ck%3D&X-Amz-Signature=e222f96decb5e2b7a90215a391ddb2ea467ef0065f0d5c6471afeb855f192e0e&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Química": 5,
+          "Didática": 4,
+          "Matemática": 3,
+          "Comunicação": 4
+        }
+      }
+    ]
+  },
+  {
+    "area": "Produção",
+    "cursos": [
+      {
+        "nome": "Engenharia de Produção",
+        "resumo": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas.",
+        "descricao": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas. Durante o curso, que dura cerca de cinco anos, os alunos estudam matérias como matemática, física, gestão de projetos, controle de qualidade, planejamento da produção e logística. Além disso, aprendem sobre ergonomia, sustentabilidade e como integrar tecnologia nos processos. No mercado de trabalho, o engenheiro de produção é valorizado em indústrias, empresas de serviços, startups e consultorias, sendo responsável por reduzir custos, otimizar recursos e aumentar a produtividade.",
+        "cargos": [
+          {
+            "cargo": "Analista de Logística",
+            "descricao": "Planeja e organiza a movimentação de materiais e produtos para garantir eficiência."
+          },
+          {
+            "cargo": "Engenheiro de Qualidade",
+            "descricao": "Avalia processos e produtos para assegurar que atendam aos padrões exigidos."
+          },
+          {
+            "cargo": "Gerente de Produção",
+            "descricao": "Supervisiona a equipe e os recursos envolvidos na fabricação de produtos, garantindo cumprimento de metas."
+          },
+          {
+            "cargo": "Consultor de Processos",
+            "descricao": "Analisa e sugere melhorias em processos empresariais para otimizar resultados."
+          },
+          {
+            "cargo": "Especialista em Planejamento e Controle de Produção (PCP)",
+            "descricao": "Garante que os processos de produção sejam organizados e eficientes."
+          }
+        ],
+        "media_salarial": "De acordo com o site Salario.com.br, a média salarial de um engenheiro de produção no Brasil é de R$ 8.500 por mês, podendo variar com a experiência e o porte da empresa.",
+        "perfil_estudante": "O estudante de Engenharia de Produção tem afinidade com matemática e física, gosta de resolver problemas e trabalhar em equipe. Geralmente, é uma pessoa organizada, analítica e interessada em melhorar processos e aumentar a eficiência. Além disso, precisa ter boa comunicação e disposição para aprender continuamente, já que o mercado exige atualização constante.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/prod_engineering.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK5F746CDN%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191645Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXNhLWVhc3QtMSJHMEUCIAZuHfY%2Bda0fvE7Sjzq17dEpCEDCBbQz7xpVleZoYFVAAiEAuq8aR5%2BeZ19eshne822AZDU4ZV2SHXIHE0R8b3swT5Eq7QIITBAAGgw0ODE2NjUxMjk0MjkiDErtkkKt%2BeeBEDX8KirKAgq5tqL9POTTR8bqD8M6dvOKrijQrYKSnIOAEdLbig8a0f27vJl7PAEYhnNuTNpXFMK46bbm%2FIqWx3PcrNbnTcGgu4blUoAGuU7zH6Mx2fV%2FnYfp%2FqMOwrO%2BmeChVJhPed4hVKvY%2FgwfwrKZdS8Wu5A3WyYfQ4oE3P0akJLXbiLAW82fdwYo0VPygwBaVVVyColVXI4Lahz8OO%2FHiUNuR%2B9vaAln0yHN%2B7s26v%2FDL6yoYIdfACM%2BwuaY0tqTqvRSUoPXlJOyPzcXWXHEsLiJxccXpjfOSg15eeCL9hP2FuACM%2FSluqxOpXXzbOHo%2F%2F3KsJXsd7voZfjtgOv%2Bs%2FxZSz1zoZVm5hRS%2BYhJyJQqbYD1sYL%2F41YwqnVic9rU3MDQo3j63lwnhKILZ0h39Erux2w7ahFI8Pwes6hjNhazNLRhJdLKK2OiII%2B5TDCHgY29BjqzAm0nL9JwvbJ%2FKqgOMcX2k3WQn1eNXikSQ357Oa%2F3XxDxXc3f%2F6HY1Uvp0P2%2FxCrrprq4FWBCvyvT2DwexVxV6YQJllEVwh1HFZI0qDfe5%2Bt30zta2Tcl7ZJ10TXp%2Fm4%2FO0ZsIxjWeG7zAEUCkaxEFJRKfJLEdIvurIgF6A6MX4t7KcpUpYE5TFWcBs%2FlsnXBEDsUdgZ32JZG5wMgI4cRttHaUPT%2BacbmFxkU%2FqFr4XevrHR2Oxm%2BndqZS8L5U1aBYi1m9fv%2Buib3X8Ci3LJnuFpIWXxrWQnbcVgPnkLjD%2Fiy9oRNIVfGO0JxmttGLm8La4oxkgG4tgKsLilpyeCfjCxTm6cpbXoVnznJ95MGPLwk8CwfVvz45vYLEKJlpuEHqSogv%2FKIbaRm5oUsDuEoJIQQ7ck%3D&X-Amz-Signature=9cf86113865ca4a63fe494f05e6fe473b4b0f146e0011464b7008554bc1b1b85&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Gestão": 5,
+          "Estatística": 4,
+          "Lógica": 4,
+          "Inglês": 3
+        }
+      }
+    ]
+  },
+  {
+    "area": "Materiais",
+    "cursos": [
+      {
+        "nome": "Engenharia de Materiais",
+        "resumo": "Estudo da ciência e tecnologia dos materiais, incluindo metais, cerâmicas, polímeros, compósitos, nanotecnologia, e suas aplicações industriais.",
+        "descricao": "A Engenharia de Materiais e Manufatura é um curso muito voltado para pesquisa e desenvolvimento na indústria, mas, no Brasil, há poucas grandes empresas atuando especificamente nessa área. Por isso, muitos engenheiros acabam migrando para setores correlatos, como manufatura e engenharia de produção. O curso envolve bastante conhecimento sobre inteligência de fábrica, planejamento e supply chain, permitindo que os profissionais atuem tanto na parte técnica quanto na gestão da produção industrial. Além disso, é um curso que frequentemente compete com a Engenharia Química no mercado de trabalho.",
+        "cargos": [
+          {
+            "cargo": "Pesquisa e Desenvolvimento (P&D)",
+            "descricao": "Geralmente dentro de indústrias químicas e materiais avançados."
+          },
+          {
+            "cargo": "Manufatura e Produção Industrial",
+            "descricao": "Inteligência de fábrica, controle de qualidade, processos de fabricação."
+          },
+          {
+            "cargo": "Supply Chain e Logística",
+            "descricao": "Trabalha no planejamento e otimização da cadeia produtiva."
+          },
+          {
+            "cargo": "Engenharia de Processos",
+            "descricao": "Garante a melhoria contínua e eficiência produtiva."
+          },
+          {
+            "cargo": "Engenheiro de Sustentabilidade",
+            "descricao": "Desenvolve soluções que utilizem materiais de forma mais eficiente e com menor impacto ambiental."
+          },
+          {
+            "cargo": "Obs:",
+            "descricao": "Muitos profissionais acabam migrando para a Engenharia de Produção ou áreas correlatas devido à maior oferta de oportunidades no Brasil."
+          }
+        ],
+        "media_salarial": "A média salarial de um estagiário é de R$2.500, analista júnior de R$5.000 e o salário no auge da carreira Depende bastante da área de atuação, mas profissionais que fazem pós-graduação e seguem carreira em grandes empresas podem alcançar cargos de liderança em laboratórios e fábricas. Já sobre as empresas de destaque, temos: Setor de Materiais e P&D: Pirelli, 3M, Saint-Gobain, Manufatura e Indústria: Volkswagen, Faber-Castell (contrata muitos estagiários), montadoras em geral, Alimentos e Bebidas: Ambev (para cargos como chefe de laboratório)",
+        "perfil_estudante": "O aluno de Engenharia de Materiais tem curiosidade sobre como os materiais são feitos e funcionam. Ele gosta de química, física e matemática, além de ter interesse por inovação tecnológica. Habilidades como raciocínio lógico, atenção aos detalhes e criatividade são fundamentais para projetar soluções eficientes. A vontade de aprender continuamente também é importante, já que o setor está em constante evolução. A pós-graduação faz diferença para quem quer crescer na área, possibilitando cargos mais altos, como liderança em laboratórios dentro de grandes empresas. Além disso, trabalhar no exterior pode ser uma ótima opção, já que há mais oportunidades nessa área fora do Brasil.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/materiais.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK5F746CDN%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191631Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXNhLWVhc3QtMSJHMEUCIAZuHfY%2Bda0fvE7Sjzq17dEpCEDCBbQz7xpVleZoYFVAAiEAuq8aR5%2BeZ19eshne822AZDU4ZV2SHXIHE0R8b3swT5Eq7QIITBAAGgw0ODE2NjUxMjk0MjkiDErtkkKt%2BeeBEDX8KirKAgq5tqL9POTTR8bqD8M6dvOKrijQrYKSnIOAEdLbig8a0f27vJl7PAEYhnNuTNpXFMK46bbm%2FIqWx3PcrNbnTcGgu4blUoAGuU7zH6Mx2fV%2FnYfp%2FqMOwrO%2BmeChVJhPed4hVKvY%2FgwfwrKZdS8Wu5A3WyYfQ4oE3P0akJLXbiLAW82fdwYo0VPygwBaVVVyColVXI4Lahz8OO%2FHiUNuR%2B9vaAln0yHN%2B7s26v%2FDL6yoYIdfACM%2BwuaY0tqTqvRSUoPXlJOyPzcXWXHEsLiJxccXpjfOSg15eeCL9hP2FuACM%2FSluqxOpXXzbOHo%2F%2F3KsJXsd7voZfjtgOv%2Bs%2FxZSz1zoZVm5hRS%2BYhJyJQqbYD1sYL%2F41YwqnVic9rU3MDQo3j63lwnhKILZ0h39Erux2w7ahFI8Pwes6hjNhazNLRhJdLKK2OiII%2B5TDCHgY29BjqzAm0nL9JwvbJ%2FKqgOMcX2k3WQn1eNXikSQ357Oa%2F3XxDxXc3f%2F6HY1Uvp0P2%2FxCrrprq4FWBCvyvT2DwexVxV6YQJllEVwh1HFZI0qDfe5%2Bt30zta2Tcl7ZJ10TXp%2Fm4%2FO0ZsIxjWeG7zAEUCkaxEFJRKfJLEdIvurIgF6A6MX4t7KcpUpYE5TFWcBs%2FlsnXBEDsUdgZ32JZG5wMgI4cRttHaUPT%2BacbmFxkU%2FqFr4XevrHR2Oxm%2BndqZS8L5U1aBYi1m9fv%2Buib3X8Ci3LJnuFpIWXxrWQnbcVgPnkLjD%2Fiy9oRNIVfGO0JxmttGLm8La4oxkgG4tgKsLilpyeCfjCxTm6cpbXoVnznJ95MGPLwk8CwfVvz45vYLEKJlpuEHqSogv%2FKIbaRm5oUsDuEoJIQQ7ck%3D&X-Amz-Signature=907e9d538a52d91cb218d33fc0d5721727c9a5bc3462ca0f4194d89f9f670ed3&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Química": 4,
+          "Física": 4,
+          "Matemática": 4,
+          "Pesquisa": 4,
+          "Inglês": 3
+        }
+      }
+    ]
+  },
+  {
+    "area": "Civil",
+    "cursos": [
+      {
+        "nome": "Engenharia Civil",
+        "resumo": "Forma profissionais para planejar, projetar e construir infraestrutura e edificações.",
+        "descricao": "A Engenharia Civil é a área responsável por projetar, construir e analisar todo tipo de infraestrutura, sendo essencial para a adaptação do meio ambiente à habitação humana. O curso abrange desde edificações e infraestrutura até sistemas de transporte e recursos hídricos. A formação envolve conhecimentos multidisciplinares, indo da construção de casas e edifícios à gestão de barragens, rodovias e planejamento de transporte. Além do trabalho técnico, o engenheiro civil pode atuar em gestão, fiscalização de obras e até em cargos administrativos e legislativos.",
+        "cargos": [
+          {
+            "cargo": "Engenheiro de Estruturas",
+            "descricao": "Projeta e analisa estruturas como pontes, edifícios e viadutos, garantindo segurança e eficiência."
+          },
+          {
+            "cargo": "Engenheiro de Obras",
+            "descricao": "Supervisiona a execução de obras, gerenciando equipes, materiais e cronogramas."
+          },
+          {
+            "cargo": "Engenheiro Geotécnico",
+            "descricao": "Estuda o comportamento do solo e das fundações para construir com segurança."
+          },
+          {
+            "cargo": "Engenheiro de Hidráulica e Saneamento",
+            "descricao": "Planeja sistemas de abastecimento de água, esgoto e drenagem urbana."
+          },
+          {
+            "cargo": "Topografia e Agrimensura",
+            "descricao": "É responsável pelo mapeamento, geoprocessamento, monitoramento de estruturas."
+          },
+          {
+            "cargo": "Engenheiro de Transportes",
+            "descricao": "Atua no desenvolvimento de projetos de infraestrutura e planejamento de rodovias, hidrovias e aeroportos."
+          }
+        ],
+        "media_salarial": "Para estagiários, de R$1.000 a R$3.000, já um engenheiro no início da carreira ganha em média de R$3.000 a R$6.000 mas podendo chegar de R$10.000 a R$25.000 no auge da carreira(podendo ser maior em cargos de gestão ou em setores como mineração, ou atuando de forma autônoma). Algumas das empresas mais famosas são: Construtoras e incorporadoras: MRV, Andrade Gutierrez, Ambar Tech (São Carlos), Mineração e siderurgia: Vale, ArcelorMittal, Energia e combustíveis: Raízen",
+        "perfil_estudante": "O aluno de Engenharia Civil geralmente é organizado, gosta de matemática e física e tem interesse por construção e infraestrutura. Características como raciocínio lógico, atenção aos detalhes, capacidade de trabalhar em equipe e habilidade de resolver problemas são essenciais. Além disso, é importante ter disposição para aprender continuamente e acompanhar as inovações tecnológicas no setor.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/civil.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK5F746CDN%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191616Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXNhLWVhc3QtMSJHMEUCIAZuHfY%2Bda0fvE7Sjzq17dEpCEDCBbQz7xpVleZoYFVAAiEAuq8aR5%2BeZ19eshne822AZDU4ZV2SHXIHE0R8b3swT5Eq7QIITBAAGgw0ODE2NjUxMjk0MjkiDErtkkKt%2BeeBEDX8KirKAgq5tqL9POTTR8bqD8M6dvOKrijQrYKSnIOAEdLbig8a0f27vJl7PAEYhnNuTNpXFMK46bbm%2FIqWx3PcrNbnTcGgu4blUoAGuU7zH6Mx2fV%2FnYfp%2FqMOwrO%2BmeChVJhPed4hVKvY%2FgwfwrKZdS8Wu5A3WyYfQ4oE3P0akJLXbiLAW82fdwYo0VPygwBaVVVyColVXI4Lahz8OO%2FHiUNuR%2B9vaAln0yHN%2B7s26v%2FDL6yoYIdfACM%2BwuaY0tqTqvRSUoPXlJOyPzcXWXHEsLiJxccXpjfOSg15eeCL9hP2FuACM%2FSluqxOpXXzbOHo%2F%2F3KsJXsd7voZfjtgOv%2Bs%2FxZSz1zoZVm5hRS%2BYhJyJQqbYD1sYL%2F41YwqnVic9rU3MDQo3j63lwnhKILZ0h39Erux2w7ahFI8Pwes6hjNhazNLRhJdLKK2OiII%2B5TDCHgY29BjqzAm0nL9JwvbJ%2FKqgOMcX2k3WQn1eNXikSQ357Oa%2F3XxDxXc3f%2F6HY1Uvp0P2%2FxCrrprq4FWBCvyvT2DwexVxV6YQJllEVwh1HFZI0qDfe5%2Bt30zta2Tcl7ZJ10TXp%2Fm4%2FO0ZsIxjWeG7zAEUCkaxEFJRKfJLEdIvurIgF6A6MX4t7KcpUpYE5TFWcBs%2FlsnXBEDsUdgZ32JZG5wMgI4cRttHaUPT%2BacbmFxkU%2FqFr4XevrHR2Oxm%2BndqZS8L5U1aBYi1m9fv%2Buib3X8Ci3LJnuFpIWXxrWQnbcVgPnkLjD%2Fiy9oRNIVfGO0JxmttGLm8La4oxkgG4tgKsLilpyeCfjCxTm6cpbXoVnznJ95MGPLwk8CwfVvz45vYLEKJlpuEHqSogv%2FKIbaRm5oUsDuEoJIQQ7ck%3D&X-Amz-Signature=7ba85f94ffc7bc5b1a793ba4b6707f2e919edeabd5707461f2ae39f685ecbecf&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Matemática": 5,
+          "Física": 4,
+          "Lógica": 4,
+          "Gestão": 3,
+          "Inglês": 2
+        }
+      }
+    ]
+  },
+  {
+    "area": "Ambiental",
+    "cursos": [
+      {
+        "nome": "Engenharia Ambiental",
+        "resumo": "Focado na preservação e recuperação do meio ambiente, com ênfase em ciência, tecnologia e sustentabilidade.",
+        "descricao": "A Engenharia Ambiental é um curso voltado para a preservação e recuperação do meio ambiente, integrando ciência, tecnologia e sustentabilidade. Durante os cinco anos da graduação, os estudantes aprendem disciplinas como ecologia, geologia, tratamento de resíduos, hidrologia, saneamento, gestão de recursos naturais e energias renováveis. O curso também inclui aspectos técnicos, como análises químicas e ambientais, e ferramentas de planejamento urbano e ambiental. No mercado de trabalho, engenheiros ambientais atuam em empresas, órgãos públicos, ONGs e consultorias, desenvolvendo soluções para minimizar os impactos ambientais e promover o uso sustentável dos recursos naturais.",
+        "cargos": [
+          {
+            "cargo": "Engenheiro de Saneamento",
+            "descricao": "Trabalha no planejamento e gestão de sistemas de abastecimento de água, esgoto e resíduos sólidos."
+          },
+          {
+            "cargo": "Consultor Ambiental",
+            "descricao": "Realiza análises e propõe soluções para empresas se adequarem às normas ambientais."
+          },
+          {
+            "cargo": "Engenheiro de Gestão de Recursos Naturais",
+            "descricao": "Planeja o uso sustentável de recursos como água, solo e florestas."
+          },
+          {
+            "cargo": "Especialista em Licenciamento Ambiental",
+            "descricao": "Elabora e supervisiona processos de licenciamento de empreendimentos que impactam o meio ambiente."
+          },
+          {
+            "cargo": "Engenheiro de Energias Renováveis",
+            "descricao": "Desenvolve projetos de energia sustentável, como solar, eólica e biomassa."
+          }
+        ],
+        "media_salarial": "De acordo com o site Glassdoor, o salário médio de um engenheiro ambiental no Brasil é de aproximadamente R$ 6.500 por mês, com variações dependendo do setor e da experiência.",
+        "perfil_estudante": "O estudante de Engenharia Ambiental geralmente tem interesse por natureza, sustentabilidade e tecnologia. É uma pessoa que gosta de biologia, química e geografia, e está motivada a resolver problemas relacionados ao meio ambiente. Características como raciocínio lógico, visão sistêmica, trabalho em equipe e vontade de causar impacto positivo na sociedade são fundamentais para o sucesso na profissão.",
+        "imagem": "https://calculo-vocacional.s3.sa-east-1.amazonaws.com/ambiental.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJL2TPK5F746CDN%2F20250205%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250205T191537Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXNhLWVhc3QtMSJHMEUCIAZuHfY%2Bda0fvE7Sjzq17dEpCEDCBbQz7xpVleZoYFVAAiEAuq8aR5%2BeZ19eshne822AZDU4ZV2SHXIHE0R8b3swT5Eq7QIITBAAGgw0ODE2NjUxMjk0MjkiDErtkkKt%2BeeBEDX8KirKAgq5tqL9POTTR8bqD8M6dvOKrijQrYKSnIOAEdLbig8a0f27vJl7PAEYhnNuTNpXFMK46bbm%2FIqWx3PcrNbnTcGgu4blUoAGuU7zH6Mx2fV%2FnYfp%2FqMOwrO%2BmeChVJhPed4hVKvY%2FgwfwrKZdS8Wu5A3WyYfQ4oE3P0akJLXbiLAW82fdwYo0VPygwBaVVVyColVXI4Lahz8OO%2FHiUNuR%2B9vaAln0yHN%2B7s26v%2FDL6yoYIdfACM%2BwuaY0tqTqvRSUoPXlJOyPzcXWXHEsLiJxccXpjfOSg15eeCL9hP2FuACM%2FSluqxOpXXzbOHo%2F%2F3KsJXsd7voZfjtgOv%2Bs%2FxZSz1zoZVm5hRS%2BYhJyJQqbYD1sYL%2F41YwqnVic9rU3MDQo3j63lwnhKILZ0h39Erux2w7ahFI8Pwes6hjNhazNLRhJdLKK2OiII%2B5TDCHgY29BjqzAm0nL9JwvbJ%2FKqgOMcX2k3WQn1eNXikSQ357Oa%2F3XxDxXc3f%2F6HY1Uvp0P2%2FxCrrprq4FWBCvyvT2DwexVxV6YQJllEVwh1HFZI0qDfe5%2Bt30zta2Tcl7ZJ10TXp%2Fm4%2FO0ZsIxjWeG7zAEUCkaxEFJRKfJLEdIvurIgF6A6MX4t7KcpUpYE5TFWcBs%2FlsnXBEDsUdgZ32JZG5wMgI4cRttHaUPT%2BacbmFxkU%2FqFr4XevrHR2Oxm%2BndqZS8L5U1aBYi1m9fv%2Buib3X8Ci3LJnuFpIWXxrWQnbcVgPnkLjD%2Fiy9oRNIVfGO0JxmttGLm8La4oxkgG4tgKsLilpyeCfjCxTm6cpbXoVnznJ95MGPLwk8CwfVvz45vYLEKJlpuEHqSogv%2FKIbaRm5oUsDuEoJIQQ7ck%3D&X-Amz-Signature=09a4456d3adef8a30ec05da300de2d4df596e5601d25655ecf103fbd09fc93ef&X-Amz-SignedHeaders=host&response-content-disposition=inline",
+        "habilidades": {
+          "Biologia": 4,
+          "Química": 4,
+          "Matemática": 3,
+          "Visão Sistêmica": 4,
+          "Inglês": 3
+        }
+      }
+    ]
+  }
 ]

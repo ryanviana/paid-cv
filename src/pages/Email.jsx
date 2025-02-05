@@ -1,58 +1,102 @@
-import { useState } from 'react'
-import axios from 'axios'
+import { useState } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 
-function Email({ pontuacaoTotal }) {
+function Email({ pontuacaoTotal, onClose }) {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('ready');
 
-    const [email, setEmail] = useState('');
-    const [status, setStatus] = useState('ready');
+  const enviarEmail = async () => {
+    setStatus('loading');
 
-    const enviarEmail = async () => {
-
-        setStatus('loading')
-
-        try {
-            await axios.post("https://cv.backend.decisaoexata.com/save-results", {
-                score: pontuacaoTotal,
-                user_email: email
-            });
-
-        } catch (error) {
-            setStatus('error1')
-            console.error("Erro ao salvar os resultados:", error);
-        }
-
-        try {
-            await axios.post("https://cv.backend.decisaoexata.com/send-email", {
-                score: pontuacaoTotal,
-                user_email: email
-            });
-            setStatus('send')
-
-        } catch (error) {
-            setStatus('error2')
-            console.error("Erro ao enviar email:", error);
-        }
+    try {
+      // Salva os resultados primeiro
+      await axios.post('https://cv.backend.decisaoexata.com/save-results', {
+        score: pontuacaoTotal,
+        user_email: email,
+      });
+    } catch (error) {
+      setStatus('error1');
+      console.error('Erro ao salvar os resultados:', error);
+      return;
     }
 
-    return (
-        <div className='flex flex-col items-center justify-center h-full gap-2 mt-10'>
-            <h1 className='font-semibold text-lg'>Digite seu email</h1>
-            <div className='text-sm'>Necessário liberar o site do <a href="https://3.12.246.4:4000/" className='hover:underline text-blue-700'>backend</a> (certificado auto assinado)</div>
-            <input type="text" className='bg-gray-200 border-gray-400 border rounded-xl py-1 px-2 m-3' onChange={(e) => setEmail(e.target.value)} />
-            <button className='bg-jornadas-blue py-1 px-5 rounded-xl transition-all hover:scale-105 hover:bg-jornadas-blue-dark' onClick={enviarEmail}>Enviar email</button>
+    try {
+      // Em seguida, envia o email
+      await axios.post('https://cv.backend.decisaoexata.com/send-email', {
+        score: pontuacaoTotal,
+        user_email: email,
+      });
+      setStatus('send');
+    } catch (error) {
+      setStatus('error2');
+      console.error('Erro ao enviar email:', error);
+    }
+  };
 
-            {status === 'loading' && <div>Enviando email...</div>}
-            {status === 'send' && <div>Email enviado e resultados salvos.</div>}
-            {status === 'error1' && <div>Erro ao salvar os resultados!</div>}
-            {status === 'error2' && <div>Erro ao enviar o email!</div>}
+  // Handle clicks outside the modal container
+  const handleOverlayClick = (e) => {
+    // Close only if the user clicked on the actual overlay, not on the child
+    if (e.target === e.currentTarget) {
+      onClose?.();
+    }
+  };
 
-        </div>
-    )
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 p-4"
+      onClick={handleOverlayClick}
+    >
+      {/* Modal container */}
+      <div className="relative w-full max-w-md bg-white rounded-lg shadow-lg p-6">
+        {/* Close button */}
+        <button
+          type="button"
+          onClick={() => onClose?.()}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 font-bold text-xl"
+        >
+          X
+        </button>
+
+        <h1 className="text-xl font-semibold text-center mb-4">Digite seu email</h1>
+
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="seuemail@exemplo.com"
+          className="w-full border border-gray-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+        />
+
+        <button
+          onClick={enviarEmail}
+          disabled={status === 'loading' || !email}
+          className="w-full bg-jornadas-blue text-white font-bold py-3 rounded-lg transition duration-150 hover:bg-jornadas-blue-dark disabled:opacity-50"
+        >
+          Enviar email
+        </button>
+
+        {/* Status messages */}
+        {status === 'loading' && (
+          <p className="mt-4 text-center text-blue-600">Enviando email...</p>
+        )}
+        {status === 'send' && (
+          <p className="mt-4 text-center text-green-600">Email enviado e resultados salvos.</p>
+        )}
+        {status === 'error1' && (
+          <p className="mt-4 text-center text-red-600">Erro ao salvar os resultados!</p>
+        )}
+        {status === 'error2' && (
+          <p className="mt-4 text-center text-red-600">Erro ao enviar o email!</p>
+        )}
+      </div>
+    </div>
+  );
 }
 
 Email.propTypes = {
-    pontuacaoTotal: PropTypes.array.isRequired,
+  pontuacaoTotal: PropTypes.array.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default Email;
