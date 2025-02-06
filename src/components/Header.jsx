@@ -12,7 +12,7 @@ function Header() {
 
             <Link to="/">
                 <h1 className="text-black text-1xl md:text-2xl font-montserrat text-center">
-                    <strong>Jornadas</strong> <i>Educação</i>
+                    Método <strong>Decisão Exata</strong>
                 </h1>
             </Link>
         </nav>

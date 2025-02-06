@@ -299,6 +299,15 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
               </div>
             )}
           </div>
+
+          {/* Segundo botão "Exportar Resultados" no final */}
+          <button
+            onClick={handleButton}
+            className="mt-6 px-6 py-3 font-bold bg-jornadas-blue text-white rounded-lg transition-all duration-150 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105"
+          >
+            {buttonContent}
+          </button>
+
         </div>
       )}
 
