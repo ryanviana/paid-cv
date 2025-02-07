@@ -4,6 +4,7 @@
     "cursos": [
       {
         "nome": "Engenharia de Computação",
+        "salario": "Altíssimo",
         "resumo": "A Engenharia de Computação é um curso de graduação com duração média de cinco anos, que combina conhecimentos de hardware e software para formar profissionais capazes de desenvolver e integrar sistemas computacionais.",
         "descricao": "A Engenharia de Computação é um curso de graduação com duração média de cinco anos, que combina conhecimentos de hardware e software para formar profissionais capazes de desenvolver e integrar sistemas computacionais. Durante a faculdade, os alunos estudam disciplinas fundamentais como Matemática, Física, Circuitos Elétricos, Eletrônica Digital, Arquitetura de Computadores, Linguagens de Programação, Estruturas de Dados, Sistemas Operacionais e Redes de Computadores. Além disso, há matérias focadas em Engenharia de Software, Inteligência Artificial e Sistemas Embarcados.",
         "cargos": [
@@ -49,6 +50,7 @@
       },
       {
         "nome": "Ciência da Computação",
+        "salario": "Altíssimo",
         "resumo": "A Ciência da Computação é um curso de graduação com duração média de quatro anos, focado no estudo dos fundamentos teóricos e práticos da computação.",
         "descricao": "A Ciência da Computação é um curso de graduação com duração média de quatro anos, focado no estudo dos fundamentos teóricos e práticos da computação. Durante a faculdade, os alunos exploram disciplinas como Programação, Algoritmos, Estruturas de Dados, Banco de Dados, Engenharia de Software, Redes de Computadores, Inteligência Artificial e Sistemas Operacionais. Além disso, há uma base sólida em Matemática, incluindo Cálculo, Álgebra Linear e Estatística, essenciais para o desenvolvimento de soluções computacionais eficientes. No mercado de trabalho, os cientistas da computação encontram oportunidades em empresas de tecnologia, instituições financeiras, indústrias e órgãos públicos, atuando no desenvolvimento de software, análise de dados, segurança da informação e pesquisa científica.",
         "cargos": [
@@ -93,6 +95,7 @@
       },
       {
         "nome": "Ciência de Dados",
+        "salario": "Alto",
         "resumo": "A Ciência de Dados é um curso de graduação que combina conhecimentos de estatística, matemática e computação para analisar grandes volumes de dados e extrair informações valiosas.",
         "descricao": "Esse curso tem um início bem teórico, com uma base forte em matemática e estatística. Nos primeiros anos, os alunos encaram disciplinas pesadas, mas fundamentais para a formação. Mais para frente, entram matérias mais aplicadas, como ciência de dados, análise de dados e machine learning. A grade horária é menor em comparação a outros cursos, mas algumas matérias são bem desafiadoras, o que faz com que muitos alunos comecem a estagiar cedo.",
         "cargos": [
@@ -130,6 +133,7 @@
       },
       {
         "nome": "Sistemas de Informação",
+        "salario": "Médio",
         "resumo": "Sistemas de Informação é uma graduação com duração média de quatro anos, que integra conhecimentos de tecnologia e gestão para desenvolver soluções que otimizem o fluxo de informações nas organizações.",
         "descricao": "Sistemas de Informação é uma graduação com duração média de quatro anos, que integra conhecimentos de tecnologia e gestão para desenvolver soluções que otimizem o fluxo de informações nas organizações. Durante o curso, os alunos estudam disciplinas como Programação, Banco de Dados, Engenharia de Software, Redes de Computadores, Análise de Sistemas e Gestão de Projetos. Além disso, há matérias voltadas à administração e negócios, preparando o estudante para compreender tanto o ambiente tecnológico quanto o organizacional. No mercado de trabalho, o profissional pode atuar em empresas de diversos setores, desenvolvendo e gerenciando sistemas de informação que atendam às necessidades específicas de cada negócio.",
         "cargos": [
@@ -167,6 +171,7 @@
       },
       {
         "nome": "Análise de Desenvolvimento de Sistemas",
+        "salario": "Médio",
         "resumo": "O curso de Análise e Desenvolvimento de Sistemas é uma graduação tecnológica com duração média de dois a três anos, focada na formação de profissionais aptos a projetar, desenvolver, testar e manter sistemas computacionais.",
         "descricao": "O curso de Análise e Desenvolvimento de Sistemas é uma graduação tecnológica com duração média de dois a três anos, focada na formação de profissionais aptos a projetar, desenvolver, testar e manter sistemas computacionais. Durante o curso, os alunos estudam disciplinas como Programação, Banco de Dados, Engenharia de Software, Análise de Sistemas e Gestão de Projetos. Essas matérias proporcionam uma base sólida para o desenvolvimento de soluções tecnológicas eficientes. No mercado de trabalho, os profissionais encontram oportunidades em empresas de tecnologia, departamentos de TI de diversas organizações e startups, atuando no desenvolvimento de softwares, aplicativos e sistemas personalizados.",
         "cargos": [
@@ -208,6 +213,7 @@
     "cursos": [
       {
         "nome": "Engenharia Elétrica",
+        "salario": "Alto",
         "resumo": "A Engenharia Elétrica é um curso de graduação com duração média de cinco anos, focado no estudo e aplicação de sistemas elétricos e eletrônicos.",
         "descricao": "A Engenharia Elétrica é um curso de graduação com duração média de cinco anos, focado no estudo e aplicação de sistemas elétricos e eletrônicos. Durante a faculdade, os alunos estudam disciplinas fundamentais como Matemática, Física e Química, além de matérias específicas como Circuitos Elétricos, Eletrônica Analógica e Digital, Eletromagnetismo, Máquinas Elétricas, Sistemas de Controle, Telecomunicações e Energias Renováveis. As aulas práticas em laboratórios são essenciais para consolidar o conhecimento teórico e preparar os estudantes para desafios reais.",
         "cargos": [
@@ -250,6 +256,7 @@
     "cursos": [
       {
         "nome": "Engenharia Mecatrônica",
+        "salario": "Alto",
         "resumo": "A Engenharia Mecatrônica une mecânica, eletrônica e computação para criar e melhorar sistemas automatizados.",
         "descricao": "A Engenharia Mecatrônica combina conhecimentos de eletrônica, programação, processos industriais e documentação técnica para integrar sistemas complexos. O curso capacita os alunos a desenvolver soluções para diversas aplicações, como robôs industriais, sistemas inteligentes e até veículos autônomos, enfatizando a conexão entre diferentes tecnologias para resolver problemas do mundo real. Além do aspecto técnico, o curso proporciona uma base matemática sólida e uma abordagem estruturada para a resolução de problemas, o que amplia as oportunidades de atuação. Essas habilidades analíticas são altamente valorizadas em áreas como consultoria estratégica e mercado financeiro, tornando engenheiros mecatrônicos competitivos em segmentos como trading quantitativo e gestão de investimentos.",
         "cargos": [
@@ -287,6 +294,7 @@
       },
       {
         "nome": "Engenharia Mecânica",
+        "salario": "Alto",
         "resumo": "A Engenharia Mecânica é voltada para o estudo e desenvolvimento de máquinas, equipamentos e sistemas mecânicos.",
         "descricao": "A Engenharia Mecânica é um curso voltado para o estudo e desenvolvimento de máquinas, equipamentos e sistemas mecânicos. Com duração média de cinco anos, o curso abrange disciplinas como termodinâmica, resistência dos materiais, mecânica dos fluidos, projeto de máquinas, manufatura e controle de sistemas. Os estudantes também aprendem fundamentos de matemática e física aplicados ao desenvolvimento e manutenção de tecnologias mecânicas. No mercado de trabalho, engenheiros mecânicos atuam em indústrias automotivas, aeronáuticas, metalúrgicas e de energia, além de trabalhar com projetos, manutenção e inovação tecnológica.",
         "cargos": [
@@ -329,6 +337,7 @@
     "cursos": [
       {
         "nome": "Engenharia Aeronáutica",
+        "salario": "Altíssimo",
         "resumo": "A Engenharia Aeronáutica é focada no desenvolvimento, construção e manutenção de aeronaves e sistemas aeroespaciais.",
         "descricao": "A Engenharia Aeronáutica é uma área focada no desenvolvimento, construção e manutenção de aeronaves e sistemas aeroespaciais. O curso, que dura em média cinco anos, oferece disciplinas como aerodinâmica, mecânica dos fluidos, estruturas aeronáuticas, motores a jato e sistemas de propulsão. Os alunos também aprendem fundamentos de matemática, física e programação, essenciais para projetar e testar tecnologias aeroespaciais. No mercado de trabalho, engenheiros aeronáuticos atuam em indústrias aeronáuticas, aeroportos, empresas de manutenção e até no setor espacial, contribuindo para a inovação e segurança no transporte aéreo e na exploração aeroespacial.",
         "cargos": [
@@ -371,6 +380,7 @@
     "cursos": [
       {
         "nome": "Licenciatura em Matemática",
+        "salario": "Baixo",
         "resumo": "Formação de professores para o ensino fundamental e médio, com ênfase em álgebra, geometria, cálculo, estatística e metodologias de ensino.",
         "descricao": "A Licenciatura em Matemática é um curso de graduação com duração média de quatro anos, que forma professores para o ensino fundamental e médio. Durante o curso, os alunos estudam disciplinas como álgebra, geometria, cálculo, estatística e metodologia de ensino. Além disso, aprendem sobre didática, pedagogia e tecnologias aplicadas à educação, para desenvolver habilidades que os ajudem a ensinar de forma clara e eficiente. No mercado de trabalho, o licenciado em Matemática pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs e até em criação de materiais didáticos.",
         "cargos": [
@@ -403,6 +413,7 @@
       },
       {
         "nome": "Licenciatura em Física",
+        "salario": "Baixo",
         "resumo": "Formação de professores para o ensino fundamental e médio com ênfase em mecânica, termodinâmica, eletromagnetismo, óptica, e metodologias de ensino da física.",
         "descricao": "A Licenciatura em Física é um curso de graduação com duração média de quatro anos, que prepara professores para o ensino fundamental e médio. Durante o curso, os alunos estudam disciplinas como mecânica, termodinâmica, eletromagnetismo, óptica, física moderna e astronomia. Além disso, aprendem didática, pedagogia e metodologias de ensino voltadas para a física, com foco em como tornar o aprendizado dessa ciência mais acessível e interessante para os alunos. No mercado de trabalho, o licenciado em Física pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs, além de colaborar com a criação de materiais didáticos e projetos educacionais.",
         "cargos": [
@@ -435,6 +446,7 @@
       },
       {
         "nome": "Licenciatura em Química",
+        "salario": "Baixo",
         "resumo": "Formação de professores para o ensino fundamental e médio, com foco em química geral, inorgânica, orgânica e metodologias de ensino da química.",
         "descricao": "A Licenciatura em Química é um curso de graduação com duração média de quatro anos, voltado para a formação de professores para o ensino fundamental e médio. Durante o curso, os estudantes aprendem fundamentos da química, como química geral, inorgânica, orgânica e físico-química. Também estudam experimentação em laboratório, toxicologia e bioquímica. Além das disciplinas científicas, há matérias pedagógicas, como didática e metodologias de ensino, que preparam os alunos para planejar e conduzir aulas de forma eficaz. No mercado de trabalho, o licenciado em Química pode atuar em escolas públicas e privadas, cursos preparatórios, ONGs e na criação de materiais didáticos.",
         "cargos": [
@@ -472,6 +484,7 @@
     "cursos": [
       {
         "nome": "Engenharia de Produção",
+        "salario": "Altíssimo",
         "resumo": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas.",
         "descricao": "A Engenharia de Produção combina conhecimentos de engenharia, administração e economia para melhorar processos produtivos e aumentar a eficiência nas empresas. Durante o curso, que dura cerca de cinco anos, os alunos estudam matérias como matemática, física, gestão de projetos, controle de qualidade, planejamento da produção e logística. Além disso, aprendem sobre ergonomia, sustentabilidade e como integrar tecnologia nos processos. No mercado de trabalho, o engenheiro de produção é valorizado em indústrias, empresas de serviços, startups e consultorias, sendo responsável por reduzir custos, otimizar recursos e aumentar a produtividade.",
         "cargos": [
@@ -514,6 +527,7 @@
     "cursos": [
       {
         "nome": "Engenharia de Materiais",
+        "salario": "Altíssimo",
         "resumo": "Estudo da ciência e tecnologia dos materiais, incluindo metais, cerâmicas, polímeros, compósitos, nanotecnologia, e suas aplicações industriais.",
         "descricao": "A Engenharia de Materiais e Manufatura é um curso muito voltado para pesquisa e desenvolvimento na indústria, mas, no Brasil, há poucas grandes empresas atuando especificamente nessa área. Por isso, muitos engenheiros acabam migrando para setores correlatos, como manufatura e engenharia de produção. O curso envolve bastante conhecimento sobre inteligência de fábrica, planejamento e supply chain, permitindo que os profissionais atuem tanto na parte técnica quanto na gestão da produção industrial. Além disso, é um curso que frequentemente compete com a Engenharia Química no mercado de trabalho.",
         "cargos": [
@@ -560,6 +574,7 @@
     "cursos": [
       {
         "nome": "Engenharia Civil",
+        "salario": "Alto",
         "resumo": "Forma profissionais para planejar, projetar e construir infraestrutura e edificações.",
         "descricao": "A Engenharia Civil é a área responsável por projetar, construir e analisar todo tipo de infraestrutura, sendo essencial para a adaptação do meio ambiente à habitação humana. O curso abrange desde edificações e infraestrutura até sistemas de transporte e recursos hídricos. A formação envolve conhecimentos multidisciplinares, indo da construção de casas e edifícios à gestão de barragens, rodovias e planejamento de transporte. Além do trabalho técnico, o engenheiro civil pode atuar em gestão, fiscalização de obras e até em cargos administrativos e legislativos.",
         "cargos": [
@@ -606,6 +621,7 @@
     "cursos": [
       {
         "nome": "Engenharia Ambiental",
+        "salario": "Médio",
         "resumo": "Focado na preservação e recuperação do meio ambiente, com ênfase em ciência, tecnologia e sustentabilidade.",
         "descricao": "A Engenharia Ambiental é um curso voltado para a preservação e recuperação do meio ambiente, integrando ciência, tecnologia e sustentabilidade. Durante os cinco anos da graduação, os estudantes aprendem disciplinas como ecologia, geologia, tratamento de resíduos, hidrologia, saneamento, gestão de recursos naturais e energias renováveis. O curso também inclui aspectos técnicos, como análises químicas e ambientais, e ferramentas de planejamento urbano e ambiental. No mercado de trabalho, engenheiros ambientais atuam em empresas, órgãos públicos, ONGs e consultorias, desenvolvendo soluções para minimizar os impactos ambientais e promover o uso sustentável dos recursos naturais.",
         "cargos": [

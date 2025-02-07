@@ -28,27 +28,18 @@ function getAreaIcon(areaName) {
   return <FaLaptopCode className="text-2xl text-jornadas-blue" />;
 }
 
-function getSalaryStars(mediaSalarialText) {
-  const pattern = /R\$[\s]*([\d.,]+)/gi;
-  let match;
-  let maxValue = 0;
+function getSalaryStars(salario) {
+  // Mapeamento de salários para estrelas
+  const salarioParaEstrelas = {
+    "Altíssimo": 5,
+    "Alto": 4,
+    "Médio": 4,
+    "Baixo": 3,
+    "Baixíssimo": 2
+  };
 
-  while ((match = pattern.exec(mediaSalarialText)) !== null) {
-    const numericString = match[1].replace(/\./g, '').replace(/,/g, '.'); 
-    const val = parseFloat(numericString);
-    if (val && val > maxValue) {
-      maxValue = val;
-    }
-  }
-
-  if (!maxValue) {
-    return 3;
-  }
-  if (maxValue < 3000) return 1;
-  if (maxValue < 6000) return 2;
-  if (maxValue < 10000) return 3;
-  if (maxValue < 15000) return 4;
-  return 5;
+  // Retorna o número de estrelas com base no salário ou 0 se não for encontrado
+  return salarioParaEstrelas[salario] || 0;
 }
 
 function getSkillIcon(skill) {
@@ -360,7 +351,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                 </div>
                 <div className="flex items-center">
                   {(() => {
-                    const stars = getSalaryStars(cursoSelecionado.media_salarial || '');
+                    const stars = getSalaryStars(cursoSelecionado.salario || '');
                     return (
                       <div className="flex items-center">
                         {Array.from({ length: 5 }).map((_, idx) => {
