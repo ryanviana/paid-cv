@@ -1,19 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import {
   FaLaptopCode, FaBolt, FaRobot, FaPlane, FaChalkboardTeacher,
   FaIndustry, FaCubes, FaBuilding, FaLeaf, FaMoneyBillWave,
   FaCalculator, FaFlask, FaDatabase, FaMicrochip, FaAtom,
-  FaComments, FaGlobe, FaBriefcase, FaChalkboardTeacher as FaDidatica, FaChartArea, 
-  FaChevronRight, FaArrowDown
+  FaComments, FaGlobe, FaBriefcase, FaChalkboardTeacher as FaDidatica, FaChartArea,
+  FaChevronRight, FaArrowDown, FaWhatsapp, FaLock
 } from 'react-icons/fa';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import html2canvas from 'html2canvas';
 
 import Grafico from "../components/Grafico";
-import Email from "./Email";
 import areasConhecimento from '../data/areas_cursos.json';
 
-/** Icon resolution logic */
 function getAreaIcon(areaName) {
   const lower = areaName.toLowerCase();
   if (lower.includes('comput')) return <FaLaptopCode className="text-2xl text-jornadas-blue" />;
@@ -29,7 +29,6 @@ function getAreaIcon(areaName) {
 }
 
 function getSalaryStars(salario) {
-  // Mapeamento de salários para estrelas
   const salarioParaEstrelas = {
     "Altíssimo": 5,
     "Alto": 4,
@@ -37,8 +36,6 @@ function getSalaryStars(salario) {
     "Baixo": 3,
     "Baixíssimo": 2
   };
-
-  // Retorna o número de estrelas com base no salário ou 0 se não for encontrado
   return salarioParaEstrelas[salario] || 0;
 }
 
@@ -62,13 +59,12 @@ function SkillChart({ habilidades }) {
   if (!habilidades) return null;
   const skillNames = Object.keys(habilidades);
   if (skillNames.length === 0) return null;
-
   return (
-    <div className="bg-white p-4 rounded-md mb-8 shadow">
-      <div className="flex items-center mb-2 text-gray-700 font-bold">
+    <div className="bg-white p-5 rounded-lg shadow-xl mb-8">
+      <div className="flex items-center mb-3 text-gray-700 font-bold">
         <span className="text-lg">Habilidades Importantes</span>
       </div>
-      <div className="space-y-4 mt-2">
+      <div className="space-y-4">
         {skillNames.map((skill) => {
           const rating = habilidades[skill];
           const widthPercent = (rating / 5) * 100;
@@ -78,8 +74,11 @@ function SkillChart({ habilidades }) {
                 {getSkillIcon(skill)}
                 <span className="font-semibold text-gray-900 font-questrial">{skill}</span>
               </div>
-              <div className="w-full bg-gray-300 h-3 rounded-full overflow-hidden">
-                <div className="bg-jornadas-blue h-3" style={{ width: `${widthPercent}%` }} />
+              <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                <div
+                  className="bg-jornadas-blue h-3 transition-all duration-300"
+                  style={{ width: `${widthPercent}%` }}
+                />
               </div>
             </div>
           );
@@ -90,56 +89,92 @@ function SkillChart({ habilidades }) {
 }
 
 function Result({ pontuacaoTotal, type, updatePagina }) {
-  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  // Course modal and scrolling states
   const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
   const [cursoSelecionado, setCursoSelecionado] = useState(null);
-
-  // States for main scrollable area
+  const scrollRef = useRef(null);
   const [showDownArrow, setShowDownArrow] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
-  const scrollRef = useRef(null);
-
-  // States for the course modal (popup) scrollable content
   const modalScrollRef = useRef(null);
   const [showModalDownArrow, setShowModalDownArrow] = useState(false);
   const [isModalAtBottom, setIsModalAtBottom] = useState(false);
+  const chartRef = useRef(null);
 
-  // Decide which button label and text to show
+  // Lead info state
   const isTotal = type === 'total';
-  const buttonContent = isTotal ? "Exportar resultados" : "Próxima pergunta";
-  const resultTitle = isTotal ? "Resultados" : "Você está quase lá!";
+  const [userInfoSubmitted, setUserInfoSubmitted] = useState(false);
+  const [name, setName] = useState('');
+  const [cellphone, setCellphone] = useState('');
+  const [schoolYear, setSchoolYear] = useState('');
+
+  // Retrieve career certainty (set earlier on LandingPage)
+  const careerCertainty = localStorage.getItem("careerCertainty") || "Não informado";
+  console.log("Retrieved careerCertainty from localStorage:", careerCertainty);
+
+  // Share modal state
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [sharePreviewImage, setSharePreviewImage] = useState('');
+
+  const resultTitle = isTotal ? "Seu Futuro Te Aguarda" : "Você Está Quase Lá!";
   const description = isTotal
-    ? "Pronto, seus resultados estão na mão!"
-    : "Você está indo muito bem! Por enquanto, vamos te dar um spoiler:";
+    ? "Desbloqueie sua jornada e descubra as áreas que vão impulsionar seu sucesso profissional!"
+    : "Continue avançando para ver uma prévia do seu caminho brilhante.";
 
-  // Main button handler (Export / Next)
-  const handleButton = () => {
-    if (type === 'parcial') {
-      updatePagina(1);
+  /** Prepare share modal (capture chart) */
+  const prepareShare = async () => {
+    if (!chartRef.current) {
+      alert('Gráfico não encontrado para compartilhar.');
+      return;
+    }
+    try {
+      const canvas = await html2canvas(chartRef.current, {
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        crossOrigin: "anonymous",
+        scale: 2
+      });
+      const dataUrl = canvas.toDataURL('image/png');
+      console.log("Chart captured as image.");
+      setSharePreviewImage(dataUrl);
+      setShowShareModal(true);
+    } catch (error) {
+      console.error('Erro ao preparar compartilhamento:', error);
+      alert('Ocorreu um erro ao preparar o compartilhamento. Verifique se as imagens externas suportam CORS.');
+    }
+  };
+
+  // WhatsApp share
+  const handleWhatsAppShare = () => {
+    const shareText = `Confira meu resultado vocacional e descubra seu verdadeiro potencial!
+Faça o teste também: https://seusite.com/teste`;
+    if (navigator.share && sharePreviewImage) {
+      fetch(sharePreviewImage)
+        .then(res => res.blob())
+        .then(blob => {
+          const file = new File([blob], 'resultado.png', { type: 'image/png' });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+              title: 'Meu Resultado Vocacional',
+              text: shareText,
+              files: [file]
+            })
+            .then(() => console.log('Compartilhado com sucesso via Web Share API'))
+            .catch((err) => console.error('Erro ao compartilhar via Web Share API:', err));
+          } else {
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+            window.open(whatsappUrl, '_blank');
+          }
+        })
+        .catch(err => {
+          console.error('Erro ao converter imagem:', err);
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+          window.open(whatsappUrl, '_blank');
+        });
     } else {
-      setIsExportModalOpen(true);
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+      window.open(whatsappUrl, '_blank');
     }
-  };
-
-  // Course modal functions
-  const openCourseModal = (curso) => {
-    setCursoSelecionado(curso);
-    setIsCourseModalOpen(true);
-  };
-  const closeCourseModal = () => {
-    setCursoSelecionado(null);
-    setIsCourseModalOpen(false);
-  };
-
-  // Export modal functions
-  const openExportModal = () => setIsExportModalOpen(true);
-  const closeExportModal = () => setIsExportModalOpen(false);
-
-  // Utility: Close modal if user clicks outside
-  const handleOverlayClick = (e, closeFunction) => {
-    if (e.target === e.currentTarget) {
-      closeFunction();
-    }
+    setShowShareModal(false);
   };
 
   // Build array of areas with scores
@@ -149,7 +184,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   }));
   areasComPontuacao.sort((a, b) => b.pontuacao - a.pontuacao);
 
-  // Main scrollable container arrow logic
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -166,12 +200,9 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   }, []);
 
   const handleArrowClick = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ top: 100, behavior: 'smooth' });
-    }
+    scrollRef.current?.scrollBy({ top: 100, behavior: 'smooth' });
   };
 
-  // Modal (popup) scrollable container arrow logic
   useEffect(() => {
     if (!isCourseModalOpen) return;
     const container = modalScrollRef.current;
@@ -189,73 +220,203 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   }, [isCourseModalOpen]);
 
   const handleModalArrowClick = () => {
-    if (modalScrollRef.current) {
-      modalScrollRef.current.scrollBy({ top: 100, behavior: 'smooth' });
-    }
+    modalScrollRef.current?.scrollBy({ top: 100, behavior: 'smooth' });
   };
 
   const shouldShowDownArrow = showDownArrow && !isAtBottom;
   const shouldShowModalDownArrow = showModalDownArrow && !isModalAtBottom;
 
+  const openCourseModal = (curso) => {
+    setCursoSelecionado(curso);
+    setIsCourseModalOpen(true);
+    console.log("Opened course modal for:", curso.nome);
+  };
+
+  const closeCourseModal = () => {
+    setCursoSelecionado(null);
+    setIsCourseModalOpen(false);
+    console.log("Closed course modal");
+  };
+
+  /**
+   * When the user clicks "Revelar Agora", save the lead info and send an email to
+   * jornadas.edtech@gmail.com with the following data:
+   * - user_name, user_cellphone, user_schoolYear, careerCertainty, and score.
+   * The UI unlocks immediately without waiting for the email request to complete.
+   */
+  const handleUserInfoSubmit = async (e) => {
+    e.preventDefault();
+    if (!name || !cellphone || !schoolYear) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
+    console.log("Submitting user info:", { name, cellphone, schoolYear });
+    const userInfo = { name, cellphone, schoolYear };
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+    // Retrieve career certainty from localStorage
+    const storedCertainty = localStorage.getItem("careerCertainty") || "Não informado";
+    console.log("Using careerCertainty:", storedCertainty);
+
+    try {
+      console.log("Calling save-results endpoint...");
+      await axios.post('https://cv.backend.decisaoexata.com/save-results', {
+        score: pontuacaoTotal,
+        user_email: "jornadas.edtech@gmail.com",
+        user_name: name,
+        user_cellphone: cellphone,
+        user_schoolYear: schoolYear,
+        user_careerChoiceCertainty: storedCertainty
+      });
+      console.log("Results saved successfully.");
+      console.log("Calling send-email endpoint...");
+      await axios.post('https://cv.backend.decisaoexata.com/send-email', {
+        score: pontuacaoTotal,
+        user_email: "jornadas.edtech@gmail.com",
+        user_name: name,
+        user_cellphone: cellphone,
+        user_schoolYear: schoolYear,
+        user_careerChoiceCertainty: storedCertainty
+      });
+      console.log("Email sent successfully.");
+    } catch (error) {
+      console.error('Erro ao enviar lead info:', error);
+    }
+    setUserInfoSubmitted(true);
+    console.log("User info submitted; final results unlocked.");
+  };
+
+  const handleOverlayClick = (e, closeFunction) => {
+    if (e.target === e.currentTarget && closeFunction) {
+      closeFunction();
+    }
+  };
+
+  const handleNextQuestion = () => {
+    console.log("Navigating to next question...");
+    updatePagina(1);
+  };
+
   return (
-    <div id="result_id" className="w-full h-fit flex flex-col items-center mb-10 p-4 relative">
-      {/* Title + Description */}
-      <div className="text-center max-w-4xl">
-        <h1 className="mt-5 text-black text-4xl sm:text-5xl font-extrabold font-montserrat">
+    <div
+      id="result_id"
+      className="
+        w-full
+        min-h-screen
+        bg-gradient-to-r
+        from-white
+        via-cyan-50
+        to-white
+        flex
+        flex-col
+        items-center
+        pt-10
+        pb-10
+        relative
+      "
+    >
+      {/* Title & Description */}
+      <div className="text-center max-w-4xl mb-8 px-4">
+        <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-extrabold font-montserrat">
           {resultTitle}
         </h1>
-        <h2 className="text-black text-xl sm:text-2xl font-bold font-questrial mt-3">
+        <p className="text-black text-base sm:text-lg lg:text-xl font-semibold font-questrial mt-3">
           {description}
-        </h2>
+        </p>
       </div>
 
-      {/* Chart */}
-      <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
+      {/* Chart Container */}
+      <div className="w-full max-w-4xl flex flex-col items-center px-4 relative">
+        <div
+          ref={chartRef}
+          className={`
+            w-full
+            rounded-lg
+            shadow-lg
+            bg-white
+            p-6
+            flex
+            flex-col
+            items-center
+            justify-center
+            relative
+            transition-all
+            duration-300
+            ${isTotal && !userInfoSubmitted ? "filter blur-sm" : ""}
+          `}
+        >
+          {isTotal && !userInfoSubmitted && (
+            <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-8xl pointer-events-none">
+              <FaLock />
+            </div>
+          )}
+          <h2 className="text-2xl font-bold mb-4 text-jornadas-blue flex items-center gap-2">
+            Seu Gráfico Vocacional
+          </h2>
+          <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
 
-      {/* Main Button (Exportar / Próxima Pergunta) */}
-      <button
-        onClick={handleButton}
-        className="mt-6 mb-6 px-6 py-3 font-bold bg-jornadas-blue text-white rounded-lg transition-all duration-150 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105"
-      >
-        {buttonContent}
-      </button>
+          {type === 'parcial' && (
+            <button
+              onClick={handleNextQuestion}
+              className="
+                mt-6
+                px-8
+                py-4
+                font-bold
+                bg-jornadas-blue
+                text-white
+                rounded-lg
+                text-base sm:text-lg
+                transition-all
+                duration-150
+                ease-in-out
+                hover:bg-jornadas-blue-dark
+                hover:scale-105
+                focus:outline-none
+                focus:ring-2
+                focus:ring-blue-500
+              "
+            >
+              Próxima pergunta
+            </button>
+          )}
+        </div>
+      </div>
 
-      {/* If it's the final result, show the list of areas/courses */}
       {isTotal && (
-        <div className="flex flex-col w-full max-w-4xl mt-4">
-          <div className="text-center font-questrial px-2">
+        <div className="w-full max-w-4xl flex flex-col mt-10 px-4">
+          <div className="text-center font-questrial">
             <h1 className="text-2xl font-extrabold mb-2">Guia de Áreas</h1>
-            <p className="text-lg font-semibold text-gray-700">
-              Para aprender mais a respeito de cada área e se direcionar na plataforma,
-              dê uma olhada no nosso guia:
+            <p className="text-lg font-semibold text-gray-700 mb-4">
+              Veja quais caminhos podem te levar ao topo e impulsionar sua carreira!
             </p>
           </div>
-
-          {/* Scrollable container with down arrow */}
           <div className="relative">
             <div
               ref={scrollRef}
-              className="mt-6 w-full px-2 max-h-[80vh] overflow-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded"
+              className="
+                w-full
+                max-h-[70vh]
+                overflow-auto
+                scrollbar-thin
+                scrollbar-thumb-gray-300
+                scrollbar-thumb-rounded
+                pb-6
+              "
             >
               <div className="flex flex-col space-y-8">
-                {areasComPontuacao.map((item, index) => (
+                {areasConhecimento.length > 0 && areasComPontuacao.map((item, index) => (
                   <div
                     key={index}
-                    className="bg-cyan-50 py-6 px-6 sm:px-12 rounded-md shadow-sm"
+                    className="bg-cyan-50 py-6 px-6 sm:px-12 rounded-md shadow-sm transition hover:shadow-lg"
                   >
-                    {/* Top row: area icon + area name */}
                     <div className="flex items-center mb-4">
-                      <div className="mr-3">
-                        {getAreaIcon(item.area.area)}
-                      </div>
+                      <div className="mr-3">{getAreaIcon(item.area.area)}</div>
                       <h2 className="text-xl sm:text-2xl font-extrabold text-black font-montserrat">
                         {index + 1}. {item.area.area}
                       </h2>
                     </div>
-
                     <hr className="my-3 border-gray-300" />
-
-                    {/* List of courses in this area */}
                     <ul className="mt-4 list-none pl-0 text-justify space-y-6">
                       {item.area.cursos.map((curso, cursoIndex) => (
                         <li key={cursoIndex} className="border-b border-gray-200 pb-5">
@@ -267,7 +428,18 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                           </p>
                           <div
                             onClick={() => openCourseModal(curso)}
-                            className="inline-flex items-center text-base sm:text-lg font-bold text-blue-500 font-questrial mt-3 cursor-pointer hover:underline"
+                            className="
+                              inline-flex
+                              items-center
+                              text-base
+                              sm:text-lg
+                              font-bold
+                              text-blue-500
+                              font-questrial
+                              mt-3
+                              cursor-pointer
+                              hover:underline
+                            "
                           >
                             Ver mais
                             <FaChevronRight className="ml-1 text-sm" />
@@ -279,72 +451,232 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                 ))}
               </div>
             </div>
-
-            {/* Down Arrow for main content */}
             {shouldShowDownArrow && (
               <div
                 onClick={handleArrowClick}
-                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-gray-600 animate-bounce cursor-pointer z-20"
+                className="
+                  absolute
+                  bottom-2
+                  left-1/2
+                  transform
+                  -translate-x-1/2
+                  text-gray-600
+                  animate-bounce
+                  cursor-pointer
+                  z-20
+                "
               >
                 <FaArrowDown className="text-2xl" />
               </div>
             )}
           </div>
-
-          {/* Segundo botão "Exportar Resultados" no final */}
-          <button
-            onClick={handleButton}
-            className="mt-6 px-6 py-3 font-bold bg-jornadas-blue text-white rounded-lg transition-all duration-150 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105"
-          >
-            {buttonContent}
-          </button>
-
         </div>
       )}
 
-      {/* =================== COURSE MODAL (Pop-up) =================== */}
+      {isTotal && !userInfoSubmitted && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+          onClick={(e) => handleOverlayClick(e, null)}
+        >
+          <div className="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md relative">
+            <h2 className="text-3xl font-bold mb-4 text-center text-jornadas-blue flex items-center justify-center gap-2">
+              <FaLock className="text-2xl text-gray-500" />
+              Desbloqueie Seus Resultados
+            </h2>
+            <p className="mb-5 text-center text-gray-700 leading-relaxed">
+              Preencha seus dados para descobrir seu caminho profissional e dar
+              <span className="font-semibold"> o próximo passo rumo ao sucesso!</span>
+            </p>
+            <form onSubmit={handleUserInfoSubmit} className="space-y-4">
+              <div>
+                <label className="block text-gray-800 font-semibold mb-1">Nome:</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => { console.log("Nome changed:", e.target.value); setName(e.target.value); }}
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Seu nome"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-800 font-semibold mb-1">Celular:</label>
+                <input
+                  type="tel"
+                  value={cellphone}
+                  onChange={(e) => { console.log("Celular changed:", e.target.value); setCellphone(e.target.value); }}
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="(XX) XXXXX-XXXX"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-800 font-semibold mb-1">Ano Escolar:</label>
+                <select
+                  value={schoolYear}
+                  onChange={(e) => { console.log("Ano Escolar changed:", e.target.value); setSchoolYear(e.target.value); }}
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                >
+                  <option value="">Selecione uma opção</option>
+                  <option value="Fundamental">Fundamental</option>
+                  <option value="1º Médio">1º Médio</option>
+                  <option value="2º Médio">2º Médio</option>
+                  <option value="3º Médio">3º Médio</option>
+                  <option value="Cursinho">Cursinho</option>
+                  <option value="Outros">Outros</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                className="
+                  w-full
+                  py-3
+                  bg-blue-600
+                  text-white
+                  rounded-lg
+                  font-bold
+                  text-lg
+                  hover:bg-blue-700
+                  transition
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-blue-500
+                "
+              >
+                Revelar Agora
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {showShareModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md md:max-w-xl">
+            <h2 className="text-3xl font-bold mb-5 text-center text-green-600">
+              Compartilhe Seu Resultado!
+            </h2>
+            {sharePreviewImage && (
+              <img
+                src={sharePreviewImage}
+                alt="Preview do Resultado"
+                className="w-full max-h-96 object-contain rounded-lg mb-5"
+                loading="lazy"
+              />
+            )}
+            <p className="mb-5 text-center text-gray-700 leading-relaxed">
+              Mostre aos seus amigos o seu potencial e convide-os a descobrir o próprio caminho de sucesso!
+            </p>
+            <button
+              onClick={handleWhatsAppShare}
+              className="
+                w-full
+                flex
+                items-center
+                justify-center
+                gap-2
+                py-3
+                bg-green-500
+                text-white
+                rounded-full
+                font-bold
+                text-xl
+                hover:shadow-xl
+                transition
+                focus:outline-none
+                focus:ring-2
+                focus:ring-blue-500
+              "
+            >
+              <FaWhatsapp className="text-2xl" />
+              Compartilhar no WhatsApp!
+            </button>
+            <button
+              onClick={() => { console.log("Share modal closed"); setShowShareModal(false); }}
+              className="
+                w-full
+                mt-4
+                py-2
+                border
+                rounded-lg
+                font-semibold
+                text-gray-700
+                hover:bg-gray-100
+                transition
+                focus:outline-none
+                focus:ring-2
+                focus:ring-blue-500
+              "
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
+
       {isCourseModalOpen && cursoSelecionado && (
         <div
           className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"
           onClick={(e) => handleOverlayClick(e, closeCourseModal)}
         >
-          {/* Wrap the scrollable content and arrow in an outer relative container */}
           <div className="relative w-full max-w-3xl">
             <div
               ref={modalScrollRef}
-              className="bg-cyan-50 rounded-lg overflow-y-auto max-h-[90vh] px-6 py-5 sm:px-8 sm:py-7 md:px-10 md:py-8 shadow-xl"
+              className="
+                bg-cyan-50
+                rounded-lg
+                overflow-y-auto
+                max-h-[90vh]
+                px-6
+                py-5
+                sm:px-8
+                sm:py-7
+                md:px-10
+                md:py-8
+                shadow-xl
+              "
             >
-              {/* Close (X) button */}
               <button
                 onClick={closeCourseModal}
-                className="absolute top-4 right-4 font-extrabold text-xl px-3 py-1 bg-gray-300 rounded-lg transition-all duration-150 ease-in-out hover:bg-gray-400 hover:scale-105"
+                className="
+                  absolute
+                  top-4
+                  right-4
+                  font-extrabold
+                  text-xl
+                  px-3
+                  py-1
+                  bg-gray-300
+                  rounded-lg
+                  transition-all
+                  duration-150
+                  ease-in-out
+                  hover:bg-gray-400
+                  hover:scale-105
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-blue-500
+                "
               >
                 X
               </button>
-
-              {/* Optional course image */}
               {cursoSelecionado.imagem && (
                 <img
                   src={cursoSelecionado.imagem}
                   alt={cursoSelecionado.nome}
-                  className="w-full h-70 sm:h-85 object-cover rounded-md mb-8"
+                  loading="lazy"
+                  className="w-full h-70 sm:h-85 object-cover rounded-md mb-6"
                 />
               )}
-
-              {/* Course Title */}
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-black mb-6 font-montserrat">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-black mb-4 font-montserrat">
                 {cursoSelecionado.nome}
               </h3>
-
               <hr className="my-3 border-gray-300" />
-
-              {/* Course Description */}
-              <p className="text-lg sm:text-xl text-gray-800 mb-8 text-left font-questrial font-semibold leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-800 mb-6 text-left font-questrial font-semibold leading-relaxed">
                 {cursoSelecionado.descricao}
               </p>
-
-              {/* Salary + Star Rating */}
-              <div className="bg-white p-4 rounded-md mb-8 shadow">
+              <div className="bg-white p-4 rounded-md mb-6 shadow">
                 <div className="flex items-center mb-2 text-gray-700 font-bold">
                   <FaMoneyBillWave className="text-green-500 mr-2" />
                   <span className="text-lg">Faixa Salarial</span>
@@ -371,44 +703,60 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                   {cursoSelecionado.media_salarial}
                 </p>
               </div>
-
-              {/* Skills */}
               <SkillChart habilidades={cursoSelecionado.habilidades} />
-
-              {/* Typical Job Positions */}
-              <h4 className="text-xl sm:text-2xl font-bold font-montserrat text-black mt-6 mb-4">
+              <h4 className="text-xl sm:text-2xl font-bold font-montserrat text-black mt-4 mb-3">
                 Cargos Típicos
               </h4>
-              <ul className="list-disc pl-5 mb-8 text-left font-questrial space-y-3">
+              <ul className="list-disc pl-5 mb-6 text-left font-questrial space-y-2">
                 {cursoSelecionado.cargos.map((cargo, i) => (
                   <li key={i} className="text-gray-800 text-base sm:text-lg font-semibold">
                     <strong>{cargo.cargo}:</strong> {cargo.descricao}
                   </li>
                 ))}
               </ul>
-
-              {/* Student Profile */}
-              <h4 className="text-xl sm:text-2xl font-bold font-montserrat text-black mt-6 mb-3">
+              <h4 className="text-xl sm:text-2xl font-bold font-montserrat text-black mt-4 mb-2">
                 Perfil do Estudante
               </h4>
-              <p className="text-lg sm:text-xl text-gray-800 mb-8 text-justify font-questrial font-semibold leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-800 mb-6 text-justify font-questrial font-semibold leading-relaxed">
                 {cursoSelecionado.perfil_estudante}
               </p>
-
-              {/* Bottom Close Button */}
               <button
                 onClick={closeCourseModal}
-                className="mt-2 px-5 py-3 bg-jornadas-blue text-white rounded-lg transition-all duration-150 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105 font-bold"
+                className="
+                  mt-2
+                  px-5
+                  py-3
+                  bg-jornadas-blue
+                  text-white
+                  rounded-lg
+                  transition-all
+                  duration-150
+                  ease-in-out
+                  hover:bg-jornadas-blue-dark
+                  hover:scale-105
+                  font-bold
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-blue-500
+                "
               >
                 Fechar
               </button>
             </div>
-
-            {/* Down Arrow for modal content positioned outside the scrollable area */}
             {shouldShowModalDownArrow && (
               <div
                 onClick={handleModalArrowClick}
-                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-gray-600 animate-bounce cursor-pointer z-20"
+                className="
+                  absolute
+                  bottom-4
+                  left-1/2
+                  transform
+                  -translate-x-1/2
+                  text-gray-600
+                  animate-bounce
+                  cursor-pointer
+                  z-20
+                "
               >
                 <FaArrowDown className="text-2xl md:text-3xl" />
               </div>
@@ -417,31 +765,37 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </div>
       )}
 
-      {/* =================== EXPORT MODAL =================== */}
-      {isExportModalOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"
-          onClick={(e) => handleOverlayClick(e, closeExportModal)}
+      {isTotal && userInfoSubmitted && (
+        <button
+          onClick={prepareShare}
+          className="
+            fixed
+            bottom-4
+            right-4
+            z-50
+            flex
+            items-center
+            gap-2
+            bg-green-500
+            text-white
+            px-5
+            py-3
+            rounded-full
+            shadow-lg
+            font-bold
+            text-lg
+            animate-pulse
+            hover:scale-105
+            hover:shadow-xl
+            transition
+            focus:outline-none
+            focus:ring-2
+            focus:ring-blue-500
+          "
         >
-          <div
-            className="relative bg-cyan-50 w-full max-w-md rounded-lg overflow-auto max-h-[90vh] px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-8 leading-relaxed hyphens-auto break-words text-base shadow-xl"
-          >
-            {/* Close (X) button */}
-            <button
-              onClick={closeExportModal}
-              className="absolute top-4 right-4 font-extrabold text-xl px-3 py-1 bg-gray-300 rounded-lg transition-all duration-150 ease-in-out hover:bg-gray-400 hover:scale-105"
-            >
-              X
-            </button>
-
-            <h1 className="font-extrabold text-xl sm:text-2xl text-center mb-6 text-gray-800">
-              Exportar Resultados
-            </h1>
-
-            {/* Email component */}
-            <Email pontuacaoTotal={pontuacaoTotal} onClose={closeExportModal} />
-          </div>
-        </div>
+          <FaWhatsapp className="text-2xl" />
+          Compartilhar no WhatsApp!
+        </button>
       )}
     </div>
   );

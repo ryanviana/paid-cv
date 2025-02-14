@@ -13,7 +13,7 @@ function ExplicacaoImagem({ updatePagina }) {
                         rounded-lg text-black font-questrial font-semibold py-2 px-4 shadow-xg
                         focus:ring-2 focus:ring-white focus:ring-opacity-75 focus:outline-none 
                         transition-all hover:bg-jornadas-blue-dark hover:scale-110">
-				Começar agora!
+				Bora lá!
 			</button>
 		</div>
 

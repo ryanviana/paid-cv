@@ -1,27 +1,26 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
   const navigate = useNavigate();
-  const [code, setCode] = useState("");
-  const [error, setError] = useState("");
-  const inputRef = useRef(null);
+  const [certainty, setCertainty] = useState("");
 
-  // Focus the input when an error is present
-  useEffect(() => {
-    if (error && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [error]);
+  const options = [
+    "Muito certo",
+    "Em dúvida",
+    "Não faço ideia",
+    "Outro"
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Normalize the input and validate the code
-    if (code.trim().toLowerCase() === "turmazero") {
-      navigate("/questions");
-    } else {
-      setError("Código inválido. Por favor, insira o código correto.");
+    if (!certainty) {
+      alert("Por favor, selecione seu nível de certeza sobre sua escolha de carreira.");
+      return;
     }
+    // Save the certainty for later use if needed
+    localStorage.setItem("careerCertainty", certainty);
+    navigate("/questions");
   };
 
   return (
@@ -44,40 +43,28 @@ function LandingPage() {
         </p>
       </div>
 
-      {/* Wrap the input and button in a form for better accessibility */}
       <form onSubmit={handleSubmit} className="w-full max-w-sm mt-5">
-        <div className="mb-4">
-          {/* Visually hidden label for accessibility */}
-          <label htmlFor="access-code" className="block text-sm font-medium text-gray-700 sr-only">
-            Código de acesso
-          </label>
-          <input
-            ref={inputRef}
-            id="access-code"
-            type="text"
-            value={code}
-            onChange={(e) => {
-              setCode(e.target.value);
-              if (error) setError("");
-            }}
-            placeholder="Digite o código"
-            aria-invalid={error ? "true" : "false"}
-            aria-describedby={error ? "error-message" : undefined}
-            className={`w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all ${
-              error ? "border-red-500" : "border-gray-300"
-            }`}
-          />
-          {error && (
-            <p id="error-message" className="mt-2 text-sm text-red-600" role="alert">
-              {error}
-            </p>
-          )}
-        </div>
+        <label htmlFor="certainty" className="block text-lg font-medium text-gray-700 mb-2">
+          Qual é a sua certeza sobre a carreira que você escolheu hoje?
+        </label>
+        <select
+          id="certainty"
+          value={certainty}
+          onChange={(e) => setCertainty(e.target.value)}
+          className="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all mb-5"
+        >
+          <option value="">Selecione uma opção</option>
+          {options.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
         <button
           type="submit"
-          disabled={!code.trim()}
+          disabled={!certainty}
           className={`w-full md:text-xl bg-jornadas-blue rounded-lg text-black font-questrial font-semibold py-2 px-4 shadow-xg transition-all focus:ring-2 focus:ring-white focus:ring-opacity-75 focus:outline-none hover:bg-jornadas-blue-dark hover:scale-105 ${
-            !code.trim() ? "opacity-50 cursor-not-allowed" : ""
+            !certainty ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
           Quero começar!
