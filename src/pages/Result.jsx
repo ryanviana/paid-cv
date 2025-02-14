@@ -86,6 +86,11 @@ function SkillChart({ habilidades }) {
 }
 
 function Result({ pontuacaoTotal, type, updatePagina }) {
+  useEffect(() => {
+    if (window.innerWidth <= 768) { // Adjust the breakpoint as needed
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, []);
   const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
   const [cursoSelecionado, setCursoSelecionado] = useState(null);
   const scrollRef = useRef(null);
