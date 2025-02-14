@@ -259,9 +259,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
 
   const handleNextQuestion = () => {
     updatePagina(1);
-    if (window.innerWidth <= 768) { 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
