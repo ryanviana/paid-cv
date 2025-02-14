@@ -102,7 +102,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   const [cellphone, setCellphone] = useState('');
   const [schoolYear, setSchoolYear] = useState('');
 
-  // Career certainty is retrieved from localStorage (set on LandingPage)
+  // Retrieve career certainty from localStorage (set on LandingPage)
   const careerCertainty = localStorage.getItem("careerCertainty") || "Não informado";
 
   const [showShareModal, setShowShareModal] = useState(false);
@@ -135,8 +135,10 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   };
 
   const handleWhatsAppShare = () => {
-    const shareText = `Confira meu resultado vocacional e descubra seu verdadeiro potencial!
-Faça o teste também: https://seusite.com/teste`;
+    const shareText = `Fiz um teste vocacional bem legal e achei os resultados bem interessantes.  
+    Se quiser fazer também: https://vocacional.decisaoexata.com`;
+    
+    
     if (navigator.share && sharePreviewImage) {
       fetch(sharePreviewImage)
         .then(res => res.blob())
@@ -159,7 +161,8 @@ Faça o teste também: https://seusite.com/teste`;
     } else {
       window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
     }
-    setShowShareModal(false);
+    // Hide the share modal and the always-on button disappears since showShareModal is true.
+    setShowShareModal(true);
   };
 
   const areasComPontuacao = areasConhecimento
@@ -218,7 +221,7 @@ Faça o teste também: https://seusite.com/teste`;
     setIsCourseModalOpen(false);
   };
 
-  // When "Revelar Agora" is clicked, fire off the API calls concurrently and immediately unlock the UI.
+  // Fire off the API calls concurrently without waiting for email response.
   const handleUserInfoSubmit = async (e) => {
     e.preventDefault();
     if (!name || !cellphone || !schoolYear) {
@@ -235,14 +238,12 @@ Faça o teste também: https://seusite.com/teste`;
       user_email: "jornadas.edtech@gmail.com"
     };
 
-    // Fire off both requests concurrently without waiting for email response
     axios.post('https://cv.backend.decisaoexata.com/save-results', payload)
       .catch(error => console.error("Erro ao salvar resultados:", error));
 
     axios.post('https://cv.backend.decisaoexata.com/send-email', payload)
       .catch(error => console.error("Erro ao enviar email:", error));
 
-    // Unlock the UI immediately
     setUserInfoSubmitted(true);
   };
 
@@ -314,7 +315,7 @@ Faça o teste também: https://seusite.com/teste`;
                 ))}
               </div>
             </div>
-            {shouldShowDownArrow && (
+            {showDownArrow && (
               <div onClick={handleArrowClick} className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-gray-600 animate-bounce cursor-pointer z-20">
                 <FaArrowDown className="text-2xl" />
               </div>
@@ -334,34 +335,15 @@ Faça o teste também: https://seusite.com/teste`;
             <form onSubmit={handleUserInfoSubmit} className="space-y-4">
               <div>
                 <label className="block text-gray-800 font-semibold mb-1">Nome:</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Seu nome"
-                  required
-                />
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Seu nome" required />
               </div>
               <div>
                 <label className="block text-gray-800 font-semibold mb-1">Celular:</label>
-                <input
-                  type="tel"
-                  value={cellphone}
-                  onChange={(e) => setCellphone(e.target.value)}
-                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="(XX) XXXXX-XXXX"
-                  required
-                />
+                <input type="tel" value={cellphone} onChange={(e) => setCellphone(e.target.value)} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="(XX) XXXXX-XXXX" required />
               </div>
               <div>
                 <label className="block text-gray-800 font-semibold mb-1">Ano Escolar:</label>
-                <select
-                  value={schoolYear}
-                  onChange={(e) => setSchoolYear(e.target.value)}
-                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                >
+                <select value={schoolYear} onChange={(e) => setSchoolYear(e.target.value)} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                   <option value="">Selecione uma opção</option>
                   <option value="Fundamental">Fundamental</option>
                   <option value="1º Médio">1º Médio</option>
@@ -378,9 +360,18 @@ Faça o teste também: https://seusite.com/teste`;
           </div>
         </div>
       )}
+      {/* Always-on Share Button (hide when share modal is visible) */}
+      {isTotal && userInfoSubmitted && !showShareModal && (
+        <button
+          onClick={prepareShare}
+          className="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-green-500 text-white px-5 py-3 rounded-full shadow-lg font-bold text-lg animate-pulse hover:scale-105 hover:shadow-xl transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <FaWhatsapp className="text-2xl" /> Compartilhar no WhatsApp!
+        </button>
+      )}
       {showShareModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md md:max-w-xl">
+          <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm sm:max-w-md md:max-w-xl">
             <h2 className="text-3xl font-bold mb-5 text-center text-green-600">Compartilhe Seu Resultado!</h2>
             {sharePreviewImage && (
               <img src={sharePreviewImage} alt="Preview do Resultado" className="w-full max-h-96 object-contain rounded-lg mb-5" loading="lazy" />
@@ -452,11 +443,6 @@ Faça o teste também: https://seusite.com/teste`;
             )}
           </div>
         </div>
-      )}
-      {isTotal && userInfoSubmitted && (
-        <button onClick={prepareShare} className="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-green-500 text-white px-5 py-3 rounded-full shadow-lg font-bold text-lg animate-pulse hover:scale-105 hover:shadow-xl transition focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <FaWhatsapp className="text-2xl" /> Compartilhar no WhatsApp!
-        </button>
       )}
     </div>
   );
