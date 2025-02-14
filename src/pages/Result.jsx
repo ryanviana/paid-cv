@@ -135,8 +135,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   };
 
   const handleWhatsAppShare = () => {
-    const shareText = `Fiz um teste vocacional bem legal e achei os resultados bem interessantes.  
-    Se quiser fazer também: https://vocacional.decisaoexata.com`;
+    const shareText = `Fiz um teste vocacional bem legal e achei os resultados bem interessantes.\n\nSe quiser fazer também: https://vocacional.decisaoexata.com`;
     
     
     if (navigator.share && sharePreviewImage) {
