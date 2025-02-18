@@ -1,126 +1,89 @@
-import { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-import {
-  FaLaptopCode, FaBolt, FaRobot, FaPlane, FaChalkboardTeacher,
-  FaIndustry, FaCubes, FaBuilding, FaLeaf, FaMoneyBillWave,
-  FaCalculator, FaFlask, FaDatabase, FaMicrochip, FaAtom,
-  FaComments, FaGlobe, FaBriefcase, FaChalkboardTeacher as FaDidatica, FaChartArea,
-  FaChevronRight, FaArrowDown, FaWhatsapp, FaLock
-} from 'react-icons/fa';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import html2canvas from 'html2canvas';
+// src/pages/Result.jsx
+import { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+import html2canvas from "html2canvas";
+import { motion } from "framer-motion";
 
 import Grafico from "../components/Grafico";
-import areasConhecimento from '../data/areas_cursos.json';
+import areasConhecimento from "../data/areas_cursos.json";
+import LeadCaptureForm from "../components/LeadCaptureForm";
+import CourseDetails from "../components/CourseDetails";
+import AboutDecisaoExataMotion from "../components/AboutDecisaoExataMotion";
 
-function getAreaIcon(areaName) {
-  const lower = areaName.toLowerCase();
-  if (lower.includes('comput')) return <FaLaptopCode className="text-2xl text-jornadas-blue" />;
-  if (lower.includes('elétrica')) return <FaBolt className="text-2xl text-yellow-500" />;
-  if (lower.includes('mecatrônica') || lower.includes('mecânica')) return <FaRobot className="text-2xl text-gray-700" />;
-  if (lower.includes('aeronáutica')) return <FaPlane className="text-2xl text-blue-500" />;
-  if (lower.includes('licenciatura')) return <FaChalkboardTeacher className="text-2xl text-green-600" />;
-  if (lower.includes('produção')) return <FaIndustry className="text-2xl text-red-500" />;
-  if (lower.includes('materiais')) return <FaCubes className="text-2xl text-purple-500" />;
-  if (lower.includes('civil')) return <FaBuilding className="text-2xl text-indigo-500" />;
-  if (lower.includes('ambiental')) return <FaLeaf className="text-2xl text-green-500" />;
-  return <FaLaptopCode className="text-2xl text-jornadas-blue" />;
-}
-
-function getSalaryStars(salario) {
-  const starsMap = {
-    "Altíssimo": 5,
-    "Alto": 4,
-    "Médio": 4,
-    "Baixo": 3,
-    "Baixíssimo": 2,
-  };
-  return starsMap[salario] || 0;
-}
-
-function getSkillIcon(skill) {
-  const lower = skill.toLowerCase();
-  if (lower.includes('matemática')) return <FaCalculator className="text-jornadas-blue mr-2" />;
-  if (lower.includes('estatística')) return <FaChartArea className="text-jornadas-blue mr-2" />;
-  if (lower.includes('química')) return <FaFlask className="text-jornadas-blue mr-2" />;
-  if (lower.includes('física')) return <FaAtom className="text-jornadas-blue mr-2" />;
-  if (lower.includes('banco')) return <FaDatabase className="text-jornadas-blue mr-2" />;
-  if (lower.includes('eletrônica')) return <FaMicrochip className="text-jornadas-blue mr-2" />;
-  if (lower.includes('inglês')) return <FaGlobe className="text-jornadas-blue mr-2" />;
-  if (lower.includes('comunicação')) return <FaComments className="text-jornadas-blue mr-2" />;
-  if (lower.includes('gestão')) return <FaBriefcase className="text-jornadas-blue mr-2" />;
-  if (lower.includes('didática')) return <FaDidatica className="text-jornadas-blue mr-2" />;
-  if (lower.includes('programação')) return <FaLaptopCode className="text-jornadas-blue mr-2" />;
-  return <FaLaptopCode className="text-jornadas-blue mr-2" />;
-}
-
-function SkillChart({ habilidades }) {
-  if (!habilidades) return null;
-  const skillNames = Object.keys(habilidades);
-  if (skillNames.length === 0) return null;
-  return (
-    <div className="bg-white p-5 rounded-lg shadow-xl mb-8">
-      <div className="flex items-center mb-3 text-gray-700 font-bold">
-        <span className="text-lg">Habilidades Importantes</span>
-      </div>
-      <div className="space-y-4">
-        {skillNames.map((skill) => {
-          const rating = habilidades[skill];
-          const widthPercent = (rating / 5) * 100;
-          return (
-            <div key={skill}>
-              <div className="flex items-center mb-1">
-                {getSkillIcon(skill)}
-                <span className="font-semibold text-gray-900 font-questrial">{skill}</span>
-              </div>
-              <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
-                <div className="bg-jornadas-blue h-3 transition-all duration-300" style={{ width: `${widthPercent}%` }} />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
+import {
+  FaChevronRight,
+  FaArrowDown,
+  FaLock,
+  FaWhatsapp,
+  FaShareAlt,
+} from "react-icons/fa";
+import getAreaIcon from "../components/AreaIcon";
 
 function Result({ pontuacaoTotal, type, updatePagina }) {
-  useEffect(() => {
-    if (window.innerWidth <= 768) { // Adjust the breakpoint as needed
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, []);
-  const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
-  const [cursoSelecionado, setCursoSelecionado] = useState(null);
-  const scrollRef = useRef(null);
+  const isTotal = type === "total";
+  const isPreview = type === "parcial";
+
+  const [userInfoSubmitted, setUserInfoSubmitted] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [showDownArrow, setShowDownArrow] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
-  const modalScrollRef = useRef(null);
-  const [showModalDownArrow, setShowModalDownArrow] = useState(false);
-  const [isModalAtBottom, setIsModalAtBottom] = useState(false);
-  const chartRef = useRef(null);
-
-  const isTotal = type === 'total';
-  const [userInfoSubmitted, setUserInfoSubmitted] = useState(false);
-  const [name, setName] = useState('');
-  const [cellphone, setCellphone] = useState('');
-  const [schoolYear, setSchoolYear] = useState('');
-
-  // Retrieve career certainty from localStorage (set on LandingPage)
-  const careerCertainty = localStorage.getItem("careerCertainty") || "Não informado";
-
   const [showShareModal, setShowShareModal] = useState(false);
-  const [sharePreviewImage, setSharePreviewImage] = useState('');
+  const [sharePreviewImage, setSharePreviewImage] = useState("");
 
-  const resultTitle = isTotal ? "Seu Futuro Te Aguarda" : "Você Está Quase Lá!";
-  const description = isTotal
-    ? "Desbloqueie sua jornada e descubra as áreas que vão impulsionar seu sucesso profissional!"
-    : "Continue avançando para ver uma prévia do seu caminho brilhante.";
+  const chartRef = useRef(null);
+  const scrollRef = useRef(null);
 
+  // ------------------------------
+  // Submit lead info -> unlock results
+  // ------------------------------
+  const handleLeadSubmit = async (userData) => {
+    setUserInfoSubmitted(true);
+    try {
+      const preTestData = JSON.parse(localStorage.getItem("preTestData") || "{}");
+  
+      // Compute top courses as explained above:
+      const topAreas = areasConhecimento
+        .map((area, idx) => ({ area, pontuacao: pontuacaoTotal[idx] }))
+        .sort((a, b) => b.pontuacao - a.pontuacao)
+        .slice(0, 3);
+      const topCourses = topAreas.map(item => item.area.cursos[0].nome);
+  
+      const payload = {
+        name: userData.name,
+        cellphone: userData.cellphone,
+        email: userData.email || "default@email.com",
+        schoolYear: preTestData.schoolYear || "",
+        careerChoiceCertainty: preTestData.certainty || "",
+        guidance: preTestData.guidance || "",
+        concern: preTestData.concern || "",
+        topCourses, // Save the top 3 courses' names instead of the score
+        inContact: false,
+      };
+  
+      await axios.post("https://cv.backend.decisaoexata.com/api/leads", payload);
+    } catch (error) {
+      console.error("Erro ao salvar/enviar resultados:", error);
+    }
+  };
+  
+  
+  
+
+  // ------------------------------
+  // If partial: proceed to next question
+  // ------------------------------
+  const handleNextQuestion = () => {
+    updatePagina(1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // ------------------------------
+  // Prepare share image with html2canvas
+  // ------------------------------
   const prepareShare = async () => {
     if (!chartRef.current) {
-      alert('Gráfico não encontrado para compartilhar.');
+      alert("Gráfico não encontrado para compartilhar.");
       return;
     }
     try {
@@ -128,54 +91,37 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         useCORS: true,
         backgroundColor: "#ffffff",
         crossOrigin: "anonymous",
-        scale: 2
+        scale: 2,
       });
-      const dataUrl = canvas.toDataURL('image/png');
+      const dataUrl = canvas.toDataURL("image/png");
       setSharePreviewImage(dataUrl);
       setShowShareModal(true);
     } catch (error) {
-      console.error('Erro ao preparar compartilhamento:', error);
-      alert('Ocorreu um erro ao preparar o compartilhamento.');
+      console.error("Erro ao preparar compartilhamento:", error);
+      alert("Ocorreu um erro ao preparar o compartilhamento.");
     }
   };
 
   const handleWhatsAppShare = () => {
-    const shareText = `Fiz um teste vocacional bem legal e achei os resultados bem interessantes.\n\nSe quiser fazer também: https://vocacional.decisaoexata.com`;
-    
-    
-    if (navigator.share && sharePreviewImage) {
-      fetch(sharePreviewImage)
-        .then(res => res.blob())
-        .then(blob => {
-          const file = new File([blob], 'resultado.png', { type: 'image/png' });
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({
-              title: 'Meu Resultado Vocacional',
-              text: shareText,
-              files: [file]
-            }).catch((err) => console.error('Erro ao compartilhar:', err));
-          } else {
-            window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
-          }
-        })
-        .catch(err => {
-          console.error('Erro ao converter imagem:', err);
-          window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
-        });
-    } else {
-      window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
-    }
-    // Hide the share modal and the always-on button disappears since showShareModal is true.
-    setShowShareModal(true);
+    const shareText =
+      "Fiz um teste vocacional bem legal e achei os resultados bem interessantes.\n\nSe quiser fazer também: https://vocacional.decisaoexata.com";
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, "_blank");
   };
 
-  const areasComPontuacao = areasConhecimento
-    .map((area, index) => ({ area, pontuacao: pontuacaoTotal[index] }))
+  // ------------------------------
+  // Sort areas by pontuação & show top 3
+  // ------------------------------
+  let areasComPontuacao = areasConhecimento
+    .map((area, idx) => ({ area, pontuacao: pontuacaoTotal[idx] }))
     .sort((a, b) => b.pontuacao - a.pontuacao);
+  areasComPontuacao = areasComPontuacao.slice(0, 3);
 
+  // ------------------------------
+  // Scroll arrow logic
+  // ------------------------------
   useEffect(() => {
+    if (!scrollRef.current) return;
     const container = scrollRef.current;
-    if (!container) return;
     if (container.scrollHeight > container.clientHeight) {
       setShowDownArrow(true);
     }
@@ -183,273 +129,331 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
       const { scrollTop, scrollHeight, clientHeight } = container;
       setIsAtBottom(scrollHeight - scrollTop <= clientHeight + 2);
     };
-    container.addEventListener('scroll', handleScroll);
+    container.addEventListener("scroll", handleScroll);
     handleScroll();
-    return () => container.removeEventListener('scroll', handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleArrowClick = () => {
-    scrollRef.current?.scrollBy({ top: 100, behavior: 'smooth' });
+    scrollRef.current?.scrollBy({ top: 100, behavior: "smooth" });
   };
 
-  useEffect(() => {
-    if (!isCourseModalOpen) return;
-    const container = modalScrollRef.current;
-    if (!container) return;
-    if (container.scrollHeight > container.clientHeight) {
-      setShowModalDownArrow(true);
-    }
-    const handleModalScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = container;
-      setIsModalAtBottom(scrollHeight - scrollTop <= clientHeight + 2);
-    };
-    container.addEventListener('scroll', handleModalScroll);
-    handleModalScroll();
-    return () => container.removeEventListener('scroll', handleModalScroll);
-  }, [isCourseModalOpen]);
-
-  const handleModalArrowClick = () => {
-    modalScrollRef.current?.scrollBy({ top: 100, behavior: 'smooth' });
-  };
-
-  const shouldShowDownArrow = showDownArrow && !isAtBottom;
-  const shouldShowModalDownArrow = showModalDownArrow && !isModalAtBottom;
-
-  const openCourseModal = (curso) => {
-    setCursoSelecionado(curso);
-    setIsCourseModalOpen(true);
-  };
-
-  const closeCourseModal = () => {
-    setCursoSelecionado(null);
-    setIsCourseModalOpen(false);
-  };
-
-  // Fire off the API calls concurrently without waiting for email response.
-  const handleUserInfoSubmit = async (e) => {
-    e.preventDefault();
-    if (!name || !cellphone || !schoolYear) {
-      alert("Por favor, preencha todos os campos.");
-      return;
-    }
-    localStorage.setItem('userInfo', JSON.stringify({ name, cellphone, schoolYear }));
-    const payload = {
-      score: pontuacaoTotal,
-      user_name: name,
-      user_cellphone: cellphone,
-      user_schoolYear: schoolYear,
-      user_careerChoiceCertainty: careerCertainty,
-      user_email: "jornadas.edtech@gmail.com"
-    };
-
-    axios.post('https://cv.backend.decisaoexata.com/save-results', payload)
-      .catch(error => console.error("Erro ao salvar resultados:", error));
-
-    axios.post('https://cv.backend.decisaoexata.com/send-email', payload)
-      .catch(error => console.error("Erro ao enviar email:", error));
-
-    setUserInfoSubmitted(true);
-  };
-
-  const handleOverlayClick = (e, closeFunction) => {
-    if (e.target === e.currentTarget && closeFunction) {
-      closeFunction();
-    }
-  };
-
-  const handleNextQuestion = () => {
-    updatePagina(1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
+  // ------------------------------
+  // RENDER
+  // ------------------------------
   return (
-    <div id="result_id" className="w-full min-h-screen bg-gradient-to-r from-white via-cyan-50 to-white flex flex-col items-center pt-10 pb-10 relative">
-      <div className="text-center max-w-4xl mb-8 px-4">
-        <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-extrabold font-montserrat">{resultTitle}</h1>
-        <p className="text-black text-base sm:text-lg lg:text-xl font-semibold font-questrial mt-3">{description}</p>
-      </div>
-      <div className="w-full max-w-4xl flex flex-col items-center px-4 relative">
-        <div ref={chartRef} className={`w-full rounded-lg shadow-lg bg-white p-6 flex flex-col items-center justify-center relative transition-all duration-300 ${isTotal && !userInfoSubmitted ? "filter blur-sm" : ""}`}>
-          {isTotal && !userInfoSubmitted && (
-            <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-8xl pointer-events-none">
-              <FaLock />
-            </div>
-          )}
-          <h2 className="text-2xl font-bold mb-4 text-jornadas-blue flex items-center gap-2">Seu Gráfico Vocacional</h2>
-          <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
-          {type === 'parcial' && (
-            <button onClick={handleNextQuestion} className="mt-6 px-8 py-4 font-bold bg-jornadas-blue text-white rounded-lg text-base sm:text-lg transition-all duration-150 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
-              Próxima pergunta
-            </button>
-          )}
+    <motion.div
+      className="w-full min-h-screen flex flex-col"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* 
+        ==================================================
+        SECTION 1: HERO TITLE 
+        ==================================================
+      */}
+      <section className="w-full bg-white pt-16 pb-6">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <motion.h1
+            className="text-4xl font-extrabold text-gray-900 mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            {isTotal ? "Seu Futuro Te Aguarda" : "Você Está Quase Lá!"}
+          </motion.h1>
+          <motion.p
+            className="text-xl text-gray-700"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+          >
+            {isTotal
+              ? "Desbloqueie sua jornada e descubra as áreas que vão impulsionar seu sucesso profissional!"
+              : "Continue avançando para ver uma prévia do seu caminho brilhante."}
+          </motion.p>
         </div>
-      </div>
-      {isTotal && (
-        <div className="w-full max-w-4xl flex flex-col mt-10 px-4">
-          <div className="text-center font-questrial">
-            <h1 className="text-2xl font-extrabold mb-2">Guia de Áreas</h1>
-            <p className="text-lg font-semibold text-gray-700 mb-4">
-              Veja quais caminhos podem te levar ao topo e impulsionar sua carreira!
-            </p>
-          </div>
-          <div className="relative">
-            <div ref={scrollRef} className="w-full max-h-[70vh] overflow-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded pb-6">
-              <div className="flex flex-col space-y-8">
-                {areasConhecimento.length > 0 && areasComPontuacao.map((item, index) => (
-                  <div key={index} className="bg-cyan-50 py-6 px-6 sm:px-12 rounded-md shadow-sm transition hover:shadow-lg">
-                    <div className="flex items-center mb-4">
-                      <div className="mr-3">{getAreaIcon(item.area.area)}</div>
-                      <h2 className="text-xl sm:text-2xl font-extrabold text-black font-montserrat">
-                        {index + 1}. {item.area.area}
-                      </h2>
-                    </div>
-                    <hr className="my-3 border-gray-300" />
-                    <ul className="mt-4 list-none pl-0 text-justify space-y-6">
-                      {item.area.cursos.map((curso, cursoIndex) => (
-                        <li key={cursoIndex} className="border-b border-gray-200 pb-5">
-                          <div className="text-lg sm:text-xl text-black font-bold font-montserrat mb-1">{curso.nome}</div>
-                          <p className="text-base sm:text-lg text-gray-700 font-questrial">{curso.resumo}</p>
-                          <div onClick={() => openCourseModal(curso)} className="inline-flex items-center text-base sm:text-lg font-bold text-blue-500 font-questrial mt-3 cursor-pointer hover:underline">
-                            Ver mais
-                            <FaChevronRight className="ml-1 text-sm" />
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+      </section>
+
+      {/* 
+        ==================================================
+        SECTION 2: BIG CHART 
+        ==================================================
+        - Large “hero” style area for the chart
+      */}
+      <section className="w-full bg-slate-50 py-10">
+        <div className="max-w-5xl mx-auto px-4 relative">
+          {/* If locked, we show a blur & lock overlay */}
+          <div
+            ref={chartRef}
+            className={`relative transition-all duration-300 ${
+              isTotal && !userInfoSubmitted ? "filter blur-sm" : ""
+            }`}
+          >
+            {/* Lock overlay if final results not unlocked */}
+            {isTotal && !userInfoSubmitted && (
+              <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-8xl pointer-events-none">
+                <FaLock />
               </div>
-            </div>
-            {showDownArrow && (
-              <div onClick={handleArrowClick} className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-gray-600 animate-bounce cursor-pointer z-20">
-                <FaArrowDown className="text-2xl" />
+            )}
+
+            <motion.h2
+              className="text-2xl font-bold text-jornadas-blue mb-6 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              Seu Resultado
+            </motion.h2>
+
+            {/* The chart is bigger and more centered. Adjust your Grafico component or CSS if needed */}
+            <motion.div
+              className="w-full flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
+            </motion.div>
+
+            {/* If it's partial results, show next question button */}
+            {isPreview && (
+              <div className="mt-8 flex justify-center">
+                <button
+                  onClick={handleNextQuestion}
+                  className="px-8 py-4 font-bold bg-jornadas-blue text-white rounded-lg text-base sm:text-lg transition-all duration-150 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Próxima pergunta
+                </button>
               </div>
             )}
           </div>
+
+          {/* "Share your results" button => only if final & unlocked. 
+              We'll place it at bottom-right of the chart section. */}
+          {isTotal && userInfoSubmitted && (
+            <motion.button
+              onClick={prepareShare}
+              className="mt-6 sm:mt-8 flex items-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-md shadow font-semibold text-sm hover:bg-gray-300 transition absolute right-4 bottom-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+            >
+              <FaShareAlt />
+              Compartilhe com seus amigos
+            </motion.button>
+          )}
         </div>
-      )}
-      {isTotal && !userInfoSubmitted && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" onClick={(e) => handleOverlayClick(e, null)}>
-          <div className="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md relative">
-            <h2 className="text-3xl font-bold mb-4 text-center text-jornadas-blue flex items-center justify-center gap-2">
-              <FaLock className="text-2xl text-gray-500" /> Desbloqueie Seus Resultados
-            </h2>
-            <p className="mb-5 text-center text-gray-700 leading-relaxed">
-              Preencha seus dados para descobrir seu caminho profissional e dar <span className="font-semibold">o próximo passo rumo ao sucesso!</span>
-            </p>
-            <form onSubmit={handleUserInfoSubmit} className="space-y-4">
-              <div>
-                <label className="block text-gray-800 font-semibold mb-1">Nome:</label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Seu nome" required />
+      </section>
+
+      {/* 
+        ==================================================
+        SECTION 3: ABOUT YOU RESULTS (TOP 3 AREAS)
+        ==================================================
+      */}
+      {isTotal && (
+        <section className="w-full bg-white py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-8">
+              <motion.h2
+                className="text-3xl font-bold text-gray-900"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                Seus Resultados em Detalhe
+              </motion.h2>
+              <div className="mt-2 border-b-4 border-blue-600 w-24 mx-auto"></div>
+              <motion.p
+                className="mt-4 text-lg text-gray-700"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                Descubra quais áreas se destacam no seu perfil e veja as principais opções para cada uma.
+              </motion.p>
+            </div>
+
+            <div className="relative">
+              <div ref={scrollRef} className="w-full max-h-[70vh] overflow-auto pb-6">
+                <div className="flex flex-col space-y-8">
+                  {areasComPontuacao.map((item, index) => (
+                    <motion.div
+                      key={index}
+                      className="bg-cyan-50 py-6 px-6 sm:px-12 rounded-md shadow-sm transition hover:shadow-lg"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="flex items-center mb-4">
+                        <div className="mr-3">{getAreaIcon(item.area.area)}</div>
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-black font-montserrat">
+                          {index + 1}. {item.area.area}
+                        </h3>
+                      </div>
+                      <hr className="my-3 border-gray-300" />
+                      <ul className="mt-4 list-none pl-0 text-justify space-y-6">
+                        {/* Show top 3 courses */}
+                        {item.area.cursos.slice(0, 3).map((curso, i) => (
+                          <li key={i} className="border-b border-gray-200 pb-5">
+                            <div className="text-lg sm:text-xl text-black font-bold font-montserrat mb-1">
+                              {curso.nome}
+                            </div>
+                            <p className="text-base sm:text-lg text-gray-700 font-questrial">
+                              {curso.resumo}
+                            </p>
+                            <div
+                              onClick={() => setSelectedCourse(curso)}
+                              className="inline-flex items-center text-base sm:text-lg font-bold text-blue-500 font-questrial mt-3 cursor-pointer hover:underline"
+                            >
+                              Ver mais
+                              <FaChevronRight className="ml-1 text-sm" />
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-              <div>
-                <label className="block text-gray-800 font-semibold mb-1">Celular:</label>
-                <input type="tel" value={cellphone} onChange={(e) => setCellphone(e.target.value)} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="(XX) XXXXX-XXXX" required />
-              </div>
-              <div>
-                <label className="block text-gray-800 font-semibold mb-1">Ano Escolar:</label>
-                <select value={schoolYear} onChange={(e) => setSchoolYear(e.target.value)} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                  <option value="">Selecione uma opção</option>
-                  <option value="Fundamental">Fundamental</option>
-                  <option value="1º Médio">1º Médio</option>
-                  <option value="2º Médio">2º Médio</option>
-                  <option value="3º Médio">3º Médio</option>
-                  <option value="Cursinho">Cursinho</option>
-                  <option value="Outros">Outros</option>
-                </select>
-              </div>
-              <button type="submit" className="w-full py-3 bg-blue-600 text-white rounded-lg font-bold text-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500">
-                Revelar Agora
-              </button>
-            </form>
+              {showDownArrow && !isAtBottom && (
+                <div
+                  onClick={handleArrowClick}
+                  className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-gray-600 animate-bounce cursor-pointer z-20"
+                >
+                  <FaArrowDown className="text-2xl" />
+                </div>
+              )}
+            </div>
           </div>
+        </section>
+      )}
+
+      {/* 
+        If final results are locked, show lead form 
+      */}
+      {isTotal && !userInfoSubmitted && (
+        <LeadCaptureForm showLeadCapture={true} onSubmit={handleLeadSubmit} />
+      )}
+
+      {/* 
+        ==================================================
+        SECTION 4: ABOUT US
+        ==================================================
+      */}
+      {isTotal && userInfoSubmitted && (
+        <section className="w-full bg-gray-50 py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-8">
+              <motion.h2
+                className="text-3xl font-bold text-gray-900"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                Sobre Nós
+              </motion.h2>
+              <div className="mt-2 border-b-4 border-blue-600 w-24 mx-auto"></div>
+            </div>
+            <AboutDecisaoExataMotion />
+          </div>
+        </section>
+      )}
+
+      {/* 
+        ==================================================
+        SECTION 5: FOOTER 
+        ==================================================
+      */}
+      {isTotal && (
+
+      <motion.footer
+        className="w-full bg-gray-900 text-gray-200 py-8 px-4 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-xl font-bold mb-4">Entre em Contato</h3>
+          <p className="mb-2">
+            <strong>Email:</strong> ryan@decisaoexata.com
+          </p>
+          <p className="mb-2">
+            <strong>Telefone:</strong> +55 35 99145-9394
+          </p>
+          <p className="mb-4">
+            <strong>Site:</strong>{" "}
+            <a
+              href="https://decisaoexata.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-400 underline"
+            >
+              decisaoexata.com
+            </a>
+          </p>
+          <div>
+            <a
+              href="https://wa.me/5535991459394?text=Oi%2C%20preciso%20de%20ajuda%20para%20decidir%20meu%20curso!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-green-500 text-white px-6 py-3 rounded-full font-bold hover:bg-green-600 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              Fale Conosco no WhatsApp
+            </a>
+          </div>
+          <p className="mt-4 text-sm">
+            © {new Date().getFullYear()} Decisão Exata. Todos os direitos reservados.
+          </p>
         </div>
+      </motion.footer>
       )}
-      {/* Always-on Share Button (hide when share modal is visible) */}
-      {isTotal && userInfoSubmitted && !showShareModal && (
-        <button
-          onClick={prepareShare}
-          className="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-green-500 text-white px-5 py-3 rounded-full shadow-lg font-bold text-lg animate-pulse hover:scale-105 hover:shadow-xl transition focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <FaWhatsapp className="text-2xl" /> Compartilhar no WhatsApp!
-        </button>
-      )}
+
+
+      {/* =================== Share Modal =================== */}
       {showShareModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm sm:max-w-md md:max-w-xl">
-            <h2 className="text-3xl font-bold mb-5 text-center text-green-600">Compartilhe Seu Resultado!</h2>
+            <h2 className="text-3xl font-bold mb-5 text-center text-green-600">
+              Compartilhe Seu Resultado!
+            </h2>
             {sharePreviewImage && (
-              <img src={sharePreviewImage} alt="Preview do Resultado" className="w-full max-h-96 object-contain rounded-lg mb-5" loading="lazy" />
+              <img
+                src={sharePreviewImage}
+                alt="Preview do Resultado"
+                className="w-full max-h-96 object-contain rounded-lg mb-5"
+                loading="lazy"
+              />
             )}
             <p className="mb-5 text-center text-gray-700 leading-relaxed">
               Mostre aos seus amigos o seu potencial e convide-os a descobrir o próprio caminho de sucesso!
             </p>
-            <button onClick={handleWhatsAppShare} className="w-full flex items-center justify-center gap-2 py-3 bg-green-500 text-white rounded-full font-bold text-xl hover:shadow-xl transition focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button
+              onClick={handleWhatsAppShare}
+              className="w-full flex items-center justify-center gap-2 py-3 bg-green-500 text-white rounded-full font-bold text-xl hover:shadow-xl transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
               <FaWhatsapp className="text-2xl" /> Compartilhar no WhatsApp!
             </button>
-            <button onClick={() => setShowShareModal(false)} className="w-full mt-4 py-2 border rounded-lg font-semibold text-gray-700 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button
+              onClick={() => setShowShareModal(false)}
+              className="w-full mt-4 py-2 border rounded-lg font-semibold text-gray-700 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
               Cancelar
             </button>
           </div>
         </div>
       )}
-      {isCourseModalOpen && cursoSelecionado && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4" onClick={(e) => handleOverlayClick(e, closeCourseModal)}>
-          <div className="relative w-full max-w-3xl">
-            <div ref={modalScrollRef} className="bg-cyan-50 rounded-lg overflow-y-auto max-h-[90vh] px-6 py-5 sm:px-8 sm:py-7 md:px-10 md:py-8 shadow-xl">
-              <button onClick={closeCourseModal} className="absolute top-4 right-4 font-extrabold text-xl px-3 py-1 bg-gray-300 rounded-lg transition-all duration-150 ease-in-out hover:bg-gray-400 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                X
-              </button>
-              {cursoSelecionado.imagem && (
-                <img src={cursoSelecionado.imagem} alt={cursoSelecionado.nome} loading="lazy" className="w-full h-70 sm:h-85 object-cover rounded-md mb-6" />
-              )}
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-black mb-4 font-montserrat">{cursoSelecionado.nome}</h3>
-              <hr className="my-3 border-gray-300" />
-              <p className="text-lg sm:text-xl text-gray-800 mb-6 text-left font-questrial font-semibold leading-relaxed">{cursoSelecionado.descricao}</p>
-              <div className="bg-white p-4 rounded-md mb-6 shadow">
-                <div className="flex items-center mb-2 text-gray-700 font-bold">
-                  <FaMoneyBillWave className="text-green-500 mr-2" />
-                  <span className="text-lg">Faixa Salarial</span>
-                </div>
-                <div className="flex items-center">
-                  {(() => {
-                    const stars = getSalaryStars(cursoSelecionado.salario || '');
-                    return (
-                      <div className="flex items-center">
-                        {Array.from({ length: 5 }).map((_, idx) => {
-                          const Icon = idx < stars ? AiFillStar : AiOutlineStar;
-                          return <Icon key={idx} className="text-yellow-400 text-xl mr-1" />;
-                        })}
-                      </div>
-                    );
-                  })()}
-                </div>
-                <p className="text-sm text-gray-700 font-questrial mt-2 font-semibold">{cursoSelecionado.media_salarial}</p>
-              </div>
-              <SkillChart habilidades={cursoSelecionado.habilidades} />
-              <h4 className="text-xl sm:text-2xl font-bold font-montserrat text-black mt-4 mb-3">Cargos Típicos</h4>
-              <ul className="list-disc pl-5 mb-6 text-left font-questrial space-y-2">
-                {cursoSelecionado.cargos.map((cargo, i) => (
-                  <li key={i} className="text-gray-800 text-base sm:text-lg font-semibold">
-                    <strong>{cargo.cargo}:</strong> {cargo.descricao}
-                  </li>
-                ))}
-              </ul>
-              <h4 className="text-xl sm:text-2xl font-bold font-montserrat text-black mt-4 mb-2">Perfil do Estudante</h4>
-              <p className="text-lg sm:text-xl text-gray-800 mb-6 text-justify font-questrial font-semibold leading-relaxed">{cursoSelecionado.perfil_estudante}</p>
-              <button onClick={closeCourseModal} className="mt-2 px-5 py-3 bg-jornadas-blue text-white rounded-lg transition-all duration-150 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105 font-bold focus:outline-none focus:ring-2 focus:ring-blue-500">
-                Fechar
-              </button>
-            </div>
-            {shouldShowModalDownArrow && (
-              <div onClick={handleModalArrowClick} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-gray-600 animate-bounce cursor-pointer z-20">
-                <FaArrowDown className="text-2xl md:text-3xl" />
-              </div>
-            )}
-          </div>
-        </div>
+
+      {/* =================== Course Modal =================== */}
+      {selectedCourse && (
+        <CourseDetails
+          course={selectedCourse}
+          onClose={() => setSelectedCourse(null)}
+        />
       )}
-    </div>
+    </motion.div>
   );
 }
 
