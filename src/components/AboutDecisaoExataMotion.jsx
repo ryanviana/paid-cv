@@ -20,7 +20,7 @@ export default function AboutDecisaoExataMotion() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          Sobre a Decisão Exata
+          Sobre o Decisão Exata
         </motion.h2>
 
         {/* Copy */}
@@ -63,7 +63,7 @@ export default function AboutDecisaoExataMotion() {
           viewport={{ once: true }}
         >
           <a
-            href="https://wa.me/5535991459394?text=Oi%2C%20eu%20vi%20o%20seu%20email%20e%20quero%20ajudar%20pra%20decidir%20o%20meu%20curso%20com%20o%20Decisao%20Exata."
+            href="https://wa.me/5516936180172?text=Oi%2C%20eu%20vi%20o%20seu%20email%20e%20quero%20ajudar%20pra%20decidir%20o%20meu%20curso%20com%20o%20Decisao%20Exata."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-green-500 text-white px-8 py-4 text-lg font-bold rounded-md shadow-md hover:bg-green-600 transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500"
