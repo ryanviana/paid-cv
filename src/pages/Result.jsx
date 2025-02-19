@@ -34,21 +34,58 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   const chartRef = useRef(null);
   const scrollRef = useRef(null);
 
+  const handleShare = async () => {
+    const shareText =
+      "Fiz um teste vocacional bem legal e achei os resultados bem interessantes.\n\nSe quiser fazer também: https://vocacional.decisaoexata.com";
+
+    if (navigator.share) {
+      try {
+        // Converte a dataURL em Blob
+        const response = await fetch(sharePreviewImage);
+        const blob = await response.blob();
+        const file = new File([blob], "resultado.png", { type: blob.type });
+
+        // Verifica se o navegador permite compartilhar arquivos
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            files: [file],
+            text: shareText,
+          });
+        } else {
+          // Se não for possível compartilhar arquivos, compartilha somente o texto
+          await navigator.share({
+            text: shareText,
+          });
+        }
+      } catch (error) {
+        console.error("Erro ao compartilhar:", error);
+      }
+    } else {
+      // Fallback para WhatsApp, se a Web Share API não estiver disponível
+      window.open(
+        `https://wa.me/?text=${encodeURIComponent(shareText)}`,
+        "_blank"
+      );
+    }
+  };
+
   // ------------------------------
   // Submit lead info -> unlock results
   // ------------------------------
   const handleLeadSubmit = async (userData) => {
     setUserInfoSubmitted(true);
     try {
-      const preTestData = JSON.parse(localStorage.getItem("preTestData") || "{}");
-  
+      const preTestData = JSON.parse(
+        localStorage.getItem("preTestData") || "{}"
+      );
+
       // Compute top courses as explained above:
       const topAreas = areasConhecimento
         .map((area, idx) => ({ area, pontuacao: pontuacaoTotal[idx] }))
         .sort((a, b) => b.pontuacao - a.pontuacao)
         .slice(0, 3);
-      const topCourses = topAreas.map(item => item.area.cursos[0].nome);
-  
+      const topCourses = topAreas.map((item) => item.area.cursos[0].nome);
+
       const payload = {
         name: userData.name,
         cellphone: userData.cellphone,
@@ -61,15 +98,15 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         topCourses, // Save the top 3 courses' names instead of the score
         inContact: false,
       };
-  
-      await axios.post("https://cv.backend.decisaoexata.com/api/leads", payload);
+
+      await axios.post(
+        "https://cv.backend.decisaoexata.com/api/leads",
+        payload
+      );
     } catch (error) {
       console.error("Erro ao salvar/enviar resultados:", error);
     }
   };
-  
-  
-  
 
   // ------------------------------
   // If partial: proceed to next question
@@ -106,7 +143,10 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   const handleWhatsAppShare = () => {
     const shareText =
       "Fiz um teste vocacional bem legal e achei os resultados bem interessantes.\n\nSe quiser fazer também: https://vocacional.decisaoexata.com";
-    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, "_blank");
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(shareText)}`,
+      "_blank"
+    );
   };
 
   // ------------------------------
@@ -236,7 +276,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
           {isTotal && userInfoSubmitted && (
             <motion.button
               onClick={prepareShare}
-              className="mt-6 sm:mt-8 flex items-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-md shadow font-semibold text-sm hover:bg-gray-300 transition absolute right-4 bottom-4"
+              className="mt-6 sm:mt-8 flex items-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-md shadow font-semibold text-sm sm:absolute sm:right-4 sm:bottom-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
@@ -272,13 +312,14 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                Descubra quais áreas se destacam no seu perfil e veja as principais opções para cada uma.
+                Descubra quais áreas se destacam no seu perfil e veja as
+                principais opções para cada uma.
               </motion.p>
             </div>
 
             <div className="relative">
-            <div ref={scrollRef} className="w-full pb-6">
-            <div className="flex flex-col space-y-8">
+              <div ref={scrollRef} className="w-full pb-6">
+                <div className="flex flex-col space-y-8">
                   {areasComPontuacao.map((item, index) => (
                     <motion.div
                       key={index}
@@ -289,7 +330,9 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                       viewport={{ once: true }}
                     >
                       <div className="flex items-center mb-4">
-                        <div className="mr-3">{getAreaIcon(item.area.area)}</div>
+                        <div className="mr-3">
+                          {getAreaIcon(item.area.area)}
+                        </div>
                         <h3 className="text-xl sm:text-2xl font-extrabold text-black font-montserrat">
                           {index + 1}. {item.area.area}
                         </h3>
@@ -369,49 +412,48 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         ==================================================
       */}
       {isTotal && (
-
-      <motion.footer
-        className="w-full bg-gray-900 text-gray-200 py-8 px-4 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-      >
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-xl font-bold mb-4">Entre em Contato</h3>
-          <p className="mb-2">
-            <strong>Email:</strong> ryan@decisaoexata.com
-          </p>
-          <p className="mb-2">
-            <strong>Telefone:</strong> +55 35 99145-9394
-          </p>
-          <p className="mb-4">
-            <strong>Site:</strong>{" "}
-            <a
-              href="https://decisaoexata.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-green-400 underline"
-            >
-              decisaoexata.com
-            </a>
-          </p>
-          <div>
-            <a
-              href="https://wa.me/5535991459394?text=Oi%2C%20preciso%20de%20ajuda%20para%20decidir%20meu%20curso!"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-green-500 text-white px-6 py-3 rounded-full font-bold hover:bg-green-600 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              Fale Conosco no WhatsApp
-            </a>
+        <motion.footer
+          className="w-full bg-gray-900 text-gray-200 py-8 px-4 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-xl font-bold mb-4">Entre em Contato</h3>
+            <p className="mb-2">
+              <strong>Email:</strong> ryan@decisaoexata.com
+            </p>
+            <p className="mb-2">
+              <strong>Telefone:</strong> +55 35 99145-9394
+            </p>
+            <p className="mb-4">
+              <strong>Site:</strong>{" "}
+              <a
+                href="https://decisaoexata.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-400 underline"
+              >
+                decisaoexata.com
+              </a>
+            </p>
+            <div>
+              <a
+                href="https://wa.me/5535991459394?text=Oi%2C%20preciso%20de%20ajuda%20para%20decidir%20meu%20curso!"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-green-500 text-white px-6 py-3 rounded-full font-bold hover:bg-green-600 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                Fale Conosco no WhatsApp
+              </a>
+            </div>
+            <p className="mt-4 text-sm">
+              © {new Date().getFullYear()} Decisão Exata. Todos os direitos
+              reservados.
+            </p>
           </div>
-          <p className="mt-4 text-sm">
-            © {new Date().getFullYear()} Decisão Exata. Todos os direitos reservados.
-          </p>
-        </div>
-      </motion.footer>
+        </motion.footer>
       )}
-
 
       {/* =================== Share Modal =================== */}
       {showShareModal && (
@@ -429,14 +471,16 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
               />
             )}
             <p className="mb-5 text-center text-gray-700 leading-relaxed">
-              Mostre aos seus amigos o seu potencial e convide-os a descobrir o próprio caminho de sucesso!
+              Mostre aos seus amigos o seu potencial e convide-os a descobrir o
+              próprio caminho de sucesso!
             </p>
             <button
-              onClick={handleWhatsAppShare}
+              onClick={handleShare}
               className="w-full flex items-center justify-center gap-2 py-3 bg-green-500 text-white rounded-full font-bold text-xl hover:shadow-xl transition focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <FaWhatsapp className="text-2xl" /> Compartilhar no WhatsApp!
             </button>
+
             <button
               onClick={() => setShowShareModal(false)}
               className="w-full mt-4 py-2 border rounded-lg font-semibold text-gray-700 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
