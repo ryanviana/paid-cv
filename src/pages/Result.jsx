@@ -53,6 +53,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         name: userData.name,
         cellphone: userData.cellphone,
         email: userData.email || "default@email.com",
+        vocationalHelp: userData.vocationalHelp,
         schoolYear: preTestData.schoolYear || "",
         careerChoiceCertainty: preTestData.certainty || "",
         guidance: preTestData.guidance || "",
