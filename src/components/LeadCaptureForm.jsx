@@ -16,9 +16,9 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
 
   // Options for the dropdown
   const vocationalOptions = [
-    { value: "I really want help", label: "Eu realmente quero ajuda" },
-    { value: "I guess help is good", label: "Acho que ajuda é boa" },
-    { value: "No help required", label: "Não preciso de ajuda" },
+    { value: "Eu realmente quero ajuda", label: "Eu realmente quero ajuda" },
+    { value: "Acho que ajuda é boa", label: "Acho que ajuda é boa" },
+    { value: "Não preciso de ajuda", label: "Não preciso de ajuda" },
   ];
 
   const handleSubmit = (e) => {
