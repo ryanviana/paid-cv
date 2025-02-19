@@ -277,8 +277,8 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
             </div>
 
             <div className="relative">
-              <div ref={scrollRef} className="w-full max-h-[70vh] overflow-auto pb-6">
-                <div className="flex flex-col space-y-8">
+            <div ref={scrollRef} className="w-full pb-6">
+            <div className="flex flex-col space-y-8">
                   {areasComPontuacao.map((item, index) => (
                     <motion.div
                       key={index}
