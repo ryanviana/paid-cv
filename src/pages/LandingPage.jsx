@@ -23,6 +23,7 @@ const customSelectStyles = {
 
 function LandingPage() {
   const navigate = useNavigate();
+  const [schoolType, setSchoolType] = useState("");
   const [schoolYear, setSchoolYear] = useState("");
   const [certainty, setCertainty] = useState("");
   const [guidance, setGuidance] = useState("");
@@ -30,14 +31,14 @@ function LandingPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!schoolYear || !certainty || !guidance || !concern) {
+    if (!schoolYear || !schoolType || !certainty || !guidance || !concern) {
       alert("Por favor, preencha todas as perguntas antes de continuar.");
       return;
     }
 
     localStorage.setItem(
       "preTestData",
-      JSON.stringify({ schoolYear, certainty, guidance, concern })
+      JSON.stringify({ schoolYear, schoolType, certainty, guidance, concern })
     );
 
     navigate("/questions");
@@ -84,15 +85,45 @@ function LandingPage() {
           </label>
           <Select
             options={[
-              { value: "Ensino Médio – 1º Ano", label: "Ensino Médio – 1º Ano" },
-              { value: "Ensino Médio – 2º Ano", label: "Ensino Médio – 2º Ano" },
-              { value: "Ensino Médio – 3º Ano", label: "Ensino Médio – 3º Ano" },
+              {
+                value: "Ensino Médio – 1º Ano",
+                label: "Ensino Médio – 1º Ano",
+              },
+              {
+                value: "Ensino Médio – 2º Ano",
+                label: "Ensino Médio – 2º Ano",
+              },
+              {
+                value: "Ensino Médio – 3º Ano",
+                label: "Ensino Médio – 3º Ano",
+              },
               { value: "Cursinho", label: "Cursinho" },
-              { value: "Já estou na Universidade", label: "Já estou na Universidade" },
+              {
+                value: "Já estou na Universidade",
+                label: "Já estou na Universidade",
+              },
               { value: "Outro", label: "Outro" },
             ]}
             value={schoolYear ? { value: schoolYear, label: schoolYear } : null}
             onChange={(selected) => setSchoolYear(selected?.value || "")}
+            placeholder="Selecione..."
+            styles={customSelectStyles}
+          />
+        </div>
+
+        {/* NEW FIELD: School Type */}
+        <div>
+          <label className="block text-gray-800 font-medium mb-2 text-lg">
+            Em que tipo de escola você estuda?
+          </label>
+          <Select
+            options={[
+              { value: "Pública", label: "Pública" },
+              { value: "Privada", label: "Privada" },
+              { value: "Técnica", label: "Técnica" },
+            ]}
+            value={schoolType ? { value: schoolType, label: schoolType } : null}
+            onChange={(selected) => setSchoolType(selected?.value || "")}
             placeholder="Selecione..."
             styles={customSelectStyles}
           />
@@ -105,10 +136,18 @@ function LandingPage() {
           </label>
           <Select
             options={[
-              { value: "Tenho uma opção e estou seguro dela", label: "Tenho uma opção e estou seguro dela" },
-              { value: "Tenho algumas opções em mente", label: "Tenho algumas opções em mente" },
-              { value: "Não tenho ideia do que escolher", label: "Não tenho ideia do que escolher" },
-
+              {
+                value: "Tenho uma opção e estou seguro dela",
+                label: "Tenho uma opção e estou seguro dela",
+              },
+              {
+                value: "Tenho algumas opções em mente",
+                label: "Tenho algumas opções em mente",
+              },
+              {
+                value: "Não tenho ideia do que escolher",
+                label: "Não tenho ideia do que escolher",
+              },
             ]}
             value={certainty ? { value: certainty, label: certainty } : null}
             onChange={(selected) => setCertainty(selected?.value || "")}
@@ -124,8 +163,14 @@ function LandingPage() {
           </label>
           <Select
             options={[
-              { value: "Sim, com um psicólogo profissional", label: "Sim, com um psicólogo profissional" },
-              { value: "Sim, através de programas escolares/de orientação", label: "Sim, através de programas escolares/de orientação" },
+              {
+                value: "Sim, com um psicólogo profissional",
+                label: "Sim, com um psicólogo profissional",
+              },
+              {
+                value: "Sim, através de programas escolares/de orientação",
+                label: "Sim, através de programas escolares/de orientação",
+              },
               { value: "Não, nunca fiz um", label: "Não, nunca fiz um" },
             ]}
             value={guidance ? { value: guidance, label: guidance } : null}
@@ -142,10 +187,22 @@ function LandingPage() {
           </label>
           <Select
             options={[
-              { value: "Não saber qual carreira se encaixa em mim", label: "Não saber qual carreira se encaixa em mim" },
-              { value: "Preocupar-me em escolher o curso errado", label: "Preocupar-me em escolher o curso errado" },
-              { value: "Encontrar um curso com boas oportunidades de emprego", label: "Encontrar um curso com boas oportunidades de emprego" },
-              { value: "Garantir que vou gostar do trabalho no futuro", label: "Garantir que vou gostar do trabalho no futuro" },
+              {
+                value: "Não saber qual carreira se encaixa em mim",
+                label: "Não saber qual carreira se encaixa em mim",
+              },
+              {
+                value: "Preocupar-me em escolher o curso errado",
+                label: "Preocupar-me em escolher o curso errado",
+              },
+              {
+                value: "Encontrar um curso com boas oportunidades de emprego",
+                label: "Encontrar um curso com boas oportunidades de emprego",
+              },
+              {
+                value: "Garantir que vou gostar do trabalho no futuro",
+                label: "Garantir que vou gostar do trabalho no futuro",
+              },
               { value: "Outro", label: "Outro" },
             ]}
             value={concern ? { value: concern, label: concern } : null}

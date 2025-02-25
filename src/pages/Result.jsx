@@ -92,6 +92,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         email: userData.email || "default@email.com",
         vocationalHelp: userData.vocationalHelp,
         schoolYear: preTestData.schoolYear || "",
+        schoolType: preTestData.schoolType || "",
         careerChoiceCertainty: preTestData.certainty || "",
         guidance: preTestData.guidance || "",
         concern: preTestData.concern || "",
