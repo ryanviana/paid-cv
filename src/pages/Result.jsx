@@ -1,9 +1,10 @@
 // src/pages/Result.jsx
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import html2canvas from "html2canvas";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 import Grafico from "../components/Grafico";
 import areasConhecimento from "../data/areas_cursos.json";
@@ -20,11 +21,18 @@ import {
 } from "react-icons/fa";
 import getAreaIcon from "../components/AreaIcon";
 
+import { ResultContext } from "../context/ResultContext";
+
 function Result({ pontuacaoTotal, type, updatePagina }) {
+  const { result, leadSubmitted, setLeadSubmitted } = useContext(ResultContext);
+  const navigate = useNavigate();
+
   const isTotal = type === "total";
   const isPreview = type === "parcial";
 
-  const [userInfoSubmitted, setUserInfoSubmitted] = useState(false);
+  // Use context value if available; otherwise, fall back to the prop.
+  const finalPontuacaoTotal = result ? result : pontuacaoTotal;
+
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [showDownArrow, setShowDownArrow] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
@@ -34,34 +42,37 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   const chartRef = useRef(null);
   const scrollRef = useRef(null);
 
+  // Virtual pageview tracking for /results
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "virtualPageview",
+      virtualPageURL: "/results",
+      virtualPageTitle: "Resultados",
+    });
+  }, []);
+
+  // If no result data exists, redirect to /questions.
+  useEffect(() => {
+    if (!result) {
+      navigate("/questions");
+    }
+  }, [result, navigate]);
+
   const handleShare = async () => {
     const shareText =
       "Fiz um teste vocacional bem legal e achei os resultados bem interessantes.\n\nSe quiser fazer também: https://vocacional.decisaoexata.com";
-
-    if (navigator.share) {
-      try {
-        // Converte a dataURL em Blob
-        const response = await fetch(sharePreviewImage);
-        const blob = await response.blob();
-        const file = new File([blob], "resultado.png", { type: blob.type });
-
-        // Verifica se o navegador permite compartilhar arquivos
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            files: [file],
-            text: shareText,
-          });
-        } else {
-          // Se não for possível compartilhar arquivos, compartilha somente o texto
-          await navigator.share({
-            text: shareText,
-          });
-        }
-      } catch (error) {
-        console.error("Erro ao compartilhar:", error);
+    try {
+      const response = await fetch(sharePreviewImage);
+      const blob = await response.blob();
+      const file = new File([blob], "resultado.png", { type: blob.type });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], text: shareText });
+      } else {
+        await navigator.share({ text: shareText });
       }
-    } else {
-      // Fallback para WhatsApp, se a Web Share API não estiver disponível
+    } catch (error) {
+      console.error("Erro ao compartilhar:", error);
       window.open(
         `https://wa.me/?text=${encodeURIComponent(shareText)}`,
         "_blank"
@@ -73,15 +84,25 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   // Submit lead info -> unlock results
   // ------------------------------
   const handleLeadSubmit = async (userData) => {
-    setUserInfoSubmitted(true);
+    // Mark as submitted and navigate immediately
+    setLeadSubmitted(true);
+    navigate("/results");
+
     try {
+      // Retrieve pre-test data (if any) from localStorage
       const preTestData = JSON.parse(
         localStorage.getItem("preTestData") || "{}"
       );
 
-      // Compute top courses as explained above:
+      // Set default values if fields are missing. Adjust these defaults to match your allowed enum values.
+      const defaultSchoolYear = "Outro";
+      const defaultSchoolType = "Pública";
+      const defaultCareerChoiceCertainty = "Não tenho ideia do que escolher";
+      const defaultGuidance = "Não, nunca fiz um";
+      const defaultConcern = "Outro";
+
       const topAreas = areasConhecimento
-        .map((area, idx) => ({ area, pontuacao: pontuacaoTotal[idx] }))
+        .map((area, idx) => ({ area, pontuacao: finalPontuacaoTotal[idx] }))
         .sort((a, b) => b.pontuacao - a.pontuacao)
         .slice(0, 3);
       const topCourses = topAreas.map((item) => item.area.cursos[0].nome);
@@ -91,21 +112,29 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         cellphone: userData.cellphone,
         email: userData.email || "default@email.com",
         vocationalHelp: userData.vocationalHelp,
-        schoolYear: preTestData.schoolYear || "",
-        schoolType: preTestData.schoolType || "",
-        careerChoiceCertainty: preTestData.certainty || "",
-        guidance: preTestData.guidance || "",
-        concern: preTestData.concern || "",
-        topCourses, // Save the top 3 courses' names instead of the score
+        schoolYear: preTestData.schoolYear || defaultSchoolYear,
+        schoolType: preTestData.schoolType || defaultSchoolType,
+        careerChoiceCertainty:
+          preTestData.certainty || defaultCareerChoiceCertainty,
+        guidance: preTestData.guidance || defaultGuidance,
+        concern: preTestData.concern || defaultConcern,
+        topCourses,
         inContact: false,
+        version: "V2_25-02-2025_VIDEO",
       };
 
-      await axios.post(
+      console.log("Sending payload to backend:", payload);
+
+      const response = await axios.post(
         "https://cv.backend.decisaoexata.com/api/leads",
         payload
       );
+      console.log("Lead saved successfully. Response:", response.data);
     } catch (error) {
       console.error("Erro ao salvar/enviar resultados:", error);
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+      }
     }
   };
 
@@ -141,22 +170,9 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     }
   };
 
-  const handleWhatsAppShare = () => {
-    const shareText =
-      "Fiz um teste vocacional bem legal e achei os resultados bem interessantes.\n\nSe quiser fazer também: https://vocacional.decisaoexata.com";
-    window.open(
-      `https://wa.me/?text=${encodeURIComponent(shareText)}`,
-      "_blank"
-    );
+  const handleArrowClick = () => {
+    scrollRef.current?.scrollBy({ top: 100, behavior: "smooth" });
   };
-
-  // ------------------------------
-  // Sort areas by pontuação & show top 3
-  // ------------------------------
-  let areasComPontuacao = areasConhecimento
-    .map((area, idx) => ({ area, pontuacao: pontuacaoTotal[idx] }))
-    .sort((a, b) => b.pontuacao - a.pontuacao);
-  areasComPontuacao = areasComPontuacao.slice(0, 3);
 
   // ------------------------------
   // Scroll arrow logic
@@ -176,13 +192,12 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleArrowClick = () => {
-    scrollRef.current?.scrollBy({ top: 100, behavior: "smooth" });
-  };
+  // Compute top 3 areas based on finalPontuacaoTotal
+  const areasComPontuacao = areasConhecimento
+    .map((area, idx) => ({ area, pontuacao: finalPontuacaoTotal[idx] }))
+    .sort((a, b) => b.pontuacao - a.pontuacao)
+    .slice(0, 3);
 
-  // ------------------------------
-  // RENDER
-  // ------------------------------
   return (
     <motion.div
       className="w-full min-h-screen flex flex-col"
@@ -190,11 +205,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* 
-        ==================================================
-        SECTION 1: HERO TITLE 
-        ==================================================
-      */}
+      {/* SECTION 1: HERO TITLE */}
       <section className="w-full bg-white pt-16 pb-6">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.h1
@@ -218,28 +229,20 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </div>
       </section>
 
-      {/* 
-        ==================================================
-        SECTION 2: BIG CHART 
-        ==================================================
-        - Large “hero” style area for the chart
-      */}
+      {/* SECTION 2: BIG CHART */}
       <section className="w-full bg-slate-50 py-10">
         <div className="max-w-5xl mx-auto px-4 relative">
-          {/* If locked, we show a blur & lock overlay */}
           <div
             ref={chartRef}
             className={`relative transition-all duration-300 ${
-              isTotal && !userInfoSubmitted ? "filter blur-sm" : ""
+              isTotal && !leadSubmitted ? "filter blur-sm" : ""
             }`}
           >
-            {/* Lock overlay if final results not unlocked */}
-            {isTotal && !userInfoSubmitted && (
+            {isTotal && !leadSubmitted && (
               <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-8xl pointer-events-none">
                 <FaLock />
               </div>
             )}
-
             <motion.h2
               className="text-2xl font-bold text-jornadas-blue mb-6 text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -248,18 +251,14 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
             >
               Seu Resultado
             </motion.h2>
-
-            {/* The chart is bigger and more centered. Adjust your Grafico component or CSS if needed */}
             <motion.div
               className="w-full flex items-center justify-center"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <Grafico pontuacaoTotal={pontuacaoTotal} type={type} />
+              <Grafico pontuacaoTotal={finalPontuacaoTotal} type={type} />
             </motion.div>
-
-            {/* If it's partial results, show next question button */}
             {isPreview && (
               <div className="mt-8 flex justify-center">
                 <button
@@ -271,10 +270,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
               </div>
             )}
           </div>
-
-          {/* "Share your results" button => only if final & unlocked. 
-              We'll place it at bottom-right of the chart section. */}
-          {isTotal && userInfoSubmitted && (
+          {isTotal && leadSubmitted && (
             <motion.button
               onClick={prepareShare}
               className="mt-6 sm:mt-8 flex items-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-md shadow font-semibold text-sm sm:absolute sm:right-4 sm:bottom-4"
@@ -289,11 +285,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </div>
       </section>
 
-      {/* 
-        ==================================================
-        SECTION 3: ABOUT YOU RESULTS (TOP 3 AREAS)
-        ==================================================
-      */}
+      {/* SECTION 3: ABOUT YOU RESULTS (TOP 3 AREAS) */}
       {isTotal && (
         <section className="w-full bg-white py-16">
           <div className="max-w-4xl mx-auto px-4">
@@ -317,7 +309,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                 principais opções para cada uma.
               </motion.p>
             </div>
-
             <div className="relative">
               <div ref={scrollRef} className="w-full pb-6">
                 <div className="flex flex-col space-y-8">
@@ -340,7 +331,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                       </div>
                       <hr className="my-3 border-gray-300" />
                       <ul className="mt-4 list-none pl-0 text-justify space-y-6">
-                        {/* Show top 3 courses */}
                         {item.area.cursos.slice(0, 3).map((curso, i) => (
                           <li key={i} className="border-b border-gray-200 pb-5">
                             <div className="text-lg sm:text-xl text-black font-bold font-montserrat mb-1">
@@ -376,19 +366,13 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </section>
       )}
 
-      {/* 
-        If final results are locked, show lead form 
-      */}
-      {isTotal && !userInfoSubmitted && (
+      {/* Show the lead capture form if the lead is not submitted */}
+      {isTotal && !leadSubmitted && (
         <LeadCaptureForm showLeadCapture={true} onSubmit={handleLeadSubmit} />
       )}
 
-      {/* 
-        ==================================================
-        SECTION 4: ABOUT US
-        ==================================================
-      */}
-      {isTotal && userInfoSubmitted && (
+      {/* SECTION 4: ABOUT US */}
+      {isTotal && leadSubmitted && (
         <section className="w-full bg-gray-50 py-16">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-8">
@@ -407,11 +391,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </section>
       )}
 
-      {/* 
-        ==================================================
-        SECTION 5: FOOTER 
-        ==================================================
-      */}
+      {/* SECTION 5: FOOTER */}
       {isTotal && (
         <motion.footer
           className="w-full bg-gray-900 text-gray-200 py-8 px-4 text-center"
@@ -456,7 +436,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </motion.footer>
       )}
 
-      {/* =================== Share Modal =================== */}
+      {/* SHARE MODAL */}
       {showShareModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm sm:max-w-md md:max-w-xl">
@@ -481,7 +461,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
             >
               <FaWhatsapp className="text-2xl" /> Compartilhar no WhatsApp!
             </button>
-
             <button
               onClick={() => setShowShareModal(false)}
               className="w-full mt-4 py-2 border rounded-lg font-semibold text-gray-700 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -492,7 +471,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </div>
       )}
 
-      {/* =================== Course Modal =================== */}
+      {/* COURSE MODAL */}
       {selectedCourse && (
         <CourseDetails
           course={selectedCourse}
@@ -504,7 +483,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
 }
 
 Result.propTypes = {
-  pontuacaoTotal: PropTypes.array.isRequired,
+  pontuacaoTotal: PropTypes.array,
   type: PropTypes.string.isRequired,
   updatePagina: PropTypes.func.isRequired,
 };
