@@ -13,12 +13,12 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
   const [videoEnded, setVideoEnded] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
   const [playerReady, setPlayerReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const videoRef = useRef(null);
   const playerRef = useRef(null);
 
   useEffect(() => {
-    // Load YouTube IFrame API if not already loaded
     if (!window.YT) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -54,24 +54,28 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
   };
 
   const onPlayerReady = (event) => {
-    // Use event.target (the player object) to ensure we have the proper API methods
     playerRef.current = event.target;
     setPlayerReady(true);
   };
 
   const onPlayerStateChange = (event) => {
-    if (event.data === window.YT.PlayerState.ENDED) {
+    const playerState = event.data;
+    if (playerState === window.YT.PlayerState.PLAYING) {
+      setIsPlaying(true);
+    } else if (playerState === window.YT.PlayerState.PAUSED) {
+      setIsPlaying(false);
+    } else if (playerState === window.YT.PlayerState.ENDED) {
       setVideoEnded(true);
       setVideoProgress(100);
+      setIsPlaying(false);
     }
   };
 
-  // Update progress bar every 500ms when player is ready and video not ended
+  // Update the progress bar only when the video is playing.
   useEffect(() => {
     let intervalId;
-    if (playerReady && playerRef.current && !videoEnded) {
+    if (playerReady && playerRef.current && isPlaying && !videoEnded) {
       intervalId = setInterval(() => {
-        // Ensure the player has the getDuration function
         if (
           playerRef.current &&
           typeof playerRef.current.getDuration === "function"
@@ -79,7 +83,16 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
           const duration = playerRef.current.getDuration();
           const currentTime = playerRef.current.getCurrentTime();
           if (duration > 0) {
-            setVideoProgress(Math.min(100, (currentTime / duration) * 100));
+            const rawProgress = (currentTime / duration) * 100;
+            let displayedProgress;
+            if (rawProgress < 80) {
+              // Easing function for early progress.
+              const gamma = 0.45;
+              displayedProgress = 80 * Math.pow(rawProgress / 80, gamma);
+            } else {
+              displayedProgress = rawProgress;
+            }
+            setVideoProgress(displayedProgress);
           }
         }
       }, 500);
@@ -87,7 +100,7 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [playerReady, videoEnded]);
+  }, [playerReady, videoEnded, isPlaying]);
 
   const handleHelpChoice = (choice) => {
     setVocationalHelp({ value: choice, label: choice });
@@ -159,7 +172,7 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
               </p>
               <div className="mt-4 w-full bg-gray-300 h-2 rounded">
                 <div
-                  className="h-2 bg-blue-600 rounded"
+                  className="h-2 bg-blue-600 rounded transition-all duration-200"
                   style={{ width: `${videoProgress}%` }}
                 />
               </div>
@@ -167,69 +180,64 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
           )}
         </div>
 
-        {/* Option Buttons */}
+        {/* Option Buttons, Name, and Cellphone Form (shown when video has ended) */}
         {videoEnded && (
-          <div className="flex flex-col gap-4 mb-6">
-            <button
-              type="button"
-              onClick={() => handleHelpChoice("Eu realmente quero ajuda")}
-              className={`w-full py-3 px-4 rounded-full border-2 transition-all duration-200 focus:outline-none ${
-                vocationalHelp?.value === "Eu realmente quero ajuda"
-                  ? "bg-green-700 border-green-900 text-white shadow-xl scale-105"
-                  : "bg-green-500 border-green-500 text-white hover:bg-green-600 hover:border-green-700"
-              }`}
-            >
-              Eu realmente quero ajuda
-            </button>
-            <button
-              type="button"
-              onClick={() => handleHelpChoice("Não preciso de ajuda")}
-              className={`w-full py-3 px-4 rounded-full border-2 transition-all duration-200 focus:outline-none ${
-                vocationalHelp?.value === "Não preciso de ajuda"
-                  ? "bg-gray-700 border-gray-900 text-white shadow-xl scale-105"
-                  : "bg-gray-500 border-gray-500 text-white hover:bg-gray-600 hover:border-gray-700"
-              }`}
-            >
-              Não preciso de ajuda
-            </button>
-          </div>
+          <>
+            <div className="flex flex-col gap-4 mb-6">
+              <button
+                type="button"
+                onClick={() => handleHelpChoice("Eu realmente quero ajuda")}
+                className={`w-full py-3 px-4 rounded-full border-2 transition-all duration-200 focus:outline-none ${
+                  vocationalHelp?.value === "Eu realmente quero ajuda"
+                    ? "bg-green-700 border-green-900 text-white shadow-xl scale-105"
+                    : "bg-green-500 border-green-500 text-white hover:bg-green-600 hover:border-green-700"
+                }`}
+              >
+                Eu realmente quero ajuda
+              </button>
+              <button
+                type="button"
+                onClick={() => handleHelpChoice("Não preciso de ajuda")}
+                className={`w-full py-3 px-4 rounded-full border-2 transition-all duration-200 focus:outline-none ${
+                  vocationalHelp?.value === "Não preciso de ajuda"
+                    ? "bg-gray-700 border-gray-900 text-white shadow-xl scale-105"
+                    : "bg-gray-500 border-gray-500 text-white hover:bg-gray-600 hover:border-gray-700"
+                }`}
+              >
+                Não preciso de ajuda
+              </button>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Seu nome"
+                required
+              />
+              <input
+                type="tel"
+                value={cellphone}
+                onChange={(e) => setCellphone(e.target.value)}
+                className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="(XX) XXXXX-XXXX"
+                required
+              />
+              <button
+                type="submit"
+                disabled={!vocationalHelp}
+                className={`w-full py-3 rounded-full font-extrabold shadow-lg transition transform focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  vocationalHelp
+                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                    : "bg-gray-400 text-white cursor-not-allowed"
+                }`}
+              >
+                Revelar Agora
+              </button>
+            </form>
+          </>
         )}
-
-        {errorMessage && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded text-center">
-            {errorMessage}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Seu nome"
-            required
-          />
-          <input
-            type="tel"
-            value={cellphone}
-            onChange={(e) => setCellphone(e.target.value)}
-            className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="(XX) XXXXX-XXXX"
-            required
-          />
-          <button
-            type="submit"
-            disabled={!vocationalHelp}
-            className={`w-full py-3 rounded-full font-extrabold shadow-lg transition transform focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              vocationalHelp
-                ? "bg-blue-600 hover:bg-blue-700 text-white"
-                : "bg-gray-400 text-white cursor-not-allowed"
-            }`}
-          >
-            Revelar Agora
-          </button>
-        </form>
       </motion.div>
     </motion.div>
   );
