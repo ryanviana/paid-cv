@@ -11,12 +11,14 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
   const [vocationalHelp, setVocationalHelp] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [videoEnded, setVideoEnded] = useState(false);
-  const [revealError, setRevealError] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
+  const [playerReady, setPlayerReady] = useState(false);
 
   const videoRef = useRef(null);
   const playerRef = useRef(null);
 
   useEffect(() => {
+    // Load YouTube IFrame API if not already loaded
     if (!window.YT) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -44,27 +46,56 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
           fs: 0,
         },
         events: {
+          onReady: onPlayerReady,
           onStateChange: onPlayerStateChange,
         },
       });
     }
   };
 
+  const onPlayerReady = (event) => {
+    // Use event.target (the player object) to ensure we have the proper API methods
+    playerRef.current = event.target;
+    setPlayerReady(true);
+  };
+
   const onPlayerStateChange = (event) => {
     if (event.data === window.YT.PlayerState.ENDED) {
       setVideoEnded(true);
+      setVideoProgress(100);
     }
   };
 
+  // Update progress bar every 500ms when player is ready and video not ended
+  useEffect(() => {
+    let intervalId;
+    if (playerReady && playerRef.current && !videoEnded) {
+      intervalId = setInterval(() => {
+        // Ensure the player has the getDuration function
+        if (
+          playerRef.current &&
+          typeof playerRef.current.getDuration === "function"
+        ) {
+          const duration = playerRef.current.getDuration();
+          const currentTime = playerRef.current.getCurrentTime();
+          if (duration > 0) {
+            setVideoProgress(Math.min(100, (currentTime / duration) * 100));
+          }
+        }
+      }, 500);
+    }
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [playerReady, videoEnded]);
+
   const handleHelpChoice = (choice) => {
     setVocationalHelp({ value: choice, label: choice });
-    setRevealError(false); // clear error once an option is selected
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrorMessage("");
-    // Check required fields.
     if (!name || !cellphone) {
       setErrorMessage("Por favor, preencha todos os campos.");
       return;
@@ -73,7 +104,6 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
       setErrorMessage(
         "Por favor, selecione uma opção de orientação vocacional."
       );
-      setRevealError(true);
       return;
     }
     try {
@@ -116,16 +146,24 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
           Assista ao vídeo abaixo antes de prosseguir.
         </p>
 
-        {/* Video Embed */}
-        <div className="mb-6">
+        {/* Video Embed and Progress Bar */}
+        <div className="mb-4">
           <div
             ref={videoRef}
             className="w-full mx-auto rounded-lg overflow-hidden"
           />
           {!videoEnded && (
-            <p className="mt-2 text-center text-gray-600">
-              Aguarde até o final do vídeo para escolher sua opção.
-            </p>
+            <>
+              <p className="mt-2 text-center text-gray-600">
+                Aguarde até o final do vídeo para escolher sua opção.
+              </p>
+              <div className="mt-4 w-full bg-gray-300 h-2 rounded">
+                <div
+                  className="h-2 bg-blue-600 rounded"
+                  style={{ width: `${videoProgress}%` }}
+                />
+              </div>
+            </>
           )}
         </div>
 
@@ -138,8 +176,7 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
               className={`w-full py-3 px-4 rounded-full border-2 transition-all duration-200 focus:outline-none ${
                 vocationalHelp?.value === "Eu realmente quero ajuda"
                   ? "bg-green-700 border-green-900 text-white shadow-xl scale-105"
-                  : "bg-green-500 border-green-500 text-white hover:bg-green-600 hover:border-green-700" +
-                    (!vocationalHelp ? " opacity-70 animate-pulse" : "")
+                  : "bg-green-500 border-green-500 text-white hover:bg-green-600 hover:border-green-700"
               }`}
             >
               Eu realmente quero ajuda
@@ -150,8 +187,7 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
               className={`w-full py-3 px-4 rounded-full border-2 transition-all duration-200 focus:outline-none ${
                 vocationalHelp?.value === "Não preciso de ajuda"
                   ? "bg-gray-700 border-gray-900 text-white shadow-xl scale-105"
-                  : "bg-gray-500 border-gray-500 text-white hover:bg-gray-600 hover:border-gray-700" +
-                    (!vocationalHelp ? " opacity-70 animate-pulse" : "")
+                  : "bg-gray-500 border-gray-500 text-white hover:bg-gray-600 hover:border-gray-700"
               }`}
             >
               Não preciso de ajuda
@@ -186,9 +222,7 @@ function LeadCaptureForm({ showLeadCapture, onSubmit }) {
             type="submit"
             disabled={!vocationalHelp}
             className={`w-full py-3 rounded-full font-extrabold shadow-lg transition transform focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              revealError
-                ? "bg-red-500 border-2 border-red-700 text-white animate-pulse"
-                : vocationalHelp
+              vocationalHelp
                 ? "bg-blue-600 hover:bg-blue-700 text-white"
                 : "bg-gray-400 text-white cursor-not-allowed"
             }`}
