@@ -206,7 +206,7 @@ function PaymentCaptureForm({
             <div className="flex flex-col items-center justify-center mb-4 relative z-10">
               <div className="flex items-baseline space-x-2">
                 <span className="line-through text-red-600 text-sm md:text-base">
-                  R$78,90
+                  R$37,80
                 </span>
                 <span className="text-green-600 text-3xl md:text-4xl font-extrabold animate-pulse">
                   R$9,90
