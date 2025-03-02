@@ -18,11 +18,21 @@ function PaymentCaptureForm({
   // Timer and payment state
   const [timer, setTimer] = useState(15 * 60); // 15 minutes in seconds
   const [loading, setLoading] = useState(false);
+  // Persist testId and paymentStatus so they survive page refresh
   const [testId, setTestId] = usePersistedState("paymentTestId", null);
-  const [paymentStatus, setPaymentStatus] = useState(null);
+  const [paymentStatus, setPaymentStatus] = usePersistedState(
+    "paymentStatus",
+    null
+  );
   const [qrCodeData, setQrCodeData] = useState(null);
   const [qrCodeText, setQrCodeText] = useState(null);
   const [copied, setCopied] = useState(false);
+
+  // New persisted state to track if the lead data was already submitted (i.e. results revealed)
+  const [resultsRevealed, setResultsRevealed] = usePersistedState(
+    "resultsRevealed",
+    false
+  );
 
   // Lead data using persisted state (reads/writes automatically to localStorage)
   const [userName, setUserName] = usePersistedState("leadName", "");
@@ -35,18 +45,23 @@ function PaymentCaptureForm({
   // State to track if user attempted to submit
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
+  // If results were already revealed (i.e. lead data submitted), do not render the PaymentCaptureForm
+  if (resultsRevealed) {
+    return null;
+  }
+
   // When modal shows, start PIX payment and countdown
   useEffect(() => {
     if (!showForm) return;
-    // Only start a new payment if there's no persisted testId
-    if (!testId) {
+    // Only start a new payment if no testId exists and payment hasn't been approved
+    if (!testId && paymentStatus !== "approved") {
       startPixPayment();
     }
     const interval = setInterval(() => {
       setTimer((prev) => (prev <= 1 ? 0 : prev - 1));
     }, 1000);
     return () => clearInterval(interval);
-  }, [showForm, testId]);
+  }, [showForm, testId, paymentStatus]);
 
   // Listen for payment status updates via Socket.IO
   useEffect(() => {
@@ -167,6 +182,8 @@ function PaymentCaptureForm({
     // Send lead data and email once the user clicks the button
     sendLeadData();
     sendLeadEmail();
+    // Mark that the results have been revealed so the form won't show again on refresh
+    setResultsRevealed(true);
   };
 
   if (!showForm) return null;
@@ -194,10 +211,9 @@ function PaymentCaptureForm({
           className="absolute inset-0 w-full h-full object-cover opacity-10"
         />
 
-        {/* Show this top section only if payment is NOT approved */}
+        {/* Show top section only if payment is not approved */}
         {paymentStatus !== "approved" && (
           <>
-            {/* Title and Urgency */}
             <h2 className="text-center font-extrabold text-2xl md:text-3xl text-red-600 mb-2 relative z-10 uppercase tracking-wider">
               Oferta Relâmpago
             </h2>
@@ -205,7 +221,6 @@ function PaymentCaptureForm({
               Aproveite antes que acabe! Tempo limitado.
             </p>
 
-            {/* Pricing */}
             <div className="flex flex-col items-center justify-center mb-4 relative z-10">
               <div className="flex items-baseline space-x-2">
                 <span className="line-through text-red-600 text-sm md:text-base">
@@ -221,7 +236,6 @@ function PaymentCaptureForm({
               </p>
             </div>
 
-            {/* Countdown (bigger, with pulse) */}
             <p className="text-center text-2xl md:text-3xl text-red-600 font-bold mb-4 relative z-10 animate-pulse">
               <span className="mr-2">O QR Code expira em:</span>
               <span className="underline">{countdown}</span>
@@ -285,7 +299,7 @@ function PaymentCaptureForm({
           </p>
         )}
 
-        {/* Input Fields and Reveal Button (shown only when payment is approved) */}
+        {/* Input Fields and Reveal Button (shown when payment is approved) */}
         {paymentStatus === "approved" && (
           <div className="relative z-10 mt-4">
             <p className="text-center text-green-600 font-bold mb-4">
