@@ -28,12 +28,6 @@ function PaymentCaptureForm({
   const [qrCodeText, setQrCodeText] = useState(null);
   const [copied, setCopied] = useState(false);
 
-  // New persisted state to track if the lead data was already submitted (i.e. results revealed)
-  const [resultsRevealed, setResultsRevealed] = usePersistedState(
-    "resultsRevealed",
-    false
-  );
-
   // Lead data using persisted state (reads/writes automatically to localStorage)
   const [userName, setUserName] = usePersistedState("leadName", "");
   const [userCellphone, setUserCellphone] = usePersistedState(
@@ -45,27 +39,9 @@ function PaymentCaptureForm({
   // State to track if user attempted to submit
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
-  // Instead of returning null when results have been revealed,
-  // display a confirmation message.
-  if (resultsRevealed) {
-    return (
-      <motion.div
-        className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <motion.div
-          className="relative bg-white p-6 md:p-8 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
-          initial={{ scale: 0.8 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <p className="text-center text-green-600 font-bold text-xl">
-            Obrigado! Seus dados foram enviados com sucesso.
-          </p>
-        </motion.div>
-      </motion.div>
-    );
+  // If payment already approved, do not render the PaymentCaptureForm at all.
+  if (paymentStatus === "approved") {
+    return null;
   }
 
   // When modal shows, start PIX payment and countdown
@@ -200,8 +176,6 @@ function PaymentCaptureForm({
     // Send lead data and email once the user clicks the button
     sendLeadData();
     sendLeadEmail();
-    // Mark that the results have been revealed so the form won't show again on refresh
-    setResultsRevealed(true);
   };
 
   if (!showForm) return null;
@@ -317,7 +291,7 @@ function PaymentCaptureForm({
           </p>
         )}
 
-        {/* Input Fields and Reveal Button (shown when payment is approved) */}
+        {/* Input Fields and Reveal Button (for when payment is approved) */}
         {paymentStatus === "approved" && (
           <div className="relative z-10 mt-4">
             <p className="text-center text-green-600 font-bold mb-4">
