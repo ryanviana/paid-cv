@@ -45,9 +45,27 @@ function PaymentCaptureForm({
   // State to track if user attempted to submit
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
-  // If results were already revealed (i.e. lead data submitted), do not render the PaymentCaptureForm
+  // Instead of returning null when results have been revealed,
+  // display a confirmation message.
   if (resultsRevealed) {
-    return null;
+    return (
+      <motion.div
+        className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <motion.div
+          className="relative bg-white p-6 md:p-8 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <p className="text-center text-green-600 font-bold text-xl">
+            Obrigado! Seus dados foram enviados com sucesso.
+          </p>
+        </motion.div>
+      </motion.div>
+    );
   }
 
   // When modal shows, start PIX payment and countdown
