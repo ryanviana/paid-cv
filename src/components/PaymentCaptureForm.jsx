@@ -32,6 +32,9 @@ function PaymentCaptureForm({
   );
   const [userEmail, setUserEmail] = usePersistedState("leadEmail", "");
 
+  // State to track if user attempted to submit
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
+
   // When modal shows, start PIX payment and countdown
   useEffect(() => {
     if (!showForm) return;
@@ -50,10 +53,6 @@ function PaymentCaptureForm({
         if (data.paymentStatus === "approved") {
           // Optionally hide QR code when approved
           setQrCodeData(null);
-          // Send the lead data to the backend (save in CRM)
-          sendLeadData();
-          // Also send the email using the email endpoint
-          sendLeadEmail();
         }
       }
     });
@@ -131,7 +130,7 @@ function PaymentCaptureForm({
     onPaymentSuccess(leadPayload);
   };
 
-  // NEW: Function to send email to the lead using the email endpoint
+  // Function to send email to the lead using the email endpoint
   const sendLeadEmail = async () => {
     const emailPayload = {
       score: pontuacaoTotal, // pass the computed score array
@@ -153,6 +152,18 @@ function PaymentCaptureForm({
     } catch (error) {
       console.error("Erro ao enviar email:", error);
     }
+  };
+
+  // Handle the click on "Revelar resultados"
+  const handleRevealResults = () => {
+    setAttemptedSubmit(true);
+    if (!userName || !userCellphone || !userEmail) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
+    // Send lead data and email once the user clicks the button
+    sendLeadData();
+    sendLeadEmail();
   };
 
   if (!showForm) return null;
@@ -179,107 +190,89 @@ function PaymentCaptureForm({
           alt="Success"
           className="absolute inset-0 w-full h-full object-cover opacity-10"
         />
-        {/* Offer Heading */}
-        <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-center text-jornadas-blue relative z-10">
-          OFERTA RELÂMPAGO
-        </h2>
-        <p className="text-center text-gray-800 text-xl font-bold mb-2 relative z-10">
-          De <span className="line-through text-red-600">R$78,90</span> por{" "}
-          <span className="text-green-600">R$9,90</span>
-        </p>
-        <p className="text-center text-gray-600 mb-4 relative z-10">
-          Pague agora e descubra seu futuro profissional!
-        </p>
-        {/* Countdown */}
-        <p className="text-center text-sm md:text-base text-gray-700 font-semibold mb-4 relative z-10">
-          O QR Code expira em{" "}
-          <span className="text-red-600 text-lg md:text-xl">{countdown}</span>
-        </p>
+
+        {/* Show this top section only if payment is NOT approved */}
+        {paymentStatus !== "approved" && (
+          <>
+            {/* Title and Urgency */}
+            <h2 className="text-center font-extrabold text-2xl md:text-3xl text-red-600 mb-2 relative z-10 uppercase tracking-wider">
+              Oferta Relâmpago
+            </h2>
+            <p className="text-center text-gray-600 text-sm md:text-base font-medium mb-4 relative z-10">
+              Aproveite antes que acabe! Tempo limitado.
+            </p>
+
+            {/* Pricing */}
+            <div className="flex flex-col items-center justify-center mb-4 relative z-10">
+              <div className="flex items-baseline space-x-2">
+                <span className="line-through text-red-600 text-sm md:text-base">
+                  R$78,90
+                </span>
+                <span className="text-green-600 text-3xl md:text-4xl font-extrabold animate-pulse">
+                  R$9,90
+                </span>
+              </div>
+              <p className="text-gray-700 text-xs md:text-sm mt-1 font-semibold">
+                Desconto exclusivo! Pague agora e descubra seu futuro
+                profissional.
+              </p>
+            </div>
+
+            {/* Countdown (bigger, with pulse) */}
+            <p className="text-center text-2xl md:text-3xl text-red-600 font-bold mb-4 relative z-10 animate-pulse">
+              <span className="mr-2">O QR Code expira em:</span>
+              <span className="underline">{countdown}</span>
+            </p>
+          </>
+        )}
+
         {/* QR Code and Copy Button */}
         {loading && (
           <p className="text-center text-gray-500 mb-4 relative z-10">
             Gerando QR Code, aguarde...
           </p>
         )}
-        {!loading && qrCodeData && timer > 0 && (
-          <div className="flex flex-col items-center justify-center mb-4 relative z-10">
-            <img
-              src={qrCodeData}
-              alt="QR Code para pagamento PIX"
-              className="w-44 h-44 object-contain rounded shadow-lg border-2 border-green-500 mb-2"
-            />
-            {qrCodeText && (
-              <div className="flex flex-col items-center">
-                <p className="text-sm text-gray-700 mb-2">
-                  Não consegue escanear? Copie a chave PIX:
-                </p>
-                <button
-                  onClick={handleCopyPixKey}
-                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-all duration-200"
-                >
-                  Copiar Chave PIX
-                </button>
-                {copied && (
-                  <span className="text-xs text-green-600 mt-1">
-                    Copiado para a área de transferência!
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
-        )}
-        {/* Input Fields for Lead Data */}
-        <div className="relative z-10 mb-4">
-          <label className="block text-gray-800 font-semibold mb-1">
-            Seu Nome
-          </label>
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            placeholder="Digite seu nome"
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div className="relative z-10 mb-4">
-          <label className="block text-gray-800 font-semibold mb-1">
-            Celular
-          </label>
-          <input
-            type="tel"
-            value={userCellphone}
-            onChange={(e) => setUserCellphone(e.target.value)}
-            placeholder="(XX) XXXXX-XXXX"
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div className="relative z-10 mb-4">
-          <label className="block text-gray-800 font-semibold mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-            placeholder="seuemail@exemplo.com"
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        {/* Payment Status */}
-        {paymentStatus === "approved" && (
-          <p className="text-center text-green-600 font-bold mt-4 relative z-10">
-            Pagamento Aprovado! Carregando resultados...
-          </p>
-        )}
+        {!loading &&
+          qrCodeData &&
+          timer > 0 &&
+          paymentStatus !== "approved" && (
+            <div className="flex flex-col items-center justify-center mb-4 relative z-10">
+              <img
+                src={qrCodeData}
+                alt="QR Code para pagamento PIX"
+                className="w-44 h-44 object-contain rounded shadow-lg border-4 border-green-500 mb-2"
+              />
+              {qrCodeText && (
+                <div className="flex flex-col items-center">
+                  <p className="text-sm text-gray-700 mb-2 font-medium">
+                    Não consegue escanear? Copie a chave PIX:
+                  </p>
+                  <button
+                    onClick={handleCopyPixKey}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-all duration-200"
+                  >
+                    Copiar Chave PIX
+                  </button>
+                  {copied && (
+                    <span className="text-xs text-green-600 mt-1">
+                      Copiado para a área de transferência!
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+        {/* Payment Status Messages */}
         {paymentStatus === "pending" && (
-          <p className="text-center text-blue-600 font-semibold mt-4 relative z-10">
+          <p className="text-center text-blue-600 font-semibold mb-4 relative z-10">
             Pagamento Pendente...
           </p>
         )}
         {paymentStatus &&
           paymentStatus !== "approved" &&
           paymentStatus !== "pending" && (
-            <p className="text-center text-gray-600 mt-4 relative z-10">
+            <p className="text-center text-gray-600 mt-2 relative z-10">
               Status do Pagamento: {paymentStatus}
             </p>
           )}
@@ -287,6 +280,71 @@ function PaymentCaptureForm({
           <p className="text-center text-red-600 font-bold mt-4 relative z-10">
             Tempo Esgotado! Feche esta janela e tente novamente.
           </p>
+        )}
+
+        {/* Input Fields and Reveal Button (shown only when payment is approved) */}
+        {paymentStatus === "approved" && (
+          <div className="relative z-10 mt-4">
+            <p className="text-center text-green-600 font-bold mb-4">
+              Pagamento Aprovado! Preencha seus dados para revelar resultados.
+            </p>
+            <div className="mb-4">
+              <label className="block text-gray-800 font-semibold mb-1">
+                Seu Nome
+              </label>
+              <input
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="Digite seu nome"
+                required
+                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                  attemptedSubmit && !userName ? "border-red-500" : ""
+                }`}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-800 font-semibold mb-1">
+                Celular
+              </label>
+              <input
+                type="tel"
+                value={userCellphone}
+                onChange={(e) => setUserCellphone(e.target.value)}
+                placeholder="(XX) XXXXX-XXXX"
+                required
+                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                  attemptedSubmit && !userCellphone ? "border-red-500" : ""
+                }`}
+              />
+            </div>
+            <div className="mb-6">
+              <label className="block text-gray-800 font-semibold mb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                placeholder="seuemail@exemplo.com"
+                required
+                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                  attemptedSubmit && !userEmail ? "border-red-500" : ""
+                }`}
+              />
+            </div>
+            <button
+              onClick={handleRevealResults}
+              disabled={!userName || !userCellphone || !userEmail}
+              className={`w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-200 ${
+                !userName || !userCellphone || !userEmail
+                  ? "opacity-50 cursor-not-allowed"
+                  : "opacity-100"
+              }`}
+            >
+              Revelar resultados
+            </button>
+          </div>
         )}
       </motion.div>
     </motion.div>
