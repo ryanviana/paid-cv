@@ -1,0 +1,111 @@
+/* PaymentComponent.css */
+
+/* Modal Backdrop */
+.payment-modal-backdrop {
+    position: fixed;
+    inset: 0; /* top, right, bottom, left = 0 */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Modal Container */
+  .payment-modal {
+    position: relative;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  /* Close Button */
+  .payment-close-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: #999;
+    cursor: pointer;
+  }
+  .payment-close-btn:hover {
+    color: #333;
+  }
+  
+  /* Title */
+  .payment-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1f2937; /* Gray-800 */
+  }
+  
+  /* Price Info */
+  .payment-price {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #111827; /* Gray-900 */
+  }
+  
+  /* Subtitle */
+  .payment-subtitle {
+    font-size: 0.95rem;
+    color: #4b5563; /* Gray-600 */
+    margin-bottom: 1rem;
+  }
+  
+  /* Action Button */
+  .payment-action-btn {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    background-color: #10b981; /* Green-500 */
+    color: #ffffff;
+    font-weight: 700;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 1rem;
+  }
+  .payment-action-btn:hover {
+    background-color: #059669; /* Green-600 */
+  }
+  
+  /* Loading Text */
+  .payment-loading {
+    font-size: 1rem;
+    color: #6b7280; /* Gray-500 */
+    margin-bottom: 1rem;
+  }
+  
+  /* QR Code Container */
+  .payment-qrcode-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* QR Code Image */
+  .payment-qrcode {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Payment Status */
+  .payment-status {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: #2563eb; /* Blue-600 */
+  }
+  

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import Grafico from "../components/Grafico";
 import areasConhecimento from "../data/areas_cursos.json";
-import LeadCaptureForm from "../components/LeadCaptureForm";
+import PaymentCaptureForm from "../components/PaymentCaptureForm";
 import CourseDetails from "../components/CourseDetails";
 import AboutDecisaoExataMotion from "../components/AboutDecisaoExataMotion";
 
@@ -26,12 +26,19 @@ import { ResultContext } from "../context/ResultContext";
 function Result({ pontuacaoTotal, type, updatePagina }) {
   const { result, leadSubmitted, setLeadSubmitted } = useContext(ResultContext);
   const navigate = useNavigate();
-
   const isTotal = type === "total";
   const isPreview = type === "parcial";
-
-  // Use context value if available; otherwise, fall back to the prop.
   const finalPontuacaoTotal = result ? result : pontuacaoTotal;
+
+  // Compute top 3 areas and derive recommended course names
+  const areasComPontuacao = areasConhecimento
+    .map((area, idx) => ({
+      area,
+      pontuacao: finalPontuacaoTotal[idx] || 0,
+    }))
+    .sort((a, b) => b.pontuacao - a.pontuacao)
+    .slice(0, 3);
+  const topCourses = areasComPontuacao.map((item) => item.area.cursos[0].nome);
 
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [showDownArrow, setShowDownArrow] = useState(false);
@@ -52,7 +59,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     });
   }, []);
 
-  // If no result data exists, redirect to /questions.
+  // Redirect to /questions if no result exists.
   useEffect(() => {
     if (!result) {
       navigate("/questions");
@@ -80,75 +87,18 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     }
   };
 
-  // ------------------------------
-  // Submit lead info -> unlock results
-  // ------------------------------
-  const handleLeadSubmit = async (userData) => {
-    // Mark as submitted and navigate immediately
+  // Process payment lead info → unlock results
+  const handlePaymentSuccess = async (leadPayload) => {
     setLeadSubmitted(true);
-    navigate("/results");
-
-    try {
-      // Retrieve pre-test data (if any) from localStorage
-      const preTestData = JSON.parse(
-        localStorage.getItem("preTestData") || "{}"
-      );
-
-      // Set default values if fields are missing. Adjust these defaults to match your allowed enum values.
-      const defaultSchoolYear = "Outro";
-      const defaultSchoolType = "Pública";
-      const defaultCareerChoiceCertainty = "Não tenho ideia do que escolher";
-      const defaultGuidance = "Não, nunca fiz um";
-      const defaultConcern = "Outro";
-
-      const topAreas = areasConhecimento
-        .map((area, idx) => ({ area, pontuacao: finalPontuacaoTotal[idx] }))
-        .sort((a, b) => b.pontuacao - a.pontuacao)
-        .slice(0, 3);
-      const topCourses = topAreas.map((item) => item.area.cursos[0].nome);
-
-      const payload = {
-        name: userData.name,
-        cellphone: userData.cellphone,
-        email: userData.email || "default@email.com",
-        vocationalHelp: userData.vocationalHelp,
-        schoolYear: preTestData.schoolYear || defaultSchoolYear,
-        schoolType: preTestData.schoolType || defaultSchoolType,
-        careerChoiceCertainty:
-          preTestData.certainty || defaultCareerChoiceCertainty,
-        guidance: preTestData.guidance || defaultGuidance,
-        concern: preTestData.concern || defaultConcern,
-        topCourses,
-        inContact: false,
-        version: "V2_25-02-2025_VIDEO",
-      };
-
-      console.log("Sending payload to backend:", payload);
-
-      const response = await axios.post(
-        "https://cv.backend.decisaoexata.com/api/leads",
-        payload
-      );
-      console.log("Lead saved successfully. Response:", response.data);
-    } catch (error) {
-      console.error("Erro ao salvar/enviar resultados:", error);
-      if (error.response) {
-        console.error("Error response data:", error.response.data);
-      }
-    }
+    console.log("Payment success lead data received:", leadPayload);
+    // No additional POST call here since PaymentCaptureForm already saved the lead.
   };
 
-  // ------------------------------
-  // If partial: proceed to next question
-  // ------------------------------
   const handleNextQuestion = () => {
     updatePagina(1);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // ------------------------------
-  // Prepare share image with html2canvas
-  // ------------------------------
   const prepareShare = async () => {
     if (!chartRef.current) {
       alert("Gráfico não encontrado para compartilhar.");
@@ -174,9 +124,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     scrollRef.current?.scrollBy({ top: 100, behavior: "smooth" });
   };
 
-  // ------------------------------
-  // Scroll arrow logic
-  // ------------------------------
   useEffect(() => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
@@ -192,12 +139,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Compute top 3 areas based on finalPontuacaoTotal
-  const areasComPontuacao = areasConhecimento
-    .map((area, idx) => ({ area, pontuacao: finalPontuacaoTotal[idx] }))
-    .sort((a, b) => b.pontuacao - a.pontuacao)
-    .slice(0, 3);
-
   return (
     <motion.div
       className="w-full min-h-screen flex flex-col"
@@ -205,7 +146,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* SECTION 1: HERO TITLE */}
+      {/* HERO TITLE SECTION */}
       <section className="w-full bg-white pt-16 pb-6">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.h1
@@ -229,7 +170,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </div>
       </section>
 
-      {/* SECTION 2: BIG CHART */}
+      {/* BIG CHART SECTION */}
       <section className="w-full bg-slate-50 py-10">
         <div className="max-w-5xl mx-auto px-4 relative">
           <div
@@ -285,7 +226,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </div>
       </section>
 
-      {/* SECTION 3: ABOUT YOU RESULTS (TOP 3 AREAS) */}
+      {/* ABOUT YOU RESULTS SECTION */}
       {isTotal && (
         <section className="w-full bg-white py-16">
           <div className="max-w-4xl mx-auto px-4">
@@ -366,12 +307,17 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </section>
       )}
 
-      {/* Show the lead capture form if the lead is not submitted */}
+      {/* Payment Capture Form – shown if the lead is not yet submitted */}
       {isTotal && !leadSubmitted && (
-        <LeadCaptureForm showLeadCapture={true} onSubmit={handleLeadSubmit} />
+        <PaymentCaptureForm
+          showForm={true}
+          onPaymentSuccess={handlePaymentSuccess}
+          pontuacaoTotal={finalPontuacaoTotal}
+          topCourses={topCourses}
+        />
       )}
 
-      {/* SECTION 4: ABOUT US */}
+      {/* ABOUT US SECTION */}
       {isTotal && leadSubmitted && (
         <section className="w-full bg-gray-50 py-16">
           <div className="max-w-4xl mx-auto px-4">
@@ -391,7 +337,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </section>
       )}
 
-      {/* SECTION 5: FOOTER */}
+      {/* FOOTER SECTION */}
       {isTotal && (
         <motion.footer
           className="w-full bg-gray-900 text-gray-200 py-8 px-4 text-center"
@@ -459,7 +405,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
               onClick={handleShare}
               className="w-full flex items-center justify-center gap-2 py-3 bg-green-500 text-white rounded-full font-bold text-xl hover:shadow-xl transition focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <FaWhatsapp className="text-2xl" /> Compartilhar no WhatsApp!
+              <FaWhatsapp className="text-2xl" /> Compartilhe no WhatsApp!
             </button>
             <button
               onClick={() => setShowShareModal(false)}

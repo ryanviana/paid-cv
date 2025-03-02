@@ -1,36 +1,36 @@
-import { useState } from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
+import { useState } from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
 
 function Email({ pontuacaoTotal, onClose }) {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('ready');
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("ready");
 
   const enviarEmail = async () => {
-    setStatus('loading');
+    setStatus("loading");
 
     try {
       // Salva os resultados primeiro
-      await axios.post('https://cv.backend.decisaoexata.com/save-results', {
+      await axios.post("https://cv.back.decisaoexata.com/save-results", {
         score: pontuacaoTotal,
         user_email: email,
       });
     } catch (error) {
-      setStatus('error1');
-      console.error('Erro ao salvar os resultados:', error);
+      setStatus("error1");
+      console.error("Erro ao salvar os resultados:", error);
       return;
     }
 
     try {
       // Em seguida, envia o email
-      await axios.post('https://cv.backend.decisaoexata.com/send-email', {
+      await axios.post("https://cv.back.decisaoexata.com/send-email", {
         score: pontuacaoTotal,
         user_email: email,
       });
-      setStatus('send');
+      setStatus("send");
     } catch (error) {
-      setStatus('error2');
-      console.error('Erro ao enviar email:', error);
+      setStatus("error2");
+      console.error("Erro ao enviar email:", error);
     }
   };
 
@@ -58,7 +58,9 @@ function Email({ pontuacaoTotal, onClose }) {
           X
         </button>
 
-        <h1 className="text-xl font-semibold text-center mb-4">Digite seu email</h1>
+        <h1 className="text-xl font-semibold text-center mb-4">
+          Digite seu email
+        </h1>
 
         <input
           type="email"
@@ -70,24 +72,30 @@ function Email({ pontuacaoTotal, onClose }) {
 
         <button
           onClick={enviarEmail}
-          disabled={status === 'loading' || !email}
+          disabled={status === "loading" || !email}
           className="w-full bg-jornadas-blue text-white font-bold py-3 rounded-lg transition duration-150 hover:bg-jornadas-blue-dark disabled:opacity-50"
         >
           Enviar email
         </button>
 
         {/* Status messages */}
-        {status === 'loading' && (
+        {status === "loading" && (
           <p className="mt-4 text-center text-blue-600">Enviando email...</p>
         )}
-        {status === 'send' && (
-          <p className="mt-4 text-center text-green-600">Email enviado e resultados salvos.</p>
+        {status === "send" && (
+          <p className="mt-4 text-center text-green-600">
+            Email enviado e resultados salvos.
+          </p>
         )}
-        {status === 'error1' && (
-          <p className="mt-4 text-center text-red-600">Erro ao salvar os resultados!</p>
+        {status === "error1" && (
+          <p className="mt-4 text-center text-red-600">
+            Erro ao salvar os resultados!
+          </p>
         )}
-        {status === 'error2' && (
-          <p className="mt-4 text-center text-red-600">Erro ao enviar o email!</p>
+        {status === "error2" && (
+          <p className="mt-4 text-center text-red-600">
+            Erro ao enviar o email!
+          </p>
         )}
       </div>
     </div>
