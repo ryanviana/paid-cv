@@ -1,4 +1,3 @@
-// src/components/PaymentCaptureForm.jsx
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
@@ -15,20 +14,22 @@ function PaymentCaptureForm({
   pontuacaoTotal,
   topCourses,
 }) {
-  // Timer and payment state
-  const [timer, setTimer] = useState(15 * 60); // 15 minutes in seconds
-  const [loading, setLoading] = useState(false);
-  // Persist testId and paymentStatus so they survive page refresh
+  // 1. Persist all important states so they survive page refresh
   const [testId, setTestId] = usePersistedState("paymentTestId", null);
   const [paymentStatus, setPaymentStatus] = usePersistedState(
     "paymentStatus",
     null
   );
-  const [qrCodeData, setQrCodeData] = useState(null);
-  const [qrCodeText, setQrCodeText] = useState(null);
-  const [copied, setCopied] = useState(false);
+  const [qrCodeData, setQrCodeData] = usePersistedState(
+    "paymentQrCodeData",
+    null
+  );
+  const [qrCodeText, setQrCodeText] = usePersistedState(
+    "paymentQrCodeText",
+    null
+  );
 
-  // Lead data using persisted state (reads/writes automatically to localStorage)
+  // 2. Persist the user’s name, phone, and email
   const [userName, setUserName] = usePersistedState("leadName", "");
   const [userCellphone, setUserCellphone] = usePersistedState(
     "leadCellphone",
@@ -36,47 +37,77 @@ function PaymentCaptureForm({
   );
   const [userEmail, setUserEmail] = usePersistedState("leadEmail", "");
 
-  // State to track if user attempted to submit
+  // 3. Track whether the user already revealed results
+  const [resultsRevealed, setResultsRevealed] = usePersistedState(
+    "resultsRevealed",
+    false
+  );
+
+  // 4. Other local states
+  const [timer, setTimer] = useState(15 * 60); // 15 min in seconds
+  const [loading, setLoading] = useState(false);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  // If payment already approved, do not render the PaymentCaptureForm at all.
-  if (paymentStatus === "approved") {
-    return null;
-  }
+  // If the parent says not to show, bail out
+  if (!showForm) return null;
 
-  // When modal shows, start PIX payment and countdown
+  //
+  // ─────────────────────────────────────────────────────────────
+  //   ::::: USE EFFECTS :::::
+  // ─────────────────────────────────────────────────────────────
+  //
+
+  // A) Start PIX Payment (if needed) and start the countdown timer
   useEffect(() => {
-    if (!showForm) return;
-    // Only start a new payment if no testId exists and payment hasn't been approved
+    // Only start a new payment if we don't have a testId yet and not approved
     if (!testId && paymentStatus !== "approved") {
       startPixPayment();
     }
+    // Start the countdown
     const interval = setInterval(() => {
       setTimer((prev) => (prev <= 1 ? 0 : prev - 1));
     }, 1000);
     return () => clearInterval(interval);
-  }, [showForm, testId, paymentStatus]);
+  }, [testId, paymentStatus, showForm]);
 
-  // Listen for payment status updates via Socket.IO
+  // B) Listen for payment updates from the socket
   useEffect(() => {
     socket.on("paymentStatusUpdate", (data) => {
       if (data.testId === testId) {
         setPaymentStatus(data.paymentStatus);
         if (data.paymentStatus === "approved") {
-          // Optionally hide QR code when approved
+          // Optionally hide the QR code when approved
           setQrCodeData(null);
+          setQrCodeText(null);
         }
       }
     });
     return () => socket.off("paymentStatusUpdate");
-  }, [testId, userName, userCellphone, userEmail, pontuacaoTotal, topCourses]);
+  }, [
+    testId,
+    setPaymentStatus,
+    setQrCodeData,
+    setQrCodeText,
+    userName,
+    userCellphone,
+    userEmail,
+    pontuacaoTotal,
+    topCourses,
+  ]);
 
-  // Call the backend PIX endpoint to generate the QR code
+  //
+  // ─────────────────────────────────────────────────────────────
+  //   ::::: BACKEND CALLS :::::
+  // ─────────────────────────────────────────────────────────────
+  //
+
+  // Call the backend to get the PIX QR code
   const startPixPayment = async () => {
     setLoading(true);
     try {
       const payload = {
-        email: "user@example.com", // used only for payment creation
+        email: "user@example.com", // used for payment creation
         answers: ["Answer1", "Answer2", "Answer3"],
       };
       const res = await fetch(
@@ -89,6 +120,8 @@ function PaymentCaptureForm({
       );
       const data = await res.json();
       setTestId(data.testId);
+      setPaymentStatus("pending"); // start in pending
+      // Store the QR code in persisted state
       if (data.qrCodeBase64) {
         setQrCodeData("data:image/png;base64," + data.qrCodeBase64);
       } else if (data.qrCodeUrl) {
@@ -104,24 +137,14 @@ function PaymentCaptureForm({
     }
   };
 
-  // Copy the plain-text PIX key to clipboard
-  const handleCopyPixKey = () => {
-    if (qrCodeText) {
-      navigator.clipboard.writeText(qrCodeText).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      });
-    }
-  };
-
-  // Function to send the lead data to the CRM endpoint
+  // Send lead data to the CRM endpoint
   const sendLeadData = async () => {
     const leadPayload = {
       name: userName,
       cellphone: userCellphone,
       email: userEmail,
       topCourses: topCourses,
-      // Provide default valid enum values if these fields are not captured by the form:
+      // Provide default valid enum values
       schoolYear: "Outro",
       careerChoiceCertainty: "Não tenho ideia do que escolher",
       vocationalHelp: "Não preciso de ajuda",
@@ -138,19 +161,20 @@ function PaymentCaptureForm({
     } catch (error) {
       console.error("Erro ao salvar os resultados:", error);
     }
-    // Notify parent component about approved payment (pass the payload)
+
+    // Tell the parent that the payment was a success
     onPaymentSuccess(leadPayload);
   };
 
-  // Function to send email to the lead using the email endpoint
+  // Send lead email
   const sendLeadEmail = async () => {
     const emailPayload = {
-      score: pontuacaoTotal, // pass the computed score array
+      score: pontuacaoTotal,
       user_name: userName,
       user_cellphone: userCellphone,
       user_email: userEmail,
-      user_schoolYear: "Outro", // default value (adjust if you have input)
-      user_careerChoiceCertainty: "Não tenho ideia do que escolher", // default value (adjust if you have input)
+      user_schoolYear: "Outro",
+      user_careerChoiceCertainty: "Não tenho ideia do que escolher",
     };
 
     console.log("Sending email payload to email backend:", emailPayload);
@@ -166,20 +190,43 @@ function PaymentCaptureForm({
     }
   };
 
-  // Handle the click on "Revelar resultados"
+  //
+  // ─────────────────────────────────────────────────────────────
+  //   ::::: EVENT HANDLERS :::::
+  // ─────────────────────────────────────────────────────────────
+  //
+
+  // Copy the plain-text PIX key
+  const handleCopyPixKey = () => {
+    if (qrCodeText) {
+      navigator.clipboard.writeText(qrCodeText).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    }
+  };
+
+  // Reveal the results (send lead data + email)
   const handleRevealResults = () => {
     setAttemptedSubmit(true);
     if (!userName || !userCellphone || !userEmail) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
-    // Send lead data and email once the user clicks the button
+    // Send the data
     sendLeadData();
     sendLeadEmail();
+    // Mark results as revealed so we can skip this form next time if you wish
+    setResultsRevealed(true);
   };
 
-  if (!showForm) return null;
+  //
+  // ─────────────────────────────────────────────────────────────
+  //   ::::: RENDER LOGIC :::::
+  // ─────────────────────────────────────────────────────────────
+  //
 
+  // Countdown display
   const minutes = Math.floor(timer / 60);
   const seconds = timer % 60;
   const countdown = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
@@ -196,107 +243,32 @@ function PaymentCaptureForm({
         animate={{ scale: 1 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Background image */}
+        {/* Background image (faded) */}
         <img
           src="https://images.unsplash.com/photo-1588693741639-c0321a438d6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
           alt="Success"
           className="absolute inset-0 w-full h-full object-cover opacity-10"
         />
 
-        {/* Show top section only if payment is not approved */}
-        {paymentStatus !== "approved" && (
-          <>
-            <h2 className="text-center font-extrabold text-2xl md:text-3xl text-red-600 mb-2 relative z-10 uppercase tracking-wider">
-              Oferta Relâmpago
-            </h2>
-            <p className="text-center text-gray-600 text-sm md:text-base font-medium mb-4 relative z-10">
-              Aproveite antes que acabe! Tempo limitado.
+        {/* If user already revealed results, show a simple confirmation */}
+        {resultsRevealed ? (
+          <div className="relative z-10 text-center">
+            <p className="text-green-600 font-bold text-xl">
+              Obrigado! Seus dados foram enviados com sucesso.
+            </p>
+          </div>
+        ) : paymentStatus === "approved" ? (
+          // ─────────────────────────────────────────────────────
+          // IF PAYMENT APPROVED (BUT NOT REVEALED), SHOW THE FORM
+          // ─────────────────────────────────────────────────────
+          <div className="relative z-10">
+            <p className="text-center text-green-600 font-bold mb-4 text-xl">
+              Pagamento Aprovado!
+            </p>
+            <p className="text-center text-gray-700 font-medium mb-6">
+              Preencha seus dados para revelar os resultados.
             </p>
 
-            <div className="flex flex-col items-center justify-center mb-4 relative z-10">
-              <div className="flex items-baseline space-x-2">
-                <span className="line-through text-red-600 text-sm md:text-base">
-                  R$37,80
-                </span>
-                <span className="text-green-600 text-3xl md:text-4xl font-extrabold animate-pulse">
-                  R$9,90
-                </span>
-              </div>
-              <p className="text-gray-700 text-xs md:text-sm mt-1 font-semibold">
-                Desconto exclusivo! Pague agora e descubra seu futuro
-                profissional.
-              </p>
-            </div>
-
-            <p className="text-center text-2xl md:text-3xl text-red-600 font-bold mb-4 relative z-10 animate-pulse">
-              <span className="mr-2">O QR Code expira em:</span>
-              <span className="underline">{countdown}</span>
-            </p>
-          </>
-        )}
-
-        {/* QR Code and Copy Button */}
-        {loading && (
-          <p className="text-center text-gray-500 mb-4 relative z-10">
-            Gerando QR Code, aguarde...
-          </p>
-        )}
-        {!loading &&
-          qrCodeData &&
-          timer > 0 &&
-          paymentStatus !== "approved" && (
-            <div className="flex flex-col items-center justify-center mb-4 relative z-10">
-              <img
-                src={qrCodeData}
-                alt="QR Code para pagamento PIX"
-                className="w-44 h-44 object-contain rounded shadow-lg border-4 border-green-500 mb-2"
-              />
-              {qrCodeText && (
-                <div className="flex flex-col items-center">
-                  <p className="text-sm text-gray-700 mb-2 font-medium">
-                    Não consegue escanear? Copie a chave PIX:
-                  </p>
-                  <button
-                    onClick={handleCopyPixKey}
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-all duration-200"
-                  >
-                    Copiar Chave PIX
-                  </button>
-                  {copied && (
-                    <span className="text-xs text-green-600 mt-1">
-                      Copiado para a área de transferência!
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-
-        {/* Payment Status Messages */}
-        {paymentStatus === "pending" && (
-          <p className="text-center text-blue-600 font-semibold mb-4 relative z-10">
-            Pagamento Pendente...
-          </p>
-        )}
-        {paymentStatus &&
-          paymentStatus !== "approved" &&
-          paymentStatus !== "pending" && (
-            <p className="text-center text-gray-600 mt-2 relative z-10">
-              Status do Pagamento: {paymentStatus}
-            </p>
-          )}
-        {!loading && timer === 0 && !paymentStatus && (
-          <p className="text-center text-red-600 font-bold mt-4 relative z-10">
-            Tempo Esgotado! Feche esta janela e tente novamente.
-          </p>
-        )}
-
-        {/* Input Fields and Reveal Button (for when payment is approved) */}
-        {paymentStatus === "approved" && (
-          <div className="relative z-10 mt-4">
-            <p className="text-center text-green-600 font-bold mb-4">
-              Pagamento Aprovado! Preencha seus dados para revelar resultados.
-            </p>
             <div className="mb-4">
               <label className="block text-gray-800 font-semibold mb-1">
                 Seu Nome
@@ -354,6 +326,96 @@ function PaymentCaptureForm({
               Revelar resultados
             </button>
           </div>
+        ) : (
+          // ───────────────────────────────────────────────────────────
+          // ELSE: PAYMENT NOT APPROVED YET => SHOW QR CODE OR TIMEOUT
+          // ───────────────────────────────────────────────────────────
+          <>
+            {/* Title / Urgency */}
+            <h2 className="text-center font-extrabold text-2xl md:text-3xl text-red-600 mb-2 relative z-10 uppercase tracking-wider">
+              Oferta Relâmpago
+            </h2>
+            <p className="text-center text-gray-600 text-sm md:text-base font-medium mb-4 relative z-10">
+              Aproveite antes que acabe! Tempo limitado.
+            </p>
+
+            <div className="flex flex-col items-center justify-center mb-4 relative z-10">
+              <div className="flex items-baseline space-x-2">
+                <span className="line-through text-red-600 text-sm md:text-base">
+                  R$37,80
+                </span>
+                <span className="text-green-600 text-3xl md:text-4xl font-extrabold animate-pulse">
+                  R$9,90
+                </span>
+              </div>
+              <p className="text-gray-700 text-xs md:text-sm mt-1 font-semibold">
+                Desconto exclusivo! Pague agora e descubra seu futuro
+                profissional.
+              </p>
+            </div>
+
+            <p className="text-center text-2xl md:text-3xl text-red-600 font-bold mb-4 relative z-10 animate-pulse">
+              <span className="mr-2">O QR Code expira em:</span>
+              <span className="underline">{countdown}</span>
+            </p>
+
+            {/* Loading message */}
+            {loading && (
+              <p className="text-center text-gray-500 mb-4 relative z-10">
+                Gerando QR Code, aguarde...
+              </p>
+            )}
+
+            {/* QR Code Display */}
+            {!loading && qrCodeData && timer > 0 && (
+              <div className="flex flex-col items-center justify-center mb-4 relative z-10">
+                <img
+                  src={qrCodeData}
+                  alt="QR Code para pagamento PIX"
+                  className="w-44 h-44 object-contain rounded shadow-lg border-4 border-green-500 mb-2"
+                />
+                {qrCodeText && (
+                  <div className="flex flex-col items-center">
+                    <p className="text-sm text-gray-700 mb-2 font-medium">
+                      Não consegue escanear? Copie a chave PIX:
+                    </p>
+                    <button
+                      onClick={handleCopyPixKey}
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-all duration-200"
+                    >
+                      Copiar Chave PIX
+                    </button>
+                    {copied && (
+                      <span className="text-xs text-green-600 mt-1">
+                        Copiado para a área de transferência!
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Payment status messages */}
+            {paymentStatus === "pending" && (
+              <p className="text-center text-blue-600 font-semibold mb-4 relative z-10">
+                Pagamento Pendente...
+              </p>
+            )}
+            {paymentStatus &&
+              paymentStatus !== "approved" &&
+              paymentStatus !== "pending" && (
+                <p className="text-center text-gray-600 mt-2 relative z-10">
+                  Status do Pagamento: {paymentStatus}
+                </p>
+              )}
+
+            {/* Time ran out? */}
+            {!loading && timer === 0 && !paymentStatus && (
+              <p className="text-center text-red-600 font-bold mt-4 relative z-10">
+                Tempo Esgotado! Feche esta janela e tente novamente.
+              </p>
+            )}
+          </>
         )}
       </motion.div>
     </motion.div>
