@@ -18,7 +18,7 @@ function PaymentCaptureForm({
   // Timer and payment state
   const [timer, setTimer] = useState(15 * 60); // 15 minutes in seconds
   const [loading, setLoading] = useState(false);
-  const [testId, setTestId] = useState(null);
+  const [testId, setTestId] = usePersistedState("paymentTestId", null);
   const [paymentStatus, setPaymentStatus] = useState(null);
   const [qrCodeData, setQrCodeData] = useState(null);
   const [qrCodeText, setQrCodeText] = useState(null);
@@ -38,12 +38,15 @@ function PaymentCaptureForm({
   // When modal shows, start PIX payment and countdown
   useEffect(() => {
     if (!showForm) return;
-    startPixPayment();
+    // Only start a new payment if there's no persisted testId
+    if (!testId) {
+      startPixPayment();
+    }
     const interval = setInterval(() => {
       setTimer((prev) => (prev <= 1 ? 0 : prev - 1));
     }, 1000);
     return () => clearInterval(interval);
-  }, [showForm]);
+  }, [showForm, testId]);
 
   // Listen for payment status updates via Socket.IO
   useEffect(() => {
