@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import io from "socket.io-client";
 import axios from "axios";
+import { usePersistedState } from "../hooks/usePersistedState";
 
 // Use the paid backend domain for Socket.IO (for payment status updates)
 const socket = io("https://paid.cv.backend.decisaoexata.com");
@@ -23,31 +24,13 @@ function PaymentCaptureForm({
   const [qrCodeText, setQrCodeText] = useState(null);
   const [copied, setCopied] = useState(false);
 
-  // Lead data – stored in localStorage
-  const [userName, setUserName] = useState("");
-  const [userCellphone, setUserCellphone] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-
-  // Rehydrate lead data from localStorage on mount
-  useEffect(() => {
-    const storedName = localStorage.getItem("leadName");
-    const storedCellphone = localStorage.getItem("leadCellphone");
-    const storedEmail = localStorage.getItem("leadEmail");
-    if (storedName) setUserName(storedName);
-    if (storedCellphone) setUserCellphone(storedCellphone);
-    if (storedEmail) setUserEmail(storedEmail);
-  }, []);
-
-  // Persist lead data as user types
-  useEffect(() => {
-    localStorage.setItem("leadName", userName);
-  }, [userName]);
-  useEffect(() => {
-    localStorage.setItem("leadCellphone", userCellphone);
-  }, [userCellphone]);
-  useEffect(() => {
-    localStorage.setItem("leadEmail", userEmail);
-  }, [userEmail]);
+  // Lead data using persisted state (reads/writes automatically to localStorage)
+  const [userName, setUserName] = usePersistedState("leadName", "");
+  const [userCellphone, setUserCellphone] = usePersistedState(
+    "leadCellphone",
+    ""
+  );
+  const [userEmail, setUserEmail] = usePersistedState("leadEmail", "");
 
   // When modal shows, start PIX payment and countdown
   useEffect(() => {
@@ -67,13 +50,15 @@ function PaymentCaptureForm({
         if (data.paymentStatus === "approved") {
           // Optionally hide QR code when approved
           setQrCodeData(null);
-          // Send the lead data to the backend
+          // Send the lead data to the backend (save in CRM)
           sendLeadData();
+          // Also send the email using the email endpoint
+          sendLeadEmail();
         }
       }
     });
     return () => socket.off("paymentStatusUpdate");
-  }, [testId, userName, userCellphone, userEmail]);
+  }, [testId, userName, userCellphone, userEmail, pontuacaoTotal, topCourses]);
 
   // Call the backend PIX endpoint to generate the QR code
   const startPixPayment = async () => {
@@ -118,7 +103,7 @@ function PaymentCaptureForm({
     }
   };
 
-  // When payment is approved, send lead data with proper field names and valid defaults
+  // Function to send the lead data to the CRM endpoint
   const sendLeadData = async () => {
     const leadPayload = {
       name: userName,
@@ -126,12 +111,12 @@ function PaymentCaptureForm({
       email: userEmail,
       topCourses: topCourses,
       // Provide default valid enum values if these fields are not captured by the form:
-      schoolYear: "Outro", // valid value from: "Ensino Médio – 1º Ano", "Ensino Médio – 2º Ano", "Ensino Médio – 3º Ano", "Cursinho", "Já estou na Universidade", "Outro"
-      careerChoiceCertainty: "Não tenho ideia do que escolher", // valid value from the enum
-      vocationalHelp: "Não preciso de ajuda", // valid value from the enum
+      schoolYear: "Outro",
+      careerChoiceCertainty: "Não tenho ideia do que escolher",
+      vocationalHelp: "Não preciso de ajuda",
     };
 
-    console.log("Sending lead payload to backend:", leadPayload);
+    console.log("Sending lead payload to CRM backend:", leadPayload);
 
     try {
       await axios.post(
@@ -140,10 +125,34 @@ function PaymentCaptureForm({
         { headers: { "Content-Type": "application/json" } }
       );
     } catch (error) {
-      console.error("Erro ao salvar os resultados e enviar email:", error);
+      console.error("Erro ao salvar os resultados:", error);
     }
     // Notify parent component about approved payment (pass the payload)
     onPaymentSuccess(leadPayload);
+  };
+
+  // NEW: Function to send email to the lead using the email endpoint
+  const sendLeadEmail = async () => {
+    const emailPayload = {
+      score: pontuacaoTotal, // pass the computed score array
+      user_name: userName,
+      user_cellphone: userCellphone,
+      user_email: userEmail,
+      user_schoolYear: "Outro", // default value (adjust if you have input)
+      user_careerChoiceCertainty: "Não tenho ideia do que escolher", // default value (adjust if you have input)
+    };
+
+    console.log("Sending email payload to email backend:", emailPayload);
+
+    try {
+      await axios.post(
+        "https://leads.cv.backend.decisaoexata.com/send-email/",
+        emailPayload,
+        { headers: { "Content-Type": "application/json" } }
+      );
+    } catch (error) {
+      console.error("Erro ao enviar email:", error);
+    }
   };
 
   if (!showForm) return null;

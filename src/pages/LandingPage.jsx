@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import "@fontsource/ubuntu"; // Import Ubuntu font
+import { usePersistedState } from "../hooks/usePersistedState";
+import { use } from "react";
 
 const customSelectStyles = {
   control: (provided, state) => ({
@@ -23,11 +25,17 @@ const customSelectStyles = {
 
 function LandingPage() {
   const navigate = useNavigate();
-  const [schoolType, setSchoolType] = useState("");
-  const [schoolYear, setSchoolYear] = useState("");
-  const [certainty, setCertainty] = useState("");
-  const [guidance, setGuidance] = useState("");
-  const [concern, setConcern] = useState("");
+  const [schoolType, setSchoolType] = usePersistedState(
+    "landing_schoolType",
+    ""
+  );
+  const [schoolYear, setSchoolYear] = usePersistedState(
+    "landing_schoolYear",
+    ""
+  );
+  const [certainty, setCertainty] = usePersistedState("landing_certainty", "");
+  const [guidance, setGuidance] = usePersistedState("landing_guidance", "");
+  const [concern, setConcern] = usePersistedState("landing_concern", "");
 
   const handleSubmit = (e) => {
     e.preventDefault();

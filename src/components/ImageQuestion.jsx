@@ -1,20 +1,29 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   FaThumbsUp,
   FaThumbsDown,
   FaArrowCircleLeft,
-  FaArrowCircleRight
-} from 'react-icons/fa';
+  FaArrowCircleRight,
+} from "react-icons/fa";
 
-import AlertModal from '../components/AlertModal';
-import * as Defines from '../data/Defines';
+import AlertModal from "../components/AlertModal";
+import * as Defines from "../data/Defines";
+import { usePersistedState } from "../hooks/usePersistedState";
 
-const INTEREST_LIKE = '1';
-const INTEREST_DISLIKE = '-1';
+const INTEREST_LIKE = "1";
+const INTEREST_DISLIKE = "-1";
 
-function ImageQuestion({ weight_question, statement_question, updatePerguntaAtual }) {
-  const [interests, setInterests] = useState(['', '', '', '']);
+function ImageQuestion({
+  questionId,
+  weight_question,
+  statement_question,
+  updatePerguntaAtual,
+}) {
+  const [interests, setInterests] = usePersistedState(
+    `imageQuestion_interests_${questionId}`,
+    ["", "", "", ""]
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   // Indices of unselected images that flash if user tries next
   const [flashIndices, setFlashIndices] = useState([]);
@@ -24,7 +33,7 @@ function ImageQuestion({ weight_question, statement_question, updatePerguntaAtua
     setInterests((prev) => {
       const updated = [...prev];
       // If already chosen => toggle off
-      updated[index] = updated[index] !== chosenInterest ? chosenInterest : '';
+      updated[index] = updated[index] !== chosenInterest ? chosenInterest : "";
       return updated;
     });
   };
@@ -81,24 +90,25 @@ function ImageQuestion({ weight_question, statement_question, updatePerguntaAtua
   /** ring color logic */
   const getRingColor = (index) => {
     const val = interests[index];
-    if (val === INTEREST_LIKE) return 'ring-green-500';
-    if (val === INTEREST_DISLIKE) return 'ring-red-500';
-    return 'ring-gray-300';
+    if (val === INTEREST_LIKE) return "ring-green-500";
+    if (val === INTEREST_DISLIKE) return "ring-red-500";
+    return "ring-gray-300";
   };
 
   // flash if user tries next w/o selecting
   const getFlashClass = (index) =>
-    flashIndices.includes(index) ? 'animate-pulse ring-red-500' : '';
+    flashIndices.includes(index) ? "animate-pulse ring-red-500" : "";
 
   // dim if unselected, bright if selected
   const getImageOpacity = (index) =>
-    interests[index] ? 'opacity-100' : 'opacity-60 group-hover:opacity-90';
+    interests[index] ? "opacity-100" : "opacity-60 group-hover:opacity-90";
 
   // color overlay for like/dislike
   const getColorOverlay = (index) => {
-    if (interests[index] === INTEREST_LIKE) return 'bg-green-500 bg-opacity-20';
-    if (interests[index] === INTEREST_DISLIKE) return 'bg-red-500 bg-opacity-20';
-    return 'bg-transparent';
+    if (interests[index] === INTEREST_LIKE) return "bg-green-500 bg-opacity-20";
+    if (interests[index] === INTEREST_DISLIKE)
+      return "bg-red-500 bg-opacity-20";
+    return "bg-transparent";
   };
 
   /** Click “Voltar” => updatePerguntaAtual(null, -1) */
@@ -348,9 +358,10 @@ function ImageQuestion({ weight_question, statement_question, updatePerguntaAtua
 }
 
 ImageQuestion.propTypes = {
+  questionId: PropTypes.string.isRequired,
   weight_question: PropTypes.array.isRequired,
   statement_question: PropTypes.object.isRequired,
-  updatePerguntaAtual: PropTypes.func.isRequired
+  updatePerguntaAtual: PropTypes.func.isRequired,
 };
 
 export default ImageQuestion;

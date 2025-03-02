@@ -22,6 +22,7 @@ import {
 import getAreaIcon from "../components/AreaIcon";
 
 import { ResultContext } from "../context/ResultContext";
+import { usePersistedState } from "../hooks/usePersistedState";
 
 function Result({ pontuacaoTotal, type, updatePagina }) {
   const { result, leadSubmitted, setLeadSubmitted } = useContext(ResultContext);
@@ -40,7 +41,12 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     .slice(0, 3);
   const topCourses = areasComPontuacao.map((item) => item.area.cursos[0].nome);
 
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  // Persist the selected course so that if the user refreshes, it remains.
+  const [selectedCourse, setSelectedCourse] = usePersistedState(
+    "result_selectedCourse",
+    null
+  );
+  // Other UI states remain ephemeral.
   const [showDownArrow, setShowDownArrow] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -87,11 +93,19 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     }
   };
 
+  const handleVoltar = () => {
+    // This value (-1) should match your navigation logic to go back to the images page.
+    updatePagina(-1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   // Process payment lead info → unlock results
   const handlePaymentSuccess = async (leadPayload) => {
     setLeadSubmitted(true);
     console.log("Payment success lead data received:", leadPayload);
-    // No additional POST call here since PaymentCaptureForm already saved the lead.
+    navigate("/results");
+
+    // PaymentCaptureForm already saves the lead, so no additional POST call here.
   };
 
   const handleNextQuestion = () => {
@@ -201,12 +215,18 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
               <Grafico pontuacaoTotal={finalPontuacaoTotal} type={type} />
             </motion.div>
             {isPreview && (
-              <div className="mt-8 flex justify-center">
+              <div className="mt-8 flex justify-center gap-4">
                 <button
                   onClick={handleNextQuestion}
                   className="px-8 py-4 font-bold bg-jornadas-blue text-white rounded-lg text-base sm:text-lg transition-all duration-150 ease-in-out hover:bg-jornadas-blue-dark hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Próxima pergunta
+                </button>
+                <button
+                  onClick={handleVoltar} // Make sure you have a handleVoltar function defined in this component
+                  className="px-8 py-4 font-bold bg-gray-200 text-black rounded-lg text-base sm:text-lg transition-all duration-150 ease-in-out hover:bg-gray-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                >
+                  Voltar
                 </button>
               </div>
             )}
@@ -415,14 +435,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
             </button>
           </div>
         </div>
-      )}
-
-      {/* COURSE MODAL */}
-      {selectedCourse && (
-        <CourseDetails
-          course={selectedCourse}
-          onClose={() => setSelectedCourse(null)}
-        />
       )}
     </motion.div>
   );

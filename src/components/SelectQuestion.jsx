@@ -1,18 +1,24 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { 
-  FaArrowCircleLeft, 
-  FaArrowCircleRight 
-} from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
-import AlertModal from '../components/AlertModal';
-import * as Defines from '../data/Defines';
+import AlertModal from "../components/AlertModal";
+import * as Defines from "../data/Defines";
+import { usePersistedState } from "../hooks/usePersistedState";
 
 const MAX_SELECTIONS = 3;
 
-function SelectQuestion({ weight_question, statement_question, updatePerguntaAtual }) {
-  const [checkedItems, setCheckedItems] = useState([]); 
-  const [flashIndices, setFlashIndices] = useState([]); 
+function SelectQuestion({
+  questionId,
+  weight_question,
+  statement_question,
+  updatePerguntaAtual,
+}) {
+  const [checkedItems, setCheckedItems] = usePersistedState(
+    `selectQuestion_checkedItems_${questionId}`,
+    []
+  );
+  const [flashIndices, setFlashIndices] = useState([]);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
   /** Toggle a phrase's selection, max 3. */
@@ -97,7 +103,6 @@ function SelectQuestion({ weight_question, statement_question, updatePerguntaAtu
 
   return (
     <div className="flex flex-col items-center p-7 w-full h-fit relative">
-
       {/* Title */}
       <h2 className="font-montserrat text-black font-bold text-xl sm:text-2xl lg:text-3xl text-center max-w-4xl mb-5">
         Escolha as três frases que mais combinam com você:
@@ -194,8 +199,8 @@ function SelectQuestion({ weight_question, statement_question, updatePerguntaAtu
             const selected = isSelected(index);
             // If user tried next & it's unselected => flash
             const flashClass = flashIndices.includes(index)
-              ? 'animate-pulse border-l-4 border-red-400'
-              : '';
+              ? "animate-pulse border-l-4 border-red-400"
+              : "";
 
             return (
               <div
@@ -211,7 +216,7 @@ function SelectQuestion({ weight_question, statement_question, updatePerguntaAtu
                   transition
                   cursor-pointer
                   hover:bg-gray-100
-                  ${selected ? 'bg-blue-100' : 'bg-white'}
+                  ${selected ? "bg-blue-100" : "bg-white"}
                   ${flashClass}
                 `}
               >
@@ -234,9 +239,7 @@ function SelectQuestion({ weight_question, statement_question, updatePerguntaAtu
                     focus:outline-none
                   "
                 />
-                <label className="cursor-pointer leading-snug">
-                  {label}
-                </label>
+                <label className="cursor-pointer leading-snug">{label}</label>
               </div>
             );
           })}
@@ -286,9 +289,9 @@ function SelectQuestion({ weight_question, statement_question, updatePerguntaAtu
 }
 
 SelectQuestion.propTypes = {
+  questionId: PropTypes.string.isRequired,
   weight_question: PropTypes.array.isRequired,
   statement_question: PropTypes.object.isRequired,
-  updatePerguntaAtual: PropTypes.func.isRequired
+  updatePerguntaAtual: PropTypes.func.isRequired,
 };
-
 export default SelectQuestion;

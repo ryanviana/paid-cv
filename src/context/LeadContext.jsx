@@ -1,10 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
+import { usePersistedState } from "../hooks/usePersistedState";
 
 export const LeadContext = createContext();
 
 export function LeadProvider({ children }) {
-  const [leadSubmitted, setLeadSubmitted] = useState(false);
-  const [leadData, setLeadData] = useState(null); // if you need to store lead data
+  const [leadSubmitted, setLeadSubmitted] = usePersistedState(
+    "leadSubmitted",
+    false
+  );
+  const [leadData, setLeadData] = usePersistedState("leadData", null); // if you need to store lead data
 
   return (
     <LeadContext.Provider

@@ -6,6 +6,7 @@ import SelectQuestion from "../components/SelectQuestion";
 import Result from "./Result";
 import ExplicacaoImagem from "./ExplicacaoImagem";
 import ExplicacaoSelect from "./ExplicacaoSelect";
+import { usePersistedState } from "../hooks/usePersistedState";
 
 // defines das áreas
 import * as Defines from "../data/Defines";
@@ -46,35 +47,44 @@ function Questions() {
   const totalQuestions = 10;
 
   // pontuacaoTotal: current accumulated score (one number per area)
-  const [pontuacaoTotal, setPontuacaoTotal] = useState(
+  const [pontuacaoTotal, setPontuacaoTotal] = usePersistedState(
+    "questions_pontuacaoTotal",
     Array(Defines.numAreas).fill(0)
   );
+
   // perguntaAtual: index of the current page in the "paginas" array
-  const [perguntaAtual, setPerguntaAtual] = useState(0);
+  const [perguntaAtual, setPerguntaAtual] = usePersistedState(
+    "questions_perguntaAtual",
+    0
+  );
 
   // Define our pages (paginas). Order is important.
   const paginas = [
     <ExplicacaoImagem key="ex1" updatePagina={updatePagina} />,
     <ImageQuestion
       key="q1"
+      questionId="q1"
       weight_question={weight_question_1}
       statement_question={statement_question_1}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
     <ImageQuestion
       key="q2"
+      questionId="q2"
       weight_question={weight_question_2}
       statement_question={statement_question_2}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
     <ImageQuestion
       key="q3"
+      questionId="q3"
       weight_question={weight_question_3}
       statement_question={statement_question_3}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
     <ImageQuestion
       key="q4"
+      questionId="q4"
       weight_question={weight_question_4}
       statement_question={statement_question_4}
       updatePerguntaAtual={updatePerguntaAtual}
@@ -88,36 +98,42 @@ function Questions() {
     <ExplicacaoSelect key="ex2" updatePagina={updatePagina} />,
     <SelectQuestion
       key="q5"
+      questionId="q5"
       weight_question={weight_question_5}
       statement_question={statement_question_5}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
     <SelectQuestion
       key="q6"
+      questionId="q6"
       weight_question={weight_question_6}
       statement_question={statement_question_6}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
     <SelectQuestion
       key="q7"
+      questionId="q7"
       weight_question={weight_question_7}
       statement_question={statement_question_7}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
     <SelectQuestion
       key="q8"
+      questionId="q8"
       weight_question={weight_question_8}
       statement_question={statement_question_8}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
     <SelectQuestion
       key="q9"
+      questionId="q9"
       weight_question={weight_question_9}
       statement_question={statement_question_9}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
     <SelectQuestion
       key="q10"
+      questionId="q10"
       weight_question={weight_question_10}
       statement_question={statement_question_10}
       updatePerguntaAtual={updatePerguntaAtual}
@@ -134,7 +150,8 @@ function Questions() {
   const questionIndexes = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12];
 
   // Now that we know how many pages there are, initialize pontuacaoQuestao.
-  const [pontuacaoQuestao, setPontuacaoQuestao] = useState(
+  const [pontuacaoQuestao, setPontuacaoQuestao] = usePersistedState(
+    "questions_pontuacaoQuestao",
     Array(paginas.length).fill(Array(Defines.numAreas).fill(0))
   );
 
