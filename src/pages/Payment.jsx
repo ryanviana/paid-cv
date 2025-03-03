@@ -322,10 +322,10 @@ function Payment() {
             {/* CTA Button (if PIX not started) */}
             {!pixStarted && paymentStatus !== "approved" && (
               <button
-                onClick={handleCopyToClipboard}
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full text-sm transition-all duration-200 mb-4"
+                onClick={handleStartPayment}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-200"
               >
-                Copiar Código PIX
+                Quero Meu Acesso
               </button>
             )}
 
@@ -343,9 +343,7 @@ function Payment() {
                     />
                     {qrCodeText && (
                       <button
-                        onClick={() =>
-                          navigator.clipboard.writeText(qrCodeText)
-                        }
+                        onClick={handleCopyToClipboard}
                         className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full text-sm transition-all duration-200 mb-4"
                       >
                         Copiar Código PIX
