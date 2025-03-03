@@ -158,16 +158,23 @@ function Payment() {
   // Final submission handler (after payment is approved)
   const handlePaymentSuccess = async () => {
     setAttemptedSubmit(true);
+
     if (!userName || !userCellphone || !userEmail) {
       setErrorMsg("Por favor, preencha todos os campos.");
       return;
     }
+
     setErrorMsg("");
-    await sendLeadData();
-    await sendLeadEmail();
+
+    // Navigate immediately
+    navigate("/results");
+
+    // Run these functions in the background (no await)
+    sendLeadData();
+    sendLeadEmail();
+
     setResultsRevealed(true);
     setLeadSubmitted(true);
-    navigate("/results");
   };
 
   // Format timer as mm:ss
