@@ -83,7 +83,10 @@ function Payment() {
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: "paymentApproved" });
           if (window.fbq) {
-            window.fbq("trackCustom", "paymentApproved", { amount: 9.9 });
+            window.fbq("trackCustom", "paymentApproved", {
+              amount: 9.9,
+              conversionKey: "paymentApproved",
+            });
           }
         }
       }
@@ -112,8 +115,12 @@ function Payment() {
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: "paymentApproved" });
           if (window.fbq) {
-            window.fbq("trackCustom", "paymentApproved", { amount: 9.9 });
+            window.fbq("trackCustom", "paymentApproved", {
+              amount: 9.9,
+              conversionKey: "paymentApproved",
+            });
           }
+
           clearInterval(pollInterval);
         }
       } catch (err) {
