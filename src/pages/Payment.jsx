@@ -80,6 +80,8 @@ function Payment() {
         if (data.paymentStatus === "approved") {
           setQrCodeData(null);
           setQrCodeText(null);
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "paymentApproved" });
         }
       }
     };
@@ -104,6 +106,8 @@ function Payment() {
           setPaymentStatus("approved");
           setQrCodeData(null);
           setQrCodeText(null);
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "paymentApproved" });
           clearInterval(pollInterval);
         }
       } catch (err) {
