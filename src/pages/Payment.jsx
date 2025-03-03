@@ -177,6 +177,34 @@ function Payment() {
     setLeadSubmitted(true);
   };
 
+  const handleCopyToClipboard = () => {
+    if (navigator.clipboard && window.isSecureContext) {
+      // Modern clipboard API (for supported browsers)
+      navigator.clipboard
+        .writeText(qrCodeText)
+        .then(() => alert("Código PIX copiado!"))
+        .catch(() => fallbackCopy(qrCodeText));
+    } else {
+      // Fallback method for older browsers & iOS
+      fallbackCopy(qrCodeText);
+    }
+  };
+
+  // Fallback for older mobile browsers
+  const fallbackCopy = (text) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand("copy");
+      alert("Código PIX copiado!");
+    } catch (err) {
+      alert("Não foi possível copiar o código. Tente manualmente.");
+    }
+    document.body.removeChild(textArea);
+  };
+
   // Format timer as mm:ss
   const formattedTimer = `${Math.floor(timer / 60)}:${
     timer % 60 < 10 ? "0" : ""
@@ -294,10 +322,10 @@ function Payment() {
             {/* CTA Button (if PIX not started) */}
             {!pixStarted && paymentStatus !== "approved" && (
               <button
-                onClick={handleStartPayment}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-200"
+                onClick={handleCopyToClipboard}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full text-sm transition-all duration-200 mb-4"
               >
-                Quero Meu Acesso
+                Copiar Código PIX
               </button>
             )}
 
