@@ -1,14 +1,12 @@
 // src/pages/Result.jsx
 import { useState, useEffect, useRef, useContext } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import html2canvas from "html2canvas";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 import Grafico from "../components/Grafico";
 import areasConhecimento from "../data/areas_cursos.json";
-import PaymentCaptureForm from "../components/PaymentCaptureForm";
 import CourseDetails from "../components/CourseDetails";
 import AboutDecisaoExataMotion from "../components/AboutDecisaoExataMotion";
 
@@ -25,13 +23,21 @@ import { ResultContext } from "../context/ResultContext";
 import { usePersistedState } from "../hooks/usePersistedState";
 
 function Result({ pontuacaoTotal, type, updatePagina }) {
-  const { result, leadSubmitted, setLeadSubmitted } = useContext(ResultContext);
+  const { result, leadSubmitted } = useContext(ResultContext);
   const navigate = useNavigate();
   const isTotal = type === "total";
   const isPreview = type === "parcial";
   const finalPontuacaoTotal = result ? result : pontuacaoTotal;
 
-  // Compute top 3 areas and derive recommended course names
+  // If no result exists, redirect back to the questions page.
+  // Only redirect if we are in "total" mode and there’s no result.
+  useEffect(() => {
+    if (type === "total" && !result) {
+      navigate("/questions");
+    }
+  }, [result, navigate, type]);
+
+  // Compute top 3 areas and derive recommended course names.
   const areasComPontuacao = areasConhecimento
     .map((area, idx) => ({
       area,
@@ -41,12 +47,13 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     .slice(0, 3);
   const topCourses = areasComPontuacao.map((item) => item.area.cursos[0].nome);
 
-  // Persist the selected course so that if the user refreshes, it remains.
+  // Persist the selected course.
   const [selectedCourse, setSelectedCourse] = usePersistedState(
     "result_selectedCourse",
     null
   );
-  // Other UI states remain ephemeral.
+
+  // Ephemeral UI states.
   const [showDownArrow, setShowDownArrow] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -58,11 +65,9 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
 
   const chartRef = useRef(null);
   const scrollRef = useRef(null);
+  const detailsRef = useRef(null);
 
-  // ADDED: reference to the details section
-  const detailsRef = useRef(null); // ADDED
-
-  // Virtual pageview tracking for /results
+  // Virtual pageview tracking.
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
@@ -72,34 +77,30 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
     });
   }, []);
 
-  // Redirect to /questions if no result exists.
+  // Generate a preview image of the chart.
+  // Only generate when type is "total" (final results) to avoid errors in partial preview.
   useEffect(() => {
-    if (!result) {
-      navigate("/questions");
-    }
-  }, [result, navigate]);
-
-  useEffect(() => {
-    const generateChartPreview = async () => {
-      if (chartRef.current) {
-        try {
-          setTimeout(async () => {
-            const canvas = await html2canvas(chartRef.current, {
-              useCORS: true,
-              backgroundColor: "#ffffff",
-              crossOrigin: "anonymous",
-              scale: 2,
-            });
-            const dataUrl = canvas.toDataURL("image/png");
-            setChartPreviewImage(dataUrl);
-          }, 500);
-        } catch (error) {
-          console.error("Error generating chart preview:", error);
-        }
+    if (type !== "total") return;
+    if (chartRef.current && chartRef.current instanceof HTMLElement) {
+      try {
+        // Increased delay to allow full rendering and animations.
+        setTimeout(async () => {
+          const canvas = await html2canvas(chartRef.current, {
+            useCORS: true,
+            backgroundColor: "#ffffff",
+            crossOrigin: "anonymous",
+            scale: 2,
+          });
+          const dataUrl = canvas.toDataURL("image/png");
+          setChartPreviewImage(dataUrl);
+        }, 800);
+      } catch (error) {
+        console.error("Error generating chart preview:", error);
       }
-    };
-    generateChartPreview();
-  }, [chartRef, setChartPreviewImage]);
+    } else {
+      console.error("Invalid chartRef.current:", chartRef.current);
+    }
+  }, [chartRef, setChartPreviewImage, type]);
 
   const handleShare = async () => {
     const shareText =
@@ -123,18 +124,8 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   };
 
   const handleVoltar = () => {
-    // This value (-1) should match your navigation logic to go back to the images page.
     updatePagina(-1);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  // Process payment lead info → unlock results
-  const handlePaymentSuccess = async (leadPayload) => {
-    setLeadSubmitted(true);
-    console.log("Payment success lead data received:", leadPayload);
-    navigate("/results");
-
-    // PaymentCaptureForm already saves the lead, so no additional POST call here.
   };
 
   const handleNextQuestion = () => {
@@ -252,7 +243,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
                   Próxima pergunta
                 </button>
                 <button
-                  onClick={handleVoltar} // Make sure you have a handleVoltar function defined in this component
+                  onClick={handleVoltar}
                   className="px-8 py-4 font-bold bg-gray-200 text-black rounded-lg text-base sm:text-lg transition-all duration-150 ease-in-out hover:bg-gray-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400"
                 >
                   Voltar
@@ -277,7 +268,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
 
       {/* ABOUT YOU RESULTS SECTION */}
       {isTotal && (
-        // ADDED: ref={detailsRef} so we can scroll to it
         <section ref={detailsRef} className="w-full bg-white py-16">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-8">
@@ -355,21 +345,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
             </div>
           </div>
         </section>
-      )}
-
-      {/* Payment Capture Form – shown if the lead is not yet submitted */}
-      {isTotal && !leadSubmitted && (
-        <PaymentCaptureForm
-          showForm={true}
-          onPaymentSuccess={handlePaymentSuccess}
-          pontuacaoTotal={finalPontuacaoTotal}
-          topCourses={topCourses}
-          previewImage="/grafico.png"
-          // ADDED: pass a callback to scroll to the details section
-          onFormOpen={() => {
-            detailsRef.current?.scrollIntoView({ behavior: "smooth" });
-          }}
-        />
       )}
 
       {/* ABOUT US SECTION */}

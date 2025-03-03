@@ -6,7 +6,7 @@ import io from "socket.io-client";
 import axios from "axios";
 import { usePersistedState } from "../hooks/usePersistedState";
 
-// Socket para atualizações de status de pagamento
+// Establish socket connection for payment status updates.
 const socket = io("https://paid.cv.backend.decisaoexata.com");
 
 function PaymentCaptureForm({
@@ -15,9 +15,9 @@ function PaymentCaptureForm({
   pontuacaoTotal,
   topCourses,
   previewImage,
-  onFormOpen, // ADDED
+  onFormOpen,
 }) {
-  /* ────────────── Estados Persistidos ────────────── */
+  // Persisted states for payment info and user data.
   const [testId, setTestId] = usePersistedState("paymentTestId", null);
   const [paymentStatus, setPaymentStatus] = usePersistedState(
     "paymentStatus",
@@ -31,39 +31,34 @@ function PaymentCaptureForm({
     "paymentQrCodeText",
     null
   );
-
-  // Dados do usuário
   const [userName, setUserName] = usePersistedState("leadName", "");
   const [userCellphone, setUserCellphone] = usePersistedState(
     "leadCellphone",
     ""
   );
   const [userEmail, setUserEmail] = usePersistedState("leadEmail", "");
-
-  // Flag para indicar se os dados já foram enviados
   const [resultsRevealed, setResultsRevealed] = usePersistedState(
     "resultsRevealed",
     false
   );
 
-  /* ────────────── Estados Locais ────────────── */
-  const [timer, setTimer] = useState(15 * 60); // contagem regressiva de 15 minutos
+  // Local UI states.
+  const [timer, setTimer] = useState(15 * 60); // 15 minutes countdown
   const [loading, setLoading] = useState(false);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
   const [copied, setCopied] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // ADDED: useEffect to scroll when the form opens
+  // Scroll to the form when it becomes visible.
   useEffect(() => {
     if (showForm) {
       onFormOpen?.();
     }
   }, [showForm, onFormOpen]);
 
-  // Se o modal não deve aparecer, sai imediatamente
   if (!showForm) return null;
 
-  /* ────────────── Efeitos de Pagamento e Timer ────────────── */
+  // Initiate PIX payment if not started and not approved.
   useEffect(() => {
     if (!testId && paymentStatus !== "approved") {
       startPixPayment();
@@ -74,7 +69,7 @@ function PaymentCaptureForm({
     return () => clearInterval(interval);
   }, [testId, paymentStatus, showForm]);
 
-  /* ────────────── Listener do Socket ────────────── */
+  // Listen to real-time updates from the payment socket.
   useEffect(() => {
     socket.on("paymentStatusUpdate", (data) => {
       if (data.testId === testId) {
@@ -88,7 +83,7 @@ function PaymentCaptureForm({
     return () => socket.off("paymentStatusUpdate");
   }, [testId, userName, userCellphone, userEmail, pontuacaoTotal, topCourses]);
 
-  /* ────────────── Chamadas para o Backend ────────────── */
+  // Function to start the PIX payment.
   const startPixPayment = async () => {
     setLoading(true);
     try {
@@ -122,6 +117,7 @@ function PaymentCaptureForm({
     }
   };
 
+  // Send the lead data to your backend.
   const sendLeadData = async () => {
     const leadPayload = {
       name: userName,
@@ -132,7 +128,6 @@ function PaymentCaptureForm({
       careerChoiceCertainty: "Não tenho ideia do que escolher",
       vocationalHelp: "Não preciso de ajuda",
     };
-    console.log("Enviando dados do lead:", leadPayload);
     try {
       await axios.post(
         "https://cv.back.decisaoexata.com/api/leads",
@@ -147,6 +142,7 @@ function PaymentCaptureForm({
     onPaymentSuccess(leadPayload);
   };
 
+  // Send a confirmation email with the lead data.
   const sendLeadEmail = async () => {
     const emailPayload = {
       score: pontuacaoTotal,
@@ -156,7 +152,6 @@ function PaymentCaptureForm({
       user_schoolYear: "Outro",
       user_careerChoiceCertainty: "Não tenho ideia do que escolher",
     };
-    console.log("Enviando email:", emailPayload);
     try {
       await axios.post(
         "https://leads.cv.backend.decisaoexata.com/send-email/",
@@ -170,7 +165,7 @@ function PaymentCaptureForm({
     }
   };
 
-  /* ────────────── Manipuladores de Eventos ────────────── */
+  // Handle copying the PIX key to clipboard.
   const handleCopyPixKey = () => {
     if (qrCodeText) {
       navigator.clipboard.writeText(qrCodeText).then(() => {
@@ -180,6 +175,7 @@ function PaymentCaptureForm({
     }
   };
 
+  // Validate and reveal the full result after collecting lead data.
   const handleRevealResults = () => {
     setAttemptedSubmit(true);
     if (!userName || !userCellphone || !userEmail) {
@@ -192,40 +188,35 @@ function PaymentCaptureForm({
     setResultsRevealed(true);
   };
 
-  /* ────────────── Cálculos para a Contagem e Progresso ────────────── */
+  // Timer and progress bar calculations.
   const minutes = Math.floor(timer / 60);
   const seconds = timer % 60;
   const countdown = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   const percentage = (timer / (15 * 60)) * 100;
 
-  /* ────────────── Renderização ────────────── */
   return (
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto"
+      className="min-h-screen bg-gray-50 flex flex-col px-4 py-8"
       style={{ fontFamily: "Ubuntu, sans-serif" }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <motion.div
-        className="relative bg-white p-6 md:p-8 rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto pointer-events-auto"
-        initial={{ scale: 0.9 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* HEADER */}
-        <header className="text-center mb-6">
-          <h1 className="mt-2 text-3xl md:text-2xl font-bold text-indigo-600">
-            Você concluiu o teste vocacional!
-          </h1>
-          <p className="mt-2 text-base md:text-lg text-gray-700">
-            Não escolha a carreira errada! Descubra agora mesmo qual é a sua
-            profissão ideal
-          </p>
-        </header>
+      {/* Landing Page Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-green-600">
+          Descubra seu Futuro: Seu Radar Completo de Carreiras por Apenas R$10!
+        </h1>
+        <p className="text-xl mt-2 text-gray-700">
+          Você já respondeu 10 perguntas – agora desbloqueie insights exclusivos
+          para transformar sua carreira.
+        </p>
+      </header>
 
-        {/* PREVIEW IMAGE */}
-        {previewImage && (
-          <section className="mb-6">
+      {/* Conditional Content Based on Payment & Lead Status */}
+      {!resultsRevealed && paymentStatus !== "approved" && (
+        <section className="flex flex-col md:flex-row items-center mb-8">
+          {/* Preview Image (blurred until payment) */}
+          <div className="md:w-1/2">
             <img
               src={previewImage}
               alt="Prévia do resultado"
@@ -234,116 +225,41 @@ function PaymentCaptureForm({
                 filter: paymentStatus !== "approved" ? "blur(2px)" : "none",
               }}
             />
-          </section>
-        )}
+          </div>
+          {/* Benefits Section */}
+          <div className="md:w-1/2 md:pl-6 mt-4 md:mt-0">
+            <ul className="list-disc ml-5 text-lg text-gray-800">
+              <li>
+                <strong>Radar Visual Exclusivo:</strong> Descubra suas forças e
+                interesses com um gráfico detalhado.
+              </li>
+              <li>
+                <strong>Detalhamento das Carreiras:</strong> Informações
+                completas sobre profissões, salários e perfis ideais.
+              </li>
+              <li>
+                <strong>Decisão Informada:</strong> Orientações valiosas para
+                escolher a carreira dos seus sonhos.
+              </li>
+            </ul>
+          </div>
+        </section>
+      )}
 
-        {/* CONTENT */}
-        {resultsRevealed ? (
-          <section className="text-center">
-            <p className="text-green-600 font-bold text-xl md:text-2xl">
-              Obrigado! Dados enviados.
-            </p>
-          </section>
-        ) : paymentStatus === "approved" ? (
-          <section>
-            <p className="text-center text-green-600 font-bold text-xl md:text-2xl mb-4">
-              Pagamento Confirmado!
-            </p>
-            <p className="text-center text-gray-700 text-sm md:text-base mb-4">
-              Insira seus dados para liberar seu resultado.
-            </p>
-            {errorMsg && (
-              <p
-                className="text-center text-red-500 text-sm md:text-base mb-4"
-                role="alert"
-              >
-                {errorMsg}
-              </p>
-            )}
-            {/* FORM FIELDS */}
-            <div className="mb-4">
-              <label className="block text-gray-800 font-semibold mb-1 text-sm md:text-base">
-                Nome
-              </label>
-              <input
-                type="text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                placeholder="Seu nome"
-                required
-                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm md:text-base ${
-                  attemptedSubmit && !userName ? "border-red-500" : ""
-                }`}
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-800 font-semibold mb-1 text-sm md:text-base">
-                Celular
-              </label>
-              <input
-                type="tel"
-                value={userCellphone}
-                onChange={(e) => setUserCellphone(e.target.value)}
-                placeholder="(XX) XXXXX-XXXX"
-                required
-                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm md:text-base ${
-                  attemptedSubmit && !userCellphone ? "border-red-500" : ""
-                }`}
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-800 font-semibold mb-1 text-sm md:text-base">
-                Email
-              </label>
-              <input
-                type="email"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-                placeholder="seuemail@exemplo.com"
-                required
-                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm md:text-base ${
-                  attemptedSubmit && !userEmail ? "border-red-500" : ""
-                }`}
-              />
-            </div>
-            <button
-              onClick={handleRevealResults}
-              disabled={!userName || !userCellphone || !userEmail}
-              className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md text-sm md:text-base transition-all duration-200 ${
-                !userName || !userCellphone || !userEmail
-                  ? "opacity-50 cursor-not-allowed"
-                  : "opacity-100"
-              }`}
-            >
-              Liberar Meu Resultado
-            </button>
-          </section>
-        ) : (
-          <section className="text-center">
-            <p className="text-2xl md:text-2xl font-extrabold text-red-500 mb-2">
-              Oferta Exclusiva
-            </p>
-            <p className="text-xl md:text-2xl font-extrabold text-red-500 mb-2">
-              Liberação Imediata dos Resultados
-            </p>
-            <div className="flex flex-col items-center mb-4">
-              <div className="flex items-baseline space-x-2">
-                <span className="line-through text-red-500 text-sm md:text-base">
-                  R$38,90
-                </span>
-                <span className="text-green-500 text-3xl md:text-4xl font-extrabold animate-pulse">
-                  R$9,90
-                </span>
-              </div>
-            </div>
-
-            {loading && (
-              <p className="text-center text-gray-500 mb-4 text-sm md:text-base">
-                Gerando QR Code...
-              </p>
-            )}
-            {!loading && qrCodeData && timer > 0 && (
-              <div className="flex flex-col items-center mb-4">
+      {/* Pricing, QR Code and Urgency Section */}
+      {!resultsRevealed && (
+        <section className="text-center mb-8">
+          <div className="flex items-center justify-center space-x-4">
+            <span className="line-through text-red-500 text-lg">R$38,90</span>
+            <span className="text-green-500 text-4xl font-extrabold">
+              R$9,90
+            </span>
+          </div>
+          <div className="mt-4">
+            {loading ? (
+              <p className="text-gray-500">Gerando QR Code...</p>
+            ) : qrCodeData && timer > 0 ? (
+              <div className="flex flex-col items-center">
                 <img
                   src={qrCodeData}
                   alt="QR Code para pagamento PIX"
@@ -353,13 +269,13 @@ function PaymentCaptureForm({
                   <div className="flex flex-col items-center">
                     <button
                       onClick={handleCopyPixKey}
-                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full text-sm md:text-base transition-all duration-200"
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full text-sm transition-all duration-200"
                     >
                       Copiar Código PIX
                     </button>
                     {copied && (
                       <span
-                        className="text-xs md:text-sm text-green-500 mt-1"
+                        className="text-xs text-green-500 mt-1"
                         aria-live="polite"
                       >
                         Copiado!
@@ -368,38 +284,129 @@ function PaymentCaptureForm({
                   </div>
                 )}
               </div>
+            ) : (
+              <p className="text-red-500 font-bold mt-4">Tempo Esgotado!</p>
             )}
+          </div>
+          {/* Countdown Timer and Progress */}
+          <div className="mt-6">
+            <span className="text-3xl font-bold text-red-500">{countdown}</span>
+            <p className="text-sm text-gray-600 mt-1">
+              Oferta válida até o código expirar
+            </p>
+            <div className="w-full bg-gray-200 rounded-full h-3 mt-3 mx-auto max-w-sm">
+              <div
+                className="bg-red-500 h-3 rounded-full transition-all duration-500"
+                style={{ width: `${percentage}%` }}
+              ></div>
+            </div>
+          </div>
+        </section>
+      )}
 
-            {/* COUNTDOWN & PROGRESS */}
-            <section className="text-center mb-6">
-              <span className="text-3xl md:text-4xl font-black text-red-500">
-                {countdown}
-              </span>
-              <div className="w-full bg-gray-200 rounded-full h-3 mt-3 mx-auto max-w-sm">
-                <div
-                  className="bg-red-500 h-3 rounded-full transition-all duration-500"
-                  style={{ width: `${percentage}%` }}
-                ></div>
-                <p className="text-sm md:text-base text-gray-400 mb-2">
-                  Tempo restante até o seu código PIX expirar
-                </p>
-              </div>
-            </section>
-
-            {!loading && timer === 0 && !paymentStatus && (
-              <p className="text-red-500 font-bold mt-4 text-sm md:text-base">
-                Tempo Esgotado!
+      {/* Lead Capture / Payment Approved Section */}
+      {paymentStatus === "approved" && !resultsRevealed && (
+        <section className="mb-8">
+          <div className="text-center mb-4">
+            <p className="text-green-600 font-bold text-2xl">
+              Pagamento Confirmado!
+            </p>
+            <p className="text-gray-700 text-base">
+              Insira seus dados para liberar seu resultado completo.
+            </p>
+            {errorMsg && (
+              <p className="text-red-500 text-sm mt-2" role="alert">
+                {errorMsg}
               </p>
             )}
-          </section>
-        )}
+          </div>
+          <div className="space-y-4 max-w-md mx-auto">
+            <div>
+              <label className="block text-gray-800 font-semibold mb-1 text-sm">
+                Nome
+              </label>
+              <input
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="Seu nome"
+                required
+                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm ${
+                  attemptedSubmit && !userName ? "border-red-500" : ""
+                }`}
+              />
+            </div>
+            <div>
+              <label className="block text-gray-800 font-semibold mb-1 text-sm">
+                Celular
+              </label>
+              <input
+                type="tel"
+                value={userCellphone}
+                onChange={(e) => setUserCellphone(e.target.value)}
+                placeholder="(XX) XXXXX-XXXX"
+                required
+                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm ${
+                  attemptedSubmit && !userCellphone ? "border-red-500" : ""
+                }`}
+              />
+            </div>
+            <div>
+              <label className="block text-gray-800 font-semibold mb-1 text-sm">
+                Email
+              </label>
+              <input
+                type="email"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                placeholder="seuemail@exemplo.com"
+                required
+                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm ${
+                  attemptedSubmit && !userEmail ? "border-red-500" : ""
+                }`}
+              />
+            </div>
+            <div className="text-center mt-4">
+              <button
+                onClick={handleRevealResults}
+                disabled={!userName || !userCellphone || !userEmail}
+                className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-200"
+              >
+                Liberar Meu Resultado
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
-        {/* FOOTER / TRUST SIGNALS */}
-        <footer className="mt-10 text-center text-gray-600 text-xs md:text-sm">
-          <p className="mb-1 font-semibold">Compra 100% Segura</p>
-          <p className="mb-2">Seus dados estão protegidos e criptografados.</p>
-        </footer>
-      </motion.div>
+      {resultsRevealed && (
+        <section className="text-center mb-8">
+          <p className="text-green-600 font-bold text-2xl mb-4">
+            Obrigado! Dados enviados.
+          </p>
+        </section>
+      )}
+
+      {/* Testimonial Section */}
+      <section className="border-t pt-4">
+        <div className="text-center">
+          <p className="italic text-gray-700">
+            "Esse teste transformou minha vida! Consegui ver minhas reais
+            potencialidades." - João S.
+          </p>
+          <p className="italic text-gray-700 mt-2">
+            "Vale cada centavo. Agora sei qual carreira seguir com confiança." -
+            Maria F.
+          </p>
+        </div>
+      </section>
+
+      {/* Footer / Trust Signals */}
+      <footer className="mt-6 text-center text-gray-600 text-sm">
+        <p>
+          Compra 100% segura – Seus dados estão protegidos e criptografados.
+        </p>
+      </footer>
     </motion.div>
   );
 }
@@ -410,7 +417,7 @@ PaymentCaptureForm.propTypes = {
   pontuacaoTotal: PropTypes.array.isRequired,
   topCourses: PropTypes.array.isRequired,
   previewImage: PropTypes.string,
-  onFormOpen: PropTypes.func, // ADDED
+  onFormOpen: PropTypes.func,
 };
 
 export default PaymentCaptureForm;

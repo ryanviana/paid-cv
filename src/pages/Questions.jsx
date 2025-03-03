@@ -1,17 +1,13 @@
 // src/pages/Questions.jsx
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import ProgressBar from "../components/ProgressBar";
 import ImageQuestion from "../components/ImageQuestion";
 import SelectQuestion from "../components/SelectQuestion";
-import Result from "./Result";
 import ExplicacaoImagem from "./ExplicacaoImagem";
 import ExplicacaoSelect from "./ExplicacaoSelect";
 import { usePersistedState } from "../hooks/usePersistedState";
-
-// defines das áreas
 import * as Defines from "../data/Defines";
-
-// enunciados das perguntas
 import {
   statement_question_1,
   statement_question_2,
@@ -24,8 +20,6 @@ import {
   statement_question_9,
   statement_question_10,
 } from "../data/QuestionsStatements";
-
-// pesos de cada item das perguntas
 import {
   weight_question_1,
   weight_question_2,
@@ -38,12 +32,10 @@ import {
   weight_question_9,
   weight_question_10,
 } from "../data/QuestionsWeight";
-
-// Import the ResultContext to store the final score when finished
 import { ResultContext } from "../context/ResultContext";
 
 function Questions() {
-  // Total number of actual questions (for progress bar)
+  const navigate = useNavigate();
   const totalQuestions = 10;
 
   // pontuacaoTotal: current accumulated score (one number per area)
@@ -58,7 +50,11 @@ function Questions() {
     0
   );
 
+  // Use the ResultContext to store the final result
+  const { setResult } = useContext(ResultContext);
+
   // Define our pages (paginas). Order is important.
+  // Notice that we removed the embedded <Result /> pages.
   const paginas = [
     <ExplicacaoImagem key="ex1" updatePagina={updatePagina} />,
     <ImageQuestion
@@ -88,12 +84,6 @@ function Questions() {
       weight_question={weight_question_4}
       statement_question={statement_question_4}
       updatePerguntaAtual={updatePerguntaAtual}
-    />,
-    <Result
-      key="res1"
-      pontuacaoTotal={pontuacaoTotal}
-      type="parcial"
-      updatePagina={updatePagina}
     />,
     <ExplicacaoSelect key="ex2" updatePagina={updatePagina} />,
     <SelectQuestion
@@ -138,16 +128,10 @@ function Questions() {
       statement_question={statement_question_10}
       updatePerguntaAtual={updatePerguntaAtual}
     />,
-    <Result
-      key="res2"
-      pontuacaoTotal={pontuacaoTotal}
-      type="total"
-      updatePagina={updatePagina}
-    />,
   ];
 
   // questionIndexes: pages that count as actual questions (for progress bar)
-  const questionIndexes = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12];
+  const questionIndexes = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11];
 
   // Now that we know how many pages there are, initialize pontuacaoQuestao.
   const [pontuacaoQuestao, setPontuacaoQuestao] = usePersistedState(
@@ -188,31 +172,40 @@ function Questions() {
     if (dir === 1) {
       updatePontuacao(pontuacao);
     }
+    // When finishing question 4 (page index 4) and moving forward,
+    // store the partial result in context and navigate to the preview route.
+    if (perguntaAtual === 4 && dir === 1) {
+      setResult(pontuacaoTotal);
+      navigate("/results/preview");
+      return;
+    }
+    // When finishing question 10 (last page, index 11) and moving forward,
+    // store the final result in context and navigate to the final results route.
+    if (perguntaAtual === paginas.length - 1 && dir === 1) {
+      setResult(pontuacaoTotal);
+      navigate("/payment");
+      return;
+    }
     updatePagina(dir);
   }
 
-  // Compute current progress (only count pages listed in questionIndexes)
-  const currentProgress = questionIndexes.filter(
-    (index) => index <= perguntaAtual
-  ).length;
-
-  // Use ResultContext to store the final result when the test is finished.
-  const { setResult } = useContext(ResultContext);
+  // Also update final result when on the final page.
   useEffect(() => {
-    // If we are on the final page (last page in the paginas array), update the context.
     if (perguntaAtual === paginas.length - 1) {
       setResult(pontuacaoTotal);
     }
   }, [perguntaAtual, pontuacaoTotal, setResult, paginas.length]);
 
+  const currentProgress = questionIndexes.filter(
+    (index) => index <= perguntaAtual
+  ).length;
+
   return (
     <div className="flex flex-col w-full h-full items-center text-center">
-      {/* PROGRESS BAR */}
       <ProgressBar
         currentQuestion={currentProgress}
         totalQuestions={totalQuestions}
       />
-      {/* DISPLAY THE CURRENT PAGE */}
       {paginas[perguntaAtual]}
     </div>
   );

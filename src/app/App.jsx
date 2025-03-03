@@ -4,6 +4,7 @@ import "../styles/index.css";
 import Header from "../components/Header";
 import LandingPage from "../pages/LandingPage";
 import Questions from "../pages/Questions";
+import Payment from "../pages/Payment";
 import Result from "../pages/Result";
 import { ResultProvider } from "../context/ResultContext";
 
@@ -16,11 +17,27 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/questions" element={<Questions />} />
+            <Route path="/payment" element={<Payment />} />
+            {/* Preview results route: shows partial (type="parcial") results */}
+            <Route
+              path="/results/preview"
+              element={
+                <Result
+                  type="parcial"
+                  updatePagina={() => {
+                    // When the user clicks “Próxima pergunta” on the preview page,
+                    // we want to continue the test at question index 5.
+                    localStorage.setItem("questions_perguntaAtual", 5);
+                    window.location.href = "/questions";
+                  }}
+                  pontuacaoTotal={[]}
+                />
+              }
+            />
+            {/* Final results route: shows final (type="total") results */}
             <Route
               path="/results"
               element={
-                // For /results, we rely entirely on the context data.
-                // Ensure that Questions calls setResult() with a non-empty array when done.
                 <Result
                   type="total"
                   updatePagina={() => {}}
