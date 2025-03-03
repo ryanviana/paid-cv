@@ -360,7 +360,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
           onPaymentSuccess={handlePaymentSuccess}
           pontuacaoTotal={finalPontuacaoTotal}
           topCourses={topCourses}
-          previewImage={chartPreviewImage} // Persisted chart preview image
+          previewImage="/grafico.png" // Use the fixed image path
         />
       )}
 
