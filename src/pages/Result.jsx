@@ -51,6 +51,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [sharePreviewImage, setSharePreviewImage] = useState("");
+  const [chartPreviewImage, setChartPreviewImage] = useState("");
 
   const chartRef = useRef(null);
   const scrollRef = useRef(null);
@@ -71,6 +72,26 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
       navigate("/questions");
     }
   }, [result, navigate]);
+
+  useEffect(() => {
+    const generateChartPreview = async () => {
+      if (chartRef.current) {
+        try {
+          const canvas = await html2canvas(chartRef.current, {
+            useCORS: true,
+            backgroundColor: "#ffffff",
+            crossOrigin: "anonymous",
+            scale: 2,
+          });
+          const dataUrl = canvas.toDataURL("image/png");
+          setChartPreviewImage(dataUrl);
+        } catch (error) {
+          console.error("Error generating chart preview:", error);
+        }
+      }
+    };
+    generateChartPreview();
+  }, [chartRef]);
 
   const handleShare = async () => {
     const shareText =
@@ -334,6 +355,7 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
           onPaymentSuccess={handlePaymentSuccess}
           pontuacaoTotal={finalPontuacaoTotal}
           topCourses={topCourses}
+          previewImage={chartPreviewImage} // Pass the preview image here
         />
       )}
 
