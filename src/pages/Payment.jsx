@@ -53,7 +53,6 @@ function Payment() {
   // Initialize socket connection when the component mounts
   useEffect(() => {
     socketRef.current = io("https://paid.cv.backend.decisaoexata.com");
-    // Cleanup on unmount
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
@@ -61,12 +60,13 @@ function Payment() {
     };
   }, []);
 
-  // Listen for payment status updates using the current testId
+  // Listen for payment status updates via WebSocket
   useEffect(() => {
     if (!socketRef.current) return;
 
     const handlePaymentUpdate = (data) => {
       console.log("Received payment status update:", data);
+      // Ensure the update is for the current test
       if (data.testId === testId) {
         setPaymentStatus(data.paymentStatus);
         if (data.paymentStatus === "approved") {
@@ -80,6 +80,29 @@ function Payment() {
     return () =>
       socketRef.current.off("paymentStatusUpdate", handlePaymentUpdate);
   }, [testId]);
+
+  // Fallback polling mechanism in case WebSocket updates are not received
+  useEffect(() => {
+    if (!testId || paymentStatus !== "pending") return;
+    const pollInterval = setInterval(async () => {
+      try {
+        const res = await fetch(
+          `https://paid.cv.backend.decisaoexata.com/api/test/pix/status?testId=${testId}`
+        );
+        const data = await res.json();
+        console.log("Polling payment status:", data);
+        if (data.paymentStatus === "approved") {
+          setPaymentStatus("approved");
+          setQrCodeData(null);
+          setQrCodeText(null);
+          clearInterval(pollInterval);
+        }
+      } catch (err) {
+        console.error("Error polling payment status:", err);
+      }
+    }, 5000);
+    return () => clearInterval(pollInterval);
+  }, [testId, paymentStatus]);
 
   // Start timer only once payment (PIX) has been started
   useEffect(() => {
@@ -175,39 +198,29 @@ function Payment() {
   // Final submission handler (after payment is approved)
   const handlePaymentSuccess = async () => {
     setAttemptedSubmit(true);
-
     if (!userName || !userCellphone || !userEmail) {
       setErrorMsg("Por favor, preencha todos os campos.");
       return;
     }
-
     setErrorMsg("");
-
-    // Navigate immediately
     navigate("/results");
-
-    // Run these functions in the background (no await)
     sendLeadData();
     sendLeadEmail();
-
     setResultsRevealed(true);
     setLeadSubmitted(true);
   };
 
   const handleCopyToClipboard = () => {
     if (navigator.clipboard && window.isSecureContext) {
-      // Modern clipboard API (for supported browsers)
       navigator.clipboard
         .writeText(qrCodeText)
         .then(() => alert("Código PIX copiado!"))
         .catch(() => fallbackCopy(qrCodeText));
     } else {
-      // Fallback method for older browsers & iOS
       fallbackCopy(qrCodeText);
     }
   };
 
-  // Fallback for older mobile browsers
   const fallbackCopy = (text) => {
     const textArea = document.createElement("textarea");
     textArea.value = text;
@@ -222,12 +235,10 @@ function Payment() {
     document.body.removeChild(textArea);
   };
 
-  // Format timer as mm:ss
   const formattedTimer = `${Math.floor(timer / 60)}:${
     timer % 60 < 10 ? "0" : ""
   }${timer % 60}`;
 
-  // Framer Motion variant for section animations
   const sectionVariant = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
@@ -244,7 +255,6 @@ function Payment() {
         className="bg-blue-600 text-white py-20 px-4 text-center"
       >
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:space-x-10">
-          {/* Left Column */}
           <div className="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
             <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
               PARABÉNS, VOCÊ CONCLUIU O TESTE!
@@ -262,7 +272,6 @@ function Payment() {
               Ver Oferta
             </button>
           </div>
-          {/* Right Column: Career Test Image */}
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <img
               src="./grafico.png"
@@ -283,7 +292,6 @@ function Payment() {
         className="py-16 px-4 bg-gray-50 text-center"
       >
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-start justify-between gap-8">
-          {/* LEFT COLUMN: Price & Headline */}
           <div className="flex-1 flex flex-col justify-center space-y-6 text-left py-6 pr-8">
             <h2 className="text-4xl font-extrabold text-gray-900 leading-tight">
               🔓 Desbloqueie Seu Resultado Agora
