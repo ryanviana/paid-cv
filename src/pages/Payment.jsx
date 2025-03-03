@@ -82,6 +82,9 @@ function Payment() {
           setQrCodeText(null);
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: "paymentApproved" });
+          if (window.fbq) {
+            window.fbq("trackCustom", "paymentApproved", { amount: 9.9 });
+          }
         }
       }
     };
@@ -108,6 +111,9 @@ function Payment() {
           setQrCodeText(null);
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: "paymentApproved" });
+          if (window.fbq) {
+            window.fbq("trackCustom", "paymentApproved", { amount: 9.9 });
+          }
           clearInterval(pollInterval);
         }
       } catch (err) {
