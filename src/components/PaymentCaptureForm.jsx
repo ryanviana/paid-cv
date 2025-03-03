@@ -222,6 +222,9 @@ function PaymentCaptureForm({
               src={previewImage}
               alt="Prévia do resultado"
               className="w-full max-h-48 object-cover rounded-lg shadow-md"
+              style={{
+                filter: paymentStatus !== "approved" ? "blur(2px)" : "none",
+              }}
             />
           </section>
         )}
