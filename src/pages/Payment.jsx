@@ -50,9 +50,11 @@ function Payment() {
   // Create a ref for the socket connection
   const socketRef = useRef(null);
 
-  // Initialize socket connection when the component mounts
+  // Initialize socket connection with both websocket and polling transports
   useEffect(() => {
-    socketRef.current = io("https://paid.cv.backend.decisaoexata.com");
+    socketRef.current = io("https://paid.cv.backend.decisaoexata.com", {
+      transports: ["websocket", "polling"],
+    });
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
@@ -86,8 +88,9 @@ function Payment() {
     if (!testId || paymentStatus !== "pending") return;
     const pollInterval = setInterval(async () => {
       try {
+        // Updated polling URL to match the backend route
         const res = await fetch(
-          `https://paid.cv.backend.decisaoexata.com/api/test/pix/status?testId=${testId}`
+          `https://paid.cv.backend.decisaoexata.com/api/test/status/${testId}`
         );
         const data = await res.json();
         console.log("Polling payment status:", data);
