@@ -6,6 +6,12 @@ import axios from "axios";
 import { usePersistedState } from "../hooks/usePersistedState";
 import { ResultContext } from "../context/ResultContext";
 import io from "socket.io-client";
+import Bernal from "../assets/Bernal.png";
+import Grafico from "../assets/grafico.png";
+import Ryan from "../assets/Ryan.png";
+import Guga from "../assets/Guga.png";
+import Beluce from "../assets/beluce.png";
+import Pedro from "../assets/Pedro.png";
 
 function Payment() {
   const navigate = useNavigate();
@@ -277,7 +283,7 @@ function Payment() {
           </div>
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <img
-              src="./grafico.png"
+              src={Grafico}
               alt="Career Test"
               className="rounded-lg shadow-lg w-full max-w-md blur-sm"
             />
@@ -431,7 +437,7 @@ function Payment() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white p-6 rounded-lg shadow flex flex-col items-center">
               <img
-                src="./Bernal.png"
+                src={Bernal}
                 alt="João"
                 className="w-20 h-20 rounded-full mb-4"
               />
@@ -445,7 +451,7 @@ function Payment() {
             </div>
             <div className="bg-white p-6 rounded-lg shadow flex flex-col items-center">
               <img
-                src="beluce.png"
+                src={Beluce}
                 alt="Beluce"
                 className="w-20 h-20 rounded-full mb-4"
               />
@@ -496,7 +502,7 @@ function Payment() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-gray-50 p-6 rounded-lg shadow flex flex-col items-center">
               <img
-                src="Guga.png"
+                src={Guga}
                 alt="Guga Sanchez"
                 className="w-20 h-20 rounded-full mb-4 object-cover"
               />
@@ -513,7 +519,7 @@ function Payment() {
             </div>
             <div className="bg-gray-50 p-6 rounded-lg shadow flex flex-col items-center">
               <img
-                src="Pedro.png"
+                src={Pedro}
                 alt="Pedro Peres"
                 className="w-20 h-20 rounded-full mb-4 object-cover"
               />
@@ -530,7 +536,7 @@ function Payment() {
             </div>
             <div className="bg-gray-50 p-6 rounded-lg shadow flex flex-col items-center">
               <img
-                src="Ryan.png"
+                src={Ryan}
                 alt="Ryan Tintore"
                 className="w-20 h-20 rounded-full mb-4 object-cover"
               />
