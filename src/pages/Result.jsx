@@ -59,6 +59,9 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   const chartRef = useRef(null);
   const scrollRef = useRef(null);
 
+  // ADDED: reference to the details section
+  const detailsRef = useRef(null); // ADDED
+
   // Virtual pageview tracking for /results
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
@@ -274,7 +277,8 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
 
       {/* ABOUT YOU RESULTS SECTION */}
       {isTotal && (
-        <section className="w-full bg-white py-16">
+        // ADDED: ref={detailsRef} so we can scroll to it
+        <section ref={detailsRef} className="w-full bg-white py-16">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-8">
               <motion.h2
@@ -360,7 +364,11 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
           onPaymentSuccess={handlePaymentSuccess}
           pontuacaoTotal={finalPontuacaoTotal}
           topCourses={topCourses}
-          previewImage="/grafico.png" // Use the fixed image path
+          previewImage="/grafico.png"
+          // ADDED: pass a callback to scroll to the details section
+          onFormOpen={() => {
+            detailsRef.current?.scrollIntoView({ behavior: "smooth" });
+          }}
         />
       )}
 
@@ -464,7 +472,6 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
         </div>
       )}
 
-      {/* COURSE MODAL */}
       {/* COURSE MODAL */}
       {selectedCourse && (
         <div className="fixed inset-0 bg-black bg-opacity-70 z-50 overflow-auto">

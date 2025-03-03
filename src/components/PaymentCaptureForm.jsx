@@ -14,7 +14,8 @@ function PaymentCaptureForm({
   onPaymentSuccess,
   pontuacaoTotal,
   topCourses,
-  previewImage, // URL para imagem de prévia do resultado
+  previewImage,
+  onFormOpen, // ADDED
 }) {
   /* ────────────── Estados Persistidos ────────────── */
   const [testId, setTestId] = usePersistedState("paymentTestId", null);
@@ -51,6 +52,13 @@ function PaymentCaptureForm({
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
   const [copied, setCopied] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+  // ADDED: useEffect to scroll when the form opens
+  useEffect(() => {
+    if (showForm) {
+      onFormOpen?.();
+    }
+  }, [showForm, onFormOpen]);
 
   // Se o modal não deve aparecer, sai imediatamente
   if (!showForm) return null;
@@ -151,7 +159,7 @@ function PaymentCaptureForm({
     console.log("Enviando email:", emailPayload);
     try {
       await axios.post(
-        "https://leads.cv.back.decisaoexata.com/send-email/",
+        "https://leads.cv.backend.decisaoexata.com/send-email/",
         emailPayload,
         {
           headers: { "Content-Type": "application/json" },
@@ -378,11 +386,6 @@ function PaymentCaptureForm({
               </div>
             </section>
 
-            {/* {paymentStatus && paymentStatus !== "approved" && (
-              <p className="text-gray-700 text-sm md:text-base mt-2">
-                {paymentStatus}
-              </p>
-            )} */}
             {!loading && timer === 0 && !paymentStatus && (
               <p className="text-red-500 font-bold mt-4 text-sm md:text-base">
                 Tempo Esgotado!
@@ -407,6 +410,7 @@ PaymentCaptureForm.propTypes = {
   pontuacaoTotal: PropTypes.array.isRequired,
   topCourses: PropTypes.array.isRequired,
   previewImage: PropTypes.string,
+  onFormOpen: PropTypes.func, // ADDED
 };
 
 export default PaymentCaptureForm;
