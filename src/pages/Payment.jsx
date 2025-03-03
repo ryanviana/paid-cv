@@ -1,14 +1,11 @@
 // src/pages/Payment.jsx
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { usePersistedState } from "../hooks/usePersistedState";
 import { ResultContext } from "../context/ResultContext";
 import io from "socket.io-client";
-
-// Initialize Socket.IO connection
-const socket = io("https://paid.cv.backend.decisaoexata.com");
 
 function Payment() {
   const navigate = useNavigate();
@@ -50,6 +47,40 @@ function Payment() {
   const originalPrice = 38.9;
   const discountedPrice = 9.9;
 
+  // Create a ref for the socket connection
+  const socketRef = useRef(null);
+
+  // Initialize socket connection when the component mounts
+  useEffect(() => {
+    socketRef.current = io("https://paid.cv.backend.decisaoexata.com");
+    // Cleanup on unmount
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+      }
+    };
+  }, []);
+
+  // Listen for payment status updates using the current testId
+  useEffect(() => {
+    if (!socketRef.current) return;
+
+    const handlePaymentUpdate = (data) => {
+      console.log("Received payment status update:", data);
+      if (data.testId === testId) {
+        setPaymentStatus(data.paymentStatus);
+        if (data.paymentStatus === "approved") {
+          setQrCodeData(null);
+          setQrCodeText(null);
+        }
+      }
+    };
+
+    socketRef.current.on("paymentStatusUpdate", handlePaymentUpdate);
+    return () =>
+      socketRef.current.off("paymentStatusUpdate", handlePaymentUpdate);
+  }, [testId]);
+
   // Start timer only once payment (PIX) has been started
   useEffect(() => {
     if (!pixStarted) return;
@@ -58,20 +89,6 @@ function Payment() {
     }, 1000);
     return () => clearInterval(interval);
   }, [pixStarted]);
-
-  // Listen for payment status updates
-  useEffect(() => {
-    socket.on("paymentStatusUpdate", (data) => {
-      if (data.testId === testId) {
-        setPaymentStatus(data.paymentStatus);
-        if (data.paymentStatus === "approved") {
-          setQrCodeData(null);
-          setQrCodeText(null);
-        }
-      }
-    });
-    return () => socket.off("paymentStatusUpdate");
-  }, [testId]);
 
   // Initiate PIX payment when the user clicks the CTA button
   const handleStartPayment = async () => {
@@ -245,7 +262,7 @@ function Payment() {
               Ver Oferta
             </button>
           </div>
-          {/* Right Column: use the career test image */}
+          {/* Right Column: Career Test Image */}
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <img
               src="./grafico.png"
@@ -261,7 +278,7 @@ function Payment() {
         id="payment-offer"
         initial="hidden"
         animate="visible"
-        variants={sectionVariant} // Ensure sectionVariant is defined in your component
+        variants={sectionVariant}
         transition={{ duration: 0.8, delay: 0.4 }}
         className="py-16 px-4 bg-gray-50 text-center"
       >
@@ -271,13 +288,9 @@ function Payment() {
             <h2 className="text-4xl font-extrabold text-gray-900 leading-tight">
               🔓 Desbloqueie Seu Resultado Agora
             </h2>
-
-            {/* Exclusive Offer Badge */}
             <div className="inline-block bg-red-100 text-red-600 text-sm font-semibold px-3 py-1 rounded-md">
               OFERTA EXCLUSIVA, SÓ ESSA SEMANA!
             </div>
-
-            {/* Pricing */}
             <div>
               <p className="text-lg font-medium text-gray-700">
                 Aproveite antes que acabe!
@@ -448,7 +461,6 @@ function Payment() {
       </motion.section>
 
       {/* ABOUT US SECTION */}
-
       <motion.section
         initial="hidden"
         animate="visible"
@@ -471,7 +483,6 @@ function Payment() {
             caminho de forma segura e consistente.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
             <div className="bg-gray-50 p-6 rounded-lg shadow flex flex-col items-center">
               <img
                 src="Guga.png"
@@ -489,7 +500,6 @@ function Payment() {
                 de encontrar o que realmente faz seus olhos brilharem.
               </p>
             </div>
-            {/* Testimonial 2 */}
             <div className="bg-gray-50 p-6 rounded-lg shadow flex flex-col items-center">
               <img
                 src="Pedro.png"
@@ -507,7 +517,6 @@ function Payment() {
                 para ajudar jovens a tomar decisões mais conscientes.
               </p>
             </div>
-            {/* Testimonial 3 */}
             <div className="bg-gray-50 p-6 rounded-lg shadow flex flex-col items-center">
               <img
                 src="Ryan.png"
@@ -540,7 +549,6 @@ function Payment() {
       </motion.section>
 
       {/* FOOTER SECTION */}
-
       <motion.footer
         className="w-full bg-gray-900 text-gray-200 py-8 px-4 text-center"
         initial="hidden"
