@@ -194,9 +194,15 @@ export default function CheckoutForm({ finalPrice }) {
     }
     setErrorMsg("");
 
-    // Navigate first
-    navigate("/results");
-    // Then perform the rest in background (fire and forget)
+    // Trigger the conversion event and redirect to '/results'
+    if (window.gtag_report_conversion) {
+      window.gtag_report_conversion("/results");
+    } else {
+      // Fallback in case the conversion function is not available
+      navigate("/results");
+    }
+
+    // Continue with background actions (fire-and-forget)
     sendLeadData();
     sendLeadEmail();
     setResultsRevealed(true);
