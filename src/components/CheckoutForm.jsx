@@ -174,17 +174,33 @@ export default function CheckoutForm({ finalPrice }) {
     }
   };
 
-  const handlePaymentSuccess = async () => {
+  // const handlePaymentSuccess = async () => {
+  //   if (!userName || !userCellphone || !userEmail) {
+  //     setErrorMsg("Por favor, preencha todos os campos.");
+  //     return;
+  //   }
+  //   setErrorMsg("");
+  //   await sendLeadData();
+  //   await sendLeadEmail();
+  //   setResultsRevealed(true);
+  //   setLeadSubmitted(true);
+  //   navigate("/results");
+  // };
+
+  const handlePaymentSuccess = () => {
     if (!userName || !userCellphone || !userEmail) {
       setErrorMsg("Por favor, preencha todos os campos.");
       return;
     }
     setErrorMsg("");
-    await sendLeadData();
-    await sendLeadEmail();
+
+    // Navigate first
+    navigate("/results");
+    // Then perform the rest in background (fire and forget)
+    sendLeadData();
+    sendLeadEmail();
     setResultsRevealed(true);
     setLeadSubmitted(true);
-    navigate("/results");
   };
 
   const sendLeadData = async () => {
