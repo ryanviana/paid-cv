@@ -78,9 +78,8 @@ const FreePreviewSection = () => {
         </h2>
         <p className="text-lg sm:text-xl text-gray-700 mb-6">
           Com base nas suas respostas, identificamos a área com maior potencial
-          para você e selecionamos um curso recomendado. Pague para desbloquear
-          o mapeamento completo, com detalhes das demais áreas e informações
-          aprofundadas.
+          para você e selecionamos um curso recomendado. Desbloquie o resultado
+          completo abaixo.
         </p>
         {topArea ? (
           <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center">

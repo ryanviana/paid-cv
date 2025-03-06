@@ -16,7 +16,7 @@ const WhatYouGetSection = () => (
     animate="visible"
     variants={sectionVariant}
     transition={{ duration: 0.8, delay: 0.2 }}
-    className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 text-center"
+    className="py-16 px-4 sm:px-6 lg:px-8 bg-blue-50 text-center"
   >
     <div className="max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">
@@ -28,10 +28,12 @@ const WhatYouGetSection = () => (
         insights detalhados sobre suas áreas de maior destaque e tudo o que
         precisa para transformar sua carreira.
       </p>
-
+      <h2 className="text-3xl sm:text-4xl font-extrabold text-green-500 mb-6">
+        Você recebe:
+      </h2>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
         {/* Card 1: Relatório Premium Completo */}
-        <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center">
+        <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
           <div className="w-full max-w-[160px]">
             <img
               src={RelatorioImage}
@@ -59,27 +61,31 @@ const WhatYouGetSection = () => (
         </div>
 
         {/* Card 2: E-book “Dicas Para Fuvest” */}
-        <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center">
-          <div className="w-full max-w-[160px]">
+        <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+          <div className="w-full max-w-[160px] relative">
             <img
               src={EbookDicasImage}
               alt="E-book Dicas Para Fuvest"
               className="w-full h-auto object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
             />
+            {/* Bonus Label */}
+            <span className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+              Bônus
+            </span>
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-gray-800 mt-4">
             E-book “Dicas Para Fuvest”
           </h3>
           <ul className="text-sm sm:text-base text-gray-700 space-y-1 mt-2 text-left">
-            <li className="flex items-center items-center">
+            <li className="flex items-center">
               <FaCheckCircle className="text-green-500 mr-2" />
               Escrito por alunos da USP
             </li>
-            <li className="flex items-center items-center">
+            <li className="flex items-center">
               <FaCheckCircle className="text-green-500 mr-2" />
               Estratégias e segredos
             </li>
-            <li className="flex items-center items-center">
+            <li className="flex items-center">
               <FaCheckCircle className="text-green-500 mr-2" />
               Conquiste sua vaga
             </li>
@@ -87,27 +93,31 @@ const WhatYouGetSection = () => (
         </div>
 
         {/* Card 3: E-book “A Realidade dos Salários” */}
-        <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center">
-          <div className="w-full max-w-[160px]">
+        <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+          <div className="w-full max-w-[160px] relative">
             <img
               src={EbookSalariosImage}
               alt="E-book A Realidade dos Salários"
               className="w-full h-auto object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
             />
+            {/* Bonus Label */}
+            <span className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+              Bônus
+            </span>
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-gray-800 mt-4">
             E-book “A Realidade dos Salários”
           </h3>
           <ul className="text-sm sm:text-base text-gray-700 space-y-1 mt-2 text-left">
-            <li className="flex items-center items-center">
+            <li className="flex items-center">
               <FaCheckCircle className="text-green-500 mr-2" />
               Desmistificando os salários
             </li>
-            <li className="flex items-center items-center">
+            <li className="flex items-center">
               <FaCheckCircle className="text-green-500 mr-2" />
               Remunerações surpreendentes
             </li>
-            <li className="flex items-center items-center">
+            <li className="flex items-center">
               <FaCheckCircle className="text-green-500 mr-2" />
               Tenha prosperidade financeira
             </li>
