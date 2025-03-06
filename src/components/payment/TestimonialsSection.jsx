@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Bernal from "../../assets/Bernal.png";
-import Beluce from "../../assets/Beluce.png";
+import Beluce from "../../assets/beluce.png";
 
 const sectionVariant = {
   hidden: { opacity: 0, y: 50 },
