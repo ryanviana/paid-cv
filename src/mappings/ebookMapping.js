@@ -47,120 +47,121 @@ import GD_ENGENHARIA_AMBIENTAL from "../assets/ebooks_gd/GD_ENGENHARIA_AMBIENTAL
 
 const ebookMapping = {
   "Engenharia de Computação": {
-    title: "Guia Definitivo de Engenharia de Computação",
+    title: "GUIA DEFINITIVO: Engenharia de Computação",
     description:
-      "Aprenda os segredos para se destacar em Engenharia de Computação com este guia completo.",
+      "Entenda tudo sobre Engenharia de Computação antes de decidir sua carreira. Saiba se esse curso é realmente para você!",
     cover: CAPA_ENGENHARIA_DE_COMPUTACAO,
     pdf: GD_ENGENHARIA_DE_COMPUTACAO,
     price: 5.9,
   },
   "Ciência da Computação": {
-    title: "Guia Definitivo de Ciência da Computação",
+    title: "GUIA DEFINITIVO: Ciência da Computação",
     description:
-      "Descubra estratégias e dicas essenciais para se destacar no mercado de Ciência da Computação.",
+      "Descubra exatamente o que você estudará em Ciência da Computação e veja se essa área combina com você.",
     cover: CAPA_CIENCIA_DA_COMPUTACAO,
     pdf: GD_CIENCIA_DA_COMPUITACAO,
     price: 5.9,
   },
   "Ciência de Dados": {
-    title: "Guia Definitivo de Ciência de Dados",
+    title: "GUIA DEFINITIVO: Ciência de Dados",
     description:
-      "Transforme dados em insights valiosos com este guia completo.",
+      "Veja claramente como funciona o curso de Ciência de Dados e decida com segurança se é a carreira certa para você.",
     cover: CAPA_CIENCIAS_DE_DADOS,
     pdf: GD_CIENCIA_DE_DADOS,
     price: 5.9,
   },
   "Sistemas de Informação": {
-    title: "Guia Definitivo de Sistemas de Informação",
+    title: "GUIA DEFINITIVO: Sistemas de Informação",
     description:
-      "Tudo que você precisa saber para dominar Sistemas de Informação.",
+      "Entenda exatamente o que você vai estudar em Sistemas de Informação antes de tomar sua decisão.",
     cover: CAPA_SISTEMAS_DE_INFORMACAO,
     pdf: GD_SISTEMAS_DE_INFORMACAO,
     price: 5.9,
   },
   "Análise de Desenvolvimento de Sistemas": {
-    title: "Guia Definitivo de Análise de Desenvolvimento de Sistemas",
-    description: "Dicas e estratégias para se destacar no mercado de ADS.",
+    title: "GUIA DEFINITIVO: Análise e Desenvolvimento de Sistemas",
+    description:
+      "Tenha certeza absoluta se o curso de ADS é a escolha certa para você. Conheça todos os detalhes importantes aqui!",
     cover: CAPA_ADS,
     pdf: GD_ADS,
     price: 5.9,
   },
   "Engenharia Elétrica": {
-    title: "Guia Definitivo de Engenharia Elétrica",
+    title: "GUIA DEFINITIVO: Engenharia Elétrica",
     description:
-      "Conheça as melhores práticas e inovações em Engenharia Elétrica.",
+      "Saiba exatamente o que esperar do curso de Engenharia Elétrica antes de tomar sua decisão final.",
     cover: CAPA_ENGENHARIA_ELETRICA,
     pdf: GD_ENGENHARIA_ELETRICA,
     price: 5.9,
   },
   "Engenharia Mecatrônica": {
-    title: "Guia Definitivo de Engenharia Mecatrônica",
+    title: "GUIA DEFINITIVO: Engenharia Mecatrônica",
     description:
-      "Descubra como integrar mecânica, eletrônica e computação para impulsionar sua carreira.",
+      "Entenda o curso de Engenharia Mecatrônica por completo antes de se comprometer com essa carreira interdisciplinar.",
     cover: CAPA_ENGENHARIA_MECATRONICA,
     pdf: GD_MECATRONICA,
     price: 5.9,
   },
   "Engenharia Mecânica": {
-    title: "Guia Definitivo de Engenharia Mecânica",
+    title: "GUIA DEFINITIVO: Engenharia Mecânica",
     description:
-      "Aprenda os fundamentos e técnicas avançadas da Engenharia Mecânica.",
+      "Confira tudo que você precisa saber sobre Engenharia Mecânica e descubra se este curso combina com você.",
     cover: CAPA_ENGENHARIA_MECANICA,
     pdf: GD_ENGENHARIA_MECANICA,
     price: 5.9,
   },
   "Engenharia Aeronáutica": {
-    title: "Guia Definitivo de Engenharia Aeronáutica",
+    title: "GUIA DEFINITIVO: Engenharia Aeronáutica",
     description:
-      "Domine o design e a manutenção de aeronaves com este guia completo.",
+      "Descubra como é estudar Engenharia Aeronáutica antes de se decidir pela carreira dos seus sonhos.",
     cover: CAPA_ENGENHARIA_AERONAUTICA,
     pdf: GD_ENGENHARIA_AERONAUTICA,
     price: 5.9,
   },
   "Licenciatura em Matemática": {
-    title: "Guia Definitivo de Licenciatura em Matemática",
+    title: "Guia Definitivo da Licenciatura em Matemática",
     description:
-      "Tudo que você precisa para transformar seu ensino de Matemática.",
+      "Saiba se Licenciatura em Matemática é a escolha certa para você com este guia claro e objetivo.",
     cover: CAPA_MATEMATICA,
     pdf: GD_MATEMATICA,
     price: 5.9,
   },
   "Licenciatura em Física": {
-    title: "Guia Definitivo de Licenciatura em Física",
+    title: "Guia Definitivo da Licenciatura em Física",
     description:
-      "Domine os conceitos e estratégias para um ensino eficaz de Física.",
+      "Entenda exatamente o que é estudado em Licenciatura em Física e decida com segurança sua carreira.",
     cover: CAPA_FISICA,
     pdf: GD_FISICA,
     price: 5.9,
   },
   "Licenciatura em Química": {
-    title: "Guia Definitivo de Licenciatura em Química",
+    title: "Guia Definitivo da Licenciatura em Química",
     description:
-      "Aprenda as melhores técnicas para ensinar Química de forma envolvente.",
+      "Descubra se a Licenciatura em Química realmente combina com você antes de começar o curso.",
     cover: CAPA_QUIMICA,
     pdf: GD_QUIMICA,
     price: 5.9,
   },
   "Engenharia de Produção": {
-    title: "Guia Definitivo de Engenharia de Produção",
+    title: "GUIA DEFINITIVO: Engenharia de Produção",
     description:
-      "Otimize processos e aumente a eficiência com as melhores práticas em Engenharia de Produção.",
+      "Conheça a fundo o curso de Engenharia de Produção e saiba se esta carreira é ideal para você.",
     cover: CAPA_ENGENHARIA_DE_PRODUCAO,
     pdf: GD_ENGENHARIA_DE_PRODUCAO,
     price: 5.9,
   },
   "Engenharia Civil": {
-    title: "Guia Definitivo de Engenharia Civil",
+    title: "GUIA DEFINITIVO: Engenharia Civil",
     description:
-      "Descubra os segredos para projetar e construir obras com excelência.",
+      "Entenda claramente como é o curso de Engenharia Civil antes de decidir seu futuro profissional.",
     cover: CAPA_ENGENHARIA_CIVIL,
     pdf: GD_ENGENHARIA_CIVIL,
     price: 5.9,
   },
   "Engenharia Ambiental": {
-    title: "Guia Definitivo de Engenharia Ambiental",
+    title: "GUIA DEFINITIVO: Engenharia Ambiental",
     description:
-      "Aprenda a desenvolver soluções sustentáveis e inovadoras para o meio ambiente.",
+      "Tenha certeza se Engenharia Ambiental é para você com este guia completo e objetivo sobre o curso.",
     cover: CAPA_ENGENHARIA_AMBIENTAL,
     pdf: GD_ENGENHARIA_AMBIENTAL,
     price: 5.9,

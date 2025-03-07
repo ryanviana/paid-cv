@@ -86,7 +86,7 @@ export default function CheckoutForm() {
   const [orderBumps, setOrderBumps] = useState([
     {
       id: "all-guides",
-      title: "Todos os guias",
+      title: "PACK COMPLETO: Todos os guias definitivos",
       description: "Acesso completo a todos os guias definitivos.",
       price: 15.0,
       selected: false,
@@ -94,7 +94,7 @@ export default function CheckoutForm() {
     },
     {
       id: "ebook-salarios",
-      title: "E-book “A Realidade dos Salários”",
+      title: "A REALIDADE DOS SALÁRIOS Desmistificando o que você vê no Google",
       description: "Descubra como funcionam os salários de verdade no mercado.",
       price: 5.9,
       selected: false,
