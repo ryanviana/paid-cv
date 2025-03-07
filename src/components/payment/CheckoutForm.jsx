@@ -142,6 +142,17 @@ export default function CheckoutForm() {
     };
   }, []);
 
+  const regeneratePixPayment = () => {
+    // Clear out previous payment data and reset timer
+    setTestId(null);
+    setPaymentStatus(null);
+    setQrCodeData(null);
+    setQrCodeText(null);
+    setTimer(15 * 60);
+    // Start a new PIX payment process
+    startPixPayment();
+  };
+
   useEffect(() => {
     if (!socketRef.current) return;
     const handlePaymentUpdate = (data) => {
@@ -565,6 +576,16 @@ export default function CheckoutForm() {
               <p className="text-sm text-gray-600">
                 Oferta válida até o código expirar
               </p>
+            </div>
+          ) : timer === 0 ? (
+            <div className="text-center">
+              <p className="text-red-500 font-bold">Tempo Esgotado!</p>
+              <button
+                onClick={regeneratePixPayment}
+                className="w-full p-3 bg-green-600 text-white rounded-md hover:bg-green-700 mt-4"
+              >
+                Gerar novo PIX
+              </button>
             </div>
           ) : (
             <p className="text-red-500 font-bold text-center">
