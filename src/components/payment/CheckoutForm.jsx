@@ -128,7 +128,7 @@ export default function CheckoutForm() {
     0
   );
   const selectedBumpCount = orderBumps.filter((bump) => bump.selected).length;
-  // Override total price in test mode
+  // Override total price in test mode so that Pix price is 0.1
   const totalPrice = isTestMode ? 0.1 : price + orderBumpsTotal;
 
   // Setup Socket.io
@@ -231,7 +231,7 @@ export default function CheckoutForm() {
       const payload = {
         email: userEmail || "user@example.com",
         answers: ["Answer1", "Answer2", "Answer3"],
-        price: totalPrice,
+        price: parseFloat(totalPrice.toFixed(2)),
       };
       const res = await fetch(
         "https://paid.cv.backend.decisaoexata.com/api/test/pix/start",
