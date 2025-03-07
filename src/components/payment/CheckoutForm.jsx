@@ -9,7 +9,7 @@ import { FaQrcode } from "react-icons/fa";
 import Grafico from "../../assets/grafico.png";
 
 // Default static bumps (ensure the static ones are in the desired order)
-import CAPA_2 from "../../assets/ebooks_gd/CAPA_2.png";
+import PACK_COMPLETO from "../../assets/ebooks_gd/PACK_COMPLETO.png";
 import EbookSalariosImage from "../../assets/EbookSalarios.png";
 
 // eBook mapping for dynamic ebook bump
@@ -90,7 +90,7 @@ export default function CheckoutForm() {
       description: "Acesso completo a todos os guias definitivos.",
       price: 15.0,
       selected: false,
-      image: CAPA_2,
+      image: PACK_COMPLETO,
     },
     {
       id: "ebook-salarios",

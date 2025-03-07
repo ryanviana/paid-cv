@@ -34,8 +34,8 @@ const WhatYouGetSection = () => (
         Você recebe:
       </h2>
 
-      {/* We only keep two bonus items now */}
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+      {/* Replace the grid with a flex container */}
+      <div className="flex flex-wrap justify-center gap-8">
         {/* Card 1: Relatório Premium Completo */}
         <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
           <div className="w-full max-w-[160px]">
@@ -94,8 +94,6 @@ const WhatYouGetSection = () => (
             </li>
           </ul>
         </div>
-
-        {/* The third card (E-book “A Realidade dos Salários”) is removed */}
       </div>
 
       <div className="mt-6">
