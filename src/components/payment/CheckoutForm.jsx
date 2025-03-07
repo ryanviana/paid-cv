@@ -1,4 +1,3 @@
-// src/components/CheckoutForm.jsx
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { usePersistedState } from "../../hooks/usePersistedState";
 import { ResultContext } from "../../context/ResultContext";
@@ -8,13 +7,13 @@ import io from "socket.io-client";
 import { FaQrcode } from "react-icons/fa";
 import Grafico from "../../assets/grafico.png";
 
-// Default static bumps (ensure the static ones are in the desired order)
+// Static bumps
 import PACK_COMPLETO from "../../assets/ebooks_gd/PACK_COMPLETO.png";
 import EbookSalariosImage from "../../assets/EbookSalarios.png";
 
-// eBook mapping for dynamic ebook bump
+// Dynamic ebook bump mapping
 import ebookMapping from "../../mappings/ebookMapping";
-// For recommended course, use your test results and areasConhecimento
+// Recommended course data
 import areasConhecimento from "../../data/areas_cursos.json";
 
 export default function CheckoutForm() {
@@ -24,8 +23,6 @@ export default function CheckoutForm() {
 
   // Retrieve test results from context
   const { result, setLeadSubmitted } = useContext(ResultContext);
-
-  // Compute the recommended course from test results
   const finalPontuacaoTotal = result || [];
   const areasComPontuacao = areasConhecimento
     .map((area, idx) => ({
@@ -76,13 +73,13 @@ export default function CheckoutForm() {
   const [couponMessage, setCouponMessage] = useState("");
   const [couponMessageColor, setCouponMessageColor] = useState("");
 
-  // Store purchased bumps for use in results
+  // Store purchased bumps
   const [purchasedBumps, setPurchasedBumps] = usePersistedState(
     "purchasedBumps",
     []
   );
 
-  // Default order bumps in the desired static order: "all-guides" then "ebook-salarios"
+  // Default order bumps (static order)
   const [orderBumps, setOrderBumps] = useState([
     {
       id: "all-guides",
@@ -102,9 +99,8 @@ export default function CheckoutForm() {
     },
   ]);
 
-  // Insert dynamic ebook bump (from ebookMapping) at the beginning
+  // Insert dynamic ebook bump at the beginning
   useEffect(() => {
-    console.log("Recommended course:", recommendedCourse);
     if (
       recommendedCourse &&
       recommendedCourse.nome &&
@@ -119,7 +115,7 @@ export default function CheckoutForm() {
         selected: false,
       };
       setOrderBumps((prev) => {
-        // Remove any existing dynamic bump and then insert at the beginning
+        // remove if it already exists
         const filtered = prev.filter((b) => b.id !== "ebook-bump");
         return [ebookBump, ...filtered];
       });
@@ -228,7 +224,7 @@ export default function CheckoutForm() {
 
   const startPixPayment = async () => {
     if (isTestMode) {
-      // Simulate immediate success in test mode
+      // Test mode: simulate immediate success
       setPaymentStatus("approved");
       setTestId("TEST_MODE");
       setTimeout(() => {
@@ -277,14 +273,16 @@ export default function CheckoutForm() {
       return;
     }
     setErrorMsg("");
-    // Save purchased bumps (selected ones) for the results page
     const purchasedIds = orderBumps.filter((b) => b.selected).map((b) => b.id);
     setPurchasedBumps(purchasedIds);
+
+    // Optional analytics/tracking
     if (window.gtag_report_conversion) {
       window.gtag_report_conversion("/results");
     } else {
       navigate("/results");
     }
+
     sendLeadData();
     sendLeadEmail();
     setResultsRevealed(true);
@@ -383,10 +381,10 @@ export default function CheckoutForm() {
   }${timer % 60}`;
 
   return (
-    <div className="space-y-6 max-w-2xl mx-auto px-2 sm:px-4">
+    <div className="space-y-6 max-w-2xl mx-auto px-4 sm:px-6">
       {/* Payment Card */}
       <div className="bg-white rounded-md shadow p-4">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Pagamento</h2>
           <span className="text-sm text-gray-500">Pix</span>
         </div>
@@ -429,10 +427,10 @@ export default function CheckoutForm() {
             />
           </div>
         </div>
-        <div className="text-sm text-gray-600 mb-3">
-          Pagamento é instantâneo e liberação imediata. Ao clicar em “Comprar
-          agora” você será encaminhado para um ambiente seguro, onde encontrará
-          o passo a passo para pagar via Pix.
+        <div className="text-sm text-gray-600 mb-3 leading-relaxed">
+          Pagamento é instantâneo e liberação imediata. Ao clicar em
+          <strong> “Comprar agora”</strong> você será encaminhado para um
+          ambiente seguro, onde encontrará o passo a passo para pagar via Pix.
         </div>
         <p className="font-bold text-lg">
           Valor atual: R$ {totalPrice.toFixed(2)}
@@ -445,7 +443,7 @@ export default function CheckoutForm() {
       {/* Purchase Card */}
       <div className="bg-white rounded-md shadow p-4">
         <h2 className="text-lg font-semibold mb-4">Sua Compra</h2>
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-3">
           <div className="flex items-center gap-3">
             <img
               src={Grafico}
@@ -460,14 +458,15 @@ export default function CheckoutForm() {
             </div>
           </div>
         </div>
+
         {/* Coupon Input */}
-        <div className="mt-2 flex items-center gap-2">
+        <div className="mt-2 flex flex-col sm:flex-row items-center gap-2">
           <input
             type="text"
             placeholder="Cupom"
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
-            className="p-2 border rounded w-1/2 focus:outline-none"
+            className="p-2 border rounded w-full sm:w-1/2 focus:outline-none"
           />
           <button
             onClick={handleApplyCoupon}
@@ -487,20 +486,20 @@ export default function CheckoutForm() {
 
         {/* Order Bumps Section */}
         <div className="mt-4">
-          <h3 className="text-lg font-semibold">Adicione Extras</h3>
-          <div className="grid grid-cols-1 gap-4 mt-2">
+          <h3 className="text-lg font-semibold mb-2">Adicione Extras</h3>
+          <div className="space-y-3">
             {orderBumps.map((bump) => (
               <div
                 key={bump.id}
-                className={`relative flex flex-col sm:flex-row items-center p-4 border rounded cursor-pointer transition-transform duration-200 hover:scale-[1.02] overflow-hidden ${
+                onClick={() => toggleOrderBump(bump.id)}
+                className={`relative border rounded p-4 cursor-pointer transition hover:scale-[1.02] ${
                   bump.selected
-                    ? "border-green-600 bg-green-50"
+                    ? "bg-green-50 border-green-600"
                     : "border-gray-300"
                 }`}
-                onClick={() => toggleOrderBump(bump.id)}
               >
-                {/* Checkbox */}
-                <div className="absolute top-2 left-2 z-10">
+                {/* Checkbox in top-left */}
+                <div className="absolute top-2 left-2">
                   <input
                     type="checkbox"
                     checked={bump.selected}
@@ -509,19 +508,28 @@ export default function CheckoutForm() {
                     className="h-5 w-5 text-green-600"
                   />
                 </div>
-                {/* Bump Image */}
-                <img
-                  src={bump.image}
-                  alt={bump.title}
-                  className="w-36 h-auto object-contain rounded mb-2 sm:mb-0 sm:mr-4 sm:ml-8"
-                />
-                {/* Bump Info */}
-                <div className="flex-1 text-center sm:text-left">
-                  <p className="text-lg font-medium">{bump.title}</p>
-                  <p className="text-sm text-gray-600">{bump.description}</p>
+
+                {/* Image centered */}
+                <div className="flex justify-center">
+                  <img
+                    src={bump.image}
+                    alt={bump.title}
+                    className="object-contain w-24 h-24 rounded"
+                  />
                 </div>
-                {/* Price */}
-                <div className="text-green-600 text-xl font-bold mt-2 sm:mt-0 sm:ml-4">
+
+                {/* Title & Description */}
+                <div className="mt-3 text-center">
+                  <p className="text-base sm:text-lg font-semibold">
+                    {bump.title}
+                  </p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {bump.description}
+                  </p>
+                </div>
+
+                {/* Price at the bottom center */}
+                <div className="text-center text-green-600 text-base sm:text-xl font-bold mt-3">
                   R$ {bump.price.toFixed(2)}
                 </div>
               </div>

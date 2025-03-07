@@ -23,6 +23,7 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
   const [buyers, setBuyers] = useState(0);
 
   useEffect(() => {
+    // Random buyer count for demonstration
     setBuyers(Math.floor(Math.random() * (100 - 15 + 1)) + 15);
 
     const now = new Date();
@@ -60,44 +61,34 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
       animate="visible"
       variants={sectionVariant}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="py-16 px-6 bg-yellow-50 flex justify-center"
+      className="py-8 md:py-16 px-4 md:px-6 bg-yellow-50 flex justify-center"
     >
-      <div className="max-w-5xl w-full grid md:grid-cols-2 gap-8 items-center">
+      <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Left Side - Offer Details */}
-        <div className="text-left">
-          <h2 className="text-4xl font-extrabold text-gray-900 leading-tight">
+        <div className="text-left space-y-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900">
             🚀 Última Chance Para Pagar Menos!
           </h2>
-
-          {/* Countdown Timer */}
-          <div className="inline-block bg-red-600 text-white text-sm font-semibold px-4 py-2 rounded-md mt-4">
+          <div className="inline-block bg-red-600 text-white text-sm md:text-base font-semibold px-4 py-2 rounded-md">
             ⏳ Oferta termina em {formatTime(timer)}
           </div>
-
-          {/* Purchase Count */}
-          <p className="text-lg font-medium text-gray-700 mt-2">
+          <p className="text-base md:text-lg text-gray-700">
             🔥 Mais de <strong>{buyers} pessoas</strong> compraram essa oferta
             hoje!
           </p>
-
-          {/* Price Display */}
-          <div className="flex items-center mt-4 space-x-3">
-            <span className="text-lg line-through text-red-500 font-bold">
+          <div className="flex flex-wrap items-center mt-4 space-x-3">
+            <span className="text-base md:text-lg line-through text-red-500 font-bold">
               R$ {originalPrice.toFixed(2)}
             </span>
-            <span className="text-5xl font-extrabold text-green-600">
+            <span className="text-3xl md:text-5xl font-extrabold text-green-600">
               R$ {discountedPrice.toFixed(2)}
             </span>
           </div>
-
-          {/* Coupon Info */}
-          <p className="mt-4 text-lg text-gray-800 font-bold">
+          <p className="text-base md:text-lg text-gray-800 font-bold">
             🎯 Use o cupom{" "}
             <span className="bg-yellow-300 px-2 py-1 rounded-md">CALCULO9</span>{" "}
             e pague <strong>APENAS R$9,90</strong>!
           </p>
-
-          {/* Price Warning */}
           <p className="text-sm text-red-600 font-semibold">
             📉 O preço voltará ao normal em breve!
           </p>
@@ -130,8 +121,8 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
             onClick={closeModal}
           >
             <motion.div
-              className="bg-white p-6 rounded-lg shadow-lg relative w-full max-w-lg"
-              style={{ maxHeight: "90vh", overflowY: "auto" }} // Ensure scrollability
+              className="bg-white p-6 rounded-lg shadow-lg relative w-full max-w-lg md:max-w-2xl"
+              style={{ maxHeight: "90vh", overflowY: "auto" }}
               variants={modalContent}
               initial="hidden"
               animate="visible"
@@ -144,8 +135,6 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
               >
                 ✖
               </button>
-
-              {/* Updated Checkout Form */}
               <CheckoutForm />
             </motion.div>
           </motion.div>
