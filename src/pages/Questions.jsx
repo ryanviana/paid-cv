@@ -183,6 +183,16 @@ function Questions() {
     // store the final result in context and navigate to the final results route.
     if (perguntaAtual === paginas.length - 1 && dir === 1) {
       setResult(pontuacaoTotal);
+      // Send completedTest event to dataLayer
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "completedTest" });
+
+      // Optionally, send to Facebook Pixel if available
+      if (window.fbq) {
+        window.fbq("trackCustom", "completedTest", {
+          conversionKey: "completedTest",
+        });
+      }
       navigate("/payment");
       return;
     }

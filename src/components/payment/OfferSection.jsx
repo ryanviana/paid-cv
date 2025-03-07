@@ -97,11 +97,25 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
         {/* Right Side - Checkout Button */}
         <div className="bg-white rounded-lg p-6 shadow-lg text-center">
           <button
-            onClick={() => setModalOpen(true)}
+            onClick={() => {
+              // Send the InitiateCheckoutForm event to dataLayer
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({ event: "InitiateCheckoutForm" });
+
+              // Optionally send to Facebook Pixel if available
+              if (window.fbq) {
+                window.fbq("trackCustom", "InitiateCheckoutForm", {
+                  conversionKey: "InitiateCheckoutForm",
+                });
+              }
+              // Then open the modal with the checkout form
+              setModalOpen(true);
+            }}
             className="w-full px-6 py-3 bg-green-600 text-white text-xl font-bold rounded-md hover:bg-green-700 transition"
           >
             🔥 Obter Acesso Agora
           </button>
+
           <p className="text-sm text-gray-600 mt-2">
             ✅ Compra 100% segura – Garantia de satisfação!
           </p>
