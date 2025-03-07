@@ -128,7 +128,8 @@ export default function CheckoutForm() {
     0
   );
   const selectedBumpCount = orderBumps.filter((bump) => bump.selected).length;
-  const totalPrice = price + orderBumpsTotal;
+  // Override total price in test mode
+  const totalPrice = isTestMode ? 0.1 : price + orderBumpsTotal;
 
   // Setup Socket.io
   const socketRef = useRef(null);
@@ -223,15 +224,6 @@ export default function CheckoutForm() {
   };
 
   const startPixPayment = async () => {
-    if (isTestMode) {
-      // Test mode: simulate immediate success
-      setPaymentStatus("approved");
-      setTestId("TEST_MODE");
-      setTimeout(() => {
-        handlePaymentSuccess();
-      }, 500);
-      return;
-    }
     setShowPixModal(true);
     setTimer(15 * 60);
     setLoading(true);
