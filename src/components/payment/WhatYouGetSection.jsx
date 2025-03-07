@@ -1,9 +1,11 @@
+// src/components/payment/WhatYouGetSection.jsx
+
 import React from "react";
 import { motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 import RelatorioImage from "../../assets/Relatorio.png";
 import EbookDicasImage from "../../assets/EbookDicas.png";
-import EbookSalariosImage from "../../assets/EbookSalarios.png";
+// Removed import for EbookSalariosImage
 
 const sectionVariant = {
   hidden: { opacity: 0, y: 50 },
@@ -31,6 +33,8 @@ const WhatYouGetSection = () => (
       <h2 className="text-3xl sm:text-4xl font-extrabold text-green-500 mb-6">
         Você recebe:
       </h2>
+
+      {/* We only keep two bonus items now */}
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
         {/* Card 1: Relatório Premium Completo */}
         <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
@@ -68,7 +72,6 @@ const WhatYouGetSection = () => (
               alt="E-book Dicas Para Fuvest"
               className="w-full h-auto object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
             />
-            {/* Bonus Label */}
             <span className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
               Bônus
             </span>
@@ -92,37 +95,7 @@ const WhatYouGetSection = () => (
           </ul>
         </div>
 
-        {/* Card 3: E-book “A Realidade dos Salários” */}
-        <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
-          <div className="w-full max-w-[160px] relative">
-            <img
-              src={EbookSalariosImage}
-              alt="E-book A Realidade dos Salários"
-              className="w-full h-auto object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
-            />
-            {/* Bonus Label */}
-            <span className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
-              Bônus
-            </span>
-          </div>
-          <h3 className="text-lg sm:text-xl font-bold text-gray-800 mt-4">
-            E-book “A Realidade dos Salários”
-          </h3>
-          <ul className="text-sm sm:text-base text-gray-700 space-y-1 mt-2 text-left">
-            <li className="flex items-center">
-              <FaCheckCircle className="text-green-500 mr-2" />
-              Desmistificando os salários
-            </li>
-            <li className="flex items-center">
-              <FaCheckCircle className="text-green-500 mr-2" />
-              Remunerações surpreendentes
-            </li>
-            <li className="flex items-center">
-              <FaCheckCircle className="text-green-500 mr-2" />
-              Tenha prosperidade financeira
-            </li>
-          </ul>
-        </div>
+        {/* The third card (E-book “A Realidade dos Salários”) is removed */}
       </div>
 
       <div className="mt-6">

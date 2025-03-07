@@ -1,19 +1,44 @@
 // src/components/CheckoutForm.jsx
-
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { usePersistedState } from "../../hooks/usePersistedState";
 import { ResultContext } from "../../context/ResultContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import io from "socket.io-client";
 import { FaQrcode } from "react-icons/fa";
 import Grafico from "../../assets/grafico.png";
 
-export default function CheckoutForm({ finalPrice }) {
-  const navigate = useNavigate();
-  const { setLeadSubmitted } = useContext(ResultContext);
+// Default static bumps (ensure the static ones are in the desired order)
+import CAPA_2 from "../../assets/ebooks_gd/CAPA_2.png";
+import EbookSalariosImage from "../../assets/EbookSalarios.png";
 
-  // Persisted states
+// eBook mapping for dynamic ebook bump
+import ebookMapping from "../../mappings/ebookMapping";
+// For recommended course, use your test results and areasConhecimento
+import areasConhecimento from "../../data/areas_cursos.json";
+
+export default function CheckoutForm() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isTestMode = searchParams.get("test") === "true";
+
+  // Retrieve test results from context
+  const { result, setLeadSubmitted } = useContext(ResultContext);
+
+  // Compute the recommended course from test results
+  const finalPontuacaoTotal = result || [];
+  const areasComPontuacao = areasConhecimento
+    .map((area, idx) => ({
+      area,
+      pontuacao: finalPontuacaoTotal[idx] || 0,
+    }))
+    .sort((a, b) => b.pontuacao - a.pontuacao);
+  const recommendedCourse =
+    areasComPontuacao.length > 0 && areasComPontuacao[0].area.cursos.length > 0
+      ? areasComPontuacao[0].area.cursos[0]
+      : null;
+
+  // Payment/lead data
   const [testId, setTestId] = usePersistedState("paymentTestId", null);
   const [paymentStatus, setPaymentStatus] = usePersistedState(
     "paymentStatus",
@@ -39,7 +64,7 @@ export default function CheckoutForm({ finalPrice }) {
   );
 
   // Local states
-  const [timer, setTimer] = useState(15 * 60); // 15 minutes
+  const [timer, setTimer] = useState(15 * 60);
   const [loading, setLoading] = useState(false);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -47,14 +72,70 @@ export default function CheckoutForm({ finalPrice }) {
 
   // Coupon logic
   const [couponCode, setCouponCode] = useState("");
-  const [price, setPrice] = useState(38.9); // default price (R$38,90)
+  const [price, setPrice] = useState(38.9);
   const [couponMessage, setCouponMessage] = useState("");
   const [couponMessageColor, setCouponMessageColor] = useState("");
 
-  // Socket
-  const socketRef = useRef(null);
+  // Store purchased bumps for use in results
+  const [purchasedBumps, setPurchasedBumps] = usePersistedState(
+    "purchasedBumps",
+    []
+  );
 
-  // --- Setup WebSocket & Polling ---
+  // Default order bumps in the desired static order: "all-guides" then "ebook-salarios"
+  const [orderBumps, setOrderBumps] = useState([
+    {
+      id: "all-guides",
+      title: "Todos os guias",
+      description: "Acesso completo a todos os guias definitivos.",
+      price: 15.0,
+      selected: false,
+      image: CAPA_2,
+    },
+    {
+      id: "ebook-salarios",
+      title: "E-book “A Realidade dos Salários”",
+      description: "Descubra como funcionam os salários de verdade no mercado.",
+      price: 5.9,
+      selected: false,
+      image: EbookSalariosImage,
+    },
+  ]);
+
+  // Insert dynamic ebook bump (from ebookMapping) at the beginning
+  useEffect(() => {
+    console.log("Recommended course:", recommendedCourse);
+    if (
+      recommendedCourse &&
+      recommendedCourse.nome &&
+      ebookMapping[recommendedCourse.nome]
+    ) {
+      const ebookBump = {
+        id: "ebook-bump",
+        title: ebookMapping[recommendedCourse.nome].title,
+        description: ebookMapping[recommendedCourse.nome].description,
+        image: ebookMapping[recommendedCourse.nome].cover,
+        price: 5.9,
+        selected: false,
+      };
+      setOrderBumps((prev) => {
+        // Remove any existing dynamic bump and then insert at the beginning
+        const filtered = prev.filter((b) => b.id !== "ebook-bump");
+        return [ebookBump, ...filtered];
+      });
+    }
+  }, [recommendedCourse]);
+
+  // Calculate totals
+  const orderBumpsTotal = orderBumps.reduce(
+    (acc, bump) => (bump.selected ? acc + bump.price : acc),
+    0
+  );
+  const selectedBumpCount = orderBumps.filter((bump) => bump.selected).length;
+  const totalPrice = price + orderBumpsTotal;
+
+  // Setup Socket.io
+  const socketRef = useRef(null);
   useEffect(() => {
     socketRef.current = io("https://paid.cv.backend.decisaoexata.com", {
       transports: ["websocket", "polling"],
@@ -76,7 +157,7 @@ export default function CheckoutForm({ finalPrice }) {
           window.dataLayer.push({ event: "paymentApproved" });
           if (window.fbq) {
             window.fbq("trackCustom", "paymentApproved", {
-              amount: price,
+              amount: totalPrice,
               conversionKey: "paymentApproved",
             });
           }
@@ -86,7 +167,7 @@ export default function CheckoutForm({ finalPrice }) {
     socketRef.current.on("paymentStatusUpdate", handlePaymentUpdate);
     return () =>
       socketRef.current.off("paymentStatusUpdate", handlePaymentUpdate);
-  }, [testId, price]);
+  }, [testId, totalPrice]);
 
   // Polling fallback
   useEffect(() => {
@@ -105,7 +186,7 @@ export default function CheckoutForm({ finalPrice }) {
           window.dataLayer.push({ event: "paymentApproved" });
           if (window.fbq) {
             window.fbq("trackCustom", "paymentApproved", {
-              amount: price,
+              amount: totalPrice,
               conversionKey: "paymentApproved",
             });
           }
@@ -116,9 +197,9 @@ export default function CheckoutForm({ finalPrice }) {
       }
     }, 5000);
     return () => clearInterval(pollInterval);
-  }, [testId, paymentStatus, price]);
+  }, [testId, paymentStatus, totalPrice]);
 
-  // Timer countdown for Pix
+  // Timer for Pix
   useEffect(() => {
     if (!showPixModal) return;
     const interval = setInterval(() => {
@@ -127,7 +208,14 @@ export default function CheckoutForm({ finalPrice }) {
     return () => clearInterval(interval);
   }, [showPixModal]);
 
-  // --- Handlers ---
+  const toggleOrderBump = (id) => {
+    setOrderBumps((prev) =>
+      prev.map((bump) =>
+        bump.id === id ? { ...bump, selected: !bump.selected } : bump
+      )
+    );
+  };
+
   const handleBuyNow = () => {
     setAttemptedSubmit(true);
     if (!userName || !userCellphone || !userEmail) {
@@ -139,6 +227,15 @@ export default function CheckoutForm({ finalPrice }) {
   };
 
   const startPixPayment = async () => {
+    if (isTestMode) {
+      // Simulate immediate success in test mode
+      setPaymentStatus("approved");
+      setTestId("TEST_MODE");
+      setTimeout(() => {
+        handlePaymentSuccess();
+      }, 500);
+      return;
+    }
     setShowPixModal(true);
     setTimer(15 * 60);
     setLoading(true);
@@ -146,6 +243,7 @@ export default function CheckoutForm({ finalPrice }) {
       const payload = {
         email: userEmail || "user@example.com",
         answers: ["Answer1", "Answer2", "Answer3"],
+        price: totalPrice,
       };
       const res = await fetch(
         "https://paid.cv.backend.decisaoexata.com/api/test/pix/start",
@@ -158,7 +256,6 @@ export default function CheckoutForm({ finalPrice }) {
       const data = await res.json();
       setTestId(data.testId);
       setPaymentStatus("pending");
-
       if (data.qrCodeBase64) {
         setQrCodeData("data:image/png;base64," + data.qrCodeBase64);
       } else if (data.qrCodeUrl) {
@@ -174,35 +271,20 @@ export default function CheckoutForm({ finalPrice }) {
     }
   };
 
-  // const handlePaymentSuccess = async () => {
-  //   if (!userName || !userCellphone || !userEmail) {
-  //     setErrorMsg("Por favor, preencha todos os campos.");
-  //     return;
-  //   }
-  //   setErrorMsg("");
-  //   await sendLeadData();
-  //   await sendLeadEmail();
-  //   setResultsRevealed(true);
-  //   setLeadSubmitted(true);
-  //   navigate("/results");
-  // };
-
   const handlePaymentSuccess = () => {
     if (!userName || !userCellphone || !userEmail) {
       setErrorMsg("Por favor, preencha todos os campos.");
       return;
     }
     setErrorMsg("");
-
-    // Trigger the conversion event and redirect to '/results'
+    // Save purchased bumps (selected ones) for the results page
+    const purchasedIds = orderBumps.filter((b) => b.selected).map((b) => b.id);
+    setPurchasedBumps(purchasedIds);
     if (window.gtag_report_conversion) {
       window.gtag_report_conversion("/results");
     } else {
-      // Fallback in case the conversion function is not available
       navigate("/results");
     }
-
-    // Continue with background actions (fire-and-forget)
     sendLeadData();
     sendLeadEmail();
     setResultsRevealed(true);
@@ -245,7 +327,9 @@ export default function CheckoutForm({ finalPrice }) {
       await axios.post(
         "https://leads.cv.backend.decisaoexata.com/send-email/",
         emailPayload,
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: { "Content-Type": "application/json" },
+        }
       );
     } catch (error) {
       console.error("Erro ao enviar email:", error);
@@ -277,7 +361,6 @@ export default function CheckoutForm({ finalPrice }) {
     document.body.removeChild(textArea);
   };
 
-  // --- Coupon logic: If code == "CALCULO9", set price to 9.9; else revert to 38.9
   const handleApplyCoupon = () => {
     const trimmedCode = couponCode.trim().toUpperCase();
     if (trimmedCode === "CALCULO9") {
@@ -285,12 +368,10 @@ export default function CheckoutForm({ finalPrice }) {
       setCouponMessage("Desconto aplicado! Novo valor: R$ 9,90");
       setCouponMessageColor("text-green-600");
     } else if (trimmedCode === "") {
-      // If user clears the coupon, revert to default
       setPrice(38.9);
       setCouponMessage("Cupom removido. Valor padrão: R$38,90.");
       setCouponMessageColor("text-red-600");
     } else {
-      // Invalid code
       setPrice(38.9);
       setCouponMessage("Cupom inválido. Valor padrão: R$38,90.");
       setCouponMessageColor("text-red-600");
@@ -302,21 +383,19 @@ export default function CheckoutForm({ finalPrice }) {
   }${timer % 60}`;
 
   return (
-    <div className="space-y-6 max-w-2xl mx-auto">
-      {/* PAGAMENTO CARD (Pix only) */}
+    <div className="space-y-6 max-w-2xl mx-auto px-2 sm:px-4">
+      {/* Payment Card */}
       <div className="bg-white rounded-md shadow p-4">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Pagamento</h2>
           <span className="text-sm text-gray-500">Pix</span>
         </div>
-
         <div className="flex items-center gap-2 mb-3">
           <FaQrcode className="text-green-500" />
           <p className="text-sm text-gray-600">
             Pagamento exclusivo via Pix no momento.
           </p>
         </div>
-
         {/* Identification fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
@@ -350,22 +429,20 @@ export default function CheckoutForm({ finalPrice }) {
             />
           </div>
         </div>
-
-        {/* Info text & price */}
         <div className="text-sm text-gray-600 mb-3">
           Pagamento é instantâneo e liberação imediata. Ao clicar em “Comprar
           agora” você será encaminhado para um ambiente seguro, onde encontrará
-          o passo a passo para realizar o pagamento via Pix.
+          o passo a passo para pagar via Pix.
         </div>
-        <p className="font-bold text-lg">Valor atual: R$ {price.toFixed(2)}</p>
-
-        {/* Error if fields empty */}
+        <p className="font-bold text-lg">
+          Valor atual: R$ {totalPrice.toFixed(2)}
+        </p>
         {attemptedSubmit && errorMsg && (
           <p className="text-red-500 text-sm mt-2">{errorMsg}</p>
         )}
       </div>
 
-      {/* SUA COMPRA CARD */}
+      {/* Purchase Card */}
       <div className="bg-white rounded-md shadow p-4">
         <h2 className="text-lg font-semibold mb-4">Sua Compra</h2>
         <div className="flex items-center justify-between mb-3">
@@ -377,13 +454,13 @@ export default function CheckoutForm({ finalPrice }) {
             />
             <div>
               <p className="font-semibold">Cálculo Vocacional</p>
-              <p className="text-gray-500">R$ {price.toFixed(2)}</p>
+              <p className="text-gray-500">
+                {1 + selectedBumpCount} item(s) • R$ {totalPrice.toFixed(2)}
+              </p>
             </div>
           </div>
-          <p className="font-semibold">1 item • R$ {price.toFixed(2)}</p>
         </div>
-
-        {/* Coupon code input */}
+        {/* Coupon Input */}
         <div className="mt-2 flex items-center gap-2">
           <input
             type="text"
@@ -402,16 +479,58 @@ export default function CheckoutForm({ finalPrice }) {
         <p className="text-xs text-gray-500 mt-1">
           Use o cupom <strong>CALCULO9</strong> para pagar apenas R$9,90
         </p>
-
-        {/* Coupon feedback message */}
         {couponMessage && (
           <p className={`mt-2 text-sm font-semibold ${couponMessageColor}`}>
             {couponMessage}
           </p>
         )}
+
+        {/* Order Bumps Section */}
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold">Adicione Extras</h3>
+          <div className="grid grid-cols-1 gap-4 mt-2">
+            {orderBumps.map((bump) => (
+              <div
+                key={bump.id}
+                className={`relative flex flex-col sm:flex-row items-center p-4 border rounded cursor-pointer transition-transform duration-200 hover:scale-[1.02] overflow-hidden ${
+                  bump.selected
+                    ? "border-green-600 bg-green-50"
+                    : "border-gray-300"
+                }`}
+                onClick={() => toggleOrderBump(bump.id)}
+              >
+                {/* Checkbox */}
+                <div className="absolute top-2 left-2 z-10">
+                  <input
+                    type="checkbox"
+                    checked={bump.selected}
+                    onChange={() => toggleOrderBump(bump.id)}
+                    onClick={(e) => e.stopPropagation()}
+                    className="h-5 w-5 text-green-600"
+                  />
+                </div>
+                {/* Bump Image */}
+                <img
+                  src={bump.image}
+                  alt={bump.title}
+                  className="w-36 h-auto object-contain rounded mb-2 sm:mb-0 sm:mr-4 sm:ml-8"
+                />
+                {/* Bump Info */}
+                <div className="flex-1 text-center sm:text-left">
+                  <p className="text-lg font-medium">{bump.title}</p>
+                  <p className="text-sm text-gray-600">{bump.description}</p>
+                </div>
+                {/* Price */}
+                <div className="text-green-600 text-xl font-bold mt-2 sm:mt-0 sm:ml-4">
+                  R$ {bump.price.toFixed(2)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* BUY BUTTON (only if not approved & not showing Pix) */}
+      {/* BUY BUTTON */}
       {paymentStatus !== "approved" && !showPixModal && (
         <button
           onClick={handleBuyNow}
@@ -421,7 +540,7 @@ export default function CheckoutForm({ finalPrice }) {
         </button>
       )}
 
-      {/* PIX "MODAL" CARD */}
+      {/* PIX MODAL */}
       {showPixModal && paymentStatus !== "approved" && (
         <div className="bg-white rounded-md shadow p-4 space-y-3">
           <h3 className="text-lg font-bold">Pagamento via Pix</h3>
@@ -455,7 +574,7 @@ export default function CheckoutForm({ finalPrice }) {
         </div>
       )}
 
-      {/* FINAL SUBMISSION (if payment approved) */}
+      {/* FINAL SUBMISSION */}
       {paymentStatus === "approved" && !resultsRevealed && (
         <div className="bg-white rounded-md shadow p-4 space-y-4">
           <h3 className="text-xl font-bold text-gray-800">
@@ -478,7 +597,6 @@ export default function CheckoutForm({ finalPrice }) {
         </div>
       )}
 
-      {/* Success message (if resultsRevealed) */}
       {resultsRevealed && (
         <p className="text-green-600 font-bold text-2xl text-center">
           Obrigado! Dados enviados.

@@ -94,7 +94,7 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
           <p className="mt-4 text-lg text-gray-800 font-bold">
             🎯 Use o cupom{" "}
             <span className="bg-yellow-300 px-2 py-1 rounded-md">CALCULO9</span>{" "}
-            e pague **APENAS R$9,90**!
+            e pague <strong>APENAS R$9,90</strong>!
           </p>
 
           {/* Price Warning */}
@@ -122,7 +122,7 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
         {isModalOpen && (
           <motion.div
             id="modal-backdrop"
-            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-auto p-4"
             variants={modalBackdrop}
             initial="hidden"
             animate="visible"
@@ -130,7 +130,8 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
             onClick={closeModal}
           >
             <motion.div
-              className="bg-white p-6 rounded-lg shadow-lg relative w-full max-w-md"
+              className="bg-white p-6 rounded-lg shadow-lg relative w-full max-w-lg"
+              style={{ maxHeight: "90vh", overflowY: "auto" }} // Ensure scrollability
               variants={modalContent}
               initial="hidden"
               animate="visible"
@@ -144,7 +145,7 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
                 ✖
               </button>
 
-              {/* Checkout Form */}
+              {/* Updated Checkout Form */}
               <CheckoutForm />
             </motion.div>
           </motion.div>

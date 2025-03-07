@@ -56,6 +56,8 @@ function Result({ pontuacaoTotal, type, updatePagina }) {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [sharePreviewImage, setSharePreviewImage] = useState("");
+  const [purchasedBumps] = usePersistedState("purchasedBumps", []);
+
   const [chartPreviewImage, setChartPreviewImage] = usePersistedState(
     "chartPreviewImage",
     ""
