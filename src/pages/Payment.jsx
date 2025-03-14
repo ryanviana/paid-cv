@@ -13,7 +13,7 @@ function Payment() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <HeroSection />
+      {/* <HeroSection /> */}
       <FreePreviewSection />
       <WhatYouGetSection />
       <OfferSection

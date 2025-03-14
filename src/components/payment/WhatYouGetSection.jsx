@@ -1,11 +1,9 @@
-// src/components/payment/WhatYouGetSection.jsx
-
 import React from "react";
 import { motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 import RelatorioImage from "../../assets/Relatorio.png";
 import EbookDicasImage from "../../assets/EbookDicas.png";
-// Removed import for EbookSalariosImage
+import Grafico from "../../assets/grafico_resultado.png"; // Importing the chart image
 
 const sectionVariant = {
   hidden: { opacity: 0, y: 50 },
@@ -34,7 +32,6 @@ const WhatYouGetSection = () => (
         Você recebe:
       </h2>
 
-      {/* Replace the grid with a flex container */}
       <div className="flex flex-wrap justify-center gap-8">
         {/* Card 1: Relatório Premium Completo */}
         <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
@@ -91,6 +88,34 @@ const WhatYouGetSection = () => (
             <li className="flex items-center">
               <FaCheckCircle className="text-green-500 mr-2" />
               Conquiste sua vaga
+            </li>
+          </ul>
+        </div>
+
+        {/* Card 3: Seu Mapeamento Personalizado (Chart) */}
+        <div className="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+          <div className="w-full max-w-[160px]">
+            <img
+              src={Grafico}
+              alt="Mapeamento Personalizado"
+              className="w-full h-auto object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <h3 className="text-lg sm:text-xl font-bold text-gray-800 mt-4">
+            Seu Mapeamento Personalizado
+          </h3>
+          <ul className="text-sm sm:text-base text-gray-700 space-y-1 mt-2 text-left">
+            <li className="flex items-center">
+              <FaCheckCircle className="text-green-500 mr-2" />
+              Representação visual das suas aptidões
+            </li>
+            <li className="flex items-center">
+              <FaCheckCircle className="text-green-500 mr-2" />
+              Comparação com áreas profissionais
+            </li>
+            <li className="flex items-center">
+              <FaCheckCircle className="text-green-500 mr-2" />
+              Insight detalhado sobre seu perfil
             </li>
           </ul>
         </div>
