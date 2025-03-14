@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CheckoutForm from "./CheckoutForm";
+import OfferBanner from "./OfferBanner";
 
 const sectionVariant = {
   hidden: { opacity: 0, y: 50 },
@@ -64,6 +65,7 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
       className="py-8 md:py-16 px-4 md:px-6 bg-yellow-50 flex justify-center"
     >
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <OfferBanner />
         {/* Left Side - Offer Details */}
         <div className="text-left space-y-4">
           <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900">
@@ -84,6 +86,7 @@ const OfferSection = ({ originalPrice, discountedPrice }) => {
               R$ {discountedPrice.toFixed(2)}
             </span>
           </div>
+
           <p className="text-base md:text-lg text-gray-800 font-bold">
             🎯 Use o cupom{" "}
             <span className="bg-yellow-300 px-2 py-1 rounded-md">CALCULO9</span>{" "}
