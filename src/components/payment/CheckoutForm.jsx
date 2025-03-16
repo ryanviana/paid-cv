@@ -183,7 +183,7 @@ export default function CheckoutForm() {
     const pollInterval = setInterval(async () => {
       try {
         const res = await fetch(
-          `http://localhost:3001/api/test/status/${testId}`
+          `https://paid.cv.backend.decisaoexata.com/api/test/status/${testId}`
         );
         const data = await res.json();
         if (data.paymentStatus === "approved") {
@@ -267,11 +267,14 @@ export default function CheckoutForm() {
       // Log the complete payload before sending
       console.log("Payload to send:", payload);
 
-      const res = await fetch("http://localhost:3001/api/test/pix/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "https://paid.cv.backend.decisaoexata.com/api/test/pix/start",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
       const data = await res.json();
       console.log("Response from backend:", data);
       setTestId(data.testId);
@@ -305,7 +308,7 @@ export default function CheckoutForm() {
 
     try {
       const res = await axios.get(
-        `http://localhost:3001/api/test/resultlink?external_reference=${testId}`
+        `https://paid.cv.backend.decisaoexata.com/api/test/resultlink?external_reference=${testId}`
       );
       const data = res.data;
       if (data.resultLink) {
