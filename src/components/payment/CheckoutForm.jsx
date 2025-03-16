@@ -183,7 +183,7 @@ export default function CheckoutForm() {
     const pollInterval = setInterval(async () => {
       try {
         const res = await fetch(
-          `https://paid.cv.backend.decisaoexata.com/api/test/status/${testId}`
+          `http://localhost:3001/api/test/status/${testId}`
         );
         const data = await res.json();
         if (data.paymentStatus === "approved") {
@@ -238,21 +238,42 @@ export default function CheckoutForm() {
     setShowPixModal(true);
     setTimer(15 * 60);
     setLoading(true);
+
+    const selectedBumpIds = orderBumps
+      .filter((bump) => bump.selected)
+      .map((bump) => bump.id);
+
+    // Log computed values for debugging:
+    console.log("User Email:", userEmail);
+    console.log("Final Pontuação Total:", finalPontuacaoTotal);
+    console.log("Areas com Pontuação:", areasComPontuacao);
+    console.log("Recommended Course:", recommendedCourse);
+    console.log("Total Price:", totalPrice);
+    console.log("Coupon Code:", couponCode);
+    console.log("Selected Bumps:", selectedBumpIds);
+
     try {
       const payload = {
         email: userEmail || "user@example.com",
-        answers: ["Answer1", "Answer2", "Answer3"],
+        answers: ["Answer1", "Answer2", "Answer3"], // Replace with real answers if available
         price: parseFloat(totalPrice.toFixed(2)),
+        selectedBumpIds, // Array of purchased bump IDs (e.g., ["ebook-salarios"])
+        couponCode, // The coupon code applied (e.g., "CALCULO9")
+        result: finalPontuacaoTotal, // Test scores array from context
+        areasComPontuacao, // Computed top areas with scores
+        recommendedCourse, // The recommended course object (if any)
       };
-      const res = await fetch(
-        "https://paid.cv.backend.decisaoexata.com/api/test/pix/start",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
+
+      // Log the complete payload before sending
+      console.log("Payload to send:", payload);
+
+      const res = await fetch("http://localhost:3001/api/test/pix/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
       const data = await res.json();
+      console.log("Response from backend:", data);
       setTestId(data.testId);
       setPaymentStatus("pending");
       if (data.qrCodeBase64) {
@@ -270,7 +291,7 @@ export default function CheckoutForm() {
     }
   };
 
-  const handlePaymentSuccess = () => {
+  const handlePaymentSuccess = async () => {
     if (!userName || !userCellphone || !userEmail) {
       setErrorMsg("Por favor, preencha todos os campos.");
       return;
@@ -279,17 +300,25 @@ export default function CheckoutForm() {
     const purchasedIds = orderBumps.filter((b) => b.selected).map((b) => b.id);
     setPurchasedBumps(purchasedIds);
 
-    // Optional analytics/tracking
-    if (window.gtag_report_conversion) {
-      window.gtag_report_conversion("/results");
-    } else {
-      navigate("/results");
-    }
-
-    sendLeadData();
-    sendLeadEmail();
     setResultsRevealed(true);
     setLeadSubmitted(true);
+
+    try {
+      const res = await axios.get(
+        `http://localhost:3001/api/test/resultlink?external_reference=${testId}`
+      );
+      const data = res.data;
+      if (data.resultLink) {
+        // Extract only the pathname from the absolute URL
+        const relativePath = new URL(data.resultLink).pathname;
+        navigate(relativePath);
+      } else {
+        navigate("/results");
+      }
+    } catch (error) {
+      console.error("Error finalizing payment:", error);
+      navigate("/results");
+    }
   };
 
   const sendLeadData = async () => {
@@ -314,23 +343,21 @@ export default function CheckoutForm() {
       console.error("Erro ao salvar dados:", error);
     }
   };
-
-  const sendLeadEmail = async () => {
+  const sendLeadEmail = async (resultLink) => {
     const emailPayload = {
-      score: [],
+      score: finalPontuacaoTotal, // pass the actual score array from context
       user_name: userName,
       user_cellphone: userCellphone,
       user_email: userEmail,
       user_schoolYear: "Outro",
       user_careerChoiceCertainty: "Não tenho ideia do que escolher",
+      resultLink, // include the unique result link
     };
     try {
       await axios.post(
         "https://leads.cv.backend.decisaoexata.com/send-email/",
         emailPayload,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
     } catch (error) {
       console.error("Erro ao enviar email:", error);

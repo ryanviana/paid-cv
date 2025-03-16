@@ -6,6 +6,7 @@ import LandingPage from "../pages/LandingPage";
 import Questions from "../pages/Questions";
 import Payment from "../pages/Payment";
 import Result from "../pages/Result";
+import ResultToken from "../pages/results/ResultToken";
 import { ResultProvider } from "../context/ResultContext";
 
 function App() {
@@ -39,6 +40,16 @@ function App() {
               path="/results"
               element={
                 <Result
+                  type="total"
+                  updatePagina={() => {}}
+                  pontuacaoTotal={[]}
+                />
+              }
+            />
+            <Route
+              path="/results/:token"
+              element={
+                <ResultToken
                   type="total"
                   updatePagina={() => {}}
                   pontuacaoTotal={[]}

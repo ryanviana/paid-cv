@@ -23,20 +23,14 @@ const sectionVariant = {
   visible: { opacity: 1, y: 0 },
 };
 
-const ResultResources = () => {
-  // Retrieve purchased bumps from persistent state
-  const [purchasedBumps] = usePersistedState("purchasedBumps", []);
-  // Retrieve test results from context (assumed to be an array of scores)
-  const { result } = useContext(ResultContext);
-
-  // Debug logs – remove in production
+const ResultResources = ({ purchasedBumps, finalPontuacaoTotal }) => {
+  // Log to verify props
   useEffect(() => {
-    console.log("Purchased bumps:", purchasedBumps);
-    console.log("Test result (scores):", result);
-  }, [purchasedBumps, result]);
+    console.log("Purchased bumps from backend:", purchasedBumps);
+    console.log("Final pontuação total from backend:", finalPontuacaoTotal);
+  }, [purchasedBumps, finalPontuacaoTotal]);
 
-  // Compute top areas based on test results
-  const finalPontuacaoTotal = result || [];
+  // Compute top areas based on finalPontuacaoTotal from backend
   const areasComPontuacao = areasConhecimento
     .map((area, idx) => ({
       area,
@@ -44,7 +38,7 @@ const ResultResources = () => {
     }))
     .sort((a, b) => b.pontuacao - a.pontuacao);
 
-  // Recommended course is the first course of the top scoring area
+  // Determine the recommended course based on computed areas
   const recommendedCourse =
     areasComPontuacao.length > 0 && areasComPontuacao[0].area.cursos.length > 0
       ? areasComPontuacao[0].area.cursos[0]
