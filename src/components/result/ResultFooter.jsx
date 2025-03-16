@@ -30,7 +30,7 @@ const ResultFooter = () => {
         </p>
         <div>
           <a
-            href="https://wa.me/5535991459394?text=Oi%2C%20preciso%20de%20ajuda%20para%20decidir%20meu%20curso!"
+            href="https://wa.me/5516936180172?text=Oi%2C%20preciso%20de%20ajuda%20para%20decidir%20meu%20curso!"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-green-500 text-white px-6 py-3 rounded-full font-bold hover:bg-green-600 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500"
