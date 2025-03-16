@@ -212,7 +212,7 @@ function ResultToken({ pontuacaoTotal, type, updatePagina }) {
           {isTotal && shouldUnlockResults && <ResultAboutUs />}
           {isTotal && <ResultFooter />}
           {/* Other components like ShareModal and CourseModal */}
-          {/*
+
           {showShareModal && (
             <ShareModal
               sharePreviewImage={sharePreviewImage}
@@ -225,7 +225,7 @@ function ResultToken({ pontuacaoTotal, type, updatePagina }) {
               selectedCourse={selectedCourse}
               onClose={() => setSelectedCourse(null)}
             />
-          )} */}
+          )}
         </>
       )}
     </motion.div>
