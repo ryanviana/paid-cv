@@ -115,7 +115,7 @@ export default function CheckoutForm() {
         selected: false,
       };
       setOrderBumps((prev) => {
-        // remove if it already exists
+        // Remove if it already exists
         const filtered = prev.filter((b) => b.id !== "ebook-bump");
         return [ebookBump, ...filtered];
       });
@@ -142,6 +142,7 @@ export default function CheckoutForm() {
     };
   }, []);
 
+  // Function to regenerate a new PIX payment if timer expires
   const regeneratePixPayment = () => {
     // Clear out previous payment data and reset timer
     setTestId(null);
@@ -153,6 +154,30 @@ export default function CheckoutForm() {
     startPixPayment();
   };
 
+  // One-time backend check for payment status on mount or when testId changes
+  useEffect(() => {
+    if (testId) {
+      fetch(
+        `https://paid.cv.backend.decisaoexata.com/api/test/status/${testId}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Fetched payment status:", data);
+          if (data.paymentStatus === "approved") {
+            setPaymentStatus("approved");
+            // Reset resultsRevealed so the "Liberar Meu Resultado" button appears
+            setResultsRevealed(false);
+          } else {
+            setPaymentStatus(data.paymentStatus);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching payment status:", error);
+        });
+    }
+  }, [testId]);
+
+  // Socket.io real-time payment update
   useEffect(() => {
     if (!socketRef.current) return;
     const handlePaymentUpdate = (data) => {
@@ -177,7 +202,7 @@ export default function CheckoutForm() {
       socketRef.current.off("paymentStatusUpdate", handlePaymentUpdate);
   }, [testId, totalPrice]);
 
-  // Polling fallback
+  // Polling fallback for payment status (if status is pending)
   useEffect(() => {
     if (!testId || paymentStatus !== "pending") return;
     const pollInterval = setInterval(async () => {
@@ -207,7 +232,7 @@ export default function CheckoutForm() {
     return () => clearInterval(pollInterval);
   }, [testId, paymentStatus, totalPrice]);
 
-  // Timer for Pix
+  // Timer for Pix modal
   useEffect(() => {
     if (!showPixModal) return;
     const interval = setInterval(() => {
@@ -243,7 +268,7 @@ export default function CheckoutForm() {
       .filter((bump) => bump.selected)
       .map((bump) => bump.id);
 
-    // Log computed values for debugging:
+    // Debug logs:
     console.log("User Email:", userEmail);
     console.log("Final Pontuação Total:", finalPontuacaoTotal);
     console.log("Areas com Pontuação:", areasComPontuacao);
@@ -257,14 +282,13 @@ export default function CheckoutForm() {
         email: userEmail || "user@example.com",
         answers: ["Answer1", "Answer2", "Answer3"], // Replace with real answers if available
         price: parseFloat(totalPrice.toFixed(2)),
-        selectedBumpIds, // Array of purchased bump IDs (e.g., ["ebook-salarios"])
-        couponCode, // The coupon code applied (e.g., "CALCULO9")
-        result: finalPontuacaoTotal, // Test scores array from context
-        areasComPontuacao, // Computed top areas with scores
-        recommendedCourse, // The recommended course object (if any)
+        selectedBumpIds,
+        couponCode,
+        result: finalPontuacaoTotal,
+        areasComPontuacao,
+        recommendedCourse,
       };
 
-      // Log the complete payload before sending
       console.log("Payload to send:", payload);
 
       const res = await fetch(
@@ -303,6 +327,7 @@ export default function CheckoutForm() {
     const purchasedIds = orderBumps.filter((b) => b.selected).map((b) => b.id);
     setPurchasedBumps(purchasedIds);
 
+    // When payment is approved and user clicks the button, we set resultsRevealed to true
     setResultsRevealed(true);
     setLeadSubmitted(true);
 
@@ -312,7 +337,6 @@ export default function CheckoutForm() {
       );
       const data = res.data;
       if (data.resultLink) {
-        // Extract only the pathname from the absolute URL
         const relativePath = new URL(data.resultLink).pathname;
         navigate(relativePath);
       } else {
@@ -346,21 +370,24 @@ export default function CheckoutForm() {
       console.error("Erro ao salvar dados:", error);
     }
   };
+
   const sendLeadEmail = async (resultLink) => {
     const emailPayload = {
-      score: finalPontuacaoTotal, // pass the actual score array from context
+      score: finalPontuacaoTotal,
       user_name: userName,
       user_cellphone: userCellphone,
       user_email: userEmail,
       user_schoolYear: "Outro",
       user_careerChoiceCertainty: "Não tenho ideia do que escolher",
-      resultLink, // include the unique result link
+      resultLink,
     };
     try {
       await axios.post(
         "https://leads.cv.backend.decisaoexata.com/send-email/",
         emailPayload,
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: { "Content-Type": "application/json" },
+        }
       );
     } catch (error) {
       console.error("Erro ao enviar email:", error);
