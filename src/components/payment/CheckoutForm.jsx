@@ -134,7 +134,7 @@ export default function CheckoutForm() {
   // Setup Socket.io
   const socketRef = useRef(null);
   useEffect(() => {
-    socketRef.current = io("https://paid.cv.backend.decisaoexata.com", {
+    socketRef.current = io("https://pay.cv.ryanviana.com", {
       transports: ["websocket", "polling"],
     });
     return () => {
@@ -157,9 +157,7 @@ export default function CheckoutForm() {
   // One-time backend check for payment status on mount or when testId changes
   useEffect(() => {
     if (testId) {
-      fetch(
-        `https://paid.cv.backend.decisaoexata.com/api/test/status/${testId}`
-      )
+      fetch(`https://pay.cv.ryanviana.com/api/test/status/${testId}`)
         .then((response) => response.json())
         .then((data) => {
           console.log("Fetched payment status:", data);
@@ -208,7 +206,7 @@ export default function CheckoutForm() {
     const pollInterval = setInterval(async () => {
       try {
         const res = await fetch(
-          `https://paid.cv.backend.decisaoexata.com/api/test/status/${testId}`
+          `https://pay.cv.ryanviana.com/api/test/status/${testId}`
         );
         const data = await res.json();
         if (data.paymentStatus === "approved") {
@@ -292,7 +290,7 @@ export default function CheckoutForm() {
       console.log("Payload to send:", payload);
 
       const res = await fetch(
-        "https://paid.cv.backend.decisaoexata.com/api/test/pix/start",
+        "https://pay.cv.ryanviana.com/api/test/pix/start",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -333,7 +331,7 @@ export default function CheckoutForm() {
 
     try {
       const res = await axios.get(
-        `https://paid.cv.backend.decisaoexata.com/api/test/resultlink?external_reference=${testId}`
+        `https://pay.cv.ryanviana.com/api/test/resultlink?external_reference=${testId}`
       );
       const data = res.data;
       if (data.resultLink) {
@@ -359,13 +357,9 @@ export default function CheckoutForm() {
       vocationalHelp: "Não preciso de ajuda",
     };
     try {
-      await axios.post(
-        "https://cv.back.decisaoexata.com/api/leads",
-        leadPayload,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      await axios.post("https://back.cv.ryanviana.com/api/leads", leadPayload, {
+        headers: { "Content-Type": "application/json" },
+      });
     } catch (error) {
       console.error("Erro ao salvar dados:", error);
     }

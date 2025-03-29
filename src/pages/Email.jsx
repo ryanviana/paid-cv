@@ -11,7 +11,7 @@ function Email({ pontuacaoTotal, onClose }) {
 
     try {
       // Salva os resultados primeiro
-      await axios.post("https://cv.back.decisaoexata.com/save-results", {
+      await axios.post("https://back.cv.ryanviana.com/save-results", {
         score: pontuacaoTotal,
         user_email: email,
       });
@@ -23,7 +23,7 @@ function Email({ pontuacaoTotal, onClose }) {
 
     try {
       // Em seguida, envia o email
-      await axios.post("https://cv.back.decisaoexata.com/send-email", {
+      await axios.post("https://back.cv.ryanviana.com/send-email", {
         score: pontuacaoTotal,
         user_email: email,
       });

@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import "./PaymentComponent.css";
 
 // Connect to your backend's Socket.IO (adjust the URL if necessary)
-const socket = io("https://paid.cv.backend.decisaoexata.com");
+const socket = io("https://pay.cv.ryanviana.com");
 
 const PaymentComponent = ({ onClose, onPaymentComplete }) => {
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ const PaymentComponent = ({ onClose, onPaymentComplete }) => {
       };
 
       const res = await fetch(
-        "https://paid.cv.backend.decisaoexata.com/api/test/pix/start",
+        "https://pay.cv.ryanviana.com/api/test/pix/start",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

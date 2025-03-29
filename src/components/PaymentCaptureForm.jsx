@@ -7,7 +7,7 @@ import axios from "axios";
 import { usePersistedState } from "../hooks/usePersistedState";
 
 // Establish socket connection for payment status updates.
-const socket = io("https://paid.cv.backend.decisaoexata.com");
+const socket = io("https://pay.cv.ryanviana.com");
 
 function PaymentCaptureForm({
   showForm,
@@ -92,7 +92,7 @@ function PaymentCaptureForm({
         answers: ["Answer1", "Answer2", "Answer3"],
       };
       const res = await fetch(
-        "https://paid.cv.backend.decisaoexata.com/api/test/pix/start",
+        "https://pay.cv.ryanviana.com/api/test/pix/start",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -129,13 +129,9 @@ function PaymentCaptureForm({
       vocationalHelp: "Não preciso de ajuda",
     };
     try {
-      await axios.post(
-        "https://cv.back.decisaoexata.com/api/leads",
-        leadPayload,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      await axios.post("https://back.cv.ryanviana.com/api/leads", leadPayload, {
+        headers: { "Content-Type": "application/json" },
+      });
     } catch (error) {
       console.error("Erro ao salvar dados:", error);
     }

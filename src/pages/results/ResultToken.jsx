@@ -89,9 +89,7 @@ function ResultToken({ pontuacaoTotal, type, updatePagina }) {
   useEffect(() => {
     if (token) {
       axios
-        .get(
-          `https://paid.cv.backend.decisaoexata.com/api/test/result/${token}`
-        )
+        .get(`https://pay.cv.ryanviana.com/api/test/result/${token}`)
         .then((res) => {
           if (res.data && res.data.resultData) {
             setFetchedResult(res.data.resultData);
